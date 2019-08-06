@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-	
-<!-- Mirrored from www.oliveyoung.co.kr/store/main/getCouponList.do by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 05:30:59 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
@@ -24,19 +21,11 @@
 
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
-
-
-	
-
 </head>
 <body>
 
-
-
-
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
-	
 	<div id="Header">
 		<div class="top_util">
 			<ul class="menu_list">
@@ -145,9 +134,6 @@
 			123456789
 	</div>
 
-
-
-	
 	<!-- #Footer -->
 	<div id="Footer">
 		<div class="oneConts">
@@ -219,6 +205,3 @@
 	</div>
 	<!-- //#Footer -->
 </div>
-
-
-
