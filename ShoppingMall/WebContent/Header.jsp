@@ -14,7 +14,7 @@
 				
 				<li class="join"><a href="#">회원가입</a></li>
 				<li class="login"><a href="#">로그인</a></li>
-				<li class="cart"><a href="#">장바구니<span id="cartToCnt"></span></a></li>
+				<li class="cart"><a href="Cart.jsp">장바구니<span id="cartToCnt"></span></a></li>
 
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
