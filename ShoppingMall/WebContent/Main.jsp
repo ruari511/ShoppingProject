@@ -33,7 +33,7 @@
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="Header.jsp"/>
+	<jsp:include page="./include/Header.jsp"/>
 	<!-- header// -->
 					
 	<!-- section -->
@@ -41,6 +41,6 @@
 	<!-- section// -->
 
 	<!-- footer -->
-	<jsp:include page="Footer.jsp"/>
+	<jsp:include page="./include/Footer.jsp"/>
 	<!-- footer// -->
 </div>

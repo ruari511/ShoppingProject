@@ -26,7 +26,7 @@
 </head>
 <body>
 
-	<jsp:include page="include/top.jsp"/>
+	<jsp:include page="./include/Header.jsp"/>
 
 	<div id="Container">
 		
@@ -337,6 +337,6 @@ $(document).ready(function(){
 		<button><span></span>TOP</button>
 	</div>
 	
-	<jsp:include page="include/bottom.jsp"/>
+	<jsp:include page="./include/Footer.jsp"/>
 	
 </div>
