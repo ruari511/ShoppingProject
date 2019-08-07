@@ -1,0 +1,189 @@
+@CHARSET "UTF-8";
+
+.title_box {overflow:hidden;height:140px;border-radius:5px;z-index:0;}
+.title_box:before {content:'';position:absolute;width:100%;height:140px;left:50%;margin-left:-50%;background:#ffeeda url("https://image.oliveyoung.co.kr/uploads/contents/main/top/bg_order_top.png") no-repeat 50% 0;z-index:-1}
+.title_box:after {content:'';position:absolute;display:block;width:1020px;height:20px;margin:110px 0 0;background:#fff url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_line.gif") no-repeat 50% 10px}
+.title_box h1 {float:left;padding:37px 0 0;font-size:40px;color:#000;line-height:40px;}
+.title_box h1 > span {display:inline-block;width:36px;height:36px;line-height:36px;font-size:16px;color:#fff;background:#ff2828;border-radius:18px;text-align:center;vertical-align:10px}
+.title_box .step_list {float:right}
+.title_box .step_list:after {content:'';display:block;clear:both}
+.title_box .step_list > li {float:left;height:120px;padding:0 30px 0 20px;line-height:120px;text-align:center;font-size:24px;color:#8b8176;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_step.png") no-repeat 100% 50%;white-space:nowrap;}
+.title_box .step_list > li .step_num {display:inline-block;margin-right:5px;font-size:20px;color:#8b8176;vertical-align:top}
+.title_box .step_list > li .step_num:before {content:'0'}
+.title_box .step_list > li.last {background:none;padding-right:0}
+.title_box .step_list > li.on {color:#000;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_step_on.png") no-repeat 100% 50%}
+.title_box .step_list > li.on .step_num {color:#333}
+.title_box .step_list > li.on.last {background:none;padding-right:0;border-radius:0 5px 5px 0}
+
+
+
+
+
+
+
+
+
+
+
+
+.membership_box {overflow:hidden;height:103px;padding:9px 0 25px;border-bottom:1px solid #e6e6e6}
+.membership_box:after {content:'';display:block;clear:both}
+.membership_box .tx_grade_info {float:left;width:338px;padding:6px 30px 0 30px;font-size:20px;color:#222;line-height:28px;}
+.membership_box .tx_grade_info .grade {}
+.membership_box .tx_grade_info strong {font-weight:400}
+.membership_box .tx_grade_info .tx_staff {display:inline-block;width:55px;height:22px;margin-left:5px;text-align:center;line-height:22px;font-size:12px;color:#969937;border:1px solid #969937;vertical-align:2px;font-weight:700}
+.membership_box .membership_info_list {float:left;overflow:hidden;margin-left:50px}
+.membership_box .membership_info_list > li {float:left;width:170px;height:68px;text-align:center;color:#222}
+.membership_box .membership_info_list > li+li {padding:10px 0 0;border-left:1px solid #e6e6e6;color:#333}
+.membership_box .membership_info_list > li .grade_benefit {display:inline-block;width:60px;padding:45px 0 0;font-size:12px;}
+.membership_box .membership_info_list > li .grade_benefit > span {display:inline-block;padding-right:13px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow6x11.png") no-repeat 100% 4px;font-weight:700}
+.membership_box .membership_info_list > li strong {display:block;margin-bottom:8px}
+.membership_box .membership_info_list > li a {color:#333;display:block}
+
+.membership_box .membership_info_list > li .own_point {display:block;font-size:12px}
+.membership_box .membership_info_list > li .own_point .tx_num {margin-right:2px;font-size:18px;color:#ff8336;vertical-align:-1px}
+.membership_box .membership_info_list > li .own_point.type2 .tx_num {color:#969937}
+.membership_box.staff .membership_info_list > li {width:126px}
+.membership_box .membership_info_list > li:first-child {width:120px !important}
+
+.membership_box.iconGrade1 .tx_grade_info .grade {color:#c9af64}
+.membership_box.iconGrade2 .tx_grade_info .grade {color:#333}
+.membership_box.iconGrade3 .tx_grade_info .grade {color:#11b761}
+.membership_box.iconGrade4 .tx_grade_info .grade {color:#89b000}
+
+.membership_box.iconGrade1 .membership_info_list > li .grade_benefit {background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_rating_gold_on.png") no-repeat center 0;}
+.membership_box.iconGrade2 .membership_info_list > li .grade_benefit {background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_rating_black_on.png") no-repeat center 0;}
+.membership_box.iconGrade3 .membership_info_list > li .grade_benefit{background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_rating_green_on.png") no-repeat center 0;}
+.membership_box.iconGrade4 .membership_info_list > li .grade_benefit{background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_rating_baby_on.png") no-repeat center 0;}
+
+
+
+
+
+.sub-title2 {width:1020px;margin:40px auto 10px;color:#333;font-size:20px;font-weight:400}
+.sub-title2 > span {color:#f47330}
+
+.tbl_prd_list {width:100%}
+.tbl_prd_list thead th {height:40px;border-top:2px solid #d6d6d6;border-bottom:1px solid #ccc;background:#fafafa}
+.tbl_prd_list tbody td {border-bottom:1px solid #e6e6e6;text-align:center}
+.tbl_prd_list tbody td.last {border-right:0;border-bottom:1px solid #ccc !important}
+.tbl_prd_list tbody td.no_data {height:295px;padding:130px 0 0;border-right:0;color:#888;font-size:16px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_nodata104x104.png") no-repeat 50% 80px}
+.tbl_prd_list thead th input[type="checkbox"],
+.tbl_prd_list tbody td input[type="checkbox"] {width:12px;height:12px;margin:0 auto;background:none;-webkit-appearance:checkbox;-webkit-appearance:checkbox;vertical-align:middle;}
+.tbl_prd_list tbody td .w700 .prd_info{padding-left:165px;}
+.tbl_prd_list tbody td .w700 .prd_info .prd_img {width:165px;}
+.tbl_prd_list tbody td .prd_info {display:table-cell;position:relative;height:145px;padding:30px 30px 30px 125px;border-left:0;text-align:left;vertical-align:middle}
+.tbl_prd_list tbody td .prd_info .prd_img {position:absolute;top:50%;left:0;width:125px;height:85px;margin-top:-42px;text-align:center;}
+.tbl_prd_list tbody td .prd_info .prd_img img {width:auto !important;max-width:85px;height:auto !important;max-height:85px;}
+.tbl_prd_list tbody td .prd_info .prd_img .status_info {position:absolute;left:20px;bottom:0;width:85px;height:26px;line-height:26px;font-size:12px;color:#fff !important;text-align:center}
+.tbl_prd_list tbody td .prd_info .prd_img .status_info.soldout {background-color:rgba(0,0,0,0.2);}
+.tbl_prd_list tbody td .prd_info .prd_img .status_info.saleend {background-color:rgba(0,0,0,0.6);}
+.tbl_prd_list tbody td .prd_info .prd_img .status_info.oos {background-color:rgba(255,103,102,0.6);}
+.tbl_prd_list tbody td .prd_info .prd_name {display:inline-block;margin-bottom:5px}
+.tbl_prd_list tbody td .prd_info .prd_name > span {display:block;margin-bottom:4px;color:#777;font-weight:700}
+.tbl_prd_list tbody td .prd_info .prd_name > p {overflow:hidden;max-height:36px;-webkit-box-orient:vertical;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;word-break:normal;font-size:14px;line-height:18px;color:#000;}
+.tbl_prd_list tbody td .prd_info .prd_opt {margin-bottom:5px;color:#888;font-size:12px;font-weight:700}
+.tbl_prd_list tbody td .prd_info .prd_opt .tit{font-style:normal;}
+.tbl_prd_list tbody td .prd_info .prd_opt .tit:after{content:'';display:inline-block;margin:0 5px 1px;width:1px;height:11px;background:#aaa;vertical-align:middle;}
+.tbl_prd_list tbody td .prd_info .prd_opt > span{padding-right:10px;}
+.tbl_prd_list tbody td .prd_info .prd_opt .change{background:none;color:#969937;font-size:12px;border-bottom:1px solid #969937;}
+.tbl_prd_list tbody td .prd_cnt {width:60px;margin:0 auto}
+.tbl_prd_list tbody td .prd_cnt select {width:60px;height:28px;padding:0 0 0 10px;border-color:#ccc;font-size:12px}
+.tbl_prd_list tbody td .prd_cnt select:focus {border-color:#969937}
+.tbl_prd_list tbody td .prd_cnt+button {width:60px;margin:5px 0 0}
+.tbl_prd_list tbody td .prd_cnt input {height:28px;padding:0 5px;color:#222;border-color:#ccc;font-size:12px;text-align:center}
+.tbl_prd_list tbody td .prd_cnt input:focus {border-color:#969937}
+
+.tbl_prd_list tbody td .org_price {display:block;font-size:12px;color:#b5b5b5;text-decoration:line-through}
+.tbl_prd_list tbody td .org_price .tx_num {font-weight:normal}
+.tbl_prd_list tbody td .cur_price {display:block;color:#222;font-weight:700}
+.tbl_prd_list tbody td .pur_price {display:block;color:#f47330;font-weight:700}
+.tbl_prd_list tbody td .btn_group .btnSmall {width:109px;margin-bottom:5px}
+.tbl_prd_list tbody td .btn_group .btnSmall.zzim {padding-left:23px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_btn_zzim.png") no-repeat 30px 8px}
+.tbl_prd_list tbody td .btn_group .btnSmall.zzim.on {background-position:30px -41px}
+.tbl_prd_list tbody td .btn_group .btnSmall.delete {padding-left:18px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_btn_del.png") no-repeat 35px 8px}
+
+.tbl_prd_list tbody td .prd_delivery {color:#666;font-size:12px}
+.tbl_prd_list tbody td .tbl_cell.sum{position:relative;padding-bottom:24px;}
+.tbl_prd_list tbody td .tbl_cell.delay{position:relative;padding-bottom:24px;}
+.tbl_prd_list tbody td .tbl_cell.sum.delay{padding-bottom:48px;}
+.tbl_prd_list tbody td .tbl_cell.sum .sumNo{position:absolute;left:50%;bottom:10px;height:24px;margin-left:-50px;}
+.tbl_prd_list tbody td .tbl_cell.delay .tx_delay{position:absolute;left:50%;bottom:10px;height:24px;margin-left:-50px;}
+.tbl_prd_list tbody td .tbl_cell.sum.delay .tx_delay{bottom:34px;}
+.tbl_prd_list tbody td .prd_delivery strong {display:block;color:#222;font-size:14px}
+.tbl_prd_list tbody td .prd_delivery .tx_delay {display:block;width:100px;margin:0 auto;background:#f6f6f6;color:#f47331;font-size:12px;line-height:24px;font-weight:bold;}
+.tbl_prd_list tbody td .prd_delivery .ex{display:block;color:#666;font-size:12px;font-weight:normal;}
+.tbl_prd_list tbody td .prd_delivery .sumNo{display:block;width:100px;margin:0 auto;background:#f6f6f6;color:#ff2828;font-size:12px;line-height:24px;font-weight:bold;}
+.tbl_prd_list tbody td .prd_delivery .sumNo:before{display:inline-block;content:'';width:12px;height:12px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/project/icon_04.png") no-repeat;vertical-align:middle;margin:0 5px 2px 0;}
+.tbl_prd_list tbody .no_sale td .prd_info,
+.tbl_prd_list tbody .no_sale td .prd_info * {color:#ccc !important}
+.tbl_prd_list tbody .soldout td .prd_cnt {background:#f8f8f8}
+.tbl_prd_list tbody .soldout td .prd_cnt input {color:#888}
+.tbl_prd_list tbody .chain_wrap td{background:url("https://image.oliveyoung.co.kr/pc-static-root/image/project/line_01.gif") repeat-x top left;border-bottom:0}
+.tbl_prd_list tbody .chain_wrap.first td {background-image:none;}
+.tbl_prd_list tbody .chain_wrap.last td {border-bottom:1px solid #e6e6e6}
+.tbl_prd_list .tbl_cont_area {display:table-row}
+.tbl_prd_list .tbl_cont_area .tbl_cell {display:table-cell;vertical-align:middle}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w40 {width:40px}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w390 {width:390px}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w110 {width:110px;border-left:1px solid #e6e6e6}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w120 {width:120px;border-left:1px solid #e6e6e6}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w100 {width:100px;border-left:1px solid #e6e6e6}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w150 {width:150px;border-left:1px solid #e6e6e6}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w580 {width:580px}
+.tbl_prd_list .tbl_cont_area .tbl_cell.w700 {width:700px}
+
+.tbl_prd_list tbody .add_gift_area {position:relative;width:100%;background:#f8f8f8 url("https://image.oliveyoung.co.kr/pc-static-root/image/project/line_02.gif") repeat-x top left;font-size:13px;line-height:16px;text-align:left}
+.tbl_prd_list tbody .add_gift_area.cart_gift ol li{padding:10px 0 !important;margin:0 150px 0 165px !important;}
+.tbl_prd_list tbody .add_gift_area.cart_gift ol li:first-of-type{padding-left:0;margin-left:0 !important;}
+.tbl_prd_list tbody .add_gift_area ol li{position:relative;min-height:47px;padding:10px 150px 10px 165px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/project/line_01.gif") repeat-x top left;}
+.tbl_prd_list tbody .add_gift_area ol li:first-of-type{padding-left:0 !important;}
+.tbl_prd_list tbody .add_gift_area .prd_img{display:inline-block;width:65px;height:65px;background:#fff;margin:10px 19px 10px 0;line-height:65px;text-align:center;vertical-align:middle;}
+.tbl_prd_list tbody .add_gift_area .prd_img img {width:auto !important;max-width:65px;height:auto !important;max-height:65px;vertical-align:middle;}
+.tbl_prd_list tbody .add_gift_area .info{display:inline-block;vertical-align:middle;line-height:23px}
+.tbl_prd_list tbody .add_gift_area h6{display:inline-block;width:163px;padding:0 0 2px 25px;color:#f7a341;font-size:13px;font-weight:700;vertical-align:middle;}
+.tbl_prd_list tbody .add_gift_area h6 .selend{display:block;color:#999999;margin-top:3px;}
+.tbl_prd_list tbody .add_gift_area h6 .selend:before{display:inline-block;content:'';width:11px;height:11px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/project/icon_05.png") no-repeat top left;vertical-align:middle;margin:0 5px 2px 0;}
+.tbl_prd_list tbody .add_gift_area .tx_txt {display:block;color:#666;font-weight:700;}
+.tbl_prd_list tbody .add_gift_area .tx_txt em{font-style:normal}
+.tbl_prd_list tbody .add_gift_area .tx_txt em:before{content:'';display:inline-block;width:1px;height:10px;background:#cccccc;margin:0 10px 1px;vertical-align:middle;}
+.tbl_prd_list tbody .add_gift_area .tx_opt {display:block;color:#888;font-size:12px;font-weight:700;}
+.tbl_prd_list tbody .add_gift_area .tx_opt em{font-style:normal}
+.tbl_prd_list tbody .add_gift_area .tx_opt em:after{content:'';display:inline-block;width:1px;height:10px;background:#aaaaaa;margin:0 6px 1px;vertical-align:middle;}
+.tbl_prd_list tbody .add_gift_area .tx_no_gift {color:#666;font-weight:700;line-height:47px}
+.tbl_prd_list tbody .add_gift_area .tx_no_gift:before{content:'';display:inline-block;width:1px;height:13px;background:#adadad;vertical-align:middle;margin:0 11px 1px 0;}
+.tbl_prd_list tbody .add_gift_area .tx_gift_list {padding-top:2px}
+.tbl_prd_list tbody .add_gift_area .tx_gift_list > li+li {margin:3px 0 0}
+.tbl_prd_list tbody .add_gift_area .tx_gift_list > li > span {display:inline-block;padding-left:13px;font-size:13px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x11.gif") no-repeat 6px 50%}
+.tbl_prd_list tbody .add_gift_area .tx_gift_list > li > span > em {margin-left:5px;font-style:normal}
+.tbl_prd_list tbody .add_gift_area .tx_gift_list+.tx_no_gift {margin-top:10px}
+.tbl_prd_list tbody .add_gift_area .btnSmall {position:absolute;top:50%;right:40px;margin-top:-14px;width:70px}
+
+.tbl_prd_list.type2 tbody .add_gift_area {padding-left:134px}
+.tbl_prd_list.type2 tbody .add_gift_area .tx_tit {left:20px} 
+
+.basket_price_info {overflow:hidden;margin:10px 0 0}
+.basket_price_info .btn_area {float:left;width:300px}
+.basket_price_info .sum_price {float:right;width:700px;margin:5px 0 0;color:#222;line-height:18px;text-align:right;}
+.basket_price_info .sum_price .tx_num {margin-right:1px}
+.basket_price_info .sum_price .tx_sign {margin:0 5px}
+.basket_price_info .sum_price .tx_total_price {font-size:16px}
+.basket_price_info .sum_price .tx_total_price .tx_price {color:#f47330}
+.basket_price_info .sum_price .tx_total_price .tx_num {font-size:18px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
