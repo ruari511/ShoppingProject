@@ -24,7 +24,7 @@
 			<div class="conts">
 				<ul class="list-area">
 					<li>
-						<p class="logo"><a href="javascript:common.link.moveMainHome();"><img src="../../../image.oliveyoung.co.kr/pc-static-root/image/footer/foot_logo.png" alt="OLIVEYOUNG"></a></p>
+						<p class="logo"><a href="#"><img src="#" alt="###"></a></p>
 						<h2>네트웍스 주식회사</h2>
 						<p>대표이사 : ### | 사업자등록번호 : 123-45-78910</p>
 						<p>주소 : (12345) 서울특별시 ##구 ####로 ##, ##층 <br>(###, ##시티)</p>
@@ -33,7 +33,7 @@
 					</li>
 					<li>
 						<ul class="list-link">
-							<li><a href="#">이용약관</a><a href="javascript:common.link.moveLegalPage();">법적고지</a></li>
+							<li><a href="#">이용약관</a><a href="#">법적고지</a></li>
 							<li><a href="#">개인정보처리방침</a></li>
 							<li><a href="#">청소년보호방침</a></li>
 							<li><a href="#">영상정보처리기기운영/관리방침</a></li>
@@ -44,7 +44,7 @@
 						<h2>#서비스</h2>
 						<p>
 							고객님은 안전거래를 위해 모든거래 결제시<br>저희 쇼핑몰에서 가입한 LG U+ 전자 결제의<br>매매보호(에스크로) 서비스를 이용하실 수<br>있습니다.<br>
-							<a class="link" href="javascript:common.link.openLGUPEscrow();">서비스 가입사실 확인 &gt;</a>
+							<a class="link" href="#">서비스 가입사실 확인 &gt;</a>
 						</p>
 					</li>
 				</ul>
@@ -66,11 +66,11 @@
 				<p class="copyright">Copyright ⓒ 2017 CJ #. All Rights Reserved.</p>
 				<div class="sns">
 					<h2># # #</h2>
-					<a class="facebook" href="#" title="페이지 이동" target="_blank"><img src="../../../image.oliveyoung.co.kr/pc-static-root/image/footer/%40facebook.gif" alt="페이스북"></a>
-					<a class="twitter" href="#" title="페이지 이동" target="_blank"><img src="../../../image.oliveyoung.co.kr/pc-static-root/image/footer/%40twitter.gif" alt="트위터"></a>
-					<a class="kakao" href="#" title="페이지 이동" ><img src="../../../image.oliveyoung.co.kr/pc-static-root/image/footer/%40kakaotalk.gif" alt="카카오톡"></a>
-					<a class="cafe" href="#" title="페이지 이동" target="_blank"><img src="../../../image.oliveyoung.co.kr/pc-static-root/image/footer/%40oliveyo.gif" alt="올리브영"></a>
-					<a class="insta" href="#" title="페이지 이동" target="_blank"><img src="../../../image.oliveyoung.co.kr/pc-static-root/image/footer/%40instagram.gif" alt="인스타그램"></a>
+					<a class="facebook" href="#" title="페이지 이동" target="_blank"><img src="#" alt="페이스북"></a>
+					<a class="twitter" href="#" title="페이지 이동" target="_blank"><img src="#" alt="트위터"></a>
+					<a class="kakao" href="#" title="페이지 이동" ><img src="#" alt="카카오톡"></a>
+					<a class="cafe" href="#" title="페이지 이동" target="_blank"><img src="#" alt="올리브영"></a>
+					<a class="insta" href="#" title="페이지 이동" target="_blank"><img src="#" alt="인스타그램"></a>
 				</div>
 			</div>
 		</div>
