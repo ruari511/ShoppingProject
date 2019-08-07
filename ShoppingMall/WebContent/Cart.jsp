@@ -1,3 +1,4 @@
+<%@page import="cart.CartDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,7 +13,11 @@
 	<script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
 <body>
-
+<%
+String id = "admin";
+CartDAO dao = new CartDAO();
+dao.getCartList(id);
+%>
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
