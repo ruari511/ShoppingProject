@@ -71,6 +71,14 @@ public class CartDAO {
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("discount"));
 				
+				System.out.println("id = " + rs.getString("id"));
+				System.out.println("name = " + rs.getString("product_name"));
+				System.out.println("img = " + rs.getString("img_main"));
+				System.out.println("brand = " + rs.getString("brand"));
+				System.out.println("price = " + rs.getInt("product_price"));
+				System.out.println("count = " + rs.getInt("product_count"));
+				System.out.println("discount = " + rs.getInt("discount"));
+				
 				cartList.add(cartDTO);
 			}//while문 끝
 			
