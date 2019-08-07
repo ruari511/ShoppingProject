@@ -150,7 +150,33 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 #btnGnbOpen.active:before{background:url(../image/ico_menu_on.png) no-repeat 0 14px !important;}
 
 
+/* */
+#Container {overflow:hidden;}
 
+#Contents {width:1020px;height:100%;margin:0 auto;}
+
+input[type="submit"],
+button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-serif;font-weight:700}
+
+/* slick slider (슬라이더 관련 CSS) */
+.slick-slider {position: relative;display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-khtml-user-select:none;-ms-touch-action:pan-y;touch-action:pan-y;-webkit-tap-highlight-color:transparent}
+.slick-list {position:relative;display:block;overflow:hidden;margin:0;padding:0}
+.slick-list.dragging {cursor:pointer;}
+.slick-slider .slick-track,
+.slick-slider .slick-list {-webkit-transform:translate3d(0, 0, 0);-moz-transform:translate3d(0, 0, 0);-ms-transform:translate3d(0, 0, 0);-o-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0)}
+.slick-track {position:relative;top:0;left:0;display:block;z-index:1}
+.slick-track:before,
+.slick-track:after {display:table;content:''}
+.slick-track:after {clear:both}
+.slick-loading .slick-track {visibility:hidden}
+.slick-slide {display:none;float:left;height:100%;min-height:1px}
+.slick-initialized .slick-slide {display:block}
+
+.slick-arrow {display:inline-block;width:40px;height:40px;background:url(../image/ico_arrow.png) no-repeat 0 0;text-indent:-9999px}
+.slick-arrow.slick-prev {background-position:0 0}
+.slick-arrow.slick-prev:hover {background-position:0 -40px}
+.slick-arrow.slick-next {background-position:-40px 0}
+.slick-arrow.slick-next:hover {background-position:-40px -40px}
 
 #btnGnbClose {position:absolute;bottom:5px;right:6px;width:29px;height:29px;text-indent:-9999px;background:url(../image/close_gnb.gif) no-repeat 0 0}
 .googleFrame{position:absolute;bottom:0;left:-300px;width:1px;height:1px;overflow:hidden;}
@@ -230,4 +256,3 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 
 /* OCB헤더대응 */
 .cmHeader .cmTop2 {box-sizing:content-box !important;line-height:100% !important}
-
