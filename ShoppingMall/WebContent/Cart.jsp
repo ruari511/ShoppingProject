@@ -17,7 +17,7 @@
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="../include/Header.jsp"/>
+	<jsp:include page="./include/Header.jsp"/>
 	<!-- header// -->
 					
 	<div id="Container">
@@ -198,7 +198,7 @@
 					<p class="tx_sale">총 할인금액<span><span class="tx_num">1,300</span>원</span></p>
 					<span class="tx_sign2 plus">+</span>
 					<p>배송비 <span><span class="tx_num">0</span>원</span></p>
-				</div>	
+				</div>
 				<div class="sum_price">
 					<span class="tx_text">배송비는 쿠폰할인금액에 따라 변경될 수 있습니다.</span>
 					총 결제예상금액 <span class="tx_price"><span class="tx_num">24,700</span>원</span>
@@ -213,7 +213,7 @@
 	</div>
 
 	<!-- footer -->
-	<jsp:include page="../include/Footer.jsp"/>
+	<jsp:include page="./include/Footer.jsp"/>
 	<!-- footer// -->
 </div>
 </body>
