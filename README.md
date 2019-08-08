@@ -1,6 +1,7 @@
 # ShoppingMall Web Project
 
 ## Authors
+- Hwang Cheol Min
 - Kim Hyeon Jeong
 - Kim Hyeon Ji
 - Nam Ji Yun

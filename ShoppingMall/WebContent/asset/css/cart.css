@@ -195,7 +195,13 @@
 .btnOrange, a.btnOrange {width:100%;height:50px;background-color:#f7a341;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
 .btnOrangeW, a.btnOrangeW {width:100%;height:50px;background-color:#fff;border:1px solid #f7a341;padding:11px 0 9px;font-size:16px;line-height:28px;color:#f7a341;border-radius:5px}
 
-
+.tbl_prd_list tbody td .prd_cnt .product_count #p_count{
+	width: 60px;
+    height: 28px;
+    padding: 0 0 0 10px;
+    border-color: #ccc;
+    font-size: 12px;
+}
 
 
 
