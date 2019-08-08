@@ -64,7 +64,7 @@ public class MemberFrontController extends HttpServlet{
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 			forward.setRedirect(false);
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?section=member/join.jsp");
+			forward.setPath("./Main.jsp?center=member/join.jsp");
 			
 		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
 		}else if(command.equals("/MemberJoinAction.me")){
@@ -73,12 +73,6 @@ public class MemberFrontController extends HttpServlet{
 			action=new MemberJoinAction();
 			
 			try {
-				//josin.jsp에서 입력한 회원가입 내용을 담고 있는
-				//request영역을 execute메소드의 매개변수로 전달하여..
-				//회원가입 DB 작업후 회원가입에 성공하면..
-				// 페이지 이동 방식 여부 값 true와...
-				// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..
-				//new ActionForward()객체를 리턴 받는다.
 				forward=action.execute(request, response);
 						
 			} catch (Exception e) {
@@ -93,7 +87,7 @@ public class MemberFrontController extends HttpServlet{
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 			forward.setRedirect(false); //주소값 노출 안됨
 			//이동할 페이지 경로(로그인 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?center=member/login.jsp"); 
+			forward.setPath("./CarMain.jsp?center=member/login.jsp"); 
 		
 		//login.jsp에서... "Sign in"버튼을 눌렀을때..로그인 처리 요청받기!
 		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
@@ -103,21 +97,12 @@ public class MemberFrontController extends HttpServlet{
 			action=new MemberLoginAction();
 			
 			try {
-				//login.jsp에서 사용자가 입력한 id와 패스워드를 담고 있는 request영역을
-				//execute메소드의 매개변수로 전달하여.. DB에있는 id와 패스워드 값을 비교한다.
-				//DB에 있는 아이디,비밀번호와...
-				//login.jsp 화면에서 입력한 아이디,비밀번호가 일치할때...
-				//login.jsp 화면에서 입력한 아이디를 세션객체영역에 저장하고...
-				//페이지 이동 방식 여부 값 true와...이동할페이지 주소 (./CarMain.jsp)를 담고 있는..
-				//new ActionForward()객체를 MemberFrontController로 리턴 
 				forward=action.execute(request, response);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-		//top.jsp에서 ..logout링크를 클릭하여 세션값초기화하고...
-		//CarMain.jsp화면으로 이동하라 라는 요청이 들어 왔을때...				
 		}else if(command.equals("/MemberLogout.me")){
 			
 			//로그아웃 처리를 위한 Action객체 생성  
@@ -136,7 +121,7 @@ public class MemberFrontController extends HttpServlet{
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 			forward=new ActionForward();
 			forward.setRedirect(false); //주소값 노출 x
-			forward.setPath("./Main.jsp"); //이동할 페이지 저장
+			forward.setPath("./CarMain.jsp"); //이동할 페이지 저장
 		}
 		
 		//주소 이동

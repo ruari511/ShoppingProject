@@ -43,21 +43,13 @@
 						});
 					</script>
 
-
-
-
 					<div class="title-area linezero">
 						<h2 class="tit">상품평</h2>
 					</div>
 
 					<ul class="comm1sTabs mgzero">
-						<li><a
-							href="javascript:mypage.gdasCompleteList.goGdasList();">상품평
-								쓰기</a></li>
 						<li class="on"><a href="javascript:void(0);">작성한 상품평</a></li>
 					</ul>
-
-
 
 					<fieldset class="search-period">
 						<legend></legend>
@@ -68,8 +60,7 @@
 							<li><button type="button" data-month="-12">12개월</button></li>
 						</ul>
 						<div class="select-range">
-							<select id="cal-start-year" title="년도를 선택하세요"
-								style="width: 76px;">
+							<select id="cal-start-year" title="년도를 선택하세요" style="width: 76px;">
 
 								<option value="2012">2012</option>
 								<option value="2013">2013</option>
