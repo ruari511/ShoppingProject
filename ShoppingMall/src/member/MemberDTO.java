@@ -7,18 +7,24 @@ public class MemberDTO {
 	private String id;
 	private String password;
 	private String name;
-	private Timestamp birth_date;
+	private String birth_date;
 	private String gender;
 	private String email;
 	private Timestamp reg_date;
 	private String address_main;
 	private String address_detail;
 	private String tel;
-	private String phone_tel;
-	private int grade;
+	private String phone;
+	private String grade;
 	private int totalprice;
 	private int point;
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -43,10 +49,10 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Timestamp getBirth_date() {
+	public String getBirth_date() {
 		return birth_date;
 	}
-	public void setBirth_date(Timestamp birth_date) {
+	public void setBirth_date(String birth_date) {
 		this.birth_date = birth_date;
 	}
 	public String getGender() {
@@ -85,16 +91,10 @@ public class MemberDTO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getPhone_tel() {
-		return phone_tel;
-	}
-	public void setPhone_tel(String phone_tel) {
-		this.phone_tel = phone_tel;
-	}
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 	public int getTotalprice() {
