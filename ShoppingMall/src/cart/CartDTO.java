@@ -6,7 +6,7 @@ public class CartDTO {
 	private int product_count;
 	
 	private String product_name;
-	private String product_brand;
+	private String brand;
 	private String img_main;
 	private int product_price;
 	private int discount;
@@ -36,11 +36,11 @@ public class CartDTO {
 	public void setProduct_count(int product_count) {
 		this.product_count = product_count;
 	}
-	public String getProduct_brand() {
-		return product_brand;
+	public String getBrand() {
+		return brand;
 	}
-	public void setProduct_brand(String product_brand) {
-		this.product_brand = product_brand;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	public String getImg_main() {
 		return img_main;
