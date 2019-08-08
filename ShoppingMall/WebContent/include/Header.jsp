@@ -11,16 +11,17 @@
 	
 	<div id="Header">
 		<div class="top_util">
+			<form action="#" method="post">
 			<ul class="menu_list">
-				
 				<li class="join"><a href="#">회원가입</a></li>
 				<li class="login"><a href="#">로그인</a></li>
-				<li class="cart"><a href="Cart.jsp">장바구니<span id="cartToCnt"></span></a></li>
-
+				<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
+				
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
 				<li class="store"><a href="#">매장안내</a></li>
 			</ul>
+			</form>
 		</div>
 		<div class="header_inner">
 			<h1><a href="Main.jsp"><img src="./asset/image/logo.png" alt="###" /></a></h1>
