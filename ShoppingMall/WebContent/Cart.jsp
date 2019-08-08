@@ -14,9 +14,9 @@
 </head>
 <body>
 <%
-String id = "admin";
-CartDAO dao = new CartDAO();
-dao.getCartList(id);
+	String id = "admin";
+	CartDAO dao = new CartDAO();
+	dao.getCartList(id);
 %>
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
