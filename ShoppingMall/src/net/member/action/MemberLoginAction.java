@@ -8,77 +8,76 @@ import javax.servlet.http.HttpSession;
 
 import member.MemberDAO;
 
-/*login.jspì—ì„œ ì‚¬ìš©ìê°€ ì…ë ¥í•œ idì™€ passë¥¼  userCheckë©”ì†Œë“œë¡œ ì „ë‹¬í•˜ì—¬..
-ì‚¬ìš©ìê°€ ì…ë ¥í•œ idì™€ passê°’ê³¼...DBì— ìˆëŠ” id,passê°’ì„ ë¹„êµí•˜ì—¬ ë¡œê·¸ì¸ ì²˜ë¦¬ í•˜ê¸° */
+/*login.jsp¿¡¼­ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id¿Í pass¸¦  userCheck¸Ş¼Òµå·Î Àü´ŞÇÏ¿©..
+»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id¿Í pass°ª°ú...DB¿¡ ÀÖ´Â id,pass°ªÀ» ºñ±³ÇÏ¿© ·Î±×ÀÎ Ã³¸® ÇÏ±â */
 public class MemberLoginAction implements Action{
-	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+   @Override
+   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		//login.jspì—ì„œ ì‚¬ìš©ìê°€ ì…ë ¥í•œ idì™€ pass íŒŒë¼ë¯¸í„° ê°€ì ¸ì˜¤ê¸°
-		String id=request.getParameter("id");
-		String pass=request.getParameter("pass");
-		
-		//DBì‘ì—… ê°ì²´ ìƒì„±
-		MemberDAO mdao=new MemberDAO();
-		
-	 
-		//login.jspì—ì„œ ì‚¬ìš©ìê°€ ì…ë ¥í•œ idì™€ passë¥¼  userCheckë©”ì†Œë“œë¡œ ì „ë‹¬í•˜ì—¬..
-		//ì‚¬ìš©ìê°€ ì…ë ¥í•œ idì™€ passê°’ê³¼...DBì— ìˆëŠ” id,passê°’ì„ ë¹„êµí•˜ì—¬ ë¡œê·¸ì¸ ì²˜ë¦¬ í•˜ê¸° 
-		//: check = 1 -> ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ ë§ìŒ
-		//: check = 0 -> ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ í‹€ë¦¼
-		//: check = -1 -> ì•„ì´ë”” í‹€ë¦¼
-		int check=mdao.userCheck(id, pass);
-		
-		
-		// check==0  "ë¹„ë°€ë²ˆí˜¸í‹€ë¦¼" ë’¤ë¡œì´ë™
-		if(check==0){
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("alert('ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸í‹€ë¦¼');");
-			out.println("history.back();");
-			out.println("</script>");
-			out.close();
-			return null;
-		
-		// check==-1 "ì•„ì´ë””ì—†ìŒ" ë’¤ë¡œì´ë™	
-		}else if(check==-1){
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("alert('ì•„ì´ë””ì—†ìŒ');");
-			out.println("history.back();");
-			out.println("</script>");
-			out.close();
-			return null;	
-		}
-		
-		
-	/*check == 1  
-	 * DBì— ìˆëŠ” ì•„ì´ë””,ë¹„ë°€ë²ˆí˜¸ì™€...
-	 * login.jsp í™”ë©´ì—ì„œ ì…ë ¥í•œ ì•„ì´ë””,ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í• ë•Œ...
-	 */
-		//ì„¸ì…˜ê°ì²´ ìƒì„±
-		HttpSession session=request.getSession();
-		
-		//login.jsp í™”ë©´ì—ì„œ ì…ë ¥í•œ ì•„ì´ë””ë¥¼ ì„¸ì…˜ê°ì²´ì˜ì—­ì— ì €ì¥
-		session.setAttribute("id", id);
-		
-	/*ë¡œê·¸ì¸ ì„±ê³µì‹œ.... CarMain.jsp í˜ì´ì§€ë¡œ ì´ë™ ì‹œí‚¨ë‹¤.*/
-		//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’,ì´ë™í˜ì´ì§€ ê²½ë¡œ ê°’ ì €ì¥ í•˜ì—¬ ë¦¬í„´ í•´ì£¼ëŠ” ê°ì²´ ìƒì„±
-		ActionForward forward=new ActionForward();
-		
-		//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’ trueë¡œ ì €ì¥  
-		//true sendRedirect() <-ì´ë°©ì‹ì€ ì´ë™í•  í˜ì´ì§€ ì£¼ì†Œ ê²½ë¡œ ë…¸ì¶œ í•¨.	
-		forward.setRedirect(true);
-		
-		// ./CarMain.jsp ì´ë™í•  í˜ì´ì§€ ì£¼ì†Œ ì €ì¥
-		forward.setPath("./Main.me"); 
-		
-		//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’ trueì™€...
-		// ì´ë™í• í˜ì´ì§€ ì£¼ì†Œ (./CarMain.jsp)ë¥¼ ë‹´ê³  ìˆëŠ”..
-		//new ActionForward()ê°ì²´ë¥¼ MemberFrontControllerë¡œ ë¦¬í„´  
-		return forward;
-	}
+      //login.jsp¿¡¼­ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id¿Í pass ÆÄ¶ó¹ÌÅÍ °¡Á®¿À±â
+      String id=request.getParameter("id");
+      String pass=request.getParameter("pass");
+      
+      //DBÀÛ¾÷ °´Ã¼ »ı¼º
+      MemberDAO mdao=new MemberDAO();
+      
+    
+      //login.jsp¿¡¼­ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id¿Í pass¸¦  userCheck¸Ş¼Òµå·Î Àü´ŞÇÏ¿©..
+      //»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id¿Í pass°ª°ú...DB¿¡ ÀÖ´Â id,pass°ªÀ» ºñ±³ÇÏ¿© ·Î±×ÀÎ Ã³¸® ÇÏ±â 
+      //: check = 1 -> ¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£ ¸ÂÀ½
+      //: check = 0 -> ¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£ Æ²¸²
+      //: check = -1 -> ¾ÆÀÌµğ Æ²¸²
+      int check=mdao.userCheck(id, pass);
+      
+      
+      // check==0  "ºñ¹Ğ¹øÈ£Æ²¸²" µÚ·ÎÀÌµ¿
+      if(check==0){
+         response.setContentType("text/html; charset=UTF-8");
+         PrintWriter out=response.getWriter();
+         out.println("<script>");
+         out.println("alert('¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£Æ²¸²');");
+         out.println("history.back();");
+         out.println("</script>");
+         out.close();
+         return null;
+      
+      // check==-1 "¾ÆÀÌµğ¾øÀ½" µÚ·ÎÀÌµ¿   
+      }else if(check==-1){
+         response.setContentType("text/html; charset=UTF-8");
+         PrintWriter out=response.getWriter();
+         out.println("<script>");
+         out.println("alert('¾ÆÀÌµğ¾øÀ½');");
+         out.println("history.back();");
+         out.println("</script>");
+         out.close();
+         return null;   
+      }
+      
+      
+   /*check == 1  
+    * DB¿¡ ÀÖ´Â ¾ÆÀÌµğ,ºñ¹Ğ¹øÈ£¿Í...
+    * login.jsp È­¸é¿¡¼­ ÀÔ·ÂÇÑ ¾ÆÀÌµğ,ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÒ¶§...
+    */
+      //¼¼¼Ç°´Ã¼ »ı¼º
+      HttpSession session=request.getSession();
+      
+      //login.jsp È­¸é¿¡¼­ ÀÔ·ÂÇÑ ¾ÆÀÌµğ¸¦ ¼¼¼Ç°´Ã¼¿µ¿ª¿¡ ÀúÀå
+      session.setAttribute("id", id);
+      
+      /*·Î±×ÀÎ ¼º°ø½Ã.... CarMain.jsp ÆäÀÌÁö·Î ÀÌµ¿ ½ÃÅ²´Ù.*/
+      //ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼ »ı¼º
+      ActionForward forward=new ActionForward();
+      
+      //ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª true·Î ÀúÀå  
+      //true sendRedirect() <- ÀÌ¹æ½ÄÀº ÀÌµ¿ÇÒ ÆäÀÌÁö ÁÖ¼Ò °æ·Î ³ëÃâ ÇÔ.   
+      forward.setRedirect(true);
+      
+      // ./CarMain.jsp ÀÌµ¿ÇÒ ÆäÀÌÁö ÁÖ¼Ò ÀúÀå
+      forward.setPath("./Main.me"); 
+      
+      //ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª true¿Í...
+      // ÀÌµ¿ÇÒÆäÀÌÁö ÁÖ¼Ò (./CarMain.jsp)¸¦ ´ã°í ÀÖ´Â..
+      //new ActionForward()°´Ã¼¸¦ MemberFrontController·Î ¸®ÅÏ  
+      return forward;
+   }
 }
-

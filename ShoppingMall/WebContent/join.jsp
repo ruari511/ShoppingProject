@@ -6,6 +6,56 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+<!-- 제이쿼리 최선버전의 js파일을 불러와 jquery를 사용하기 위해 반드시 설정해야함 -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	
+	function id_check(){
+		var _id = $("#user_id").val();
+		
+		if(_id == ''){// 아이디를 입력하지 않았을 경우
+			alter("ID를 입력하세요.");
+			return;
+		}
+		$.ajax(
+			{
+				url:"http://localhost:8090/ShoppingMall/joinCheck",
+				type:"post",
+				async:true,
+				data:{id:_id},
+				dataType:"text",
+				success:function(data,textStatus){
+					if(data == 'usable'){ // 아이디가 중복이 아닐 시
+						if(_id == ""){// 아이디가 공백일때
+							$("message").text("아이디를 입력해주세요 :)");
+							$("message").css("color","red");
+							$(".submit").attr("disabled",true);
+// 						}else if(_id.length() < 4 || _id.length > 12){// 아이디가 4~12자가 아닐 시
+// 							$("message").text("아이디를 입력해주세요 :)");
+// 							$("imessage").css("color","red");
+// 							$(".submit").attr("disabled",true);
+						}else{
+							$("#message").text("사용할 수 있는  아이디입니다:)");
+						}
+					}else{// 중복일 때
+						$("#message").text("사용중인 아이디입니다.");
+						$("#message").css("color","red");
+						$(".submit").attr("disabled",true);
+					}
+				
+				},
+				error:function(data,textStatus){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
+					 alert("에러가 발생했습니다.");
+			 }
+		}); // ajax 메소드 끝
+		
+	};	
+		
+	
+	
+</script>
+
 </head>
 <body>
 <!-- 본문내용 -->
@@ -18,7 +68,8 @@
 				<fieldset>
 				<legend>회원가입 정보</legend>
 				<label>아이디</label>
-					<input type="text" name="id" class="id" required><br>
+					<input type="text" class="id" id="user_id" onkeyup="id_check()"  required><br>
+					<div class="check_font" id="message"></div>
 				<label>비밀번호</label>
 					<input type="password" name="pass" required><br>
 				<label>이름</label>
