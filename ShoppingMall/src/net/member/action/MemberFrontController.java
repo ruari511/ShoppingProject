@@ -26,138 +26,123 @@ public class MemberFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		//가상요청 주소 가져오기
+		//媛��긽�슂泥� 二쇱냼 媛��졇�삤湲�
 		//  /CarProject/MemberJoin.me
 		//  /CarProject/MemberJoinAction.me
 		//   /CarProject/MemberLogin.me 
 		String RequestURI=request.getRequestURI();
 		System.out.println(RequestURI);
 		
-		//  /CarProject 얻기
-		//  /CarProject 얻기
-		//  /CarProject 얻기
+		//  /CarProject �뼸湲�
+		//  /CarProject �뼸湲�
+		//  /CarProject �뼸湲�
 		String contextPath=request.getContextPath();
 		
-		//	길이 11
-		//	길이 11
-		//	길이 11
+		//	湲몄씠 11
+		//	湲몄씠 11
+		//	湲몄씠 11
 		System.out.println(contextPath.length());
 		
-		//  /MemberJoin.me 얻기
+		//  /MemberJoin.me �뼸湲�
 		// /MemberJoinAction.me
-		//  /MemberLogin.me 얻기 
+		//  /MemberLogin.me �뼸湲� 
 		String command=RequestURI.substring(contextPath.length());
 		System.out.println(command);
 					
-		/*주소 비교*/	
-		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체를 저장할 참조변수 선언 
+		/*二쇱냼 鍮꾧탳*/	
+		//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛�,�씠�룞�럹�씠吏� 寃쎈줈 媛� ���옣 �븯�뿬 由ы꽩 �빐二쇰뒗 媛앹껜瑜� ���옣�븷 李몄“蹂��닔 �꽑�뼵 
 		ActionForward forward=null;
 	
-		//자식 Action 객체들을 담을 인터페이스 타입의 참조변수 선언
+		//�옄�떇 Action 媛앹껜�뱾�쓣 �떞�쓣 �씤�꽣�럹�씠�뒪 ���엯�쓽 李몄“蹂��닔 �꽑�뼵
 		Action action=null;
 			
-		//Top.jsp에서.. join링크를 누르면 회원가입페이지로 이동하는 요청이 들어 왔을때..
+		//Top.jsp�뿉�꽌.. join留곹겕瑜� �늻瑜대㈃ �쉶�썝媛��엯�럹�씠吏�濡� �씠�룞�븯�뒗 �슂泥��씠 �뱾�뼱 �솕�쓣�븣..
 		if(command.equals("/MemberJoin.me")){
 		
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛�,�씠�룞�럹�씠吏� 寃쎈줈 媛� ���옣 �븯�뿬 由ы꽩 �빐二쇰뒗 媛앹껜 �깮�꽦 
 			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛� false濡� ���옣-> RequestDispatcher  forward() 諛⑹떇
 			forward.setRedirect(false);
-			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?center=member/join.jsp");
+			//�씠�룞�븷 �럹�씠吏� 寃쎈줈(�쉶�썝媛��엯 �럹�씠吏�) 二쇱냼媛� ���옣
+			forward.setPath("./Main.jsp?=member/join.jsp");
 			
-		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
+		//join.jsp�뿉�꽌...�쉶�썝媛��엯 泥섎━�슂泥��씠 �뱾�뼱 �솕�쓣�뻹...	
 		}else if(command.equals("/MemberJoinAction.me")){
 	
-			//회원가입 처리를 위한 Action객체 생성
+			//�쉶�썝媛��엯 泥섎━瑜� �쐞�븳 Action媛앹껜 �깮�꽦
 			action=new MemberJoinAction();
 			
 			try {
-				//josin.jsp에서 입력한 회원가입 내용을 담고 있는
-				//request영역을 execute메소드의 매개변수로 전달하여..
-				//회원가입 DB 작업후 회원가입에 성공하면..
-				// 페이지 이동 방식 여부 값 true와...
-				// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..
-				//new ActionForward()객체를 리턴 받는다.
 				forward=action.execute(request, response);
 						
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
-		//또는 회원가입후!.. 로그인화면으로 이동하라 라는 요청이 들어 왔을떄...
+		//top.jsp�뿉�꽌 ..login留곹겕瑜� �겢由��븯�뿬 濡쒓렇�씤�솕硫댁쑝濡� �씠�룞�븯�씪 �씪�뒗 �슂泥��씠 �뱾�뼱 �솕�쓣�븣...	
+		//�삉�뒗 �쉶�썝媛��엯�썑!.. 濡쒓렇�씤�솕硫댁쑝濡� �씠�룞�븯�씪 �씪�뒗 �슂泥��씠 �뱾�뼱 �솕�쓣�뻹...
 		}else if(command.equals("/MemberLogin.me")){ 
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛�,�씠�룞�럹�씠吏� 寃쎈줈 媛� ���옣 �븯�뿬 由ы꽩 �빐二쇰뒗 媛앹껜 �깮�꽦 
 			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
-			forward.setRedirect(false); //주소값 노출 안됨
-			//이동할 페이지 경로(로그인 페이지) 주소값 저장
+			//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛� false濡� ���옣-> RequestDispatcher  forward() 諛⑹떇
+			forward.setRedirect(false); //二쇱냼媛� �끂異� �븞�맖
+			//�씠�룞�븷 �럹�씠吏� 寃쎈줈(濡쒓렇�씤 �럹�씠吏�) 二쇱냼媛� ���옣
 			forward.setPath("./CarMain.jsp?center=member/login.jsp"); 
 		
-		//login.jsp에서... "Sign in"버튼을 눌렀을때..로그인 처리 요청받기!
-		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
+		//login.jsp�뿉�꽌... "Sign in"踰꾪듉�쓣 �닃���쓣�븣..濡쒓렇�씤 泥섎━ �슂泥�諛쏄린!
+		//�궗�슜�옄媛� �엯�젰�븳 id�� �뙣�뒪�썙�뱶瑜� request�쁺�뿭�뿉 �떞�븘�삤湲�
 		}else if(command.equals("/MemberLoginAction.me")){
 			
-			//로그인 처리를 위한 Action객체 생성 
+			//濡쒓렇�씤 泥섎━瑜� �쐞�븳 Action媛앹껜 �깮�꽦 
 			action=new MemberLoginAction();
 			
 			try {
-				//login.jsp에서 사용자가 입력한 id와 패스워드를 담고 있는 request영역을
-				//execute메소드의 매개변수로 전달하여.. DB에있는 id와 패스워드 값을 비교한다.
-				//DB에 있는 아이디,비밀번호와...
-				//login.jsp 화면에서 입력한 아이디,비밀번호가 일치할때...
-				//login.jsp 화면에서 입력한 아이디를 세션객체영역에 저장하고...
-				//페이지 이동 방식 여부 값 true와...이동할페이지 주소 (./CarMain.jsp)를 담고 있는..
-				//new ActionForward()객체를 MemberFrontController로 리턴 
 				forward=action.execute(request, response);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-		//top.jsp에서 ..logout링크를 클릭하여 세션값초기화하고...
-		//CarMain.jsp화면으로 이동하라 라는 요청이 들어 왔을때...				
 		}else if(command.equals("/MemberLogout.me")){
 			
-			//로그아웃 처리를 위한 Action객체 생성  
+			//濡쒓렇�븘�썐 泥섎━瑜� �쐞�븳 Action媛앹껜 �깮�꽦  
 			action=new MemberLogoutAction();
 			try {
-				//top.jsp에서  로그아웃 요청이 들어왔을때...  
-				//세션값 초기화후~ 로그아웃 메세지창을 띄어주고...
-				//CarList.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
+				//top.jsp�뿉�꽌  濡쒓렇�븘�썐 �슂泥��씠 �뱾�뼱�솕�쓣�븣...  
+				//�꽭�뀡媛� 珥덇린�솕�썑~ 濡쒓렇�븘�썐 硫붿꽭吏�李쎌쓣 �쓣�뼱二쇨퀬...
+				//CarList.jsp�럹�씠吏�濡� �씠�룞�븯�뒗�씪�쓣 �븯�뒗 execute()硫붿냼�뱶 �샇異쒗븿.
 				forward=action.execute(request, response); //return null;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}	//"CarMain.jsp 메인 페이지 요청"이 들어 왔을떄...
+		}	//"CarMain.jsp 硫붿씤 �럹�씠吏� �슂泥�"�씠 �뱾�뼱 �솕�쓣�뻹...
 		else if(command.equals("/Main.me")){
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
+			//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛�,�씠�룞�럹�씠吏� 寃쎈줈 媛� ���옣 �븯�뿬 由ы꽩 �빐二쇰뒗 媛앹껜 �깮�꽦
 			forward=new ActionForward();
-			forward.setRedirect(false); //주소값 노출 x
-			forward.setPath("./CarMain.jsp"); //이동할 페이지 저장
+			forward.setRedirect(false); //二쇱냼媛� �끂異� x
+			forward.setPath("./CarMain.jsp"); //�씠�룞�븷 �럹�씠吏� ���옣
 		}
 		
-		//주소 이동
-		if(forward!=null){ //new ActionForward()객체가 존재 하고..
-			if(forward.isRedirect()){//true -> sendRedirect() 방식일떄..
-				//리다이렉트 방식으로 페이지 이동!  페이지 주소 경로 노출 함 
-				//join.jsp화면 이동
-				//login.jsp화면 이동
-				//CarMain.jsp화면 이동시 session영역 전달
+		//二쇱냼 �씠�룞
+		if(forward!=null){ //new ActionForward()媛앹껜媛� 議댁옱 �븯怨�..
+			if(forward.isRedirect()){//true -> sendRedirect() 諛⑹떇�씪�뻹..
+				//由щ떎�씠�젆�듃 諛⑹떇�쑝濡� �럹�씠吏� �씠�룞!  �럹�씠吏� 二쇱냼 寃쎈줈 �끂異� �븿 
+				//join.jsp�솕硫� �씠�룞
+				//login.jsp�솕硫� �씠�룞
+				//CarMain.jsp�솕硫� �씠�룞�떆 session�쁺�뿭 �쟾�떖
 				response.sendRedirect(forward.getPath());
 				
-			}else{//false -> forward() 방식일때...
+			}else{//false -> forward() 諛⑹떇�씪�븣...
 				
 				RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 		}//if 
 		
-	}//	doProcess 메소드 끝
+	}//	doProcess 硫붿냼�뱶 �걹
 	
-}//서블릿 끝
+}//�꽌釉붾┸ �걹
 
 
 

@@ -13,7 +13,7 @@
 		<div class="top_util">
 			<form action="#" method="post">
 			<ul class="menu_list">
-				<li class="join"><a href="#">회원가입</a></li>
+				<li class="join"><a href="join.jsp">회원가입</a></li>
 				<li class="login"><a href="#">로그인</a></li>
 				<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
 				

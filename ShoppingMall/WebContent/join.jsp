@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- 본문내용 -->
-<center>
+<section>
 		<article>
 			<h1>Join Us</h1>
 			<%--MemberFrontController서블릿에.. 회원가입 처리 요청! --%>
@@ -55,7 +55,7 @@
 			</form>
 		</article>
 
-</center>
+</section>
 <!-- 본문내용 -->
 </body>
 </html>
