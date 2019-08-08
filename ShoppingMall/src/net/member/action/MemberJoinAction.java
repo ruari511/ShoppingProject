@@ -40,9 +40,6 @@ public class MemberJoinAction implements Action{
 		dto.setAddress_detail(request.getParameter("address_detail"));
 		dto.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));//회원 전화번호 저장
 		dto.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));//회원  폰번호 저장
-		dto.setGrade(request.getParameter("grade"));
-		dto.setTotalprice(Integer.parseInt(request.getParameter("totalprice")));
-		dto.setPoint(Integer.parseInt(request.getParameter("point")));
 		
 		
 		//회원가입 성공 여부를 담을 변수 선언
@@ -55,7 +52,7 @@ public class MemberJoinAction implements Action{
 		//가입에 성공하면 true리턴, 실패하면 false리턴
 		result = mdao.insertMember(dto);
 		
-		System.out.println("fgds");
+		
 		
 		//회원 가입 처리에 실패 했을 경우 null을 반환 한다.
 		if(result == false){

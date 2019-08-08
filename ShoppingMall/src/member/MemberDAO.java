@@ -20,7 +20,7 @@ public class MemberDAO {
 	private Connection getConnection() throws Exception {
 		Connection con=null;
 		Context init=new InitialContext();
-		DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/jspbeginner");
+		DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/shoppingmall");
 		con=ds.getConnection();
 		return con;
 		
@@ -96,20 +96,20 @@ public class MemberDAO {
 			sql = "insert into member(id,password,name,birth_date,gender,email,reg_date,address_main,address_detail,tel,phone,grade,totalprice,point) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 
-			// pstmt.setString(1,dto.getId()); //1 물음표 위치
-			// pstmt.setString(2,dto.getPassword()); //2 물음표 위치
-			// pstmt.setString(3,dto.getName()); //3 물음표 위치
-			// pstmt.setString(4,dto.getBirth_date()); //4 물음표 위치
-			// pstmt.setString(5,dto.getGender()); //5 물음표 위치
-			// pstmt.setString(6, dto.getEmail());
-			// pstmt.setTimestamp(7, dto.getReg_date());
-			// pstmt.setString(8, dto.getAddress_main());
-			// pstmt.setString(9, dto.getAddress_detail());
-			// pstmt.setString(10, dto.getTel());
-			// pstmt.setString(11, dto.getPhone());
-			// pstmt.setString(12, dto.getGrade());
-			// pstmt.setInt(13, dto.getTotalprice());
-			// pstmt.setInt(14,dto.getPoint());
+			pstmt.setString(1,dto.getId()); //1 물음표 위치
+			pstmt.setString(2,dto.getPassword()); //2 물음표 위치
+			pstmt.setString(3,dto.getName()); //3 물음표 위치
+			 pstmt.setString(4,dto.getBirth_date()); //4 물음표 위치
+			 pstmt.setString(5,dto.getGender()); //5 물음표 위치
+			 pstmt.setString(6, dto.getEmail());
+			 pstmt.setTimestamp(7, dto.getReg_date());
+			 pstmt.setString(8, dto.getAddress_main());
+			 pstmt.setString(9, dto.getAddress_detail());
+			 pstmt.setString(10, dto.getTel());
+			 pstmt.setString(11, dto.getPhone());
+			 pstmt.setString(12, "bronze");
+			 pstmt.setInt(13,0);
+			 pstmt.setInt(14,0);
 
 			// 4단계 실행
 			result = pstmt.executeUpdate(); // 회원가입 성공하면 1리턴, 실패시0리턴
