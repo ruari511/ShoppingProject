@@ -5,6 +5,7 @@
 <%-- 현재 페이지에서 JSTL의 core라이브러리에 속한 태그들을 사용 하기 위한 설정
 	core라이브러리에 속한 태그는? 접두사 c를 이용한다. 
  --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,14 +49,14 @@ function checkAll(bool) {
 				</ul>
 			</div>
 			<!--// title_box -->
-			
+			<c:set var="member" value="${requestScope.m}" />
 			<!-- membership_box -->
 			<div class="membership_box  iconGrade4">		 
-				<p class="tx_grade_info"><strong>박정현</strong>님의 멤버십 등급은 <span class="grade">Baby Olive</span>입니다. </p>
+				<p class="tx_grade_info"><strong>${member.name}</strong>님의 멤버십 등급은 <span class="grade">${member.grade}</span>입니다. </p>
 				<ul class="membership_info_list">
 					<li><a class="grade_benefit"><span>등급혜택</span></a></li>
-					<li><a><strong><span class="tx_num">CJ ONE</span> 포인트</strong> 
-					<span class="own_point"><span class="tx_num">935</span>P</span></a></li>
+					<li><a><strong>포인트</strong> 
+					<span class="own_point"><span class="tx_num">${member.point}</span>P</span></a></li>
 					<li><a><strong>할인쿠폰</strong> <span class="own_point"><span class="tx_num">0</span>개</span></a></li>
 					<li><a><strong>예치금</strong> <span class="own_point"><span class="tx_num">0</span>원</span></a></li>
 				</ul>
@@ -87,10 +88,14 @@ function checkAll(bool) {
 				</tr>
 				</thead>
 				<tbody>
-				<%
-				int i=0;
-				%>
+				<c:set var="sum" value="0" />
+				<c:set var="discount" value="0" />
 <c:forEach var="cartlist"  items="${requestScope.v}">
+	<input type="hidden" value="${sum = sum + cartlist.product_price*cartlist.product_count}">
+	<input type="hidden" value="${discount = discount + cartlist.product_price*cartlist.product_count*cartlist.discount/100}">
+	<fmt:parseNumber var= "pages" integerOnly= "true" value= "${discount}" />
+	<fmt:parseNumber var= "dis" integerOnly= "true" value= "${(cartlist.product_price*cartlist.product_count)-cartlist.product_price*cartlist.product_count*cartlist.discount/100}" />
+	<fmt:formatNumber value="${discount}" pattern="0"/>
 	<tr>
 		<td colspan="7">
 			<div class="tbl_cont_area">		
@@ -129,9 +134,9 @@ function checkAll(bool) {
 				</div>
 				<div class="tbl_cell w110">
 					<span class="org_price">
-					<span class="tx_num">${cartlist.product_price}</span>원
+					<span class="tx_num">${cartlist.product_price*cartlist.product_count}</span>원
 					</span>
-					<span class="pur_price"><span class="tx_num">${cartlist.product_price-cartlist.discount}</span>원</span>
+					<span class="pur_price"><span class="tx_num">${dis}</span>원</span>
 				</div>
 				<div class="tbl_cell w120  ">
 					<p class="prd_delivery">
@@ -147,10 +152,11 @@ function checkAll(bool) {
 			</div>
 		</td>
 	</tr>	
+	
 </c:forEach>
 </tbody>
-			</table>
-			
+</table>
+		
 			<!--// 올리브영 배송상품 -->
 			<!-- 올리브영 배송상품 결제금액 -->
 			<div class="basket_price_info">
@@ -158,21 +164,26 @@ function checkAll(bool) {
 					<button type="button" class="btnSmall wGray type2" id="partDelBtn1" name="partDelBtn"><span>선택상품 삭제</span></button> 
 					<button type="button" class="btnSmall wGray type2" id="soldOutDelBtn1" name="soldOutDelBtn"><span>품절상품 삭제</span></button>
 				</div>
-				<div class="sum_price">총 판매가 <span class="tx_num">26,000</span>원 <span class="tx_sign minus">-</span> 총 할인금액 <span class="tx_num">1,300</span>원 <span class="tx_sign plus">+</span> 배송비 <span class="tx_num">0</span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">총 결제금액 <span class="tx_price"><span class="tx_num">24,700</span>원</span></span></div>
+				<div class="sum_price">
+				총 판매가 <span class="tx_num">${sum}</span>원 <span class="tx_sign minus">-</span>
+				 총 할인금액 <span class="tx_num">${pages}</span>원 <span class="tx_sign plus">+</span>
+				  배송비 <span class="tx_num">0</span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">
+				  총 결제금액 <span class="tx_price"><span class="tx_num">${sum-pages}</span>원</span></span>
+				  </div>
 			</div>
 			<!--// 올리브영 배송상품 결제금액 -->
 
 			<div class="total_price_info">
 				<div class="detail_price">
-					<p>총 판매가<span><span class="tx_num">26,000</span>원</span></p>
+					<p>총 판매가<span><span class="tx_num">${sum}</span>원</span></p>
 					<span class="tx_sign2 minus">-</span>
-					<p class="tx_sale">총 할인금액<span><span class="tx_num">1,300</span>원</span></p>
+					<p class="tx_sale">총 할인금액<span><span class="tx_num">${pages}</span>원</span></p>
 					<span class="tx_sign2 plus">+</span>
 					<p>배송비 <span><span class="tx_num">0</span>원</span></p>
 				</div>
 				<div class="sum_price">
 					<span class="tx_text">배송비는 쿠폰할인금액에 따라 변경될 수 있습니다.</span>
-					총 결제예상금액 <span class="tx_price"><span class="tx_num">24,700</span>원</span>
+					총 결제예상금액 <span class="tx_price"><span class="tx_num">${sum-pages}</span>원</span>
 				</div>	
 			</div>
 		

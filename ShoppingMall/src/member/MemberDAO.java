@@ -112,6 +112,8 @@ public class MemberDAO {
 				member.setName(rs.getString("name"));
 				member.setPhone_tel(rs.getString("phone_tel"));
 				member.setEmail(rs.getString("email"));
+				member.setPoint(rs.getInt("point"));
+				member.setGrade(rs.getInt("grade"));
 				
 			}//while문 끝
 			
