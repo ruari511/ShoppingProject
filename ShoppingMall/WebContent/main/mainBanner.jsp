@@ -6,7 +6,65 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../asset/css/mainBanner.css"/> 
 <link rel="stylesheet" href="../asset/css/global.css"/> 
-<title>Insert title here</title>
+<title>배너</title>
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		
+		//배너 총 갯수
+		var maxIndex = $(".mainBanner_Img_Wrap").length;
+		
+		//현재 배너 인덱스
+		var index=0;
+
+		//배너들 위치 조정
+		
+		for(var i = 0; i<maxIndex; i++){
+			var top = -450*i;
+			$(".mainBanner_Img_Wrap").eq(i).css("top", top +"px");											.css("opacity", 0);
+		}
+		
+		//첫번째 배너 위로 올리기
+		$(".mainBanner_Img_Wrap").eq(0).css("z-index", 7);
+		$(".mainBanner_Img_Wrap").eq(0).css("opacity", 1);
+		
+		
+		//정해진 초마다 실행하는 함수
+		var mainBanner;
+		mainBanner = setInterval(function(){mainBannerStart();}, 5000);
+		
+		function mainBannerStart(){
+			//현재 배너 값 저장
+			var currentIndex = index;
+			//현재 배너 z인덱스 줄이기
+			$(".mainBanner_Img_Wrap").eq(currentIndex).css("z-index", 6);
+						
+			
+			//새 인덱스
+			index++
+			
+			//인덱스초과했으며 맨앞으로
+			if(index>=maxIndex){
+				index = 0;
+			}
+			
+			//새 배너 z인덱스 올리기
+			$(".mainBanner_Img_Wrap").eq(index).css("z-index", 7);
+			
+			//새 배너 오퍼시티 서서히 변하게
+			$(".mainBanner_Img_Wrap").eq(index).animate({opacity: '1'}, 500, function(){
+				
+				
+				//새배너 오퍼시티 1이 되면 현재배너 오퍼시티 0
+				$(".mainBanner_Img_Wrap").eq(currentIndex).css("opacity", 0);				
+			});	
+		}
+
+	});
+
+</script>
+
 </head>
 <body>
 <!--190808 김현정 메인 배너 틀 제작-->
@@ -14,10 +72,11 @@
 		<div id="mainBanner">
 			<div id="mainBanner_Wrap">
 				<div id="mainBanner_Img">
+				
 					<!--링크배너-->
 					<div class="mainBanner_Img_Wrap">
-						<a href="#">
-							<img src="img/test1.jpg">
+						<a href="http://www.naver.com">
+							<img src="../asset/image/bannertest1.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -29,6 +88,23 @@
 							</p>
 						</a>
 					</div>
+					
+					<div class="mainBanner_Img_Wrap">
+						<a href="http://www.daum.net">
+							<img src="../asset/image/bannertest2.jpg">
+							<p class="mainBanner_Img_Text">
+							<span>{Title}</span>
+							<strong>
+							{ccc}<br>
+							{ccc}<br>
+							{ccc}<br>
+							</strong>
+							<span>{Tag}</span>
+							</p>
+						</a>
+					</div>
+					
+
 				
 				</div>
 				<div id="mainBanner_Btn">

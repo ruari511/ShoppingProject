@@ -1,4 +1,4 @@
-<!--190808 김현정 메인 배너 틀 제작-->
+/*190808 김현정 메인 배너 틀 제작*/
 @CHARSET "UTF-8";
 *{box-sizing: border-box;}
 html, body {
@@ -35,7 +35,7 @@ html, body {
 	position: absolute;
 	top: 380px;
 	left: 60%;
-	z-index: 5;
+	z-index: 10;
 }
 
 #mainBanner_Btn Button{
@@ -60,7 +60,8 @@ html, body {
 	height: 100%;
 	min-width: 1020px;
 	left: 0;
-	z-index: 4;
+	z-index: 5;
+	position:relative;
 }
 
 .mainBanner_Img_Wrap a{
