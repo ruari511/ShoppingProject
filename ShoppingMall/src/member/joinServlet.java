@@ -32,11 +32,16 @@ public class joinServlet extends HttpServlet {
 		
 		//요청값얻기(사용자가 입력한 아이디 얻기)
 		String id = request.getParameter("id");
-		System.out.println("id=" + id);
-		
 		String pass = request.getParameter("pass");
 		String pass2 = request.getParameter("pass2");
-		System.out.println("pass = " + pass);
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String phone1 = request.getParameter("phone1");
+		String phone2 = request.getParameter("phone2");
+		String phone3 = request.getParameter("phone3");
+		
+		
+		
 				
 		//사용자가 입력한 id와  DB에 저장되어 있는 회원의 id를 비교 하기 위해 DB작업
 		MemberDAO memberDAO = new MemberDAO();
@@ -50,6 +55,22 @@ public class joinServlet extends HttpServlet {
 		}else{
 			writer.print("usable");
 		}
+		
+		
+		// 핸드폰 번호 3자리 합친 값 구하기
+		String phone = phone1 + "-" + phone2 + "-" + phone3;
+		System.out.println(phone);
+		//핸드폰번호 중복 체크 여부값 얻기
+		boolean overlappedPhone = memberDAO.overlappedPhone(phone);
+		
+		//핸드폰번호 중복이냐 중복이 아니냐에 따라 메세지를 클라이언트의 웹브라우저로 출력(응답)
+		if(overlappedPhone == true){
+			writer.print("overlapped");
+		}else{
+			writer.print("not_overlapped");
+		}
+		
+		
 		
 		
 	}	

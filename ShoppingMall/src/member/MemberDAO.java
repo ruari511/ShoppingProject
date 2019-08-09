@@ -173,6 +173,36 @@ public class MemberDAO {
 		return false; // �쉶�썝媛��엯 �떎�뙣�떆! false由ы꽩
 
 	}// insertMember()硫붿냼�뱶
+	public boolean overlappedPhone(String phone) {
+		//아이디 중복 또는 중복이아니다 라는 판별값을 저장할 변수 
+		boolean result = false;
+		
+		try {
+			Connection con = null;
+			String sql = "";
+			PreparedStatement pstmt = null;
+			//커넥션풀로부터 커넥션 얻기
+			con = getConnection();
+			
+			//오라클의 decode()함수를 이용하여 서블릿에서 전달된 ID에 해당하는 데이터를 검색하여
+			//true또는 false반환하는데...
+			//검색한 갯수가 1(검색한 레코드가 존재하면)이면 true를 반환,
+			//존재 하지 않으면 false를 문자열로 반환하여 조회하는 SQL문을 작성
+			String query = "select if(count(*)>0,'true','false') as result from member";
+				   query += " where phone=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, phone);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			result = Boolean.parseBoolean(rs.getString("result"));   
+			pstmt.close();
+			rs.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 		
 		
 }
