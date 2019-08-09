@@ -34,8 +34,6 @@ public class CartListController extends HttpServlet {
 		//실제 데이터베이스에 접근하여 자동차 정보를 모두 검색해서 얻기
 		Vector<CartDTO> v = cdao.getCartList("admin");
 		
-		System.out.println(v.get(0).getProduct_name());
-		
 		//전체차량을 검색한 정보는 백터에 있으므로
 		//View페이지로 백터를 전달하기 위해.. request내장객체 영역에 수동으로 저장
 		request.setAttribute("v", v);
