@@ -34,6 +34,10 @@ public class joinServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		System.out.println("id=" + id);
 		
+		String pass = request.getParameter("pass");
+		String pass2 = request.getParameter("pass2");
+		System.out.println("pass = " + pass);
+				
 		//사용자가 입력한 id와  DB에 저장되어 있는 회원의 id를 비교 하기 위해 DB작업
 		MemberDAO memberDAO = new MemberDAO();
 		

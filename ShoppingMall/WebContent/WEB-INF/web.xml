@@ -19,7 +19,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-    <resource-ref>
+   <resource-ref>
     <description>Connection</description>
     <res-ref-name>jdbc/shoppingmall</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>

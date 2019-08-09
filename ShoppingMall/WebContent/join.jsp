@@ -11,8 +11,12 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	
-	function id_check(){
+	function join_check(){
 		var _id = $("#user_id").val();
+		var chkSuccess;
+		
+		var _pass = $("#user_pass").val();
+		var _pass2 = $("#user_pass2").val();
 		
 		if(_id == ''){// 아이디를 입력하지 않았을 경우
 			alter("ID를 입력하세요.");
@@ -22,28 +26,51 @@
 			{
 				url:"http://localhost:8090/ShoppingMall/joinCheck",
 				type:"post",
-				async:true,
-				data:{id:_id},
+				async:false,
+				data:{id:_id, pass:_pass},
 				dataType:"text",
 				success:function(data,textStatus){
-					if(data == 'usable'){ // 아이디가 중복이 아닐 시
-						if(_id == ""){// 아이디가 공백일때
-							$("message").text("아이디를 입력해주세요 :)");
-							$("message").css("color","red");
+					
+					// 아이디 체크
+					if(data == 'usable'){ // 아이디가 중복이 아닐 시(사용가능)
+						if(_id.length < 4 || _id.length > 12){// 아이디가 4~12자가 아닐 시
+							$("#idMessage").text("아이디 4~12자를 입력해주세요 :)");
+							$("#idMmessage").css("color","red");
 							$(".submit").attr("disabled",true);
-// 						}else if(_id.length() < 4 || _id.length > 12){// 아이디가 4~12자가 아닐 시
-// 							$("message").text("아이디를 입력해주세요 :)");
-// 							$("imessage").css("color","red");
-// 							$(".submit").attr("disabled",true);
+						}else if(_id == ""){// 아이디가 공백일때
+							$("#idMessage").text("아이디를 입력해주세요 :)");
+							$("#idMessage").css("color","red");
+							$(".submit").attr("disabled",true);
 						}else{
-							$("#message").text("사용할 수 있는  아이디입니다:)");
+							$("#idMessage").text("사용할 수 있는  아이디입니다:)");
+							$("#idMessage").css("color","blue");
+							$(".submit").attr("disabled",false);
+							chkSuccess = true;
 						}
 					}else{// 중복일 때
-						$("#message").text("사용중인 아이디입니다.");
-						$("#message").css("color","red");
+						$("#idMessage").text("사용중인 아이디입니다.");
+						$("#idMessage").css("color","red");
 						$(".submit").attr("disabled",true);
+						chkSuccess = false;
 					}
-				
+					
+					// 비밀번호 체크
+					if(chkSuccess == true){
+						if(_pass != _pass2 ){
+							$("#passMessage").text("비밀번호가 일치하지 않습니다.");
+							$("#passMessage").css("color","red");
+							$(".submit").attr("disabled",true);
+						}else if(_pass.length < 4 || _pass2.length < 4){
+							$("#passMessage").text("비밀번호 4자리 이상 입력해주세요");
+							$("#passMessage").css("color","red");
+							$(".submit").attr("disabled",true);
+						}else{ 
+							$("#passMessage").text("비밀번호가 일치합니다.");
+							$("#passMessage").css("color","blue");
+							$(".submit").attr("disabled",false);
+						}
+					}	
+					
 				},
 				error:function(data,textStatus){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
 					 alert("에러가 발생했습니다.");
@@ -51,8 +78,6 @@
 		}); // ajax 메소드 끝
 		
 	};	
-		
-	
 	
 </script>
 
@@ -68,19 +93,22 @@
 				<fieldset>
 				<legend>회원가입 정보</legend>
 				<label>아이디</label>
-					<input type="text" class="id" id="user_id" onkeyup="id_check()"  required><br>
-					<div class="check_font" id="message"></div>
+					<input type="text" class="id" id="user_id" onblur="join_check()"  required>
+					<div class="check_font" id="idMessage"></div>
 				<label>비밀번호</label>
-					<input type="password" name="pass" required><br>
+					<input type="password" name="pass" id="user_pass" required><br>
+				<label>비밀번호 확인</label>
+					<input type="password" name="pass2" id="user_pass2" onblur="join_check()" required>
+					<div class="check_font" id="passMessage"></div>
 				<label>이름</label>
-					<input type="text" name="name" required><br>
+					<input type="text" name="name" id="user_name" required><br>
 				<label>생년월일</label>
-					<input type="date" name="birth_date" required><br>
+					<input type="date" name="birth_date" id="user_birth" required><br>
 				<label>성별</label>
 					남자<input type="radio" name="gender" value="남자" checked>
 					여자<input type="radio" name="gender" value="여자" ><br>
 				<label>이메일</label>
-					<input type="email" name="email" required><br>
+					<input type="email" name="email" id="user_email" required><br>
 				<label>address_main *</label>
 					<input type="text" name="address_main"><br>
 				<label>address_detail *</label>
