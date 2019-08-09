@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <html>
@@ -26,127 +27,123 @@
 <script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
 <body>
-	<div id="Wrapper">
-		<jsp:include page="./include/Header.jsp" />
+   <div id="Wrapper">
+      <jsp:include page="./include/Header.jsp" />
 
-		<div id="Container">
-			<div id="Contents">
+      <div id="Container">
+         <div id="Contents">
 
-				<jsp:include page="mypage_topMenu.jsp" />
+            <jsp:include page="mypage_topMenu.jsp" />
 
-				<div class="mypage-conts">
-					<script
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
-					<script>
-						$(window).ready(function() {
-							mypage.header.init();
-						});
-					</script>
-
-
-
-					<div class="title-area linezero">
-						<h2 class="tit">쿠폰</h2>
-					</div>
-					<ul class="coupon-go">
-						<li>
-							<p>
-								쿠폰존에서 다운받을 수 있는<br>쿠폰을 한눈에 확인하세요.
-							</p> <a href="#none" id="goCouponZon" name="goCouponZon">쿠폰존 바로가기</a>
-						</li>
-						<li>
-							<p>
-								보유하고 계시는<br>쿠폰번호를 등록하세요.
-							</p> <a href="javascript:;" id="getCouponLPop" name="getCouponLPop">쿠폰등록하기</a>
-						</li>
-					</ul>
+            <div class="mypage-conts">
+               <script
+                  src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
+               <script>
+                  $(window).ready(function() {
+                     mypage.header.init();
+                  });
+               </script>
+<script type="text/javascript">
+		// 비밀번호 미입력시 경고창
+		function checkValue(){
+			if(!document.deleteform.password.value){
+				alert("비밀번호를 입력하지 않았습니다.");
+				return false;
+			}
+		}
+	</script>          
+            
 
 
-					<div class="comm1sTabConts show">
-						<div class="area-over">
-							<button type="button" class="ButtonCoupon right"
-								id="getCouponDescInfoLPop" name="getCouponDescInfoLPop">쿠폰안내</button>
-						</div>
-
-						<!-- 쿠폰 상품 목록 -->
-						<table class="board-list-2s">
-							<caption>재입고 상품 목록</caption>
-							<colgroup>
-								<col style="width: 25%;">
-								<col style="width: 45%;">
-								<col style="width: 15%;">
-								<col style="width: 15%;">
-							</colgroup>
-							<thead>
-								<tr>
-									<th scope="col">혜택</th>
-									<th scope="col">쿠폰명</th>
-									<th scope="col">쿠폰사용조건</th>
-									<th scope="col">사용기간</th>
-								</tr>
-							</thead>
-							<tbody id="onCpnList" name="onCpnList">
+<script src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080833432"></script>
+<script>
+   $(window).ready(function(){
+       mypage.header.init();
+   });
+</script>  
 
 
 
-								<tr data-day-cnt="30" data-cpn-cd="RpM21aGK7dc="
-									data-cpn-no="g0CzCBI3VCbN1WY2UmNt7w==" data-expire-s-date=""
-									data-expire-e-date="">
-									<td><span class="coupon-inner percent"> 5 % </span><br></td>
-									<td class="subject">앱 첫구매 5% 중복쿠폰 <span class="icon-app">APP전용</span>
 
-									</td>
-									<td class="colorGrey"><span class="price"> 30,000</span>원
-										이상 <br>(최대 <span class="price"> 5,000</span>원)</td>
+   <div class="title-area">
+      <h2 class="tit">회원탈퇴</h2>
+   </div>
 
-									<td class="colorGrey">2019.08.07 <br>~2019.09.06
+   <p class="common3s-text"><strong>회원 탈퇴(이용약관 동의 철회)시 아래 내용을 확인해주세요.</strong></p>
 
-
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="usage-guide">
-							<h2 class="stit">이용안내</h2>
-							<ul>
-								<li>발급받으신 (사이트이름)에서 사용하시는 경우 다운로드 후 주문/결제 시 적용하실 수 있습니다.</li>
-								<li>사용기간이 만료되거나 사용한 쿠폰은 보유 목록에서 자동으로 삭제됩니다.</li>
-								<li>주문/취소 시 이용기간이 남아 있는 쿠폰인 경우 재발급됩니다.</li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- CJ ONE 시스템점검 알림 Alert -->
-
-					<script
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/coupon.js?dumm=2019080133412"></script>
-					<script>
-						$(window).ready(function() {
-							mypage.coupon.list.init();
-						});
-					</script>
-
-
-				</div>
-			</div>
-
-		</div>
-
-		<script type="text/javascript"
-			src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
-		<script type="text/javascript"
-			src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdas.js?dumm=2019080133412"></script>
-		<script>
-			HDC_PATH = $
-					.parseJSON('{"00":"http://nexs.cjgls.com/web/service02_01.jsp?slipno=","10":"http://www.hanjinexpress.hanjin.net/customer/plsql/hddcw07.result?wbl_num=","20":"http://www.lotteglogis.com/personalService/tracking/06/tracking_goods_result.jsp?InvNo=","30":"http://nexs.cjgls.com/web/detail.jsp?slipno=","50":"http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","70":"http://www.ilogen.com/d2d/delivery/invoice_search_popup.jsp?viewType=type2&invoiceNum=","91":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","92":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","93":"http://kdexp.com/basicNewDelivery.kd?barcode=","94":null,"200":"http://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE=","210":"http://www.dhl.co.kr/content/kr/ko/express/tracking.shtml?brand=DHL&AWB="}');
-
-			$(document).ready(function() {
-				mypage.orderList.init();
-			});
-		</script>
+   <ul class="secess-area">
+      <li>올리브영 이용약관 동의 철회 시 고객님께서 보유하셨던 쿠폰은 모두 삭제되며, 재가입 시 복원이 불가능합니다.</li>
+      <li>올리브영 이용약관 동의 철회 시에는 올리브영 서비스만 이용할 수 없게 되며, CJ ONE 웹사이트를 포함한 다른 CJ ONE 제휴 브랜드의 웹사이트 서비스는 이용하실 수 있습니다.</li>
+      <li>올리브영 이용약관 동의 철회 시에도 CJ ONE 멤버십 서비스 및 타 제휴 브랜드의 이용을 위해 회원님의 개인정보 및 거래정보는 CJ ONE 회원 탈퇴 시까지 보존됩니다.</li>
+      <li>올리브영 이용약관 동의를 철회한 후에라도 해당 약관에 다시 동의하시면 서비스를 이용할 수 있습니다.</li>
+      <li>진행 중인 전자상거래 이용내역(결제/배송/교환/반품 중인 상태)이 있거나 고객상담 및 이용하신 서비스가 완료되지 않은 경우 서비스 철회 하실 수 없습니다.</li>
+   </ul>
+	
+	
+	
+	<form name="deleteform" method="post" action="MemberDeleteAction.me"
+			onsubmit="return checkValue()">
 		
-		<jsp:include page="./include/Footer.jsp" />
-		
-	</div>
-</body>	
+			<table align="center">
+				<tr>
+					<td>회원 탈퇴를 하실려면 아래에 비밀번호를 입력해주세요</td>
+				</tr>
+				<tr>
+					<td><input type="password" name="password" maxlength="50" border="2"></td>
+				</tr>
+			</table>
+				
+			<br> 
+			<input type="button" value="취소" onclick="javascript:window.location='Main.me'">
+			<input type="submit" value="탈퇴" /> 
+	</form>
+	
+	
+	
+<script src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/customer.js?dumm=2019080833432"></script>
+
+
+         </div>
+      </div>
+      
+   </div>
+   
+
+   <script>
+      $(document).ready(function() {
+          common.gnb.initMypageMenu(); 
+      });
+   </script>
+
+               <!-- CJ ONE 시스템점검 알림 Alert -->
+
+               <script
+                  src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/coupon.js?dumm=2019080133412"></script>
+               <script>
+                  $(window).ready(function() {
+                     mypage.coupon.list.init();
+                  });
+               </script>
+
+
+            </div>
+
+
+      <script type="text/javascript"
+         src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
+      <script type="text/javascript"
+         src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdas.js?dumm=2019080133412"></script>
+      <script>
+         HDC_PATH = $
+               .parseJSON('{"00":"http://nexs.cjgls.com/web/service02_01.jsp?slipno=","10":"http://www.hanjinexpress.hanjin.net/customer/plsql/hddcw07.result?wbl_num=","20":"http://www.lotteglogis.com/personalService/tracking/06/tracking_goods_result.jsp?InvNo=","30":"http://nexs.cjgls.com/web/detail.jsp?slipno=","50":"http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","70":"http://www.ilogen.com/d2d/delivery/invoice_search_popup.jsp?viewType=type2&invoiceNum=","91":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","92":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","93":"http://kdexp.com/basicNewDelivery.kd?barcode=","94":null,"200":"http://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE=","210":"http://www.dhl.co.kr/content/kr/ko/express/tracking.shtml?brand=DHL&AWB="}');
+
+         $(document).ready(function() {
+            mypage.orderList.init();
+         });
+      </script>
+      
+      <jsp:include page="./include/Footer.jsp" />
+      
+   </div>
+</body>   
 </html>

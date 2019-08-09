@@ -138,6 +138,30 @@ public class MemberDAO {
 		return false; // 회원가입 실패시! false리턴
 
 	}// insertMember()메소드
+
+
+
+
+	public static MemberDAO getInstance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	public void updateMember(MemberDTO member) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	public MemberDTO getUserInfo(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 		
 }
