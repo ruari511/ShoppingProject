@@ -10,19 +10,22 @@
 <script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
 
 <script type="text/javascript">
+
+	
+	var mainBanner;//정해진 초마다 실행하는 함수
+	var index=0;//현재 배너 인덱스
+	var maxIndex; //배너 총개수
+
 	$(function(){
 		
 		//배너 총 갯수
-		var maxIndex = $(".mainBanner_Img_Wrap").length;
-		
-		//현재 배너 인덱스
-		var index=0;
+		maxIndex = $(".mainBanner_Img_Wrap").length;
 
 		//배너들 위치 조정
 		
 		for(var i = 0; i<maxIndex; i++){
 			var top = -450*i;
-			$(".mainBanner_Img_Wrap").eq(i).css("top", top +"px");											.css("opacity", 0);
+			$(".mainBanner_Img_Wrap").eq(i).css("top", top +"px").css("opacity", 0);
 		}
 		
 		//첫번째 배너 위로 올리기
@@ -30,38 +33,47 @@
 		$(".mainBanner_Img_Wrap").eq(0).css("opacity", 1);
 		
 		
-		//정해진 초마다 실행하는 함수
-		var mainBanner;
+		//배너슬라이드 시작
 		mainBanner = setInterval(function(){mainBannerStart();}, 5000);
 		
-		function mainBannerStart(){
-			//현재 배너 값 저장
-			var currentIndex = index;
-			//현재 배너 z인덱스 줄이기
-			$(".mainBanner_Img_Wrap").eq(currentIndex).css("z-index", 6);
-						
-			
-			//새 인덱스
-			index++
-			
-			//인덱스초과했으며 맨앞으로
-			if(index>=maxIndex){
-				index = 0;
-			}
-			
-			//새 배너 z인덱스 올리기
-			$(".mainBanner_Img_Wrap").eq(index).css("z-index", 7);
-			
-			//새 배너 오퍼시티 서서히 변하게
-			$(".mainBanner_Img_Wrap").eq(index).animate({opacity: '1'}, 500, function(){
-				
-				
-				//새배너 오퍼시티 1이 되면 현재배너 오퍼시티 0
-				$(".mainBanner_Img_Wrap").eq(currentIndex).css("opacity", 0);				
-			});	
-		}
-
+		
+		//배너에 마우스 오버했을 때 정지
+		$("#mainBanner_Img").hover(function(){
+			clearInterval(mainBanner);
+		}, function(){
+			mainBanner=setInterval(function(){mainBannerStart();}, 5000);
+		});
+		
 	});
+	
+	function mainBannerStart(){
+		//현재 배너 값 저장
+		var currentIndex = index;
+		//현재 배너 z인덱스 줄이기
+		$(".mainBanner_Img_Wrap").eq(currentIndex).css("z-index", 6);
+					
+		
+		//새 인덱스
+		index++
+		
+		//인덱스초과했으며 맨앞으로
+		if(index>=maxIndex){
+			index = 0;
+		}
+		
+		//새 배너 z인덱스 올리기
+		$(".mainBanner_Img_Wrap").eq(index).css("z-index", 7);
+		
+		//새 배너 오퍼시티 서서히 변하게
+		$(".mainBanner_Img_Wrap").eq(index).animate({opacity: '1'}, 500, function(){
+			
+			
+			//새배너 오퍼시티 1이 되면 현재배너 오퍼시티 0
+			$(".mainBanner_Img_Wrap").eq(currentIndex).css("opacity", 0);				
+		});	
+	} //mainBannerStart끝
+	
+	
 
 </script>
 
@@ -108,10 +120,10 @@
 				
 				</div>
 				<div id="mainBanner_Btn">
-					<Button>1</Button>
+					<Button onclick="">1</Button>
 					<span>1234</span>
-					<Button>2</Button>	
-					<Button>3</Button>	
+					<Button onclick="">2</Button>	
+					<Button onclick="">3</Button>	
 				</div>
 			
 			</div>
