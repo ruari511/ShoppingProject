@@ -27,18 +27,7 @@ public class CartDAO {
 		return ds.getConnection();
 	}
 		
-	//DB종료 메소드
-	private void CloseDB() {
-		try {
-			if(con != null) con.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
-		} catch(Exception e) {
-			System.out.println("CloseDB()메서드에서 에러 : " + e);
-		}
-	}
-	
-	public Vector<CartDTO> getCartList(String id){
+	public Vector<CartDTO> getAllCartList(String id){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -49,7 +38,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.discount "
+			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.discount, c.cart_num "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.id=?";
@@ -71,6 +60,7 @@ public class CartDAO {
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("discount"));
+				cartDTO.setCart_num(rs.getInt("cart_num"));
 				
 				cartList.add(cartDTO);
 			}//while문 끝
@@ -78,11 +68,62 @@ public class CartDAO {
 		} catch (Exception e) {
 			System.out.println("getCartList()메소드 내부에서의 오류 : " + e);
 		} finally{
-			CloseDB();
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
 		}
 	
 		return cartList;
 	}//getCartList() 메소드 끝
+	
+	public CartDTO getCartList(int cart_num){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		CartDTO cartDTO = new CartDTO();
+		
+		try {
+			con = getConnection();
+			
+			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.discount "
+					+"from product p join cart c "+
+					"on p.product_num=c.product_num "+
+					"where c.cart_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cart_num);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				cartDTO = new CartDTO();
+				
+				cartDTO.setProduct_name(rs.getString("product_name"));
+				cartDTO.setImg_main(rs.getString("img_main"));
+				cartDTO.setBrand(rs.getString("brand"));
+				cartDTO.setProduct_price(rs.getInt("product_price"));
+				cartDTO.setProduct_count(rs.getInt("product_count"));
+				cartDTO.setDiscount(rs.getInt("discount"));
+				cartDTO.setCart_num(rs.getInt("cart_num"));
+				
+			}//while문 끝
+			
+		} catch (Exception e) {
+			System.out.println("getCartList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	
+		return cartDTO;
+	}//getCartList() 메소드 끝
+	
+	
 	
 	public int insertCart(String id, ProductDTO productDTO, int count){
 		
@@ -131,7 +172,9 @@ public class CartDAO {
 		} catch (Exception e) {
 			System.out.println("insertCart()메소드 내부의 오류 : " + e);
 		} finally{
-			CloseDB();
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
 		}
 		
 		return check;

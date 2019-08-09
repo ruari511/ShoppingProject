@@ -49,10 +49,12 @@
 					<col style="width:*">
 				</colgroup>
 				<tbody>
+				<c:set var="member" value="${requestScope.m}" />
 				<tr>
 					<th scope="row">주문자명</th>
-					<td><input type="text" id="ordManNm" name="ordManNm" value="박정현" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
+					<td><input type="text" id="ordManNm" name="ordManNm" value="${member.name}" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
 				</tr>
+				
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
@@ -133,7 +135,7 @@
 				<tr>
 					<th scope="row">이메일</th>
 					<td>
-						<input type="hidden" id="ordManEmailAddr" name="ordManEmailAddr" value="wjdgus5625@naver.com" title="주문자 이메일 주소를 입력해주세요.">
+						<input type="hidden" id="ordManEmailAddr" name="ordManEmailAddr" value="${member.email}" title="주문자 이메일 주소를 입력해주세요.">
 						<input type="text" id="ordManEmailAddrId" value="wjdgus5625" class="inpH28" title="주문자 이메일 주소를 입력해주세요." this="주문자 이메일 주소는" style="width:120px"> 
 						@ <input type="text" id="ordManEmailAddrDmn" value="naver.com" class="inpH28" title="이메일도메인을 입력해주세요." this="이메일도메인은" style="width:120px" disabled="">
 						<select id="ordManEmailAddrDmn_select" class="selH28" title="주문자 이메일 주소 도메인을 선택해주세요." style="width:120px">
@@ -645,39 +647,38 @@
 				</tr>
 				</thead>
 				<tbody>
+				<c:forEach var="cartlist"  items="${requestScope.v}">
 				<tr>
-					<input type="hidden" name="cartNo" value="70203916">
-					<td colspan="5" dispcatno="90000010001" stdcatno="010101" goodsno="A000000102929" itemno="001" entrno="C14488" brndcd="1545" tradeshpcd="1" staffdscntyn="Y"><!-- 2017-01-13 수정 -->
+					<td colspan="5">
 						<div class="tbl_cont_area">
-							<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
+							<div class="tbl_cell w700">
 								<div class="prd_info">
 									<div class="prd_img">
-										<img src="./주문_결제 _ 올리브영_files/A00000010292905ko.jpg" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
+										<img src="" alt="장바구니 상품 임시 이미지">
 									</div>
 									<div class="prd_name">
 		
-										<span>유세린</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-										<p>유세린 더모 퓨리파이어 토너 1+1 기획</p>
+										<span>${cartlist.brand}</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
+										<p>${cartlist.product_name}</p>
 									</div>
 									<p class="prd_opt">
 		
 									</p>
-									<p class="prd_flag">
-									<span class="icon_flag coupon">쿠폰</span><!-- 13 -->
-									</p>
 								</div>
 							</div>
 							<div class="tbl_cell w110">
-								<span class="cur_price"><span class="tx_num">26,000</span>원</span>
+								<span class="cur_price"><span class="tx_num">${cartlist.product_price}</span>원</span>
 							</div>
+							<div class="tbl_cell w100">${cartlist.product_count}</div>
 							<div class="tbl_cell w110">
-								<span class="org_price"><span class="tx_num" id="normPrc_A000000102929/001">26,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
+								<span class="org_price"><span class="tx_num" id="normPrc_A000000102929/001">${cartlist.product_price}</span>원</span><!-- 2017-01-24 수정 : 추가 -->
 								<span class="pur_price"><span class="tx_num" id="salePrc_A000000102929/001">24,700</span>원</span>
 							</div>
 						</div>
 		
 					</td>
 				</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 			<!--// 주문상품정보 -->

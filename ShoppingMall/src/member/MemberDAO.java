@@ -8,6 +8,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import cart.CartDTO;
+
 public class MemberDAO {
 	
 	//재료 준비
@@ -81,6 +83,47 @@ public class MemberDAO {
 			CloseDB();
 		}
 		return check;
+	}
+	
+	public MemberDTO selectMember(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		MemberDTO member = new MemberDTO();
+		
+		
+		try {
+			con = getConnection();
+			
+			sql  = "select * from member where id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				member = new MemberDTO();
+				
+				member.setName(rs.getString("name"));
+				member.setPhone_tel(rs.getString("phone_tel"));
+				member.setEmail(rs.getString("email"));
+				
+			}//while문 끝
+			
+		} catch (Exception e) {
+			System.out.println("getCartList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		return member;
 	}
 	
 }

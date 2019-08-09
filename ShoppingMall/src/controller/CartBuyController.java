@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import cart.CartDAO;
 import cart.CartDTO;
+import member.MemberDAO;
+import member.MemberDTO;
 
 /*CarReservation.jsp페이지에서.. 전체검색 버튼 클릭했을떄.. DB에 저장되어 있는 전체 차량 검색요청을 받는 서블릿*/
-@WebServlet("/CartListController.do")
-public class CartListController extends HttpServlet {
+@WebServlet("/CartBuyController.do")
+public class CartBuyController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		requestPro(request, response);
@@ -26,29 +28,39 @@ public class CartListController extends HttpServlet {
 	}
 
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		/*DB에 존재하는 전체 차량 을 검색하기 위한 작업 */
-		//데이터베이스에 접근해서 작업할  자바빈 역할을 하는 CarDAO객체 생성
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		//Cart.jsp에서 checked인 cart_num값을 배열로 받아오기
+		String[] chk = request.getParameterValues("cart");
+		
+		MemberDAO mdao = new MemberDAO();
+		
+		MemberDTO m = mdao.selectMember("admin");
+		
 		CartDAO cdao = new CartDAO();
 		
-		//실제 데이터베이스에 접근하여 자동차 정보를 모두 검색해서 얻기
-		Vector<CartDTO> v = cdao.getAllCartList("admin");
+		Vector<CartDTO> v = new Vector<CartDTO>();
 		
-		//전체차량을 검색한 정보는 백터에 있으므로
-		//View페이지로 백터를 전달하기 위해.. request내장객체 영역에 수동으로 저장
+		for(int i=0;i<chk.length; i++){
+			//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
+			v.add(cdao.getCartList(Integer.parseInt(chk[i])));
+		}
+		
+		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);
 		
-		//CarMain.jsp로  포워딩 (재요청)시~ request영역 전달
-		//디스패치 방식으로 ...
+		//구매하기 페이지의 주문자정보 값 넘기
+		request.setAttribute("m", m);
+		
+		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("Cart.jsp");
+					request.getRequestDispatcher("Buy.jsp");
 		//실제 재요청
-		dis.forward(request, response);		
+		dis.forward(request, response);	
+		
 	}
-	
-	
 }
-
 
 
 

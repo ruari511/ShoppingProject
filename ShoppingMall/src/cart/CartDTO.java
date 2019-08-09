@@ -11,7 +11,16 @@ public class CartDTO {
 	private int product_price;
 	private int discount;
 	
+	private int cart_num;
 	
+	
+	
+	public int getCart_num() {
+		return cart_num;
+	}
+	public void setCart_num(int cart_num) {
+		this.cart_num = cart_num;
+	}
 	public String getProduct_name() {
 		return product_name;
 	}
