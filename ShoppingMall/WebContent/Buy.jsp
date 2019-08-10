@@ -3,12 +3,70 @@
 <%-- 현재 페이지에서 JSTL의 core라이브러리에 속한 태그들을 사용 하기 위한 설정
 	core라이브러리에 속한 태그는? 접두사 c를 이용한다. 
  --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+	window.onload = function (){
+		var email = document.getElementById("orderEmail").value;
+		var split_email = email.split("@");
+		
+		var orderEmail_sel = document.getElementById("orderEmail_sel"); //이메일 뒷부분 select태그
+		var orderEmail_op; //이메일 뒷부분 인덱스 값 저장 변수
+		
+		for(var i=0; i<orderEmail_sel.options.length; i++){
+			if(split_email[1] == orderEmail_sel.options[i].value){
+				orderEmail_op = i;
+			}
+		}
+		if(orderEmail_op == null){
+			orderEmail_op = 1;
+			document.getElementById("orderEmail_2").value = orderEmail_sel.options[orderEmail_op].value;
+		} else {
+			orderEmail_sel.selectedIndex = orderEmail_op;
+			document.getElementById("orderEmail_2").value = orderEmail_sel.options[orderEmail_op].value;
+		}
+		
+		document.getElementById("orderEmail_1").value = split_email[0];
+		document.getElementById("orderEmail_2").value = split_email[1];
+		
+		var phone = document.getElementById("orderPhone").value;
+		var split_phone = phone.split("-");
+		
+		var orderPhone_1 = document.getElementById("orderPhone_1"); //핸드폰 앞자리 select태그
+		var orderPhone_1_sel; //핸드폰 번호 앞자리와 같은 value를 가진 option태그 인덱스 값 변수
+		
+		for(var i=0; i<orderPhone_1.options.length; i++){
+			if(split_phone[0] == orderPhone_1.options[i].value){
+				orderPhone_1_sel = i;
+			}
+		}
+		//orderPhone_1_sel의 option태그를 selected함
+		orderPhone_1.selectedIndex = orderPhone_1_sel; //
+		
+		document.getElementById("orderPhone_2").value = split_phone[1];
+		document.getElementById("orderPhone_3").value = split_phone[2];
+
+	}
+	
+	function email_change() {
+		var obj = document.getElementById("orderEmail_sel");
+		
+		if(obj.value==1){
+			document.getElementById("orderEmail_2").value = "";
+			document.getElementById("orderEmail_2").readOnly = false;
+		} else{
+			document.getElementById("orderEmail_2").value = obj.value;
+			document.getElementById("orderEmail_2").readOnly = true;
+		}
+	}
+
+</script>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
 <link rel="stylesheet" href="./asset/css/buy.css"/> 
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
@@ -27,6 +85,7 @@
 		<div id="Contents">
 			<!-- title_box -->
 			<div class="title_box">
+			<button onclick="spit_test()">test</button>
 				<h1>주문/결제</h1>
 				<ul class="step_list">
 					<li><span class="step_num tx_num">1</span> 장바구니</li>
@@ -58,10 +117,11 @@
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
-						<select id="ordManCellSctNo" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
+						<input type="hidden" id="orderPhone" value="${member.phone_tel}">
+						<select id="orderPhone_1" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
 							<option value="">선택</option>
 
-							<option value="010" selected="selected">010</option>
+							<option value="010">010</option>
 
 							<option value="011">011</option>
 
@@ -128,22 +188,22 @@
 							<option value="0507">0507</option>
 
 						</select>
-						 - <input type="text" id="ordManCellTxnoNo" name="ordManCellTxnoNo" value="5172" class="inpH28" title="주문자 휴대폰 번호 가운데 자리를 입력해주세요." this="주문자 휴대폰 번호 가운데 자리는" style="width:90px">
-						 - <input type="text" id="ordManCellEndNo" name="ordManCellEndNo" value="8187" class="inpH28" title="주문자 휴대폰 번호 마지막 4자리를 입력해주세요." this="주문자 휴대폰 번호 마지막 자리는" style="width:90px">
+						 - <input type="text" id="orderPhone_2" name="ordManCellTxnoNo" value="" class="inpH28" title="주문자 휴대폰 번호 가운데 자리를 입력해주세요." this="주문자 휴대폰 번호 가운데 자리는" style="width:90px">
+						 - <input type="text" id="orderPhone_3" name="ordManCellEndNo" value="" class="inpH28" title="주문자 휴대폰 번호 마지막 4자리를 입력해주세요." this="주문자 휴대폰 번호 마지막 자리는" style="width:90px">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row">이메일</th>
 					<td>
-						<input type="hidden" id="ordManEmailAddr" name="ordManEmailAddr" value="${member.email}" title="주문자 이메일 주소를 입력해주세요.">
-						<input type="text" id="ordManEmailAddrId" value="wjdgus5625" class="inpH28" title="주문자 이메일 주소를 입력해주세요." this="주문자 이메일 주소는" style="width:120px"> 
-						@ <input type="text" id="ordManEmailAddrDmn" value="naver.com" class="inpH28" title="이메일도메인을 입력해주세요." this="이메일도메인은" style="width:120px" disabled="">
-						<select id="ordManEmailAddrDmn_select" class="selH28" title="주문자 이메일 주소 도메인을 선택해주세요." style="width:120px">
-							<option value="">직접입력</option>
+						<input type="hidden" id="orderEmail" name="ordManEmailAddr" value="${member.email}">
+						<input type="text" id="orderEmail_1" value="" class="inpH28" style="width:120px"> 
+						@ <input type="text" id="orderEmail_2" value="" class="inpH28" style="width:120px">
+						<select id="orderEmail_sel" class="selH28" onchange="email_change()" style="width:120px">
+							<option value="1">직접입력</option>
 
 							<option value="hanmir.com">hanmir.com</option>
 
-							<option value="naver.com" selected="selected">naver.com</option>
+							<option value="naver.com">naver.com</option>
 
 							<option value="hanmail.net">hanmail.net</option>
 
@@ -626,7 +686,7 @@
 			<!-- 주문상품정보 -->
 			<h2 class="sub-title2">
 				올리브영 배송상품
-			
+				
 				 <em class="gift" id="giftNoti2" style="display: none;">* 증정품은 결제 시 확인하실 수 있습니다.</em>
 			
 			</h2><!-- 2017-01-24 수정 : 타이틀 마크업 수정 및 클래스명 변경 -->
@@ -648,6 +708,7 @@
 				</thead>
 				<tbody>
 				<c:forEach var="cartlist"  items="${requestScope.v}">
+				<c:set var="sum" value="${sum = sum + (cartlist.product_price-cartlist.discount)*cartlist.product_count}"/>
 				<tr>
 					<td colspan="5">
 						<div class="tbl_cont_area">
@@ -671,8 +732,8 @@
 							</div>
 							<div class="tbl_cell w100">${cartlist.product_count}</div>
 							<div class="tbl_cell w110">
-								<span class="org_price"><span class="tx_num" id="normPrc_A000000102929/001">${cartlist.product_price}</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-								<span class="pur_price"><span class="tx_num" id="salePrc_A000000102929/001">24,700</span>원</span>
+								<span class="org_price"><span class="tx_num" id="normPrc_A000000102929/001">${cartlist.product_price*cartlist.product_count}</span>원</span><!-- 2017-01-24 수정 : 추가 -->
+								<span class="pur_price"><span class="tx_num" id="salePrc_A000000102929/001">${(cartlist.product_price-cartlist.discount)*cartlist.product_count}</span>원</span>
 							</div>
 						</div>
 		
@@ -695,31 +756,22 @@
 						</colgroup>
 						<tbody>
 						<tr>
-							<td colspan="2">
-								<div class="bg_area"><!-- 2017-01-18 수정 : 클래스 추가 -->
-									<input type="radio" id="autoDiscount" name="Discount_Benefits" value="auto" checked="checked"><label for="autoDiscount">최대 할인 추천받기</label>
-									<input type="radio" id="manualDiscount" name="Discount_Benefits" value="manual" class="mgL20"><label for="manualDiscount">혜택 직접 선택하기</label>
-									<p class="tx_right tx_discount"><span class="tx_num" id="totCpnAplyAmt">0</span>원</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
 							<th scope="row">쿠폰 할인</th>
 							<td id="dwnldCouponList">
+							<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->	
 								<div>
 									<select class="selH28 mgT5" style="width:300px" disabled="disabled">
 										<option>적용할 수 있는 쿠폰이 없습니다.</option>
 									</select>
 									<p class="tx_point_info">즉시할인쿠폰은 상품금액에 자동적용 되어있습니다.</p>
 								</div>
-								<!--// 상품별 할인목록 영역 -->
 							</td>
 						</tr>
-						<!-- 2017-01-18 수정 : 배송비 할인 영역 변경 -->
-
 						<tr>
 							<th scope="row">배송비 쿠폰</th>
 							<td id="dlexCouponList_hd">
+							
+						<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->	
 								<div>
 									<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
 										<option>적용할 수 있는 쿠폰이 없습니다.</option>
@@ -727,13 +779,11 @@
 								</div>
 							</td>
 						</tr>
-						<!--// 2017-01-18 수정 : 배송비 할인 영역 변경 -->
 						</tbody>
 					</table>
 					<input type="hidden" id="couponCnt" value="1">
 					<!--// 쿠폰할인정보 -->
 					
-					<!-- 포인트사용 --><!-- 2017-01-18 수정 : 전액사용 버튼이 input 뒤로 위치 변경됨 -->
 					<h2 class="sub-title2">포인트/기프트카드사용</h2>
 					<table class="tbl_inp_form type2">
 						<caption>포인트사용 입력 폼</caption>
@@ -747,11 +797,12 @@
 							<td>
 								<div>
 									<span class="inp_point_wrap">
-										<input type="text" id="cjonePntAplyAmt" class="inpH28" title="사용하실 CJ ONE 포인트를 입력해주세요." style="width:100px" this="CJ ONE 포인트는 " minownamt="1000" unit="P" unitamt="10" minaplyamt="0" disabled=""> 원 / <span id="cjonePnt_span" class="tx_num colorOrange"><span id="cjonePnt">935</span>P</span>
+										<input type="text" id="cjonePntAplyAmt" class="inpH28" style="width:100px"> 원 / 
+										<span id="cjonePnt_span" class="tx_num colorOrange"><span id="cjonePnt">${member.point}</span>P</span>
 										<input type="hidden" name="cjonePntAplyAmt" value="0">
 									</span> 
 									<button type="button" class="btnSmall wGray3" id="cjonePnt_btn" disabled=""><span>전액사용</span></button>
-									<p class="tx_point_info">CJ ONE 포인트는 최소 1,000P 이상 보유 시 10P 단위로 사용하실 수 있습니다.</p><!-- //2017-02-24 문구추가// -->
+									<p class="tx_point_info">CJ ONE 포인트는 최소 1,000P 이상 보유 시 10P 단위로 사용하실 수 있습니다.</p>
 									
 								</div>
 							</td>
@@ -1132,12 +1183,12 @@
 					<ul class="total_payment_box">
 						<li>
 							<span class="tx_tit">총 상품금액</span> 
-							<span class="tx_cont"><span class="tx_num">24,700</span>원</span>
+							<span class="tx_cont"><span class="tx_num">${sum}</span>원</span>
 							<input type="hidden" name="goodsAmt" value="26000">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 --> 
-							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">0</span>원</span>
+							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">500</span>원</span>
 							<input type="hidden" name="descentAmt" value="1300">
 							<input type="hidden" id="imdtDscntAmt" value="1300">
 						</li>
@@ -1153,7 +1204,7 @@
 						</li>
 						<li class="total">
 							<span class="tx_tit">최종 결제금액</span> 
-							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">24,700</span>원</span>
+							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum-500}</span>원</span>
 							<input type="hidden" name="remainAmt" value="24700">
 							<input type="hidden" name="ordPayAmt" value="24700">
 							<input type="hidden" name="goodsNm" value="유세린 더모 퓨리파이어 토너 1+1 기획">
