@@ -88,14 +88,11 @@ function checkAll(bool) {
 				</tr>
 				</thead>
 				<tbody>
-				<c:set var="sum" value="0" />
-				<c:set var="discount" value="0" />
 <c:forEach var="cartlist"  items="${requestScope.v}">
-	<input type="hidden" value="${sum = sum + cartlist.product_price*cartlist.product_count}">
-	<input type="hidden" value="${discount = discount + cartlist.product_price*cartlist.product_count*cartlist.discount/100}">
+	<c:set var="sum" value="${sum = sum + cartlist.product_price*cartlist.product_count}"/>
+	<c:set var="discount" value="${discount = discount + cartlist.product_price*cartlist.product_count*cartlist.discount/100}" />
 	<fmt:parseNumber var= "pages" integerOnly= "true" value= "${discount}" />
 	<fmt:parseNumber var= "dis" integerOnly= "true" value= "${(cartlist.product_price*cartlist.product_count)-cartlist.product_price*cartlist.product_count*cartlist.discount/100}" />
-	<fmt:formatNumber value="${discount}" pattern="0"/>
 	<tr>
 		<td colspan="7">
 			<div class="tbl_cont_area">		
