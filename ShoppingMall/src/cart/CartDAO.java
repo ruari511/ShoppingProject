@@ -38,7 +38,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.discount, c.cart_num "
+			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.id=?";
@@ -59,14 +59,14 @@ public class CartDAO {
 				cartDTO.setBrand(rs.getString("brand"));
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
-				cartDTO.setDiscount(rs.getInt("discount"));
+				cartDTO.setDiscount(rs.getInt("product_sale_price"));
 				cartDTO.setCart_num(rs.getInt("cart_num"));
 				
 				cartList.add(cartDTO);
 			}//while문 끝
 			
 		} catch (Exception e) {
-			System.out.println("getCartList()메소드 내부에서의 오류 : " + e);
+			System.out.println("getAllCartList()메소드 내부에서의 오류 : " + e);
 		} finally{
 			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
 			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
@@ -87,7 +87,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.discount "
+			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.cart_num=?";
@@ -107,7 +107,7 @@ public class CartDAO {
 				cartDTO.setBrand(rs.getString("brand"));
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
-				cartDTO.setDiscount(rs.getInt("discount"));
+				cartDTO.setDiscount(rs.getInt("product_sale_price"));
 				cartDTO.setCart_num(rs.getInt("cart_num"));
 				
 			}//while문 끝
