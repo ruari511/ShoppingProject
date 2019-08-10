@@ -29,13 +29,15 @@ function checkAll(bool) {
 </script>
 </head>
 <body>
-<<<<<<< HEAD
+
+<!-- 2019-08-10 이부분 확인 바람 -->
+<%-- <<<<<<< HEAD
 <%
 	String id = "admin";
 	CartDAO dao = new CartDAO();
-	dao.getCartList(id);
+	dao.getCartList(id); 
 %>
-=======
+======= --%>
 
 
 <div id="Wrapper">

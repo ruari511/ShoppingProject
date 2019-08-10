@@ -162,7 +162,7 @@ public class MemberDAO {
 	}
 		
 		
-}
+
 
 
 
@@ -270,11 +270,11 @@ public class MemberDAO {
 				member = new MemberDTO();
 				
 				member.setName(rs.getString("name"));
-				member.setPhone_tel(rs.getString("phone"));
+				member.setPhone(rs.getString("phone"));
 				member.setEmail(rs.getString("email"));
 				member.setPoint(rs.getInt("point"));
-				member.setGrade(rs.getInt("grade"));
-				member.setPhone_tel(rs.getString("phone"));
+				member.setGrade(rs.getString("grade"));
+				member.setPhone(rs.getString("phone"));
 				
 			}//while문 끝
 			
@@ -289,7 +289,7 @@ public class MemberDAO {
 		return member;
 	}
 	
-}
+
 
 ////////2019 -08-10 철민 MemberDAO///////////
 
@@ -328,3 +328,4 @@ public class MemberDAO {
 		return result;
 	}	
 	
+	}
