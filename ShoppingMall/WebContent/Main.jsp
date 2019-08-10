@@ -14,7 +14,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<meta name="format-detection" content="telephone=no">
 	<meta property="og:title" content="공식 온라인몰">
-	<meta property="og:url" content="main.html">
+	<meta property="og:url" content="Main.html">
 	<meta property="og:image" content="">
 	<meta property="og:description" content="">
 	<title> # </title>
