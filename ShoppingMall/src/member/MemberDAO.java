@@ -110,15 +110,16 @@ public class MemberDAO {
 				member = new MemberDTO();
 				
 				member.setName(rs.getString("name"));
-				member.setPhone_tel(rs.getString("phone_tel"));
+				member.setPhone_tel(rs.getString("phone"));
 				member.setEmail(rs.getString("email"));
 				member.setPoint(rs.getInt("point"));
 				member.setGrade(rs.getInt("grade"));
+				member.setPhone_tel(rs.getString("phone"));
 				
 			}//while문 끝
 			
 		} catch (Exception e) {
-			System.out.println("getCartList()메소드 내부에서의 오류 : " + e);
+			System.out.println("selectMember()메소드 내부에서의 오류 : " + e);
 		} finally{
 			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
 			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
