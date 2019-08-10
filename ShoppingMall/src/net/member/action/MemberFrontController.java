@@ -89,7 +89,7 @@ public class MemberFrontController extends HttpServlet{
 			//이동할 페이지 경로(로그인 페이지) 주소값 저장
 			forward.setPath("./Main.jsp?section=member/login.jsp"); 
 		
-		//login.jsp에서... "Sign in"버튼을 눌렀을때..로그인 처리 요청받기!
+		//login.jsp에서... "로그인"버튼을 눌렀을때..로그인 처리 요청받기!
 		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
 		}else if(command.equals("/MemberLoginAction.me")){
 			

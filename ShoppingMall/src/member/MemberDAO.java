@@ -64,43 +64,43 @@ public class MemberDAO {
 	
 		
 	
-	/*濡쒓렇�씤 泥섎━�떆.. �궗�슜�븯�뒗 硫붿냼�뱶*/
-	//login.jsp�뿉�꽌 �궗�슜�옄濡쒕��꽣 �엯�젰諛쏆� id,passwd媛믨낵 DB�뿉 �엳�뒗 id,passwd媛믪쓣 �솗�씤�븯�뿬 濡쒓렇�씤泥섎━
+	/*로그인 처리시.. 사용하는 메소드*/
+	//login.jsp에서 사용자로부터 입력받은 id,passwd값과 DB에 있는 id,passwd값을 확인하여 로그인처리
 	public int userCheck(String id,String pass){
 		Connection con=null;
 		String sql="";
 		PreparedStatement pstmt=null;
-		int check=-1;//1 -> �븘�씠�뵒, 鍮꾨�踰덊샇 留욎쓬
-					//0 -> �븘�씠�뵒 留욎쓬, 鍮꾨�踰덊샇 ��由�
-					//-1 -> �븘�씠�뵒 ��由�
+		int check=-1;//1 -> 아이디, 비밀번호 맞음
+					//0 -> 아이디 맞음, 비밀번호 틀림
+					//-1 -> 아이디 틀림
 		ResultSet rs=null;
 		try {
-			//1�떒怨� �뱶�씪�씠踰꾨줈�뜑
-			//2�떒怨� �뵒鍮꾩뿰寃�
+			//1단계 드라이버로더
+			//2단계 디비연결
 			con=getConnection();
-			//3�떒怨� sql : id�뿉 �빐�떦�븯�뒗 passwd 媛��졇�삤湲�
+			//3단계 sql : id에 해당하는 passwd 가져오기
 			sql="select password from member where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			//4�떒怨� rs = �떎�뻾
+			//4단계 rs = 실행
 			rs=pstmt.executeQuery();
-			//5�떒怨� rs 泥ル쾲吏명뻾 �씠�룞�븯�뿬.. id�뿉 �빐�떦�븯�뒗 �뜲�씠�꽣媛� pass媛� �엳�쑝硫�.
+			//5단계 rs 첫번째행 이동하여.. id에 해당하는 데이터가 pass가 있으면.
 			if(rs.next()){
-				//濡쒓렇�씤�떆.. �엯�젮�븳 pass��  DB�뿉 ���옣�릺�뼱 �엳�뒗 pass媛� 媛숈쑝硫�
-				if(pass.equals(rs.getString("pass"))){
-					check=1;//�븘�씠�뵒 留욎쓬,鍮꾨�踰덊샇 留욎쓬 �뙋蹂꾧컪 ���옣
-				//鍮꾨�踰덊샇媛� ��由щ㈃
+				//로그인시.. 입려한 pass와  DB에 저장되어 있는 pass가 같으면
+				if(pass.equals(rs.getString("password"))){
+					check=1;//아이디 맞음,비밀번호 맞음 판별값 저장
+				//비밀번호가 틀리면
 				}else{
-					check=0;//�븘�씠�뵒 留욎쓬, 鍮꾨�踰덊샇��由� �뙋蹂꾧컪 ���옣
+					check=0;//아이디 맞음, 비밀번호틀림 판별값 저장
 				}
-			//id�뿉 �빐�떦�븯�뒗 �뜲�씠�꽣媛� pass媛� �뾾�쑝硫�(�븘�씠�뵒媛� �뾾�떎�뒗 �쑜怨� 媛숈쓬)	
+			//id에 해당하는 데이터가 pass가 없으면(아이디가 없다는 뜻과 같음)	
 			}else{
-				check=-1; //�븘�씠�뵒 �뾾�쓬 �뙋蹂꾧컪 ���옣
+				check=-1; //아이디 없음 판별값 저장
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			//留덈Т由�
+			//마무리
 			if(rs!=null)try{rs.close();}catch(SQLException ex){}
 			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 			if(con!=null)try{con.close();}catch(SQLException ex){}

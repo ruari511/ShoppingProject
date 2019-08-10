@@ -13,8 +13,24 @@
 		<div class="top_util">
 			<form action="#" method="post">
 			<ul class="menu_list">
-				<li class="join"><a href="join.jsp">회원가입</a></li>
-				<li class="login"><a href="#">로그인</a></li>
+				<%
+				// [로그인 처리시... session값 이동 경로]
+			
+				//세션id값 전달받기 
+				String id=(String)session.getAttribute("id");
+
+				//세션값 없음  -> MemberFrontController서블릿에.. 로그인 | 회원가입 처리 요청  
+				if(id==null){
+					%>                  
+					<li class="login"><a href="./MemberLogin.me">로그인</a></li>
+					<li class="join"><a href="#">회원가입</a></li>	
+					<%
+				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
+					%>
+					<li class="logout"><%=id %>님 <a href="./MemberLogout.me">로그아웃</a></li>
+				<%
+				}
+				%>
 				<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
 				
 				<li class="order"><a href="#">주문배송</a></li>
