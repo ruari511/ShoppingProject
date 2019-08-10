@@ -100,13 +100,23 @@ position: relative;
 }
 
 .mainBanner_Img_Text *:nth-child(2){
+	margin-top: 20px;
 	font-size: 48px;
 	line-height: 1.5;
 }
 .mainBanner_Img_Text *:nth-child(3){
+	margin-top: 20px;
 	font-size: 40px;
 	line-height: 1.5;
 }
 
+#mainBannerIndex{
+	display: inline-block;
+    font-size: 20px;
+    height: 100%;
+    width: 60px;
+    text-align: center;
+    line-height: 2;
+}
 
 
