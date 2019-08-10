@@ -34,19 +34,21 @@
 		
 		
 		//배너슬라이드 시작
-		mainBanner = setInterval(function(){mainBannerStart();}, 5000);
+		mainBanner = setInterval(function(){mainBannerUpdate();}, 5000);
 		
 		
 		//배너에 마우스 오버했을 때 정지
-		$("#mainBanner_Img").hover(function(){
+		$("#mainBanner_Img, #mainBanner_Btn").hover(function(){
 			clearInterval(mainBanner);
 		}, function(){
-			mainBanner=setInterval(function(){mainBannerStart();}, 5000);
+			mainBanner=setInterval(function(){mainBannerUpdate();}, 5000);
 		});
 		
 	});
 	
-	function mainBannerStart(){
+	
+	//배너 바꾸기 반복 함수	
+	function mainBannerUpdate(){
 		//현재 배너 값 저장
 		var currentIndex = index;
 		//현재 배너 z인덱스 줄이기
@@ -71,7 +73,21 @@
 			//새배너 오퍼시티 1이 되면 현재배너 오퍼시티 0
 			$(".mainBanner_Img_Wrap").eq(currentIndex).css("opacity", 0);				
 		});	
-	} //mainBannerStart끝
+	} //mainBannerUpdate끝
+	
+	function MoveBanner(n){
+		//앞으로가는버튼: +1, 뒤로가는버튼 -1;
+		index+=n;
+		
+		//index가 값을 초과했을때 처리
+		if(index>=maxIndex){
+			index = 0;
+		}else if(index<0){
+			index = maxIndex;
+		}
+		
+		mainBannerUpdate();
+	}
 	
 	
 
@@ -116,19 +132,52 @@
 						</a>
 					</div>
 					
+					<div class="mainBanner_Img_Wrap">
+						<a href="http://www.daum.net">
+							<img src="../asset/image/bannertest2.jpg">
+							<p class="mainBanner_Img_Text">
+							<span>{Title}</span>
+							<strong>
+							{3333333}<br>
+							{ccc}<br>
+							{ccc}<br>
+							</strong>
+							<span>{Tag}</span>
+							</p>
+						</a>
+					</div>
+					
+					<div class="mainBanner_Img_Wrap">
+						<a href="http://www.daum.net">
+							<img src="../asset/image/bannertest2.jpg">
+							<p class="mainBanner_Img_Text">
+							<span>{Title}</span>
+							<strong>
+							{44444444}<br>
+							{ccc}<br>
+							{ccc}<br>
+							</strong>
+							<span>{Tag}</span>
+							</p>
+						</a>
+					</div>
+					
 
 				
 				</div>
+				
+				<!-- 배너 버튼 -->
 				<div id="mainBanner_Btn">
-					<Button onclick="">1</Button>
+					<Button onclick="MoveBanner(-1)">1</Button>
 					<span>1234</span>
-					<Button onclick="">2</Button>	
+					<Button onclick="MoveBanner(1)">2</Button>	
 					<Button onclick="">3</Button>	
 				</div>
 			
 			</div>
 		
 		</div>
+		
 	</div>
 </body>
 </html>
