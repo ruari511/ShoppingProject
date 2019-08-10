@@ -20,7 +20,7 @@ public class MemberJoinAction implements Action{
 		
 		MemberDTO dto=new MemberDTO();
 		dto.setId(request.getParameter("id"));//회원 id 저장
-		dto.setPassword(request.getParameter("pass")); //회원 pass 저장
+		dto.setPassword(request.getParameter("password")); //회원 pass 저장
 		dto.setName(request.getParameter("name")); //회원 이름 저장
 		dto.setBirth_date(request.getParameter("birth_date"));
 		dto.setGender(request.getParameter("gender"));

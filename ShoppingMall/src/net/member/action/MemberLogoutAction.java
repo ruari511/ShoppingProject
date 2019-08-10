@@ -17,18 +17,18 @@ public class MemberLogoutAction implements Action{
 		session.invalidate();
 		
 		//이동 ./Main.me
-//		ActionForward forward=new ActionForward();
-//		forward.setRedirect(true);
-//		forward.setPath("./Main.bo");
-//		return forward;
+		ActionForward forward=new ActionForward();
+		forward.setRedirect(true);
+		forward.setPath("./Main.bo");
+		return forward;
 		
-		response.setContentType("text/html; charset=UTF-8");
+/*		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.println("<script>");
 		out.println("alert('로그아웃');");
 		out.println("location.href='./Main.me';");
 		out.println("</script>");
 		out.close();
-		return null;
+		return null;*/
 	}
 }
