@@ -13,6 +13,7 @@
 <script type="text/javascript">
 
 	window.onload = function (){
+		
 		var email = document.getElementById("orderEmail").value;
 		var split_email = email.split("@");
 		
@@ -63,6 +64,35 @@
 		} else{
 			document.getElementById("orderEmail_2").value = obj.value;
 			document.getElementById("orderEmail_2").readOnly = true;
+		}
+	}
+	
+	function deliverycheck(){
+		var delivery_check = document.getElementById("delivery_check");
+		var delivery_tel = document.getElementById("delivery_tel");
+		if(delivery_check.checked==true){
+			
+			delivery_tel.value = document.getElementById("orderPhone_1").value; //주문자 정보 핸드폰번호 앞자리 배송지정보 핸드폰번호 앞자리로 들고오기
+			document.getElementById("delivery_name").value = document.getElementById("ordManNm").value;
+			document.getElementById("delivery_tel1").value = document.getElementById("orderPhone_2").value;
+			document.getElementById("delivery_tel2").value = document.getElementById("orderPhone_3").value;
+			
+		} else{
+			delivery_tel.value = delivery_tel.options[0].value;
+			document.getElementById("delivery_name").value = "";
+			document.getElementById("delivery_tel1").value = "";
+			document.getElementById("delivery_tel2").value = "";
+		} 
+	}
+	
+	function radiocheck(a) {
+		
+		if(a.value=="bankbook"){
+			document.getElementById("buycard").style.display="none";
+			document.getElementById("buybankbook").style.display="list-item";
+		}else if(a.value=="card"){
+			document.getElementById("buycard").style.display="list-item";
+			document.getElementById("buybankbook").style.display="none";
 		}
 	}
 
@@ -119,7 +149,7 @@
 					<td>
 						<input type="hidden" id="orderPhone" value="${member.phone_tel}">
 						<select id="orderPhone_1" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
-							<option value="">선택</option>
+							<option value="1">선택</option>
 
 							<option value="010">010</option>
 
@@ -198,7 +228,7 @@
 						<input type="hidden" id="orderEmail" name="ordManEmailAddr" value="${member.email}">
 						<input type="text" id="orderEmail_1" value="" class="inpH28" style="width:120px"> 
 						@ <input type="text" id="orderEmail_2" value="" class="inpH28" style="width:120px">
-						<select id="orderEmail_sel" class="selH28" onchange="email_change()" style="width:120px">
+						<select id="orderEmail_sel" class="selH28" onchange="email_change();" style="width:120px">
 							<option value="1">직접입력</option>
 
 							<option value="hanmir.com">hanmir.com</option>
@@ -263,204 +293,6 @@
 					</td>
 				</tr>
 				
-				<!-- 2017-01-18 추가 (기존 배송지 선택 시) -->
-						<tr type="exist" style="display: none;">
-							<th scope="row">배송지명</th>
-							<td id="dlvpNm_exist_span"></td>
-							<input type="hidden" id="dlvpNm_exist" name="dlvpNm" value="" title="배송지명을 입력해주세요." style="width:200px" this="배송지명은" disabled="disabled">
-						</tr>
-				<!--// 2017-01-18 추가 -->
-				<tr type="exist" style="display: none;">
-					<th scope="row">받는분</th>
-					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<input type="text" id="rmitNm_exist" name="rmitNm" value="" orgvalue="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px" this="받는분 이름은" disabled="disabled">
-						<span class="chk_area"><input type="checkbox" id="copyToDlvp_exist" targetid="exist" disabled="disabled"> <label for="copyToDlvp_exist">주문자정보와 동일</label></span><!-- 2017-01-18 수정 : 위치변경 -->
-					</td>
-				</tr>
-				<tr class="sumtr1" type="exist" style="display: none;">
-					<th scope="row">연락처1</th>
-					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<select id="rmitCellSctNo_exist" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px" orgvalue="" disabled="disabled">
-							<option value="">선택</option>
-
-							<option value="010">010</option>
-
-							<option value="011">011</option>
-
-							<option value="016">016</option>
-
-							<option value="017">017</option>
-
-							<option value="018">018</option>
-
-							<option value="019">019</option>
-
-							<option value="02">02</option>
-
-							<option value="031">031</option>
-
-							<option value="032">032</option>
-
-							<option value="033">033</option>
-
-							<option value="041">041</option>
-
-							<option value="042">042</option>
-
-							<option value="043">043</option>
-
-							<option value="044">044</option>
-
-							<option value="051">051</option>
-
-							<option value="052">052</option>
-
-							<option value="053">053</option>
-
-							<option value="054">054</option>
-
-							<option value="055">055</option>
-
-							<option value="061">061</option>
-
-							<option value="062">062</option>
-
-							<option value="063">063</option>
-
-							<option value="064">064</option>
-
-							<option value="070">070</option>
-
-							<option value="080">080</option>
-
-							<option value="0130">0130</option>
-
-							<option value="0303">0303</option>
-
-							<option value="0502">0502</option>
-
-							<option value="0503">0503</option>
-
-							<option value="0504">0504</option>
-
-							<option value="0505">0505</option>
-
-							<option value="0506">0506</option>
-
-							<option value="0507">0507</option>
-
-						</select>
-						 - <input type="text" id="rmitCellTxnoNo_exist" name="rmitCellTxnoNo" value="" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px" disabled="disabled">
-						 - <input type="text" id="rmitCellEndNo_exist" name="rmitCellEndNo" value="" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px" disabled="disabled">
-						 <!-- <span class="chk_area"><input type="checkbox" id="chkSafe_exist" name="chkSafe" value="123" /> <label for="chkSafe">안심번호 사용</label></span> -->
-						 <span class="info_security"><button type="button" data-rel="layer" data-target="securityInfo" class="chk_area">안심번호 서비스 안내</button></span>
-					</td>
-				</tr>
-				<tr class="sumtr2" type="exist" style="display: none;">
-					<th scope="row">연락처2</th>
-					<td>
-						<select id="rmitTelRgnNo_exist" name="rmitTelRgnNo" class="selH28" title="연락처2 앞자리를 선택해주세요." style="width:90px" disabled="disabled">
-							<option value="">선택</option>
-
-							<option value="010">010</option>
-
-							<option value="011">011</option>
-
-							<option value="016">016</option>
-
-							<option value="017">017</option>
-
-							<option value="018">018</option>
-
-							<option value="019">019</option>
-
-							<option value="02">02</option>
-
-							<option value="031">031</option>
-
-							<option value="032">032</option>
-
-							<option value="033">033</option>
-
-							<option value="041">041</option>
-
-							<option value="042">042</option>
-
-							<option value="043">043</option>
-
-							<option value="044">044</option>
-
-							<option value="051">051</option>
-
-							<option value="052">052</option>
-
-							<option value="053">053</option>
-
-							<option value="054">054</option>
-
-							<option value="055">055</option>
-
-							<option value="061">061</option>
-
-							<option value="062">062</option>
-
-							<option value="063">063</option>
-
-							<option value="064">064</option>
-
-							<option value="070">070</option>
-
-							<option value="080">080</option>
-
-							<option value="0130">0130</option>
-
-							<option value="0303">0303</option>
-
-							<option value="0502">0502</option>
-
-							<option value="0503">0503</option>
-
-							<option value="0504">0504</option>
-
-							<option value="0505">0505</option>
-
-							<option value="0506">0506</option>
-
-							<option value="0507">0507</option>
-
-						</select>
-						 - <input type="text" id="rmitTelTxnoNo_exist" name="rmitTelTxnoNo" value="" class="inpH28" title="연락처2 가운데 자리를 입력해주세요." this="연락처2 가운데 자리는" style="width:90px" disabled="disabled">
-						 - <input type="text" id="rmitTelEndNo_exist" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." this="연락처2 마지막 자리는" style="width:90px" disabled="disabled">
-					</td>
-				</tr>
-				<tr type="exist" style="display: none;">
-					<th scope="row">주소</th>
-					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
-						<input type="text" id="stnmRmitPostNo_exist" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly" disabled="disabled">
-						<input type="hidden" id="rmitPostNo_exist" name="stnmRmitPostNo" value="" title="우편번호를 검색해주세요." disabled="disabled">
-						
-							<button type="button" class="btnSmall wGreen w100" id="search-zipcode-pop_exist"><span>우편번호 찾기</span></button>
-						
-						<div class="addr_box">
-							<input type="hidden" id="stnmRmitPostAddr_exist" name="stnmRmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly" disabled="disabled">
-							<input type="hidden" id="rmitBaseAddr_exist" name="rmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly" disabled="disabled">
-							<!-- 주소 입력 시 보여지는 부분 -->
-							<p class="addr_new">
-								<span class="tx_tit">도로명</span> : 
-								<span class="tx_addr" id="stnmPostAddr_exist"> </span><!--  도로명주소를 넣어주세요 -->
-							</p>
-							<p class="addr_old">
-								<span class="tx_tit">지번</span> : 
-								<span class="tx_addr" id="baseAddr_exist"> </span><!--  지번주소를 넣어주세요 -->
-							</p>
-							<!--// 주소 입력 시 보여지는 부분 -->
-						</div>
-						<input type="text" id="tempRmitDtlAddr_exist" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px; display: none;" this="상세 주소는" disabled="disabled">
-						<input type="hidden" id="stnmRmitDtlAddr_exist" name="stnmRmitDtlAddr" value="" orgvalue="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px" this="상세 주소는" disabled="disabled">
-						<input type="hidden" id="rmitDtlAddr_exist" name="rmitDtlAddr" value="" orgvalue="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px" disabled="disabled">
-					</td>
-				</tr>
-
 				<!-- 2017-01-18 추가 (신규 배송지 선택 시) -->
 				<tr type="new" style="">
 					<th scope="row">배송지명</th>
@@ -472,14 +304,14 @@
 				<tr type="new" style="">
 					<th scope="row">받는분</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<input type="text" id="rmitNm_new" name="rmitNm" value="" orgvalue="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px" this="받는분 이름은">
-						<span class="chk_area"><input type="checkbox" id="copyToDlvp_new" targetid="new"> <label for="copyToDlvp_new">주문자정보와 동일</label></span><!-- 2017-01-18 수정 : 위치변경 -->
+						<input type="text" id="delivery_name" name="rmitNm" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px" this="받는분 이름은">
+						<span class="chk_area"><input type="checkbox" id="delivery_check" onclick="deliverycheck();" > <label for="copyToDlvp_new">주문자정보와 동일</label></span><!-- 2017-01-18 수정 : 위치변경 -->
 					</td>
 				</tr>
 				<tr type="new" style="">
 					<th scope="row">연락처1</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<select id="rmitCellSctNo_new" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." orgvalue="" style="width:90px">
+						<select id="delivery_tel" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px">
 							<option value="">선택</option>
 
 							<option value="010">010</option>
@@ -549,8 +381,8 @@
 							<option value="0507">0507</option>
 
 						</select>
-						 - <input type="text" id="rmitCellTxnoNo_new" name="rmitCellTxnoNo" value="" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px">
-						 - <input type="text" id="rmitCellEndNo_new" name="rmitCellEndNo" value="" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px">
+						 - <input type="text" id="delivery_tel1" name="rmitCellTxnoNo" value="" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px">
+						 - <input type="text" id="delivery_tel2" name="rmitCellEndNo" value="" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px">
 						 <!-- <span class="chk_area"><input type="checkbox" id="chkSafe_new" name="chkSafe" value="456" /> <label for="chkSafe">안심번호 사용</label></span> --> 
 					     <span class="info_security"><button type="button" data-rel="layer" data-target="securityInfo" class="chk_area">안심번호 서비스 안내</button></span>
 					</td>
@@ -684,12 +516,7 @@
 			<!--// 배송지 정보 -->
 			
 			<!-- 주문상품정보 -->
-			<h2 class="sub-title2">
-				올리브영 배송상품
-				
-				 <em class="gift" id="giftNoti2" style="display: none;">* 증정품은 결제 시 확인하실 수 있습니다.</em>
-			
-			</h2><!-- 2017-01-24 수정 : 타이틀 마크업 수정 및 클래스명 변경 -->
+			<h2 class="sub-title2">올리브영 배송상품</h2>
 			<table class="tbl_prd_list">
 				<caption>올리브영 배송상품 주문상품 목록</caption>
 				<colgroup>
@@ -722,9 +549,6 @@
 										<span>${cartlist.brand}</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
 										<p>${cartlist.product_name}</p>
 									</div>
-									<p class="prd_opt">
-		
-									</p>
 								</div>
 							</div>
 							<div class="tbl_cell w110">
@@ -732,8 +556,8 @@
 							</div>
 							<div class="tbl_cell w100">${cartlist.product_count}</div>
 							<div class="tbl_cell w110">
-								<span class="org_price"><span class="tx_num" id="normPrc_A000000102929/001">${cartlist.product_price*cartlist.product_count}</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-								<span class="pur_price"><span class="tx_num" id="salePrc_A000000102929/001">${(cartlist.product_price-cartlist.discount)*cartlist.product_count}</span>원</span>
+								<span class="org_price"><span class="tx_num">${cartlist.product_price*cartlist.product_count}</span>원</span><!-- 2017-01-24 수정 : 추가 -->
+								<span class="pur_price"><span class="tx_num">${(cartlist.product_price-cartlist.discount)*cartlist.product_count}</span>원</span>
 							</div>
 						</div>
 		
@@ -759,12 +583,19 @@
 							<th scope="row">쿠폰 할인</th>
 							<td id="dwnldCouponList">
 							<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->	
-								<div>
+								<div style="display:block;">
 									<select class="selH28 mgT5" style="width:300px" disabled="disabled">
 										<option>적용할 수 있는 쿠폰이 없습니다.</option>
 									</select>
 									<p class="tx_point_info">즉시할인쿠폰은 상품금액에 자동적용 되어있습니다.</p>
 								</div>
+								<div style="display:none;">
+									<select class="selH28 mgT5" style="width:300px;">
+										<option>적용할 수 있는 쿠폰이 없습니다.</option>
+									</select>
+									<p class="tx_point_info">즉시할인쿠폰은 상품금액에 자동적용 되어있습니다.</p>
+								</div>
+							<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->		
 							</td>
 						</tr>
 						<tr>
@@ -772,11 +603,17 @@
 							<td id="dlexCouponList_hd">
 							
 						<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->	
-								<div>
+								<div style="display:block;">
 									<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
 										<option>적용할 수 있는 쿠폰이 없습니다.</option>
 									</select>
 								</div>
+								<div style="display:none;">
+									<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
+										<option>적용할 수 있는 쿠폰이 없습니다.</option>
+									</select>
+								</div>
+						<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->			
 							</td>
 						</tr>
 						</tbody>
@@ -815,29 +652,25 @@
 
 					<div class="title_wrap" id="payMethod_div">
 						<h2 class="sub-title2">결제수단 선택</h2>
-						<p class="sub_area"><input type="checkbox" id="savePayMethodYn" name="savePayMethodYn" value="Y" paymeancd="" acqrcd="" instmmcnt="" pntuseyn="" bnkcd="" morcmannm=""> <label for="savePayMethodYn">선택한 결제수단 저장하기</label></p>
 					</div>
 					<ul class="payment_info_form" id="payMethodList">
 						<li class="bg_area"><!-- 2017-01-18 수정 : 클래스 추가 -->
-							<span><input type="radio" id="payMethod_11" name="payMethod" value="11" cashreceipt="N" checked="checked"><label for="payMethod_11">신용카드</label></span>
-							<span><input type="radio" id="payMethod_21" name="payMethod" value="21" cashreceipt="Y"><label for="payMethod_21">계좌이체</label></span>
+							<span><input type="radio" id="payMethod_11" name="payMethod" value="card" checked="checked" onclick="radiocheck(this);"><label for="payMethod_11">신용카드</label></span>
+							<span><input type="radio" id="payMethod_61" name="payMethod" value="bankbook" onclick="radiocheck(this);"><label for="payMethod_61">무통장입금</label></span>
+							<span><input type="radio" id="payMethod_21" name="payMethod" value="21"><label for="payMethod_21">계좌이체</label></span>
 							
-							
-							<span><input type="radio" id="payMethod_61" name="payMethod" value="61" cashreceipt="Y"><label for="payMethod_61">무통장입금</label></span>
-							
-							
-							<span><input type="radio" id="payMethod_22" name="payMethod" value="22" cashreceipt="N"><label for="payMethod_22">휴대폰결제</label></span>
+							<span><input type="radio" id="payMethod_22" name="payMethod" value="22"><label for="payMethod_22">휴대폰결제</label></span>
 							<!-- 2017-01-18 수정 : 문화상품권/도서상품권 선택 삭제 -->
 							<!-- 2017-02-14 수정 : 문화상품권/도서상품권 선택 재추가 --> 
-							<span><input type="radio" id="payMethod_23" name="payMethod" value="23" cashreceipt="N"><label for="payMethod_23">문화상품권</label></span>
-							<span><input type="radio" id="payMethod_24" name="payMethod" value="24" cashreceipt="Y"><label for="payMethod_24">도서상품권</label></span>
+							<span><input type="radio" id="payMethod_23" name="payMethod" value="23"><label for="payMethod_23">문화상품권</label></span>
+							<span><input type="radio" id="payMethod_24" name="payMethod" value="24"><label for="payMethod_24">도서상품권</label></span>
 							<!-- 2017-04-18 추가 -->
-							<span><input type="radio" id="payMethod_25" name="payMethod" value="25" cashreceipt="N"><label for="payMethod_25">PAYCO</label></span>
+							<span><input type="radio" id="payMethod_25" name="payMethod" value="25"><label for="payMethod_25">PAYCO</label></span>
 							<!-- //2017-04-18 추가 -->
-							<span><input type="radio" id="payMethod_26" name="payMethod" value="26" cashreceipt="N"><label for="payMethod_26">카카오페이</label></span>
+							<span><input type="radio" id="payMethod_26" name="payMethod" value="26"><label for="payMethod_26">카카오페이</label></span>
 						</li>
 						<!-- 신용카드 선택 시 -->
-						<li paymethod="11" style="display: list-item;">							
+						<li value="11" style="display: list-item;" id="buycard">							
 							<table class="tbl_inp_form no_line">
 								<caption>카드 결제정보 입력 폼</caption>
 								<colgroup>
@@ -896,29 +729,28 @@
 										<div>
 											<select id="instMmCnt" name="instMmCnt" class="selH28" style="width:200px" disabled="">
 												<option value="00">일시불</option>
-												<option value="02" targetid="nint2MmYn">2개월</option>
-												<option value="03" targetid="nint3MmYn">3개월</option>
-												<option value="04" targetid="nint4MmYn">4개월</option>
-												<option value="05" targetid="nint5MmYn">5개월</option>
-												<option value="06" targetid="nint6MmYn">6개월</option>
-												<option value="07" targetid="nint7MmYn">7개월</option>
-												<option value="08" targetid="nint8MmYn">8개월</option>
-												<option value="09" targetid="nint9MmYn">9개월</option>
-												<option value="10" targetid="nint10MmYn">10개월</option>
-												<option value="11" targetid="nint11MmYn">11개월</option>
-												<option value="12" targetid="nint12MmYn">12개월</option>
+												<option value="02">2개월</option>
+												<option value="03">3개월</option>
+												<option value="04">4개월</option>
+												<option value="05">5개월</option>
+												<option value="06">6개월</option>
+												<option value="07">7개월</option>
+												<option value="08">8개월</option>
+												<option value="09">9개월</option>
+												<option value="10">10개월</option>
+												<option value="11">11개월</option>
+												<option value="12">12개월</option>
 											</select>
 											
 										</div>
 									</td>
-									<input type="hidden" name="aplyNintInstYn" value="N">
 								</tr>
 								</tbody>
 							</table>							
 						</li>
 						<!--// 신용카드 선택 시 -->
 						<!-- 무통장입금 선택 시 -->
-						<li paymethod="61" style="display: none;">							
+						<li value="61" style="display: none;" id="buybankbook">							
 							<table class="tbl_inp_form no_line">
 								<caption>무통장입금 입력 안내</caption>
 								<colgroup>
@@ -930,29 +762,29 @@
 									<th scope="row">은행명</th>
 									<td>
 										<div>
-											<select id="VirDepositBank" name="cjBnkCd" class="selH28" title="은행를 선택해주세요." style="width:300px" disabled="disabled">
+											<select id="VirDepositBank" name="cjBnkCd" class="selH28" title="은행를 선택해주세요." style="width:300px">
 
-												<option value="003" targetid="03">기업</option>
+												<option value="003">기업</option>
 
-												<option value="004" targetid="06">국민</option>
+												<option value="004">국민</option>
 
-												<option value="007" targetid="07">수협</option>
+												<option value="007">수협</option>
 
-												<option value="011" targetid="11">농협</option>
+												<option value="011">농협</option>
 
-												<option value="020" targetid="20">우리</option>
+												<option value="020">우리</option>
 
-												<option value="031" targetid="31">대구</option>
+												<option value="031">대구</option>
 
-												<option value="032" targetid="32">부산</option>
+												<option value="032">부산</option>
 
-												<option value="039" targetid="39">경남</option>
+												<option value="039">경남</option>
 
-												<option value="071" targetid="71">우체국</option>
+												<option value="071">우체국</option>
 
-												<option value="081" targetid="81">하나</option>
+												<option value="081">하나</option>
 
-												<option value="088" targetid="88">신한</option>
+												<option value="088">신한</option>
 
 											</select>
 											<select name="bnkCd" style="display: none;" disabled="disabled">

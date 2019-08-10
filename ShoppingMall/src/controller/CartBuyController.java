@@ -42,7 +42,9 @@ public class CartBuyController extends HttpServlet {
 		
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
-		for(int i=0;i<chk.length; i++){
+		
+		for(int i=0; i<chk.length; i++){
+			System.out.println("i = " + i);
 			//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
 			v.add(cdao.getCartList(Integer.parseInt(chk[i])));
 		}
