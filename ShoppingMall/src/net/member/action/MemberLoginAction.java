@@ -16,7 +16,7 @@ public class MemberLoginAction implements Action{
 
 		//login.jsp에서 사용자가 입력한 id와 pass 파라미터 가져오기
 		String id=request.getParameter("id");
-		String pass=request.getParameter("password");
+		String password=request.getParameter("password");
 		
 		//DB작업 객체 생성
 		MemberDAO mdao=new MemberDAO();
@@ -27,7 +27,7 @@ public class MemberLoginAction implements Action{
 		//: check = 1 -> 아이디, 비밀번호 맞음
 		//: check = 0 -> 아이디, 비밀번호 틀림
 		//: check = -1 -> 아이디 틀림
-		int check=mdao.userCheck(id, pass);
+		int check=mdao.userCheck(id, password);
 		
 		
 		// check==0  "비밀번호틀림" 뒤로이동

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 public class MemberFrontController extends HttpServlet{
 
 	@Override
@@ -119,8 +120,8 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		
-			//MemberOut.jsp에서 ..회원탈퇴링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
-			//또는 회원가입후!.. 로그인화면으로 이동하라 라는 요청이 들어 왔을떄...
+			//MemberOut.jsp에서 ..회원탈퇴링크를 클릭하여 메인화면으로 이동하라 라는 요청이 들어 왔을때...	
+			//또는 회원탈퇴후!.. 메인화면으로 이동하라 라는 요청이 들어 왔을떄...
 			}else if(command.equals("/MemberDelet.me")){ 
 				//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 				forward=new ActionForward();
@@ -134,7 +135,6 @@ public class MemberFrontController extends HttpServlet{
 			}else if(command.equals("/MemberDeletAction.me")){
 			//회원삭제를 위한 Action객체 생성
 			action=new MemberDeletAction();
-			
 			try{
 				//Delet.jsp에서... "회원탈퇴"요청이 들어왔을때...  
 				//세션값 "회원탈퇴성공" 메세지창을 띄어주고...
@@ -145,11 +145,11 @@ public class MemberFrontController extends HttpServlet{
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-		}	//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
+			//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
 		
 		
 		
-		else if(command.equals("/Main.me")){
+			}else if(command.equals("/Main.me")){
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 			forward=new ActionForward();
 			forward.setRedirect(false); //주소값 노출 x

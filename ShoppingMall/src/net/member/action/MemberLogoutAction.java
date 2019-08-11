@@ -19,7 +19,7 @@ public class MemberLogoutAction implements Action{
 		//이동 ./Main.me
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./Main.bo");
+		forward.setPath("./Main.me");
 		return forward;
 		
 /*		response.setContentType("text/html; charset=UTF-8");

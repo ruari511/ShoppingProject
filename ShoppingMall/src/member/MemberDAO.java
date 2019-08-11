@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cart.CartDTO;
+//import jsp.util.DBConnection;
 import member.MemberDTO;
 
 public class MemberDAO {
@@ -103,7 +104,7 @@ public class MemberDAO {
 			//5단계 rs 첫번째행 이동하여.. id에 해당하는 데이터가 pass가 있으면.
 			if(rs.next()){
 				//로그인시.. 입려한 pass와  DB에 저장되어 있는 pass가 같으면
-				if(pass.equals(rs.getString("pass"))){
+				if(pass.equals(rs.getString("password"))){
 					check=1;//아이디 맞음,비밀번호 맞음 판별값 저장
 				//비밀번호가 틀리면
 				}else{
@@ -341,6 +342,67 @@ public class MemberDAO {
 		
 		return member;
 	}
+	public int deleteMember(String id, String pw) 
+	{
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		MemberDTO member = new MemberDTO();
+		
+		String dbpw = ""; // DB상의 비밀번호를 담아둘 변수
+		int x = -1;
+
+		try {
+			// 회원 삭제
+			StringBuffer query2 = new StringBuffer();
+			query2.append("DELETE FROM JSP_MEMBER WHERE ID=?");
+
+			con = getConnection();
+
+			// 자동 커밋을 false로 한다.
+			con.setAutoCommit(false);
+			
+			// 1. 아이디에 해당하는 비밀번호를 조회한다.
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) 
+			{
+				dbpw = rs.getString("password");
+				if (dbpw.equals(pw)) // 입력된 비밀번호와 DB비번 비교
+				{
+					// 같을경우 회원삭제 진행
+					pstmt = con.prepareStatement(query2.toString());
+					pstmt.setString(1, id);
+					pstmt.executeUpdate();
+					con.commit(); 
+					x = 1; // 삭제 성공
+				} else {
+					x = 0; // 비밀번호 비교결과 - 다름
+				}
+			}
+
+			return x;
+
+		} catch (Exception sqle) {
+			try {
+				con.rollback(); // 오류시 롤백
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			throw new RuntimeException(sqle.getMessage());
+		} finally {
+			try{
+				if ( pstmt != null ){ pstmt.close(); pstmt=null; }
+				if ( con != null ){ con.close(); con=null;	}
+			}catch(Exception e){
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	} // end deleteMember
+	
 	
 
 
@@ -349,7 +411,7 @@ public class MemberDAO {
 	//아이디 중복체크를 위한 메소드 
 	//MemberServlet서블릿 클래스로부터 전달된 ID로  SQL문의 조건식에 설정한후
 	//ID에 대한 회원정보를 조회하여 그결과를 true또는 false로 반환함.
-	public boolean overlappedID(String id) {
+/*	public boolean overlappedID(String id) {
 		
 		//아이디 중복 또는 중복이아니다 라는 판별값을 저장할 변수 
 		boolean result = false;
@@ -379,6 +441,6 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return result;
-	}	
+	}	*/
 	
 	}

@@ -23,76 +23,76 @@ public class joinServlet extends HttpServlet {
 	}
 
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//»ç¿ëÀÚ·Î ºÎÅÍ ÀÔ·Â¹ŞÀº ¾ÆÀÌµğ°ªÀÌ ÇÑ±ÛÀÏ°æ¿ì ÇÑ±Û ƒÆÁüÀ» ¹æÁö¸¦ À§ÇØ ¹®ÀÚ¼Â ¹æ½Ä ÁöÁ¤
+		//ì‚¬ìš©ìë¡œ ë¶€í„° ì…ë ¥ë°›ì€ ì•„ì´ë””ê°’ì´ í•œê¸€ì¼ê²½ìš° í•œê¸€ êº ì§ì„ ë°©ì§€ë¥¼ ìœ„í•´ ë¬¸ìì…‹ ë°©ì‹ ì§€ì •
 		request.setCharacterEncoding("UTF-8");
-		//ÀÀ´äÇÒ µ¥ÀÌÅÍ À¯Çü ÁöÁ¤
+		//ì‘ë‹µí•  ë°ì´í„° ìœ í˜• ì§€ì •
 		response.setContentType("text/html; charset=UTF-8");
-		//ÀÀ´ä(Ãâ·Â)ÀÇ ¿ªÇÒÀ» ÇÏ´Â  PrintWriter°´Ã¼ ¾ò±â
+		//ì‘ë‹µ(ì¶œë ¥)ì˜ ì—­í• ì„ í•˜ëŠ”  PrintWriterê°ì²´ ì–»ê¸°
 		PrintWriter writer = response.getWriter();
 		
-		//¿äÃ»°ª¾ò±â(»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¾ÆÀÌµğ ¾ò±â)
+		//ìš”ì²­ê°’ì–»ê¸°(ì‚¬ìš©ìê°€ ì…ë ¥í•œ ì•„ì´ë”” ì–»ê¸°)
 		String id = request.getParameter("id");
 		String phone = request.getParameter("phone");
 				
-		//»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id¿Í  DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â È¸¿øÀÇ id¸¦ ºñ±³ ÇÏ±â À§ÇØ DBÀÛ¾÷
+		//ì‚¬ìš©ìê°€ ì…ë ¥í•œ idì™€  DBì— ì €ì¥ë˜ì–´ ìˆëŠ” íšŒì›ì˜ idë¥¼ ë¹„êµ í•˜ê¸° ìœ„í•´ DBì‘ì—…
 		MemberDAO memberDAO = new MemberDAO();
 		
-		//¾ÆÀÌµğ Áßº¹ Ã¼Å© ¿©ºÎ°ª ¾ò±â
+		//ì•„ì´ë”” ì¤‘ë³µ ì²´í¬ ì—¬ë¶€ê°’ ì–»ê¸°
 		int overlappedID = memberDAO.overlappedID(id);
-		//ÇÚµåÆù¹øÈ£ Áßº¹ Ã¼Å© ¿©ºÎ°ª ¾ò±â
+		//í•¸ë“œí°ë²ˆí˜¸ ì¤‘ë³µ ì²´í¬ ì—¬ë¶€ê°’ ì–»ê¸°
 		int overlappedPhone = memberDAO.overlappedPhone(phone);
 		
-		// ¾ÆÀÌµğ Áßº¹ÀÏ ¶§ : 1
-		// ¾ÆÀÌµğ Áßº¹ÀÌ ¾Æ´Ò¶§ : 2
-		// ÇÚµåÆù Áßº¹ÀÏ ¶§ : 3
-		// ÇÚµåÆù Áßº¹ÀÌ ¾Æ´Ò¶§ : 4
+		// ì•„ì´ë”” ì¤‘ë³µì¼ ë•Œ : 1
+		// ì•„ì´ë”” ì¤‘ë³µì´ ì•„ë‹ë•Œ : 2
+		// í•¸ë“œí° ì¤‘ë³µì¼ ë•Œ : 3
+		// í•¸ë“œí° ì¤‘ë³µì´ ì•„ë‹ë•Œ : 4
 		
 		
-		//¾ÆÀÌµğ Áßº¹ÀÌ³Ä Áßº¹ÀÌ ¾Æ´Ï³Ä¿¡ µû¶ó ¸Ş¼¼Áö¸¦ Å¬¶óÀÌ¾ğÆ®ÀÇ À¥ºê¶ó¿ìÀú·Î Ãâ·Â(ÀÀ´ä)
-		if(overlappedID == 1){ // ¾ÆÀÌµğ°¡ Áßº¹µÇ¾ú´Ù¸é
-			writer.print("1"); // Áßº¹µÇ¾î¼­ »ç¿ë X
-			System.out.println(id + " : Áßº¹");
+		//ì•„ì´ë”” ì¤‘ë³µì´ëƒ ì¤‘ë³µì´ ì•„ë‹ˆëƒì— ë”°ë¼ ë©”ì„¸ì§€ë¥¼ í´ë¼ì´ì–¸íŠ¸ì˜ ì›¹ë¸Œë¼ìš°ì €ë¡œ ì¶œë ¥(ì‘ë‹µ)
+		if(overlappedID == 1){ // ì•„ì´ë””ê°€ ì¤‘ë³µë˜ì—ˆë‹¤ë©´
+			writer.print("1"); // ì¤‘ë³µë˜ì–´ì„œ ì‚¬ìš© X
+			System.out.println(id + " : ì¤‘ë³µ");
 		}else if(overlappedID == 0){
-			writer.print("2"); // »ç¿ë °¡´É
-			System.out.println(id + " : »ç¿ë°¡´É");
+			writer.print("2"); // ì‚¬ìš© ê°€ëŠ¥
+			System.out.println(id + " : ì‚¬ìš©ê°€ëŠ¥");
 		}
 		
-		//ÇÚµåÆù¹øÈ£ Áßº¹ÀÌ³Ä Áßº¹ÀÌ ¾Æ´Ï³Ä¿¡ µû¶ó ¸Ş¼¼Áö¸¦ Å¬¶óÀÌ¾ğÆ®ÀÇ À¥ºê¶ó¿ìÀú·Î Ãâ·Â(ÀÀ´ä)	
+		//í•¸ë“œí°ë²ˆí˜¸ ì¤‘ë³µì´ëƒ ì¤‘ë³µì´ ì•„ë‹ˆëƒì— ë”°ë¼ ë©”ì„¸ì§€ë¥¼ í´ë¼ì´ì–¸íŠ¸ì˜ ì›¹ë¸Œë¼ìš°ì €ë¡œ ì¶œë ¥(ì‘ë‹µ)	
 		if(overlappedPhone == 1){ 
-			writer.print("3"); // Áßº¹µÇ¾î¼­ »ç¿ë X
-			System.out.println(phone + " : Áßº¹");
+			writer.print("3"); // ì¤‘ë³µë˜ì–´ì„œ ì‚¬ìš© X
+			System.out.println(phone + " : ì¤‘ë³µ");
 		}else if(overlappedPhone == 0){
-			writer.print("4"); // Áßº¹¾ÈµÇ¼­ »ç¿ë °¡´É
-			System.out.println(phone + " : »ç¿ë °¡´É");
+			writer.print("4"); // ì¤‘ë³µì•ˆë˜ì„œ ì‚¬ìš© ê°€ëŠ¥
+			System.out.println(phone + " : ì‚¬ìš© ê°€ëŠ¥");
 		}
 		
 //		if(flag){
 //			if(overlappedPhone == 1){ 
-//				writer.print("3"); // Áßº¹µÇ¾î¼­ »ç¿ë X
-//				System.out.println(phone + " : Áßº¹");
+//				writer.print("3"); // ì¤‘ë³µë˜ì–´ì„œ ì‚¬ìš© X
+//				System.out.println(phone + " : ì¤‘ë³µ");
 //			}else if(overlappedPhone == 0){
-//				writer.print("4"); // Áßº¹¾ÈµÇ¼­ »ç¿ë °¡´É
-//				System.out.println(phone + " : »ç¿ë °¡´É");
+//				writer.print("4"); // ì¤‘ë³µì•ˆë˜ì„œ ì‚¬ìš© ê°€ëŠ¥
+//				System.out.println(phone + " : ì‚¬ìš© ê°€ëŠ¥");
 //			}
 //		}		
 //		switch(overlappedID){
 //			case 1:
-//				writer.print("1"); // Áßº¹µÇ¾î¼­ »ç¿ë X
-//				System.out.println(id + " : Áßº¹");
+//				writer.print("1"); // ì¤‘ë³µë˜ì–´ì„œ ì‚¬ìš© X
+//				System.out.println(id + " : ì¤‘ë³µ");
 //				break;
 //			case 0:
-//				writer.print("2"); // Áßº¹ ¾ÈµÇ¼­ »ç¿ë °¡´É
-//				System.out.println(id + " : »ç¿ë °¡´É");
+//				writer.print("2"); // ì¤‘ë³µ ì•ˆë˜ì„œ ì‚¬ìš© ê°€ëŠ¥
+//				System.out.println(id + " : ì‚¬ìš© ê°€ëŠ¥");
 //				break;
 //		}
 		
 		
 //		if(overlappedPhone == 1){
-//			writer.print("overlappedPhone"); // Áßº¹µÇ¾î¼­ »ç¿ë X
-//			System.out.println(phone + " : Áßº¹");
+//			writer.print("overlappedPhone"); // ì¤‘ë³µë˜ì–´ì„œ ì‚¬ìš© X
+//			System.out.println(phone + " : ì¤‘ë³µ");
 //		}else if(overlappedPhone == 0){
-//			writer.print("not_overlappedPhone"); // Áßº¹¾ÈµÇ¼­ »ç¿ë °¡´É
-//			System.out.println(phone + " : »ç¿ë °¡´É");
+//			writer.print("not_overlappedPhone"); // ì¤‘ë³µì•ˆë˜ì„œ ì‚¬ìš© ê°€ëŠ¥
+//			System.out.println(phone + " : ì‚¬ìš© ê°€ëŠ¥");
 //		}
 		
 		

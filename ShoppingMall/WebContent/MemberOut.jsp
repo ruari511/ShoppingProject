@@ -100,7 +100,7 @@
 	
 	
 	
-<script src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/customer.js?dumm=2019080833432"></script>
+
 
 
          </div>

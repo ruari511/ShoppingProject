@@ -34,7 +34,8 @@ public class MemberDeletAction implements Action {
 		if(check==1){
 			session.invalidate();//회원정보 담긴 세션 삭제
 			forward.setRedirect(true);
-			forward.setPath("./Main.me"); 
+			forward.setPath("Main.me"); 
+			return forward;
 		}else{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
@@ -46,9 +47,9 @@ public class MemberDeletAction implements Action {
 			return null;
 		}
 			//페이지 이동 방식 여부 값 true와...
-			// 이동할페이지 주소 (./CarMain.jsp)를 담고 있는..
+			// 이동할페이지 주소 (./Main.jsp)를 담고 있는..
 			//new ActionForward()객체를 MemberFrontController로 리턴  
-			return forward;
+			//return forward;
 			
 		}
 	}

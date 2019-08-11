@@ -47,9 +47,9 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 					<input type="text" name="id" class="id" id="id" onblur="join_check('check')" />
 					<div class="check_font" id="idMessage"></div>
 				<label>비밀번호</label>
-					<input type="password" name="pass" id="pass" required><br>
+					<input type="password" name="password" id="pass" required><br>
 				<label>비밀번호 확인</label>
-					<input type="password" name="pass2" id="pass2" onblur="join_check('pass2')" required>
+					<input type="password" name="password2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
 				<label>이름</label>
 					<input type="text" name="name" id="name" onblur="join_check('name')" required>
@@ -126,7 +126,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 								$("#idMessage").css("color","red");
 								$(".submit").attr("disabled",true);
 							}else if(data == 24 ){//  아이디 중복 x
-								if(_id.length < 4 || _id.length > 12){// 아이디가 4~12자가 아닐 시
+								if(_id.length < 4 ||_id.length > 12){// 아이디가 4~12자가 아닐 시
 									$("#idMessage").text("아이디 4~12자를 입력해주세요 :)");
 									$("#idMmessage").css("color","red");
 									$(".submit").attr("disabled",true);
@@ -152,7 +152,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 							 alert("에러가 발생했습니다.");
 					 }
 				}); // ajax 메소드 끝
-		}else if(aa == 'pass2'){
+		}else if(aa == 'password2'){
 			// 비밀번호 체크
 			if(_pass != _pass2 ){
 				$("#passMessage").text("비밀번호가 일치하지 않습니다.");
