@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/joinCheck")
+@WebServlet("/Check")
 public class joinServlet extends HttpServlet {
 
 	@Override
@@ -32,57 +32,71 @@ public class joinServlet extends HttpServlet {
 		
 		//요청값얻기(사용자가 입력한 아이디 얻기)
 		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
-		String pass2 = request.getParameter("pass2");
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String phone1 = request.getParameter("phone1");
-		String phone2 = request.getParameter("phone2");
-		String phone3 = request.getParameter("phone3");
-		
-		
-		
+		String phone = request.getParameter("phone");
 				
 		//사용자가 입력한 id와  DB에 저장되어 있는 회원의 id를 비교 하기 위해 DB작업
 		MemberDAO memberDAO = new MemberDAO();
 		
 		//아이디 중복 체크 여부값 얻기
-		boolean overlappedID = memberDAO.overlappedID(id);
+		int overlappedID = memberDAO.overlappedID(id);
+		//핸드폰번호 중복 체크 여부값 얻기
+		int overlappedPhone = memberDAO.overlappedPhone(phone);
+		
+		// 아이디 중복일 때 : 1
+		// 아이디 중복이 아닐때 : 2
+		// 핸드폰 중복일 때 : 3
+		// 핸드폰 중복이 아닐때 : 4
+		
 		
 		//아이디 중복이냐 중복이 아니냐에 따라 메세지를 클라이언트의 웹브라우저로 출력(응답)
-		if(overlappedID == true){
-			writer.print("not_usable");
-		}else{
-			writer.print("usable");
+		if(overlappedID == 1){ // 아이디가 중복되었다면
+			writer.print("1"); // 중복되어서 사용 X
+			System.out.println(id + " : 중복");
+		}else if(overlappedID == 0){
+			writer.print("2"); // 사용 가능
+			System.out.println(id + " : 사용가능");
 		}
 		
-		
-		// 핸드폰 번호 3자리 합친 값 구하기
-		String phone = phone1 + "-" + phone2 + "-" + phone3;
-		System.out.println(phone);
-		//핸드폰번호 중복 체크 여부값 얻기
-		boolean overlappedPhone = memberDAO.overlappedPhone(phone);
-		
-		//핸드폰번호 중복이냐 중복이 아니냐에 따라 메세지를 클라이언트의 웹브라우저로 출력(응답)
-		if(overlappedPhone == true){
-			writer.print("overlapped");
-		}else{
-			writer.print("not_overlapped");
+		//핸드폰번호 중복이냐 중복이 아니냐에 따라 메세지를 클라이언트의 웹브라우저로 출력(응답)	
+		if(overlappedPhone == 1){ 
+			writer.print("3"); // 중복되어서 사용 X
+			System.out.println(phone + " : 중복");
+		}else if(overlappedPhone == 0){
+			writer.print("4"); // 중복안되서 사용 가능
+			System.out.println(phone + " : 사용 가능");
 		}
 		
+//		if(flag){
+//			if(overlappedPhone == 1){ 
+//				writer.print("3"); // 중복되어서 사용 X
+//				System.out.println(phone + " : 중복");
+//			}else if(overlappedPhone == 0){
+//				writer.print("4"); // 중복안되서 사용 가능
+//				System.out.println(phone + " : 사용 가능");
+//			}
+//		}		
+//		switch(overlappedID){
+//			case 1:
+//				writer.print("1"); // 중복되어서 사용 X
+//				System.out.println(id + " : 중복");
+//				break;
+//			case 0:
+//				writer.print("2"); // 중복 안되서 사용 가능
+//				System.out.println(id + " : 사용 가능");
+//				break;
+//		}
 		
+		
+//		if(overlappedPhone == 1){
+//			writer.print("overlappedPhone"); // 중복되어서 사용 X
+//			System.out.println(phone + " : 중복");
+//		}else if(overlappedPhone == 0){
+//			writer.print("not_overlappedPhone"); // 중복안되서 사용 가능
+//			System.out.println(phone + " : 사용 가능");
+//		}
 		
 		
 	}	
 	
 	
 }
-
-
-
-
-
-
-
-
-

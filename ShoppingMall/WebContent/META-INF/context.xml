@@ -7,7 +7,7 @@
 	type="javax.sql.DataSource"
 	driverClassName="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost:3306/shoppingmall"
-	username="shopping"
+	username="root"
 	password="1234"	
 	/>
 
