@@ -147,7 +147,7 @@
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
-						<input type="hidden" id="orderPhone" value="${member.phone_tel}">
+						<input type="hidden" id="orderPhone" value="${member.phone}">
 						<select id="orderPhone_1" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
 							<option value="1">선택</option>
 
