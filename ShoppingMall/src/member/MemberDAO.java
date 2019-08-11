@@ -26,7 +26,60 @@ public class MemberDAO {
 		return con;
 		
 	}
+	//아이디 중복체크를 위한 메소드 
+	//MemberServlet서블릿 클래스로부터 전달된 ID로  SQL문의 조건식에 설정한후
+	//ID에 대한 회원정보를 조회하여 그결과를 true또는 false로 반환함.
+	public int overlappedID(String id) {
+		int result = 0;
+		
+		try {
+			Connection con = null;
+			String sql = "";
+			PreparedStatement pstmt = null;
+			con = getConnection();
+			
+			String query = "select if(count(*)>0,'1','0') as result from member";
+				   query += " where id=?";
+				   // 중복되는게 있으면 1, 중복되느게 없으면 0
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			result = rs.getInt("result");   
+			pstmt.close();
+			rs.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
+	public int overlappedPhone(String phone) {
+		int result = 0;
+		
+		try {
+			Connection con = null;
+			String sql = "";
+			PreparedStatement pstmt = null;
+			con = getConnection();
+			
+			String query = "select if(count(*)>0,'1','0') as result from member";
+				   query += " where phone=?";
+				   // 중복되는게 있으면 1, 중복되느게 없으면 0
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, phone);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			result = rs.getInt("result");   
+			pstmt.close();
+			rs.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}		
 	/*로그인 처리시.. 사용하는 메소드*/
 	//login.jsp에서 사용자로부터 입력받은 id,passwd값과 DB에 있는 id,passwd값을 확인하여 로그인처리
 	public int userCheck(String id,String pass){

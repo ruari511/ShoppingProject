@@ -35,7 +35,7 @@ public class MemberJoinAction implements Action{
 		
 		boolean result = false;
 		
-		member.MemberDAO mdao=new member.MemberDAO();
+		MemberDAO mdao=new MemberDAO();
 		
 		result = mdao.insertMember(dto);
 		

@@ -64,7 +64,7 @@ public class MemberFrontController extends HttpServlet{
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 			forward.setRedirect(false);
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?center=member/join.jsp");
+			forward.setPath("./Main.jsp?section=member/join.jsp");
 			
 		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
 		}else if(command.equals("/MemberJoinAction.me")){
@@ -89,9 +89,9 @@ public class MemberFrontController extends HttpServlet{
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 			forward.setRedirect(false); //주소값 노출 안됨
 			//이동할 페이지 경로(로그인 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?center=member/login.jsp"); 
+			forward.setPath("./Main.jsp?section=./login.jsp"); 
 		
-		//login.jsp에서... "로그인"버튼을 눌렀을때..로그인 처리 요청받기!
+		//login.jsp에서... "Sign in"버튼을 눌렀을때..로그인 처리 요청받기!
 		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
 		}else if(command.equals("/MemberLoginAction.me")){
 			
