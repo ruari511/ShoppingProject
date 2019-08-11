@@ -47,7 +47,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 					<input type="text" name="id" class="id" id="id" onblur="join_check('check')" />
 					<div class="check_font" id="idMessage"></div>
 				<label>비밀번호</label>
-					<input type="password" name="pass" id="pass" required><br>
+					<input type="password" name="password" id="pass" required><br>
 				<label>비밀번호 확인</label>
 					<input type="password" name="pass2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
