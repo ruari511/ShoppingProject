@@ -120,7 +120,6 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 						data:{id:_id, phone:_phone},
 						dataType:"text",
 						success:function(data,textStatus){
-							alert(data);
 							// 아이디 체크
 							if(data == 14){  //  아이디 중복 o
 								$("#idMessage").text("사용중인 아이디입니다.");
