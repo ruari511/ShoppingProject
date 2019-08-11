@@ -1,0 +1,122 @@
+/*190808 김현정 메인 배너 틀 제작*/
+@CHARSET "UTF-8";
+*{box-sizing: border-box;}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#content{
+	width: 1020px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#mainBanner{
+	width: 100%;
+	height: 450px;
+	background-color: aquamarine
+}
+
+#mainBanner_Wrap{
+	position: absolute;/*body기준*/
+	left: 0;/*부모 태그가 마진이잇어서 마진앞으로 당기기*/
+	width: 100%;
+	min-width: 1020px;
+	height: 450px;
+
+}
+
+#mainBanner_Btn{
+	position: absolute;
+	top: 380px;
+	left: 60%;
+	z-index: 10;
+}
+
+#mainBanner_Btn Button{
+	font-size: 30px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+
+#mainBanner_Img{
+	position: relative;
+	overflow: hidden;
+	min-width: 1020px;
+	height: 100%;
+}
+
+.mainBanner_Img_Wrap{
+	margin: 0 auto;
+	background-color: bisque;
+	width: 1020px;
+	height: 100%;
+	min-width: 1020px;
+	left: 0;
+	z-index: 5;
+	position:relative;
+}
+
+.mainBanner_Img_Wrap a{
+position: relative;
+	left: 50%;
+	top: 0;	
+}
+
+.mainBanner_Img_Wrap img{
+	position: absolute;
+	top: 0;
+	transform: translateX(-50%);
+}
+
+.mainBanner_Img_Text{
+	position: relative;
+	top: 30px;
+	right: 30%;
+}
+
+.mainBanner_Img_Text *{
+	display: block;
+}
+
+.mainBanner_Img_Text *:nth-child(1){
+	font-size: 30px;
+}
+.mainBanner_Img_Text *:nth-child(1)::after{
+	content: '';
+    display: block;
+	background-color: gray;
+	width: 15px;
+	height: 2px;	
+	margin-top: 20px;
+	margin-left: 2px;
+}
+
+.mainBanner_Img_Text *:nth-child(2){
+	margin-top: 20px;
+	font-size: 48px;
+	line-height: 1.5;
+}
+.mainBanner_Img_Text *:nth-child(3){
+	margin-top: 20px;
+	font-size: 40px;
+	line-height: 1.5;
+}
+
+#mainBannerIndex{
+	display: inline-block;
+    font-size: 20px;
+    height: 100%;
+    width: 60px;
+    text-align: center;
+    line-height: 2;
+}
+
+
