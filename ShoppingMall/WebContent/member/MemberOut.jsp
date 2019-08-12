@@ -32,7 +32,7 @@
       <div id="Container">
          <div id="Contents">
 
-            	<jsp:include page="../mypage/mypage_topMenu.jsp" />
+            	<jsp:include page="../myPage/mypage_topMenu.jsp" />
 
             <div class="mypage-conts">
                <script

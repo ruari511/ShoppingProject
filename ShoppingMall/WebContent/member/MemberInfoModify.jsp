@@ -34,7 +34,7 @@
 <div id="Wrapper">
 
 
-	<jsp:include page="../mypage/mypage_topMenu.jsp" />
+	<jsp:include page="../myPage/mypage_topMenu.jsp" />
 
 	<!-- 회원정보 수정 -->
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
