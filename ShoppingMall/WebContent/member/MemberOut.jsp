@@ -28,12 +28,12 @@
 </head>
 <body>
    <div id="Wrapper">
-      <jsp:include page="./include/Header.jsp" />
+      <jsp:include page="../include/Header.jsp" />
 
       <div id="Container">
          <div id="Contents">
 
-            <jsp:include page="mypage_topMenu.jsp" />
+            <jsp:include page="../mypage_topMenu.jsp" />
 
             <div class="mypage-conts">
                <script
@@ -81,7 +81,7 @@
 	
 	
 	
-	<form name="deleteform" method="post" action="./MemberDeleteAction.me"
+	<form name="deleteform" method="post" action="MemberDeleteAction.me"
 			onsubmit="return checkValue()">
 		
 			<table align="center">
@@ -142,7 +142,7 @@
          });
       </script>
       
-      <jsp:include page="./include/Footer.jsp" />
+      <jsp:include page="../include/Footer.jsp" />
       
    </div>
 </body>   

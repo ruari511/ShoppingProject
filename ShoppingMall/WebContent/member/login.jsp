@@ -10,43 +10,49 @@
 <!-- 제이쿼리 최선버전의 js파일을 불러와 jquery를 사용하기 위해 반드시 설정해야함 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	
-	function login_check(){
-		var _id = $("#id").val();
-		
-		var _pass = $("#password").val();
+   
+   function login_check(){
+      var _id = $("#id").val();
+      
+      var _pass = $("#password").val();
 
-		$.ajax(
-			{
-				url:"http://localhost:8090/ShoppingMall/member/login.jsp",
-				type:"post",
-				async:false,
-				data:{id:_id, pass:_pass},
-				dataType:"text",
-				success:function(data,textStatus){
-					
-					// 아이디 체크
-					if(_id.length == 0){ // 아이디가 입력되지 않았을 때
-						$("#idMessage").text("아이디를 입력해주세요 :)");
-						$("#idMessage").css("color","red");
-						$(".submit").attr("disabled",true);
-					}
-					
-					// 비밀번호 체크
-					if(_pass.length == 0){ // 비밀번호가 입력되지 않았을 때
-						$("#passMessage").text("비밀번호를 입력해주세요 :)");
-						$("#passMessage").css("color","red");
-						$(".submit").attr("disabled",true);
-					}	
-					
-				},
-				error:function(data,textStatus){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
-					 alert("에러가 발생했습니다.");
-			 }
-		}); // ajax 메소드 끝
-		
-	};	
-	
+      $.ajax(
+         {
+            url:"http://localhost:8090/ShoppingMall/member/login.jsp",
+            type:"post",
+            async:false,
+            data:{id:_id, pass:_pass},
+            dataType:"text",
+            success:function(data,textStatus){
+               
+               // 아이디 체크
+               if(_id.length == 0){ // 아이디가 입력되지 않았을 때
+                  $("#idMessage").text("아이디를 입력해주세요 :)");
+                  $("#idMessage").css("color","red");
+                  $(".submit").attr("disabled",true);
+               } else if(_id.length != 0){
+                  $("#idMessage").text("");
+
+               }
+               
+               // 비밀번호 체크
+               if(_pass.length == 0){ // 비밀번호가 입력되지 않았을 때
+                  $("#passMessage").text("비밀번호를 입력해주세요 :)");
+                  $("#passMessage").css("color","red");
+                  $(".submit").attr("disabled",true);
+               } else if(_pass.length != 0){
+                  $("#passMessage").text("");
+
+               }   
+               
+            },
+            error:function(data,textStatus){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
+                alert("에러가 발생했습니다.");
+          }
+      }); // ajax 메소드 끝
+      
+   };   
+   
 </script>
 </head>
 
