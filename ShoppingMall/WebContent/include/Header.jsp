@@ -31,7 +31,7 @@
 				<%
 				}
 				%>
-				<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
+				<li class="cart"><a href="CartListController.do?num=0">장바구니<span id="cartToCnt"></span></a></li>
 				
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
