@@ -1,4 +1,4 @@
-<%@page import="member.MemberDAO"%>
+<%@page import="net.member.db.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -19,7 +19,9 @@
 	<meta property="og:description" content="">
 	<title> # </title>
 
-	<link rel="stylesheet" href="./asset/css/global.css"/> 
+	<link rel="stylesheet" href="./asset/css/board.css"/>
+	<link rel="stylesheet" href="./asset/css/global.css"/>
+	<link rel="stylesheet" href="./asset/css/contents.css"/> 
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>

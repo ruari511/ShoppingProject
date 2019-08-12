@@ -35,7 +35,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 </head>
 <body>
 <!-- 본문내용 -->
-<section>
+	<section>
 		<article>
 			<h1>Join Us</h1>
 			<%--MemberFrontController서블릿에.. 회원가입 처리 요청! --%>
@@ -87,8 +87,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 				</fieldset>			
 			</form>
 		</article>
-
-</section>
+	</section>
 <!-- 본문내용 -->
 </body>
 <script type="text/javascript">

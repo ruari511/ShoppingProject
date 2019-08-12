@@ -22,20 +22,20 @@
 				//세션값 없음  -> MemberFrontController서블릿에.. 로그인 | 회원가입 처리 요청  
 				if(id==null){
 					%>                  
-					<li class="login"><a href="./MemberLogin.me">로그인</a></li>
-					<li class="join"><a href="./MemberJoin.me">회원가입</a></li>	
+					<li class="login"><a href="./login.do">로그인</a></li>
+					<li class="join"><a href="./join.do">회원가입</a></li>	
 					<%
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					%>
-					<li class="logout"><%=id %>님 <a href="./MemberLogout.me">로그아웃</a></li>
+					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
 					<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
 				<%
 				}
 				%>
-				<li class="mypage"><a href="./mypage_Main.jsp">마이페이지</a></li>
+				<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
-				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
+				<li class="store"><a href="./memberOut.do">탈퇴(임시)</a></li>
 			</ul>
 			</form>
 		</div>

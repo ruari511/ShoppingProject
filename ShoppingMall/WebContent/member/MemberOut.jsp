@@ -28,12 +28,12 @@
 </head>
 <body>
    <div id="Wrapper">
-      <jsp:include page="../include/Header.jsp" />
+
 
       <div id="Container">
          <div id="Contents">
 
-            <jsp:include page="../mypage_topMenu.jsp" />
+            <jsp:include page="../myPage/mypage_topMenu.jsp" />
 
             <div class="mypage-conts">
                <script
@@ -76,27 +76,22 @@
       <li>올리브영 이용약관 동의 철회 시에는 올리브영 서비스만 이용할 수 없게 되며, CJ ONE 웹사이트를 포함한 다른 CJ ONE 제휴 브랜드의 웹사이트 서비스는 이용하실 수 있습니다.</li>
       <li>올리브영 이용약관 동의 철회 시에도 CJ ONE 멤버십 서비스 및 타 제휴 브랜드의 이용을 위해 회원님의 개인정보 및 거래정보는 CJ ONE 회원 탈퇴 시까지 보존됩니다.</li>
       <li>올리브영 이용약관 동의를 철회한 후에라도 해당 약관에 다시 동의하시면 서비스를 이용할 수 있습니다.</li>
-      <li>진행 중인 전자상거래 이용내역(결제/배송/교환/반품 중인 상태)이 있거나 고객상담 및 이용하신 서비스가 완료되지 않은 경우 서비스 철회 하실 수 없습니다. djflskjfl;ksdjf;lsjf;lksdjfl;</li>
+      <li>진행 중인 전자상거래 이용내역(결제/배송/교환/반품 중인 상태)이 있거나 고객상담 및 이용하신 서비스가 완료되지 않은 경우 서비스 철회 하실 수 없습니다.</li>
    </ul>
 	
 	
 	
-	<form name="deleteform" method="post" action="MemberDeleteAction.me"
+	<form name="deleteform" method="post" action="./MemberDeleteAction.me"
 			onsubmit="return checkValue()">
-		<%
-				String id=(String)session.getAttribute("id");
-					
-				%>
-				
+		
 			<table align="center">
 				<tr>
-					<td>회원 탈퇴를 하실려면 아래에 비밀번호를 입력해주세요</td><%=id %>
+					<td>회원 탈퇴를 하실려면 아래에 비밀번호를 입력해주세요</td>
 				</tr>
 				<tr>
 					<td><input type="password" name="password" maxlength="50" border="2"></td>
 				</tr>
 			</table>
-				
 			<br> 
 			<input type="button" value="취소" onclick="javascript:window.location='Main.me'">
 			<input type="submit" value="탈퇴" /> 
@@ -146,10 +141,7 @@
          });
       </script>
       
-      <jsp:include page="../include/Footer.jsp" />
       
    </div>
-</body>  
-
- 
+</body>   
 </html>

@@ -4,8 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.MemberDAO;
-import member.MemberDTO;
+import net.member.db.MemberDAO;
+import net.member.db.MemberDTO;
+import net.action.Action;
+import net.action.ActionForward;
 
 /** 
  *  회원정보 수정화면에 현재 회원정보를 출력하는 Action 클래스

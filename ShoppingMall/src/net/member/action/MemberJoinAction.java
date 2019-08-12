@@ -5,8 +5,10 @@ import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.MemberDTO;
-import member.MemberDAO;
+import net.member.db.MemberDTO;
+import net.action.Action;
+import net.action.ActionForward;
+import net.member.db.MemberDAO;
 
 
 public class MemberJoinAction implements Action{
