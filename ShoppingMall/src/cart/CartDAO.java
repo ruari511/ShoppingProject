@@ -13,12 +13,7 @@ import product.ProductDTO;
 
 public class CartDAO {
 	
-	//재료 준비
-	Connection con;
-	PreparedStatement pstmt;
-	ResultSet rs;
 	DataSource ds;
-	String sql = "";
 	
 	//DB연결 메소드
 	private Connection getConnection() throws Exception {
@@ -53,6 +48,7 @@ public class CartDAO {
 				
 				CartDTO cartDTO = new CartDTO();
 				
+				cartDTO.setCart_num(rs.getInt("cart_num"));
 				cartDTO.setId(rs.getString("id"));
 				cartDTO.setProduct_name(rs.getString("product_name"));
 				cartDTO.setImg_main(rs.getString("img_main"));
@@ -102,6 +98,7 @@ public class CartDAO {
 				
 				cartDTO = new CartDTO();
 				
+				cartDTO.setCart_num(rs.getInt("cart_num"));
 				cartDTO.setProduct_name(rs.getString("product_name"));
 				cartDTO.setImg_main(rs.getString("img_main"));
 				cartDTO.setBrand(rs.getString("brand"));
@@ -122,6 +119,74 @@ public class CartDAO {
 	
 		return cartDTO;
 	}//getCartList() 메소드 끝
+	
+	public int updateCart(int cart_num, int count){
+		
+		int up = 1;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			sql  = "update cart set product_count=? where cart_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, cart_num);
+			
+			pstmt.executeUpdate();
+			
+			up = 2;
+			
+		} catch (Exception e) {
+			System.out.println("updateCart()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		return up;
+	}
+	
+	public int deleteCart(int cart_num){
+		
+		int up = 3;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			sql  = "delete from cart where cart_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cart_num);
+			
+			pstmt.executeUpdate();
+			
+			up = 4;
+			
+		} catch (Exception e) {
+			System.out.println("deleteCart()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		return up;
+	}
+	
 	
 	
 	
