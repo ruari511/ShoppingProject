@@ -256,7 +256,7 @@ function deleteCart(idx) {
 		
 			<div class="order_btn_area order_cart">
 				<button type="submit" class="btnOrangeW" name="partOrderBtn">선택주문</button>
-				<button type="button" class="btnOrange" name="allOrderBtn">전체주문</button>
+				<button type="button" class="btnOrange" name="allOrderBtn" onclick="location.href='CartAllBuyController.do'">전체주문</button>
 			</div>
 			</form>
 		</div>
