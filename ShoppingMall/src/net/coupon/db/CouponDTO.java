@@ -1,4 +1,4 @@
-package coupon;
+package net.coupon.db;
 
 
 public class CouponDTO {

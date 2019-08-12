@@ -27,6 +27,7 @@
 </head>
 <body>
 	<div id="Wrapper">
+
 		<div id="Container">
 			<div id="Contents">
 
@@ -142,7 +143,6 @@
 				mypage.orderList.init();
 			});
 		</script>
-
 		
 	</div>
 </body>	

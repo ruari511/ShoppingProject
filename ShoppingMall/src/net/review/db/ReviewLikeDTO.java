@@ -1,4 +1,4 @@
-package review;
+package net.review.db;
 
 public class ReviewLikeDTO {
 	private int review_num;

@@ -1,4 +1,4 @@
-package buyList;
+package net.buyList.db;
 
 public class BuyListDTO {
 	private int buynum;

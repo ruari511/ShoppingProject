@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import action.*;
-import member.MemberDAO;
+import net.member.db.MemberDAO;
+import net.action.Action;
+import net.action.ActionForward;
 
 public class MemberDeleteAction implements Action {
 

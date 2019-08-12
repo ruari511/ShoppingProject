@@ -1,4 +1,4 @@
-package product;
+package net.product.db;
 
 public class ProductDTO {
 	private int product_num;

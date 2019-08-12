@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.member.db.MemberDAO;
+
 @WebServlet("/Check")
 public class joinServlet extends HttpServlet {
 

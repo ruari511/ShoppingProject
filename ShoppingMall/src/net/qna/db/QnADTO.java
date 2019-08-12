@@ -1,4 +1,4 @@
-package qna;
+package net.qna.db;
 
 public class QnADTO {
 	private int qna_num;

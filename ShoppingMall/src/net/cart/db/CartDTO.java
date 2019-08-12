@@ -1,4 +1,4 @@
-package cart;
+package net.cart.db;
 
 public class CartDTO {
 	private int product_num;

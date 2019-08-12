@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.MemberDAO;
-import action.*;
+import net.member.db.MemberDAO;
+import net.action.Action;
+import net.action.ActionForward;
 
 /*login.jsp에서 사용자가 입력한 id와 pass를  userCheck메소드로 전달하여..
 사용자가 입력한 id와 pass값과...DB에 있는 id,pass값을 비교하여 로그인 처리 하기 */

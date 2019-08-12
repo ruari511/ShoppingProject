@@ -1,4 +1,4 @@
-package controller;
+package net.cart.action;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cart.CartDAO;
-import cart.CartDTO;
-import member.MemberDAO;
-import member.MemberDTO;
+import net.member.db.MemberDAO;
+import net.member.db.MemberDTO;
+import net.cart.db.CartDAO;
+import net.cart.db.CartDTO;
 
 /*CarReservation.jsp페이지에서.. 전체검색 버튼 클릭했을떄.. DB에 저장되어 있는 전체 차량 검색요청을 받는 서블릿*/
-@WebServlet("/CartListController.do")
-public class CartListController extends HttpServlet {
+@WebServlet("/CartBuyController.do")
+public class CartBuyAction extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		requestPro(request, response);
@@ -28,31 +28,47 @@ public class CartListController extends HttpServlet {
 	}
 
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		/*DB에 존재하는 전체 차량 을 검색하기 위한 작업 */
-		//데이터베이스에 접근해서 작업할  자바빈 역할을 하는 CarDAO객체 생성
-		CartDAO cdao = new CartDAO();
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		//Cart.jsp에서 checked인 cart_num값을 배열로 받아오기
+		String[] chk = request.getParameterValues("cart");
 		
 		MemberDAO mdao = new MemberDAO();
 		
 		MemberDTO m = mdao.selectMember("admin");
 		
-		Vector<CartDTO> v = cdao.getAllCartList("admin");
+		CartDAO cdao = new CartDAO();
 		
+		CouponDAO coudao = new CouponDAO();
+		
+		Vector<UserCouponDTO> cou = coudao.getAllCouponList("admin");
+		
+		Vector<CartDTO> v = new Vector<CartDTO>();
+		
+		
+		for(int i=0; i<chk.length; i++){
+			System.out.println("i = " + i);
+			//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
+			v.add(cdao.getCartList(Integer.parseInt(chk[i])));
+		}
+		
+		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);
 		
-		//장바구니 페이지의 주문자정보 값 넘기
+		//구매하기 페이지의 주문자정보 값 넘기
 		request.setAttribute("m", m);
 		
+		request.setAttribute("cou", cou);
+		
+		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("Cart.jsp");
+					request.getRequestDispatcher("Buy.jsp");
 		//실제 재요청
-		dis.forward(request, response);		
+		dis.forward(request, response);	
+		
 	}
-	
-	
 }
-
 
 
 

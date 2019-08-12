@@ -28,21 +28,19 @@
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					%>
 					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
-					<li class="cart"><a href="CartListController.do?num=0">장바구니<span id="cartToCnt"></span></a></li>
+					<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
 				<%
 				}
 				%>
-				<li class="cart"><a href="CartListController.do?num=0">장바구니<span id="cartToCnt"></span></a></li>
-				
-			    <li class="mypage"><a href="./Main.mypage">마이페이지</a></li>
+				<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
-				<li class="store"><a href="./memberOut.do">임시탈퇴</a></li>
+				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
 			</ul>
 			</form>
 		</div>
 		<div class="header_inner">
-			<h1><a href="./Main.jsp"><img src="../asset/image/logo.png" alt="###" /></a></h1>
+			<h1><a href="Main.jsp"><img src="./asset/image/logo.png" alt="###" /></a></h1>
 			<div class="search_box" id="w_search_box">
 			<input type="text" id="query" name="" value="" class="inp_placeholder"/>
 			<input type="hidden" name="chkButton" id="chkButton" value="" />		

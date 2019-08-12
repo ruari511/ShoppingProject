@@ -1,4 +1,4 @@
-package member;
+package net.member.db;
 
 import java.sql.Timestamp;
 

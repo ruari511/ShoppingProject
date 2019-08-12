@@ -1,5 +1,5 @@
-<%@page import="product.ProductDTO"%>
-<%@page import="cart.CartDAO"%>
+<%@page import="net.product.db.ProductDTO"%>
+<%@page import="net.cart.db.CartDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- 현재 페이지에서 JSTL의 core라이브러리에 속한 태그들을 사용 하기 위한 설정

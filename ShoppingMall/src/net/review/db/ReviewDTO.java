@@ -1,4 +1,4 @@
-package review;
+package net.review.db;
 
 import java.sql.Timestamp;
 

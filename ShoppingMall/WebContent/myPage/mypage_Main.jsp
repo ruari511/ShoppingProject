@@ -27,8 +27,7 @@
 </head>
 <body>
 <div id="Wrapper">
-
-
+	
 	<div id="Container">
 		<div id="Contents">	
 			
@@ -182,7 +181,6 @@
 				    common.gnb.initMypageMenu(); 
 				});
 			</script>	
-
 	
 	</div>
 </body>

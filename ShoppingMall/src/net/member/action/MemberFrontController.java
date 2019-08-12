@@ -7,7 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import action.*;
+
+import net.action.Action;
+import net.action.ActionForward;
+
 
 public class MemberFrontController extends HttpServlet{
 
@@ -87,7 +90,7 @@ public class MemberFrontController extends HttpServlet{
 		}else if(command.equals("/login.do")){ 
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher forward() 방식
 			forward.setRedirect(false); //주소값 노출 안됨
 			//이동할 페이지 경로(로그인 페이지) 주소값 저장
 			forward.setPath("./Main.jsp?section=./member/login.jsp"); 
@@ -154,13 +157,6 @@ public class MemberFrontController extends HttpServlet{
 			forward.setRedirect(false); //주소값 노출 x
 			forward.setPath("./Main.jsp"); //이동할 페이지 저장
 			
-		}else if(command.equals("/memberInfoModify.do")){
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
-			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
-			forward.setRedirect(false); //주소값 노출 안됨
-			//이동할 페이지 경로(회원정보 수정페이지) 주소값 저장
-			forward.setPath("./Main.jsp?center=./member/MemberInfoModify.jsp"); 
 		}
 		
 		//주소 이동
