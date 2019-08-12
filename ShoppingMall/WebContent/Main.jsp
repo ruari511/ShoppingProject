@@ -9,14 +9,14 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
+<!-- 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<meta name="format-detection" content="telephone=no">
 	<meta property="og:title" content="공식 온라인몰">
 	<meta property="og:url" content="Main.html">
 	<meta property="og:image" content="">
-	<meta property="og:description" content="">
+	<meta property="og:description" content=""> -->
 	<title> # </title>
 
 	<link rel="stylesheet" href="./asset/css/global.css"/> 

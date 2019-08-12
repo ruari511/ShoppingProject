@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import action.*;
 
 public class MemberFrontController extends HttpServlet{
 
@@ -28,9 +28,9 @@ public class MemberFrontController extends HttpServlet{
 			throws ServletException, IOException {
 		
 		//가상요청 주소 가져오기
-		//  /CarProject/MemberJoin.me
-		//  /CarProject/MemberJoinAction.me
-		//   /CarProject/MemberLogin.me 
+		//  /CarProject/MemberJoin.do
+		//  /CarProject/MemberJoinAction.do
+		//   /CarProject/MemberLogin.do 
 		String RequestURI=request.getRequestURI();
 		System.out.println(RequestURI);
 		
@@ -44,9 +44,9 @@ public class MemberFrontController extends HttpServlet{
 		//	길이 11
 		System.out.println(contextPath.length());
 		
-		//  /MemberJoin.me 얻기
-		// /MemberJoinAction.me
-		//  /MemberLogin.me 얻기 
+		//  /MemberJoin.do 얻기
+		// /MemberJoinAction.do
+		//  /MemberLogin.do 얻기 
 		String command=RequestURI.substring(contextPath.length());
 		System.out.println(command);
 					
@@ -58,7 +58,7 @@ public class MemberFrontController extends HttpServlet{
 		Action action=null;
 			
 		//Top.jsp에서.. join링크를 누르면 회원가입페이지로 이동하는 요청이 들어 왔을때..
-		if(command.equals("/MemberJoin.me")){
+		if(command.equals("/join.do")){
 		
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
@@ -68,7 +68,7 @@ public class MemberFrontController extends HttpServlet{
 			forward.setPath("./Main.jsp?section=./member/join.jsp");
 			
 		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
-		}else if(command.equals("/MemberJoinAction.me")){
+		}else if(command.equals("/MemberJoinAction.do")){
 	
 			
 			//회원가입 처리를 위한 Action객체 생성
@@ -84,7 +84,7 @@ public class MemberFrontController extends HttpServlet{
 			
 		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
 		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
-		}else if(command.equals("/MemberLogin.me")){ 
+		}else if(command.equals("/login.do")){ 
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
@@ -94,7 +94,7 @@ public class MemberFrontController extends HttpServlet{
 		
 		//login.jsp에서... "Sign in"버튼을 눌렀을때..로그인 처리 요청받기!
 		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
-		}else if(command.equals("/MemberLoginAction.me")){
+		}else if(command.equals("/MemberLoginAction.do")){
 			
 			//로그인 처리를 위한 Action객체 생성 
 			action=new MemberLoginAction();
@@ -106,7 +106,7 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/MemberLogout.me")){
+		}else if(command.equals("/logout.do")){
 			
 			//로그아웃 처리를 위한 Action객체 생성  
 			action=new MemberLogoutAction();
@@ -122,7 +122,7 @@ public class MemberFrontController extends HttpServlet{
 		
 			//MemberOut.jsp에서 ..회원탈퇴링크를 클릭하여 메인화면으로 이동하라 라는 요청이 들어 왔을때...	
 			//또는 회원탈퇴후!.. 메인화면으로 이동하라 라는 요청이 들어 왔을떄...
-		}else if(command.equals("/MemberDelete.me")){ 
+		}else if(command.equals("/memberOut.do")){ 
 				//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 				forward=new ActionForward();
 				//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
@@ -132,7 +132,7 @@ public class MemberFrontController extends HttpServlet{
 			
 			//Delet.jsp에서... "회원탈퇴"버튼을 눌렀을때..탈퇴 처리 요청받기!
 			//사용자가 입력한 id와 패스워드를 request영역에 담아오기
-		}else if(command.equals("/MemberDeleteAction.me")){
+		}else if(command.equals("/MemberDeleteAction.do")){
 				
 				//회원삭제를 위한 Action객체 생성
 				action=new MemberDeleteAction();
@@ -148,12 +148,19 @@ public class MemberFrontController extends HttpServlet{
 				}
 			
 				//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
-		}else if(command.equals("/Main.me")){
+		}else if(command.equals("/Main.do")){
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 			forward=new ActionForward();
 			forward.setRedirect(false); //주소값 노출 x
 			forward.setPath("./Main.jsp"); //이동할 페이지 저장
 			
+		}else if(command.equals("/memberInfoModify.do")){
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false); //주소값 노출 안됨
+			//이동할 페이지 경로(회원정보 수정페이지) 주소값 저장
+			forward.setPath("./Main.jsp?center=./member/MemberInfoModify.jsp"); 
 		}
 		
 		//주소 이동

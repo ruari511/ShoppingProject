@@ -17,17 +17,16 @@
 <meta property="og:description" content="">
 <title>#</title>
 
-<link rel="stylesheet" href="./asset/css/board.css" />
-<link rel="stylesheet" href="./asset/css/global.css" />
-<link rel="stylesheet" href="./asset/css/contents.css" />
-<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="../asset/css/board.css" />
+<link rel="stylesheet" href="../asset/css/global.css" />
+<link rel="stylesheet" href="../asset/css/contents.css" />
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
 
-<script type="text/javascript" src="./asset/js/slick.min.js"></script>
-<script type="text/javascript" src="./asset/js/common.js"></script>
+<script type="text/javascript" src="../asset/js/slick.min.js"></script>
+<script type="text/javascript" src="../asset/js/common.js"></script>
 </head>
 <body>
 	<div id="Wrapper">
-		<jsp:include page="./include/Header.jsp" />
 
 		<div id="Container">
 			<div id="Contents">
@@ -43,31 +42,13 @@
 						});
 					</script>
 
-
-
 					<div class="title-area linezero">
-						<h2 class="tit">사용 가능한 CJ ONE 포인트</h2>
+						<h2 class="tit">상품평</h2>
 					</div>
-					<ul class="point-cjone">
-						<li>
-							<p class="tit">사용 가능한 CJ ONE 포인트</p>
-							<p class="num">
 
-
-
-
-								0 <em>P</em>
-							</p>
-						</li>
-						<li>
-							<p class="txt">당월 소멸 예정</p> <a class="btn" href="#none"
-							id="schMonExtinPlanPnt" name="schMonExtinPlanPnt">조회하기</a>
-						</li>
-
-
-
+					<ul class="comm1sTabs mgzero">
+						<li class="on"><a href="javascript:void(0);">작성한 상품평</a></li>
 					</ul>
-
 
 					<fieldset class="search-period">
 						<legend></legend>
@@ -78,8 +59,7 @@
 							<li><button type="button" data-month="-12">12개월</button></li>
 						</ul>
 						<div class="select-range">
-							<select id="cal-start-year" title="년도를 선택하세요"
-								style="width: 76px;">
+							<select id="cal-start-year" title="년도를 선택하세요" style="width: 76px;">
 
 								<option value="2012">2012</option>
 								<option value="2013">2013</option>
@@ -152,61 +132,60 @@
 					</script>
 
 
-					<table class="board-list-2s mgT20">
-						<caption>CJ ONE 포인트 상품 목록</caption>
+
+					<table class="board-list-2s mgT20 new">
+						<caption>상품평 목록</caption>
 						<colgroup>
-							<col style="width: 15%;">
-							<col style="width: 70%;">
-							<col style="width: 15%;">
+							<col style="width: 50%;">
+							<col style="width: 40%;">
+							<col style="width: 10%;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="col">일자</th>
-								<th scope="col">내용</th>
-								<th scope="col">적립/사용</th>
+								<th scope="col">상품</th>
+								<th scope="col" colspan="2">상품평</th>
 							</tr>
 						</thead>
 						<tbody>
+
 							<tr>
-								<td class="nodata" colspan="3">조회하신 기간 내 적립/사용한 내역이 없습니다.</td>
+								<td class="nodata" colspan="2">작성 상품평이 없습니다.</td>
 							</tr>
+
+
 						</tbody>
 					</table>
-
-
-
-
-
-					<div class="pageing"></div>
-
 
 					<div class="usage-guide">
 						<h2 class="stit">이용안내</h2>
 						<ul>
-							<li>올리브영 온라인몰 이용과 관련된 포인트 내역에 대해서만 확인 가능합니다.</li>
-							<li>구매 반품/취소 시에는 지급받으신 포인트는 회수 처리 됩니다.</li>
-							<li>지급되는 포인트에 따라 유효 기간이 다를 수 있습니다.</li>
+							<li>상품평의 저작권은 올리브영에 있으며, 모두 공개를 원칙으로 합니다.</li>
+							<li>상품평에 적합하지 않은 내용, 미풍양속을 해치는 내용 등은 통보 없이 삭제될 수 있으며 상품평 삭제시
+								지급된 포인트가 회수됩니다.</li>
+							<li>명예훼손, 저작권, 초상권의 권리 침해 및 음란게시물은 관련 법률에 의해 제재를 받을 수 있습니다.</li>
+							<li>이미지는 10MB 이하의 png, gif, jpg 파일만 등록 가능하며 최대 10개까지 등록
+								가능합니다.</li>
 						</ul>
 					</div>
-
-					<script
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/pnt.js?dumm=2019080133412"></script>
+					<form id="frmGdasList" name="frmGdasList">
+						<input type="hidden" id="goodsNo" name="goodsNo" value="">
+						<input type="hidden" id="ordNo" name="ordNo" value="">
+					</form>
+					<script type="text/javascript"
+						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdas.js?dumm=2019080133412"></script>
 					<script>
-						$(window).ready(function() {
-							pnt.list.init();
+						$(document).ready(function() {
+							mypage.gdasCompleteList.init();
 						});
 					</script>
 
-
 				</div>
-			</div>
 
+
+			</div>
 		</div>
 
 
-		
-		<jsp:include page="./include/Footer.jsp" />
-		
 	</div>
 </body>
 </html>

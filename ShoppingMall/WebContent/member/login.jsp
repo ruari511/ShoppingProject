@@ -64,7 +64,7 @@
     
     <!-- 로그인 폼 -->
     <%--MemberFrontController서블릿에.. 로그인 처리 요청시! 입력한 id와 패스워드 전달 --%>
-    <form action="./MemberLoginAction.me" method="post" style=" margin: 0 auto; width: 50%; ">
+    <form action="./MemberLoginAction.do" method="post" style=" margin: 0 auto; width: 50%; ">
         <div class="form-group">
             <label>아이디</label>
             <input type="text" id="id" name="id" class="form-control" onblur="login_check()" required autofocus/>

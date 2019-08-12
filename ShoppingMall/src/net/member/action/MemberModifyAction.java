@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import member.MemberDAO;
 
 import member.MemberDTO;
+import action.*;
 
 /**
  * 회원정보 수정작업을 처리하는 Action 클래스
@@ -41,7 +42,7 @@ public class MemberModifyAction implements Action
 		dao.updateMember(member);
 
 		forward.setRedirect(true);
-   		forward.setPath("./MemberLogin.me");
+   		forward.setPath("./login.do");
 		
    		// 회원정보 수정 성공 메시지를 세션에 담는다.
    		session.setAttribute("msg", "0");

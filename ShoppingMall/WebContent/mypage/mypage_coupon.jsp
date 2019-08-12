@@ -17,18 +17,16 @@
 <meta property="og:description" content="">
 <title>#</title>
 
-<link rel="stylesheet" href="./asset/css/board.css" />
-<link rel="stylesheet" href="./asset/css/global.css" />
-<link rel="stylesheet" href="./asset/css/contents.css" />
-<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="../asset/css/board.css" />
+<link rel="stylesheet" href="../asset/css/global.css" />
+<link rel="stylesheet" href="../asset/css/contents.css" />
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
 
-<script type="text/javascript" src="./asset/js/slick.min.js"></script>
-<script type="text/javascript" src="./asset/js/common.js"></script>
+<script type="text/javascript" src="../asset/js/slick.min.js"></script>
+<script type="text/javascript" src="../asset/js/common.js"></script>
 </head>
 <body>
 	<div id="Wrapper">
-		<jsp:include page="./include/Header.jsp" />
-
 		<div id="Container">
 			<div id="Contents">
 
@@ -144,8 +142,7 @@
 				mypage.orderList.init();
 			});
 		</script>
-		
-		<jsp:include page="./include/Footer.jsp" />
+
 		
 	</div>
 </body>	

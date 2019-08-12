@@ -1,57 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<meta name="format-detection" content="telephone=no">
-	<meta property="og:title" content="공식 온라인몰">
-	<meta property="og:url" content="main.html">
-	<meta property="og:image" content="">
-	<meta property="og:description" content="">
-	<title> # </title>
-	
-	<link rel="stylesheet" href="./asset/css/board.css"/>
-	<link rel="stylesheet" href="./asset/css/global.css"/>
-	<link rel="stylesheet" href="./asset/css/contents.css"/>
-	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:title" content="공식 온라인몰">
+<meta property="og:url" content="main.html">
+<meta property="og:image" content="">
+<meta property="og:description" content="">
+<title>#</title>
 
-	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
-	<script type="text/javascript" src="./asset/js/common.js"></script>
+<link rel="stylesheet" href="../asset/css/board.css" />
+<link rel="stylesheet" href="../asset/css/global.css" />
+<link rel="stylesheet" href="../asset/css/contents.css" />
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript" src="../asset/js/slick.min.js"></script>
+<script type="text/javascript" src="../asset/js/common.js"></script>
 </head>
 <body>
-<div id="Wrapper">
-	<jsp:include page="./include/Header.jsp"/>
+	<div id="Wrapper">
 
-	<div id="Container">
-		<div id="Contents">	
-			
-			<jsp:include page="mypage_topMenu.jsp"/>	
+		<div id="Container">
+			<div id="Contents">
+
+				<jsp:include page="mypage_topMenu.jsp" />
+
 				<div class="mypage-conts">
-					<script src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
+					<script
+						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
 					<script>
-					$(window).ready(function(){
-					    mypage.header.init();
-					});
-				</script>
+						$(window).ready(function() {
+							mypage.header.init();
+						});
+					</script>
 
-					<!-- 마이페이지 Inner -->
+
+
 					<div class="title-area">
-						<h2 class="tit">주문/배송 조회</h2>
+						<h2 class="tit">상품 Q&amp;A</h2>
 					</div>
-					<ul class="mypage-step">
-						<li><em>0</em> <span>주문접수</span></li>
-						<li><em>0</em> <span>결제완료</span></li>
-						<li><em>0</em> <span>상품준비중</span></li>
-						<li><em>0</em> <span>배송중</span></li>
-						<li><em>0</em> <span>배송완료</span></li>
-					</ul>
+
 
 					<fieldset class="search-period">
 						<legend></legend>
@@ -127,64 +123,61 @@
 					<script type="text/javascript"
 						src="https://www.oliveyoung.co.kr/pc-static-root/js/common/searchPeriod.js?dumm=2019080133412"></script>
 					<script>
-						START_DATE   = '';
-						END_DATE     = '';
-						
-						$(document).ready(function(){
-						    SearchPeriod.init();
+						START_DATE = '';
+						END_DATE = '';
+
+						$(document).ready(function() {
+							SearchPeriod.init();
 						});
 					</script>
+
 					<table class="board-list-2s mgT20">
-						<caption>주문&amp;배송&amp;내역 목록</caption>
+						<caption>상품 Q&amp;A 내역 목록</caption>
 						<colgroup>
-							<col style="width: 16%;">
-							<col style="width: %;">
-							<col style="width: 8%;">
-							<col style="width: 130px;">
-							<col style="width: 110px;">
+							<col style="width: 367px;">
+							<col style="width: 272px;">
+							<col style="width: 150px;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="col">주문일자</th>
 								<th scope="col">상품</th>
-								<th scope="col">수량</th>
-								<th scope="col">주문금액</th>
-								<th scope="col">상태</th>
+								<th scope="col">문의내용</th>
+								<th scope="col">답변상태</th>
 							</tr>
 						</thead>
-						<tbody class="history">
+						<tbody class="qna">
+
+
+
 							<tr>
-								<td colspan="5" class="nodata">기간 내 주문내역이 없습니다</td>
+								<td class="nodata" colspan="3">작성하신 상품 Q&amp;A가 없습니다.</td>
 							</tr>
+
+
 						</tbody>
 					</table>
+					<!-- //내역 -->
 
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdas.js?dumm=2019080133412"></script>
+
+
+
+					<div class="pageing"></div>
+
+
+					<script
+						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdsQna.js?dumm=2019080133412"></script>
 					<script>
-		HDC_PATH = $.parseJSON('{"00":"http://nexs.cjgls.com/web/service02_01.jsp?slipno=","10":"http://www.hanjinexpress.hanjin.net/customer/plsql/hddcw07.result?wbl_num=","20":"http://www.lotteglogis.com/personalService/tracking/06/tracking_goods_result.jsp?InvNo=","30":"http://nexs.cjgls.com/web/detail.jsp?slipno=","50":"http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","70":"http://www.ilogen.com/d2d/delivery/invoice_search_popup.jsp?viewType=type2&invoiceNum=","91":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","92":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","93":"http://kdexp.com/basicNewDelivery.kd?barcode=","94":null,"200":"http://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE=","210":"http://www.dhl.co.kr/content/kr/ko/express/tracking.shtml?brand=DHL&AWB="}');
-		
-		$(document).ready(function(){
-		    mypage.orderList.init();
-		});
-		</script>
+						$(window).ready(function() {
+							mypage.gdsQna.list.init();
+						});
+					</script>
 
 				</div>
+
+
 			</div>
-				
-			</div>
-			
-		
-			<script>
-				$(document).ready(function() {
-				    common.gnb.initMypageMenu(); 
-				});
-			</script>	
-	
-	<jsp:include page="./include/Footer.jsp"/>
-	
+		</div>
+
 	</div>
 </body>
 </html>

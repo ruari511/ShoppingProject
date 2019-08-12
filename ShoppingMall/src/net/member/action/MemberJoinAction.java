@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.MemberDTO;
 import member.MemberDAO;
+import action.*;
 
 
 public class MemberJoinAction implements Action{
@@ -53,7 +54,7 @@ public class MemberJoinAction implements Action{
 		//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
 		forward.setRedirect(true);
 		// ./member/login.jsp 이동할 페이지 주소 저장
-		forward.setPath("./MemberLogin.me");
+		forward.setPath("./login.do");
 		
 		//페이지 이동 방식 여부 값 true와...
 		// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..

@@ -17,17 +17,16 @@
 <meta property="og:description" content="">
 <title>#</title>
 
-<link rel="stylesheet" href="./asset/css/board.css" />
-<link rel="stylesheet" href="./asset/css/global.css" />
-<link rel="stylesheet" href="./asset/css/contents.css" />
-<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="../asset/css/board.css" />
+<link rel="stylesheet" href="../asset/css/global.css" />
+<link rel="stylesheet" href="../asset/css/contents.css" />
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
 
-<script type="text/javascript" src="./asset/js/slick.min.js"></script>
-<script type="text/javascript" src="./asset/js/common.js"></script>
+<script type="text/javascript" src="../asset/js/slick.min.js"></script>
+<script type="text/javascript" src="../asset/js/common.js"></script>
 </head>
 <body>
 	<div id="Wrapper">
-		<jsp:include page="./include/Header.jsp" />
 
 		<div id="Container">
 			<div id="Contents">
@@ -45,12 +44,28 @@
 
 
 
-
-
-					<div class="title-area">
-						<h2 class="tit">취소/반품/교환 내역</h2>
+					<div class="title-area linezero">
+						<h2 class="tit">사용 가능한 CJ ONE 포인트</h2>
 					</div>
+					<ul class="point-cjone">
+						<li>
+							<p class="tit">사용 가능한 CJ ONE 포인트</p>
+							<p class="num">
 
+
+
+
+								0 <em>P</em>
+							</p>
+						</li>
+						<li>
+							<p class="txt">당월 소멸 예정</p> <a class="btn" href="#none"
+							id="schMonExtinPlanPnt" name="schMonExtinPlanPnt">조회하기</a>
+						</li>
+
+
+
+					</ul>
 
 
 					<fieldset class="search-period">
@@ -135,57 +150,59 @@
 						});
 					</script>
 
+
 					<table class="board-list-2s mgT20">
-						<caption>취소&반품&교환 내역 목록</caption>
+						<caption>CJ ONE 포인트 상품 목록</caption>
 						<colgroup>
-							<col style="width: 16%;">
-							<col style="width: %;">
-							<col style="width: 130px;">
-							<col style="width: 8%;">
-							<col style="width: 110px;">
+							<col style="width: 15%;">
+							<col style="width: 70%;">
+							<col style="width: 15%;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="col">주문번호</th>
-								<th scope="col">상품</th>
-								<th scope="col">구매가</th>
-								<th scope="col">수량</th>
-								<th scope="col">상태</th>
+								<th scope="col">일자</th>
+								<th scope="col">내용</th>
+								<th scope="col">적립/사용</th>
 							</tr>
 						</thead>
-
-
-
-						<tbody class="history">
+						<tbody>
 							<tr>
-								<td colspan="5" class="nodata">기간 내 취소/반품/교환 내역이 없습니다</td>
+								<td class="nodata" colspan="3">조회하신 기간 내 적립/사용한 내역이 없습니다.</td>
 							</tr>
 						</tbody>
-
-
 					</table>
 
 
 
 
 
+					<div class="pageing"></div>
 
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
+
+					<div class="usage-guide">
+						<h2 class="stit">이용안내</h2>
+						<ul>
+							<li>올리브영 온라인몰 이용과 관련된 포인트 내역에 대해서만 확인 가능합니다.</li>
+							<li>구매 반품/취소 시에는 지급받으신 포인트는 회수 처리 됩니다.</li>
+							<li>지급되는 포인트에 따라 유효 기간이 다를 수 있습니다.</li>
+						</ul>
+					</div>
+
+					<script
+						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/pnt.js?dumm=2019080133412"></script>
 					<script>
-						$(document).ready(function() {
-							mypage.orderCancelList.init();
+						$(window).ready(function() {
+							pnt.list.init();
 						});
 					</script>
 
+
 				</div>
-
-
 			</div>
+
 		</div>
 
-		<jsp:include page="./include/Footer.jsp" />
-
+		
 	</div>
 </body>
 </html>

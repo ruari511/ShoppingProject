@@ -22,62 +22,38 @@
 <meta property="og:description" content="">
 <title>#</title>
 
-<link rel="stylesheet" href="./asset/css/board.css" />
-<link rel="stylesheet" href="./asset/css/global.css" />
-<link rel="stylesheet" href="./asset/css/contents.css" />
-<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="../asset/css/board.css" />
+<link rel="stylesheet" href="../asset/css/global.css" />
+<link rel="stylesheet" href="../asset/css/contents.css" />
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
 
-<script type="text/javascript" src="./asset/js/slick.min.js"></script>
-<script type="text/javascript" src="./asset/js/common.js"></script>
+<script type="text/javascript" src="../asset/js/slick.min.js"></script>
+<script type="text/javascript" src="../asset/js/common.js"></script>
 </head>
 <body>
 <div id="Wrapper">
-	<jsp:include page="./include/Header.jsp" />
 
-	<div id="Container">
-	<div id="Contents">
 
-	<jsp:include page="mypage_topMenu.jsp" />
+	<jsp:include page="../mypage/mypage_topMenu.jsp" />
 
 	<!-- 회원정보 수정 -->
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 	<!-- 값(파라미터) 전송은 POST 방식 -->
-		<form action="MemberModifyAction.me" method="post" name="form">
+		<form action="MemberModifyAction.do" method="post" name="form">
 		
 		<fieldset>
 		<legend>회원 수정 정보</legend>
-		<label>아이디 : <%=member.getId() %></label>
+		<label>아이디 : </label>
 			
 		</fieldset>
-		
-		
-		
-		
-		
-		
+	
 		
 		</form>
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			<!-- 회원정보 수정끝 -->
 			</div>
 
-		</div>
+	
 
 		<script type="text/javascript"
 			src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
@@ -92,8 +68,7 @@
 			});
 		</script>
 		
-		<jsp:include page="./include/Footer.jsp" />
 		
-	</div>
+
 </body>	
 </html>

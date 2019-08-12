@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import member.MemberDAO;
 import member.MemberDTO;
+import action.*;
 
 /** 
  *  회원정보 수정화면에 현재 회원정보를 출력하는 Action 클래스
@@ -31,7 +32,7 @@ public class MemberModifyFormAction implements Action
 		request.setAttribute("memberInfo", member);
 		
 		forward.setRedirect(false);
-		forward.setPath("ModifyFrom.me");
+		forward.setPath("memberInfoModify.do");
 			
 			return forward;
 		}

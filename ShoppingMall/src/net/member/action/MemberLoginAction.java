@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.MemberDAO;
+import action.*;
 
 /*login.jsp에서 사용자가 입력한 id와 pass를  userCheck메소드로 전달하여..
 사용자가 입력한 id와 pass값과...DB에 있는 id,pass값을 비교하여 로그인 처리 하기 */
@@ -74,7 +75,7 @@ public class MemberLoginAction implements Action{
 		forward.setRedirect(true);
 		
 		// ./CarMain.jsp 이동할 페이지 주소 저장
-		forward.setPath("./Main.me"); 
+		forward.setPath("./Main.do"); 
 		
 		//페이지 이동 방식 여부 값 true와...
 		// 이동할페이지 주소 (./CarMain.jsp)를 담고 있는..

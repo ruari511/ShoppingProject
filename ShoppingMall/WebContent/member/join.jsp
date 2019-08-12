@@ -39,7 +39,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		<article>
 			<h1>Join Us</h1>
 			<%--MemberFrontController서블릿에.. 회원가입 처리 요청! --%>
-			<form action="./MemberJoinAction.me" id="join" name="form" method="post">
+			<form action="./MemberJoinAction.do" id="join" name="form" method="post">
 				
 				<fieldset>
 				<legend>회원가입 정보</legend>
@@ -148,12 +148,14 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 								$(".submit").attr("disabled",false);
 							}		
 						},
-						error:function(data,textStatus){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
-							 alert("에러가 발생했습니다.");
+						error:function(request,status,error){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
+							alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+
 					 }
 				}); // ajax 메소드 끝
-		}else if(aa == 'password2'){
+		}else if(aa == 'pass2'){
 			// 비밀번호 체크
+			alert(_pass + "///" + _pass2);
 			if(_pass != _pass2 ){
 				$("#passMessage").text("비밀번호가 일치하지 않습니다.");
 				$("#passMessage").css("color","red");
