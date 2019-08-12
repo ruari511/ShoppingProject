@@ -8,18 +8,18 @@ import javax.servlet.http.HttpSession;
 
 import member.MemberDAO;
 
-public class MemberDeletAction implements Action {
+public class MemberDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("MemberDeletAction execute()");
+		System.out.println("MemberDeleteAction execute()");
 		
 		ActionForward forward= new ActionForward();
 		
 		// 세션이 가지고 있는 로그인한 ID정보를 가져온다
 		HttpSession session = request.getSession();
-		String id=request.getParameter("id");
+		String id = (String) session.getAttribute("id");
 		String password=request.getParameter("password");
 		
 		//DB작업 객체 생성
@@ -34,7 +34,15 @@ public class MemberDeletAction implements Action {
 		if(check==1){
 			session.invalidate();//회원정보 담긴 세션 삭제
 			forward.setRedirect(true);
-			forward.setPath("../Main.me"); 
+			forward.setPath("./Main.me"); 
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.println("<script>");
+			out.println("alert('회원탈퇴 성공');");
+			out.println("</script>");
+			out.close();
+			
 			return forward;
 		}else{
 			response.setContentType("text/html; charset=UTF-8");

@@ -342,8 +342,9 @@ public class MemberDAO {
 		
 		return member;
 	}
-	public int deleteMember(String id, String pw) 
-	{
+	
+	// 회원 삭제 메서드
+	public int deleteMember(String id, String pw) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -356,9 +357,8 @@ public class MemberDAO {
 
 		try {
 			// 회원 삭제
-			StringBuffer query2 = new StringBuffer();
-			query2.append("DELETE FROM JSP_MEMBER WHERE ID=?");
-
+			sql = "DELETE FROM MEMBER WHERE ID=?";
+			
 			con = getConnection();
 
 			// 자동 커밋을 false로 한다.
@@ -368,13 +368,11 @@ public class MemberDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) 
-			{
+			if (rs.next()) {
 				dbpw = rs.getString("password");
-				if (dbpw.equals(pw)) // 입력된 비밀번호와 DB비번 비교
-				{
+				if (dbpw.equals(pw)){ // 입력된 비밀번호와 DB비번 비교
 					// 같을경우 회원삭제 진행
-					pstmt = con.prepareStatement(query2.toString());
+					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, id);
 					pstmt.executeUpdate();
 					con.commit(); 
@@ -386,22 +384,19 @@ public class MemberDAO {
 
 			return x;
 
-		} catch (Exception sqle) {
-			try {
-				con.rollback(); // 오류시 롤백
-			} catch (SQLException e) {
+		} catch (Exception e) {
 				e.printStackTrace();
-			}
-			throw new RuntimeException(sqle.getMessage());
 		} finally {
 			try{
 				if ( pstmt != null ){ pstmt.close(); pstmt=null; }
 				if ( con != null ){ con.close(); con=null;	}
 			}catch(Exception e){
-				throw new RuntimeException(e.getMessage());
+				e.printStackTrace();
 			}
 		}
-	} // end deleteMember
+		return x;
+	}// 회원탈퇴 메소드
+	
 	
 
 /*	public int userCheckpassword(String password) {
