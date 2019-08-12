@@ -1,5 +1,54 @@
 ﻿@charset "utf-8";
+@font-face {font-family: "montserrat";
+	font-style: normal;
+	font-display: auto;
+	font-weight: 700;
+	src: local('montserrat'),	
+	    url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-regular-webfont.eot"),
+	    url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-regular-webfont.eot?#iefix") format("embedded-opentype"),
+	    url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-regular-webfont.woff2") format("woff2"),
+	    url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-regular-webfont.woff") format("woff"),
+	    url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-regular-webfont.ttf") format("truetype"),
+	    url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-regular-webfont.svg#Montserrat") format("svg");
+}
 
+@font-face {
+	font-family: 'montserrat';
+	font-style: normal;
+	font-display: auto;
+	font-weight: 400;
+	src: local('montserrat'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-light-webfont.eot"), /* IE9 Compat Modes */
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-light-webfont.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-light-webfont.woff") format('woff'), /* Pretty Modern Browsers */
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/Montserrat-light-webfont.ttf")  format('truetype'), /* Safari, Android, iOS */
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/montserrat-light-webfont.svg#svgFontName") format('svg'); /* Legacy iOS */
+}
+@font-face {
+	font-family: 'noto';
+	font-style: normal;
+	font-display: auto;
+	font-weight: 400;
+	src: local('NotoKr Regular'), local('NotoKr-regular'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-regular.eot"),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-regular.eot?#iefix") format('embedded-opentype'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-regular.woff2") format('woff2'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-regular.woff") format('woff'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-regular.ttf") format('truetype');
+}
+
+@font-face {
+	font-family: 'noto';
+	font-style: normal;
+	font-display: auto;
+	font-weight: 700;
+	src: local('NotoKr Bold'), local('NotoKr-bold'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-bold.eot"),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-bold.eot?#iefix") format('embedded-opentype'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-bold.woff2") format('woff2'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-bold.woff") format('woff'),
+		url("https://image.oliveyoung.co.kr/pc-static-root/fonts/noto/notokr-bold.ttf") format('truetype')
+}
 
 /* ************************************************************ reset ************************************************************ */
 /* Reset */
