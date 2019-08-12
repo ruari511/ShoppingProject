@@ -30,6 +30,9 @@
 						$("#idMessage").text("아이디를 입력해주세요 :)");
 						$("#idMessage").css("color","red");
 						$(".submit").attr("disabled",true);
+					} else if(_id.length != 0){
+						$("#idMessage").text("");
+
 					}
 					
 					// 비밀번호 체크
@@ -37,6 +40,9 @@
 						$("#passMessage").text("비밀번호를 입력해주세요 :)");
 						$("#passMessage").css("color","red");
 						$(".submit").attr("disabled",true);
+					} else if(_pass.length != 0){
+						$("#passMessage").text("");
+
 					}	
 					
 				},
