@@ -276,7 +276,7 @@ public class MemberDAO {
 	}
 	
 	//로그인 시 아이디, 비밀번호 체크 메소드
-	public boolean checkLogin(String id, String pass) {
+	public boolean checkLogin(String id, String password) {
 		boolean check = false;
 		
 		try {
@@ -285,7 +285,7 @@ public class MemberDAO {
 			String sql = "SELECT id, password FROM member WHERE id=? AND password=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pass);
+			pstmt.setString(2, password);
 			
 			rs = pstmt.executeQuery();
 			
@@ -403,6 +403,29 @@ public class MemberDAO {
 		}
 	} // end deleteMember
 	
+
+/*	public int userCheckpassword(String password) {
+		boolean check = false;
+		
+		try {
+			con = getConnection();
+			
+			String sql = "SELECT password FROM member WHERE password=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, password);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) check = true;
+			else check = false;
+		} catch(Exception e) {
+			System.out.println("checkLogin()메서드에서 에러 : " + e);
+		} finally {
+			CloseDB();
+		}
+		return check;
+	}
+	*/
 	
 
 

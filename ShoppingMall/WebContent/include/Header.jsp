@@ -23,7 +23,7 @@
 				if(id==null){
 					%>                  
 					<li class="login"><a href="./MemberLogin.me">로그인</a></li>
-					<li class="join"><a href="#">회원가입</a></li>	
+					<li class="join"><a href="./MemberJoin.me">회원가입</a></li>	
 					<%
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					%>
@@ -35,7 +35,7 @@
 				
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
-				<li class="store"><a href="#">매장안내</a></li>
+				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
 			</ul>
 			</form>
 		</div>

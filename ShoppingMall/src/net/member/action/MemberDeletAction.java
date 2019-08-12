@@ -29,12 +29,12 @@ public class MemberDeletAction implements Action {
 		//: check = 1 -> 아이디, 비밀번호 맞음
 		//: check = 0 -> 아이디, 비밀번호 틀림
 		//: check = -1 -> 아이디 틀림
-		int check=mdao.userCheck(id, password);
+		int check=mdao.deleteMember(id, password);
 		
 		if(check==1){
 			session.invalidate();//회원정보 담긴 세션 삭제
 			forward.setRedirect(true);
-			forward.setPath("Main.me"); 
+			forward.setPath("../Main.me"); 
 			return forward;
 		}else{
 			response.setContentType("text/html; charset=UTF-8");
