@@ -86,17 +86,6 @@ function deleteCart(idx) {
 </script>
 </head>
 <body>
-
-<!-- 2019-08-10 이부분 확인 바람 -->
-<%-- <<<<<<< HEAD
-<%
-	String id = "admin";
-	CartDAO dao = new CartDAO();
-	dao.getCartList(id); 
-%>
-======= --%>
-
-
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	

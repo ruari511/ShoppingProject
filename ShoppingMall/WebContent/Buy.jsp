@@ -90,9 +90,12 @@
 		if(a.value=="bankbook"){
 			document.getElementById("buycard").style.display="none";
 			document.getElementById("buybankbook").style.display="list-item";
+			document.getElementById("cashReceipt").style.display="list-item";
+			
 		}else if(a.value=="card"){
 			document.getElementById("buycard").style.display="list-item";
 			document.getElementById("buybankbook").style.display="none";
+			document.getElementById("cashReceipt").style.display="none";
 		}
 	}
 	
@@ -155,8 +158,40 @@
 		document.getElementById("cjonePntAplyAmt_span").innerHTML = pointtotal;
 		
 		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		document.getElementById("inpoint").value = pointtotal;
 		
 	}
+	
+	function delivery_message(a) {
+		if(a.value==99){
+			document.getElementById("mbrMemoCont1").style.display="block";
+		}
+	}
+	
+	function card_change(a){
+		if(a.value!=0){
+			document.getElementById("instMmCnt").removeAttribute("disabled");
+		}else{
+			document.getElementById("instMmCnt").disabled = true;
+		}
+	}
+	
+	function cashTax(a){
+		if(a.value==10){
+			document.getElementById("solotax").style.display="table-row";
+			document.getElementById("solotaxphone").style.display="table-row";
+			document.getElementById("licensetax").style.display="none";
+		} else if(a.value==20){
+			document.getElementById("licensetax").style.display="table-row";
+			document.getElementById("solotax").style.display="none";
+			document.getElementById("solotaxphone").style.display="none";
+		} else{
+			document.getElementById("solotax").style.display="none";
+			document.getElementById("solotaxphone").style.display="none";
+			document.getElementById("licensetax").style.display="none";
+		}
+	}
+	
 
 </script>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
@@ -356,21 +391,21 @@
 				</tr>
 				
 				<!-- 2017-01-18 추가 (신규 배송지 선택 시) -->
-				<tr type="new" style="">
+				<tr style="">
 					<th scope="row">배송지명</th>
 					<td class="imp_data">
-						<input type="text" id="dlvpNm_new" name="dlvpNm" value="" class="inpH28" title="배송지명을 입력해주세요." style="width:200px;" this="배송지명은">
+						<input type="text" id="dlvpNm_new" name="dlvpNm" value="" class="inpH28" title="배송지명을 입력해주세요." style="width:200px;">
 					</td>
 				</tr>
 				<!--// 2017-01-18 추가 -->
-				<tr type="new" style="">
+				<tr style="">
 					<th scope="row">받는분</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<input type="text" id="delivery_name" name="rmitNm" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px" this="받는분 이름은">
-						<span class="chk_area"><input type="checkbox" id="delivery_check" onclick="deliverycheck();" > <label for="copyToDlvp_new">주문자정보와 동일</label></span><!-- 2017-01-18 수정 : 위치변경 -->
+						<input type="text" id="delivery_name" name="rmitNm" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px">
+						<span class="chk_area" onclick="deliverycheck();"><input type="checkbox" id="delivery_check">주문자정보와 동일</span><!-- 2017-01-18 수정 : 위치변경 -->
 					</td>
 				</tr>
-				<tr type="new" style="">
+				<tr style="">
 					<th scope="row">연락처1</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
 						<select id="delivery_tel" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px">
@@ -443,12 +478,12 @@
 							<option value="0507">0507</option>
 
 						</select>
-						 - <input type="text" id="delivery_tel1" name="rmitCellTxnoNo" value="" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px">
-						 - <input type="text" id="delivery_tel2" name="rmitCellEndNo" value="" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px">
-					     <span class="info_security"><button type="button" data-rel="layer" data-target="securityInfo" class="chk_area">안심번호 서비스 안내</button></span>
+						 - <input type="text" id="delivery_tel1" name="rmitCellTxnoNo" value="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." style="width:90px">
+						 - <input type="text" id="delivery_tel2" name="rmitCellEndNo" value="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." style="width:90px">
+					     <span class="info_security"><button type="button" class="chk_area">안심번호 서비스 안내</button></span>
 					</td>
 				</tr>
-				<tr type="new" style="">
+				<tr style="">
 					<th scope="row">연락처2</th>
 					<td>
 						<select id="rmitTelRgnNo_new" name="rmitTelRgnNo" class="selH28" title="연락처2 앞자리를 선택해주세요." style="width:90px">
@@ -521,11 +556,11 @@
 							<option value="0507">0507</option>
 
 						</select>
-						 - <input type="text" id="rmitTelTxnoNo_new" name="rmitTelTxnoNo" value="" class="inpH28" title="연락처2 가운데 자리를 입력해주세요." this="연락처2 가운데 자리는" style="width:90px">
-						 - <input type="text" id="rmitTelEndNo_new" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." this="연락처2 마지막 자리는" style="width:90px">
+						 - <input type="text" id="rmitTelTxnoNo_new" name="rmitTelTxnoNo" value="" class="inpH28" title="연락처2 가운데 자리를 입력해주세요." style="width:90px">
+						 - <input type="text" id="rmitTelEndNo_new" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." style="width:90px">
 					</td>
 				</tr>
-				<tr type="new" style="">
+				<tr style="">
 					<th scope="row">주소</th>
 					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
 						<input type="text" id="stnmRmitPostNo_new" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
@@ -553,7 +588,7 @@
 				<tr>
 					<th scope="row">택배배송 메시지</th>
 					<td>
-						<select id="mbrMemoCont" class="selH28" title="택배배송 메시지를 선택해주세요." style="width:350px">
+						<select id="mbrMemoCont" class="selH28" title="택배배송 메시지를 선택해주세요." style="width:350px" onchange="delivery_message(this);">
 							<option value="">배송메시지를 선택해주세요.</option>
 
 							<option value="10">부재시 경비실에 맡겨주세요.</option>
@@ -569,7 +604,7 @@
 							<option value="99">배송 메시지 직접입력</option>
 
 						</select>
-						<input type="text" name="mbrMemoCont" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
+						<input type="text" id="mbrMemoCont1" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
 					</td>
 				</tr>
 				</tbody>
@@ -710,7 +745,7 @@
 							<td>
 								<div>
 									<span class="inp_point_wrap">
-										<input type="text" id="inpoint" class="inpH28" style="width:100px" value=""> 원 / 
+										<input type="text" id="inpoint" class="inpH28" style="width:100px; text-align: right;" value=""> 원 / 
 										<span id="cjonePnt_span" class="tx_num colorOrange"><span id="cjonePnt">${member.point}</span>P</span>
 										<input type="hidden" id="memberpoint" value="${member.point}">
 									</span> 
@@ -758,9 +793,9 @@
 									<th scope="row">카드종류</th>
 									<td>
 										<div id="cardDscnt_div">
-											<input type="hidden" id="cardCouponIndex" value="" acqrcd="" orgacqrcd="">
-											<select id="acqrCd" name="acqrCd" class="selH28" title="결제하실 카드를 선택해주세요." style="width:200px">
-												<option value="">카드를 선택해주세요.</option>
+											<input type="hidden" id="cardCouponIndex" value="">
+											<select id="acqrCd" name="acqrCd" class="selH28" title="결제하실 카드를 선택해주세요." style="width:200px" onchange="card_change(this);">
+												<option value="0">카드를 선택해주세요.</option>
 
 												<option value="BCC">BC카드</option>
 
@@ -863,49 +898,7 @@
 												<option value="088">신한</option>
 
 											</select>
-											<select name="bnkCd" style="display: none;" disabled="disabled">
-
-													<option value="02">산업</option>
-
-													<option value="03">기업</option>
-
-													<option value="05">외환</option>
-
-													<option value="06">국민</option>
-
-													<option value="07">수협</option>
-
-													<option value="11">농협</option>
-
-													<option value="20">우리</option>
-
-													<option value="23">SC제일</option>
-
-													<option value="27">씨티</option>
-
-													<option value="31">대구</option>
-
-													<option value="32">부산</option>
-
-													<option value="34">광주</option>
-
-													<option value="35">제주</option>
-
-													<option value="37">전북</option>
-
-													<option value="39">경남</option>
-
-													<option value="45">새마을금고</option>
-
-													<option value="48">신협</option>
-
-													<option value="71">우체국</option>
-
-													<option value="81">하나</option>
-
-													<option value="88">신한</option>
-
-											</select>
+											
 										</div>
 									</td>
 								</tr>
@@ -955,7 +948,7 @@
 								<th scope="row">현금영수증</th>
 								<td>
 									<div>
-										<select id="crIssuCd" name="crIssuCd" class="selH28" title="현금영수증 신청여부를 선택해주세요." style="width:200px" disabled="">
+										<select id="crIssuCd" name="crIssuCd" class="selH28" title="현금영수증 신청여부를 선택해주세요." style="width:200px" onchange="cashTax(this);">
 											<option value="">신청안함</option>
 											<option value="10">개인소득공제용</option>
 											<option value="20">사업자지출증빙용</option>
@@ -965,21 +958,21 @@
 							</tr>
 							
 							<!-- 개인소득공제용신청 시 -->
-							<tr style="display: none;">
+							<tr id="solotax" style="display: none;">
 								<th scope="row">발급방법</th>
 								<td>
 									<div>
-										<input type="radio" id="crIssuMeanSctCd_3" name="crIssuMeanSctCd" value="3" checked="checked" disabled=""> <label for="crIssuMeanSctCd_3">휴대폰</label>
-										<input type="radio" id="crIssuMeanSctCd_5" name="crIssuMeanSctCd" value="5" disabled=""> <label for="crIssuMeanSctCd_5">현금영수증카드</label>
+										<input type="radio" id="crIssuMeanSctCd_3" name="crIssuMeanSctCd" value="3" checked="checked"> <label for="crIssuMeanSctCd_3">휴대폰</label>
+										<input type="radio" id="crIssuMeanSctCd_5" name="crIssuMeanSctCd" value="5"> <label for="crIssuMeanSctCd_5">현금영수증카드</label>
 									</div>
 								</td>
 							</tr>
 							<!-- 개인소득공제용 [휴대폰] 선택 시 -->
-							<tr style="display: none;">
+							<tr id="solotaxphone" style="display: none;">
 								<th scope="row">휴대폰</th>
 								<td>
 									<div>
-										<select id="dispCashReceiptInfo11" class="selH28" title="현금영수증 휴대폰 앞자리를 선택해주세요." style="width:90px" disabled="">
+										<select id="dispCashReceiptInfo11" class="selH28" title="현금영수증 휴대폰 앞자리를 선택해주세요." style="width:90px">
 
 													<option value="010" selected="selected">010</option>
 
@@ -1048,9 +1041,9 @@
 													<option value="0507">0507</option>
 
 												</select>
-										 - <input type="text" id="dispCashReceiptInfo12" value="5172" class="inpH28" title="현금영수증 휴대폰 가운데 자리를 입력해주세요." this="현금영수증 휴대폰 가운데 자리는" style="width:90px" disabled="">
-										 - <input type="text" id="dispCashReceiptInfo13" value="8187" class="inpH28" title="현금영수증 휴대폰 마지막 4자리수를 입력해주세요." this="현금영수증 휴대폰 마지막 자리는" style="width:90px" disabled="">
-										 <input type="hidden" id="crPhoneNumber" name="crIssuMeanNo" value="01051728187" disabled="">
+										 - <input type="text" id="dispCashReceiptInfo12" value="5172" class="inpH28" title="현금영수증 휴대폰 가운데 자리를 입력해주세요." this="현금영수증 휴대폰 가운데 자리는" style="width:90px">
+										 - <input type="text" id="dispCashReceiptInfo13" value="8187" class="inpH28" title="현금영수증 휴대폰 마지막 4자리수를 입력해주세요." this="현금영수증 휴대폰 마지막 자리는" style="width:90px">
+										 <input type="hidden" id="crPhoneNumber" name="crIssuMeanNo" value="01051728187">
 									</div>
 								</td>
 							</tr>
@@ -1060,7 +1053,7 @@
 								<th scope="row">현금영수증 카드번호</th>
 								<td>
 									<div>
-										<input type="text" id="CashReceipts" name="crIssuMeanNo" class="inpH28" title="현금영수증 카드번호를 입력해주세요." this="현금영수증 카드번호는" style="width:300px" disabled="">
+										<input type="text" id="CashReceipts" name="crIssuMeanNo" class="inpH28" title="현금영수증 카드번호를 입력해주세요." this="현금영수증 카드번호는" style="width:300px">
 									</div>
 								</td>
 							</tr>
@@ -1068,12 +1061,12 @@
 							<!--// 개인소득공제용신청 시 -->
 							
 							<!-- 사업자지출증빙용 시 -->
-							<tr style="display: none;">
+							<tr id="licensetax" style="display: none;">
 								<th scope="row">사업자등록번호</th>
 								<td>
 									<div>
-										<input type="hidden" name="crIssuMeanSctCd" value="2" disabled="">
-										<input type="text" id="BusinessNumber" name="crIssuMeanNo" class="inpH28" title="현금영수증 사업자 등록번호를 입력해주세요." this="현금영수증 사업자 등록번호는" style="width:300px" disabled="">
+										<input type="hidden" name="crIssuMeanSctCd" value="2">
+										<input type="text" id="BusinessNumber" name="crIssuMeanNo" class="inpH28" title="현금영수증 사업자 등록번호를 입력해주세요." this="현금영수증 사업자 등록번호는" style="width:300px"">
 									</div>
 								</td>
 							</tr>

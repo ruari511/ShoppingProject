@@ -1,0 +1,257 @@
+@CHARSET "UTF-8";
+
+/* ************************************************************ reset ************************************************************ */
+/* Reset */
+html, body {-webkit-font-smoothing:antialiased;-webkit-font-smoothing:antialiased;}
+body, h1, h2, h3, h4, h5, h6, div, p, span, strong, em, blockquote, pre, address,
+ul, ol, li, dl, dt, dd, form, fieldset, input, select, label, textarea, img, a {margin:0; padding:0; border:0/*;word-break:break-all;*/}
+* {margin:0;padding:0;box-sizing:border-box;}
+body {word-spacing:-1px;color:#666;font-size:14px;line-height:20px;font-family:'montserrat', 'noto', 'Roboto', sans-serif;letter-spacing:-0.04em}/* montserrat & Montserrat */
+ul, ol {list-style:none;}
+table {border-spacing:0; border:0;}
+img, input, select, textarea, button {border:0; vertical-align:top; color:#666;}
+legend {position:absolute; overflow:hidden; visibility:hidden; height:0; z-index:-1;}
+hr {display:none;}
+a {color:#666; text-decoration:none;}
+a:focus {border:2px solid #a5c7fe;}
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+	a:focus {border:0;}
+}
+textarea {resize:none;}
+caption {width:0;height:0;text-indent:-9999px;}
+/* Base */
+label, input.button, input.submit , input.image, button {cursor:pointer;}
+
+/* layout */
+#Wrapper,
+#Header,
+#Container,
+#Footer {width:100%;min-width:1020px}
+
+#Container {overflow:hidden}
+
+#Contents {width:1020px;height:100%;margin:0 auto;}
+
+input[type="submit"],
+button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-serif;font-weight:700}
+
+/* skip navigation */
+#skip_navi {overflow:hidden;position:absolute;top:0;left:0;width:100%;z-index:1}
+#skip_navi a {display:block;width:100%;height:0;background:#969937;text-align:center;font-size:16px}
+#skip_navi a:focus {height:40px;line-height:40px;color:#fff;font-weight:700}
+
+#Header {width:1020px;margin:0 auto}
+
+#Header .top_util {position:relative;width:100%;height:30px;letter-spacing:-0.005em}
+#Header .top_util .menu_list {overflow:hidden;position:absolute;top:0;right:0}
+#Header .top_util .menu_list > li {float:left;padding:0 9px 0 10px;line-height:30px;white-space:nowrap;}
+#Header .top_util .menu_list > li+li {background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x11.gif") no-repeat 0 50%}
+#Header .top_util .menu_list > li:last-child {padding-right:0}
+#Header .top_util .menu_list > li * {font-size:12px;color:#333;font-family:'dotum', '돋움';white-space:nowrap}
+#Header .top_util .menu_list > li strong {font-weight:700}
+#Header .top_util .menu_list > li strong+a {margin-left:4px}
+#Header .top_util .menu_list > li a > span {color:#ee782f;font-weight:700}
+
+.header_inner {width:100%;height:90px;width:1020px}
+/*.header_inner:after {position:absolute;top:119px;content:'';display:block;width:100%;left:50%;margin-left:-50%;clear:both;border-bottom:1px solid #e5e5e5}*/
+.header_inner h1 {float:left;margin-top:21px}
+.header_inner h1 a {display:block}
+.header_inner h1 img {display:block;width:248px;height:42px;}
+
+/* 헤더 검색 영역 */
+.header_inner .search_box {float:left;position:relative;width:340px;height:40px;margin:22px 0 0 90px;padding:0 45px 0 20px;border:2px solid #babb3c;background:#fff;border-radius:20px}
+.header_inner .search_box input[type="text"] {height:36px;border:0;padding:8px 10px 8px 0;font-family:'dotum', '돋움';font-size:12px;outline:0}
+.header_inner .search_box #searchSubmit {position:absolute;top:7px;right:18px;width:21px;height:21px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search21x212.png") no-repeat 50% 50%;text-indent:-9999px}
+
+.header_inner .search_box .placeholder_area {width:100%}
+.header_inner .search_box .placeholder_area label {top:0 !important;left:0 !important;max-width:95%;min-width:95%;height:36px;line-height:37px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px !important;font-family:'dotum', '돋움'}
+
+.header_inner .search_box .search_layer {display:none;position:absolute;top:36px;left:-2px;width:340px;background:#fff;border-left:2px solid #babb3c;border-right:2px solid #babb3c;border-bottom:2px solid #babb3c;border-top:1px solid #ddd;border-radius:0 0 20px 20px;z-index:12}
+.header_inner .search_box .search_layer .layer_inner {position:relative;width:100%}
+.header_inner .search_box .search_layer .search_tab {position:absolute;width:50%;color:#888;line-height:48px;text-align:center;border-bottom:2px solid #ddd;font-weight:700}
+.header_inner .search_box .search_layer .search_tab.tab01 {left:0;top:0}
+.header_inner .search_box .search_layer .search_tab.tab02 {left:50%;top:0}
+.header_inner .search_box .search_layer .search_tab_cont {display:none;padding-top:50px}
+.header_inner .search_box .search_layer .search_tab_cont ul {padding:10px 20px;}
+.header_inner .search_box .search_layer .search_tab_cont li {position:relative;width:100%}
+.header_inner .search_box .search_layer .search_tab_cont li.no_data {text-align:center;padding-top:150px;height:330px;color:#888}
+.header_inner .search_box .search_layer .search_tab_cont li > a {display:block;max-width:90%;line-height:30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'dotum', '돋움';font-size:12px;color:#777;vertical-align:middle}
+.header_inner .search_box .search_layer .search_tab_cont li > a > span {display:inline-block;width:15px;line-height:29px;margin-right:10px;color:#c1c251;text-align:center;font-family:'montserrat';font-weight:700}
+.header_inner .search_box .search_layer .search_tab_cont li > button {position:absolute;top:10px;right:0;width:9px;height:9px;text-indent:-9999px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_close9x9.png") no-repeat 0 0}
+.header_inner .search_box .search_layer .search_set_area {width:100%;height:40px;border-bottom:1px solid #babb3c;text-align:center;padding-top:7px;}
+.header_inner .search_box .search_layer .search_set_area > a {display:inline-block;height:25px;padding:0 7px;font-size:14px;line-height:22px;color:#888;border:1px solid #ddd;font-weight:700}
+.header_inner .search_box .search_layer .search_set_area > a.sch_save {margin-left:5px}
+.header_inner .search_box .search_layer .search_set_area > a.sch_close {top:12px;right:20px;padding-right:20px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_close9x9.png") no-repeat 88% 50%}
+.header_inner .search_box .search_layer .search_tab.on {border-bottom-color:#bbbb3c;color:#000}
+.header_inner .search_box .search_layer .search_tab.on+.search_tab_cont {display:block}
+.header_inner .search_box.active {height:auto}
+.header_inner .search_box.active .search_layer {display:block}
+
+.header_inner .search_box.active .search_layer:before {position:absolute;top:-19px;left:-2px;content:'';width:18px;height:18px;border-left:2px solid #bbbb3c;background:#fff}
+.header_inner .search_box.active .search_layer:after {position:absolute;top:-19px;right:-2px;content:'';width:18px;height:18px;border-right:2px solid #bbbb3c;background:#fff}
+
+.header_inner .search_box .auto_search_cont a.brand_box {display:block;overflow:hidden;margin:20px 20px 0;padding:10px 15px;border:1px solid #e6e6e6;font-family:'dotum', '돋움';font-size:12px}
+.header_inner .search_box .auto_search_cont a.brand_box strong {display:block;color:#9e9f32;font-weight:bold;line-height:23px}
+.header_inner .search_box .auto_search_cont a.brand_box span {display:inline-block;padding-right:8px;line-height:23px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow4x5.png") no-repeat 100% 7px}
+.header_inner .search_box .auto_search_cont a.brand_box img {float:left;width:62px;height:46px}
+.header_inner .search_box .auto_search_cont a.brand_box img+strong {float:left;width:190px;margin-left:10px}
+.header_inner .search_box .auto_search_cont a.brand_box img~span {float:left;width:190px;margin-left:10px}
+.header_inner .search_box .auto_search_cont ul {padding:10px 35px;border-bottom:1px solid #ddd}
+.header_inner .search_box .auto_search_cont ul li > a {display:block;max-width:90%;line-height:30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'dotum', '돋움';font-size:12px;color:#777;vertical-align:middle}
+.header_inner .search_box .auto_search_cont ul li > a > span {font-weight:bold;color:#9e9f32}
+
+.header_inner .search_box .auto_search_cont a.brand_box+ul {margin-top:0}
+
+
+.title_box {overflow:hidden;height:140px;border-radius:5px;z-index:0;}
+.title_box:before {content:'';position:absolute;width:100%;height:140px;left:50%;margin-left:-50%;background:#ffeeda url("https://image.oliveyoung.co.kr/uploads/contents/main/top/bg_order_top.png") no-repeat 50% 0;z-index:-1}
+.title_box:after {content:'';position:absolute;display:block;width:1020px;height:20px;margin:110px 0 0;background:#fff url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_line.gif") no-repeat 50% 10px}
+.title_box h1 {float:left;padding:37px 0 0;font-size:40px;color:#000;line-height:40px;}
+.title_box h1 > span {display:inline-block;width:36px;height:36px;line-height:36px;font-size:16px;color:#fff;background:#ff2828;border-radius:18px;text-align:center;vertical-align:10px}
+.title_box .step_list {float:right}
+.title_box .step_list:after {content:'';display:block;clear:both}
+.title_box .step_list > li {float:left;height:120px;padding:0 30px 0 20px;line-height:120px;text-align:center;font-size:24px;color:#8b8176;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_step.png") no-repeat 100% 50%;white-space:nowrap;}
+.title_box .step_list > li .step_num {display:inline-block;margin-right:5px;font-size:20px;color:#8b8176;vertical-align:top}
+.title_box .step_list > li .step_num:before {content:'0'}
+.title_box .step_list > li.last {background:none;padding-right:0}
+.title_box .step_list > li.on {color:#000;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_step_on.png") no-repeat 100% 50%}
+.title_box .step_list > li.on .step_num {color:#333}
+.title_box .step_list > li.on.last {background:none;padding-right:0;border-radius:0 5px 5px 0}
+
+/* 주문완료 */
+.order_end_box {}
+.order_end_box .order_title {margin:0;padding:40px 0;border-bottom:1px solid #ddd}
+.order_end_box .order_title .tx_order_info {display:inline-block;height:40px;padding:6px 20px 0;border-radius:20px;background-color:#555;color:#fff;font-size:16px}
+.order_end_box .inner_box {padding:0 120px;background:#fff}
+.order_end_box .inner_box~.inner_box {padding-bottom:60px;border-bottom:1px solid #ddd}
+
+.order_end_box .sub-title2 {width:100%;max-width:1020px;margin:55px 0 15px}
+
+.order_end_box .order_title .tx_order_info {margin:27px 0 0}
+.order_end_box .order_title .tx_order_info:before {border:1px solid blue;height:10px;}
+.order_end_box .order_title .tx_order_info:after {border:1px solid red;height:10px;}
+
+.order_end_box .order_btn_area {margin-top:60px}
+
+
+
+/* 장바구니 & 주문서 */
+.order_title {margin:22px 0 0;text-align:center;color:#222}
+.order_title > p {font-size:36px;line-height:1.0}
+.order_title > p > span {color:#969937}
+.order_title > p > span.tx_num {font-size:40px;color:#f47330}
+.order_title .tx_order_info {display:block;margin:10px 0 0;color:#666;font-size:21px;line-height:28px;}
+.order_title .tx_sub_cont {margin:15px 0 0;font-size:16px;color:#888}
+.order_title .tx_sub_cont2 {margin:15px 0 0;line-height:22px;font-size:14px;color:#666}
+
+.sub-title1 {width:1020px;margin:0 auto;padding:25px 0 0;color:#333;font-size:20px;line-height:34px;word-spacing:-3px}
+.sub-title2 {width:1020px;margin:40px auto 10px;color:#333;font-size:20px;font-weight:400}
+.sub-title2 > span {color:#f47330}
+.sub-title2.underline {padding-bottom:10px;border-bottom:1px solid #666}
+.sub-title3 {width:1020px;margin:0 auto;padding:27px 0 10px;color:#4c4c4c;font-size:18px;line-height:22px}
+.sub-title4 {width:1020px;margin:0 auto;padding:27px 0 10px;color:#333;font-size:16px;line-height:22px}
+.sub-title5 {width:1020px;margin:0 auto;padding:16px 0 7px;color:#4c4c4c;font-size:16px;line-height:22px}
+.sub-title6 {width:1020px;margin:0 auto;padding:55px 0 0;color:#333;font-size:34px;text-align:center;line-height:40px}
+.sub-title7 {width:1020px;margin:0 auto;padding:40px 0 10px;color:#969937;font-size:18px;text-align:center;line-height:24px;}
+.sub-title8 {width:1020px;margin:0 auto;padding:60px 0 16px;border-bottom:1px solid #e5e5e5;text-align:center;color:#000;font-size:26px;line-height:36px;}
+
+
+.tbl_data_view {width:100%}
+.tbl_data_view tbody th {padding:15px 0 15px 20px;text-align:left;color:#222;border-bottom:1px solid #e6e6e6;}
+.tbl_data_view tbody td {padding:15px 20px;border-bottom:1px solid #e6e6e6;font-size:14px;color:#222;text-align:right;font-weight:700}
+.tbl_data_view tbody tr:first-child th,
+.tbl_data_view tbody tr:first-child td {border-top:2px solid #666}
+.tbl_data_view tbody td .tx_num {font-size:16px;margin-right:1px;vertical-align:-1px}
+.tbl_data_view tbody td .tx_price {color:#f47330;}
+
+.tbl_data_view tbody .add_discount th,
+.tbl_data_view tbody .add_discount td {background:#f9fbf2}
+
+.tbl_data_view tbody .last_tot_price th {padding:30px 0 30px 20px;font-size:24px}
+.tbl_data_view tbody .last_tot_price td {padding:20px}
+.tbl_data_view tbody .last_tot_price td .tx_price {color:#ff2828}
+.tbl_data_view tbody .last_tot_price td .tx_price .tx_num {font-size:24px;margin-right:2px;vertical-align:-2px}
+.tbl_data_view tbody .last_tot_price td > p {margin-top:8px}
+
+
+
+.tbl_data_view.type2 tbody th {background-color:#f6f6f6;}
+.tbl_data_view.type2 tbody td {text-align:left;font-weight:400}
+
+.order_btn_area {margin:30px 0 0;text-align:center}
+.order_btn_area button {width:130px;font-size:16px}
+.order_btn_area button+button {margin-left:7px}
+.order_btn_area.order_cart button {width:180px}
+
+/* 버튼 리셋 */
+button {text-align:center;color:#fff;}
+
+.btnGreen, a.btnGreen {width:100%;height:50px;background-color:#969937;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
+.btnGreen2, a.btnGreen2 {width:100%;height:44px;background-color:#c0c200;padding:0;font-size:18px;line-height:44px;border-radius:5px}
+.btnGray, a.btnGray {width:100%;height:50px;background-color:#888;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
+.btnLgray {display:block;width:88px;padding:7px 0;border:1px solid #ddd;border-radius:5px;background-color:#f6f6f6;font-size:14px;line-height:20px;color:#969937;text-align:center;border-radius:5px}
+.btnGreenW, a.btnGreenW {width:100%;height:50px;background-color:#fff;border:1px solid #969937;padding:11px 0 9px;font-size:16px;line-height:28px;color:#969937;border-radius:5px}
+.ButtonDelete {width:19px;height:19px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_delete19x19.png") no-repeat 0 0;font-size:0;text-indent:-99999px;line-height:0;}
+.input-delete {position:relative;height:38px;}
+.input-delete .ButtonDelete {position:absolute;top:9px;right:15px;}
+
+.btnMedium {height:38px;padding:0 10px;font-size:14px !important;line-height:38px;border-radius:5px}
+.btnSmall {height:28px;padding:0 5px;font-size:12px !important;line-height:28px;border-radius:5px}
+
+.btnOrange, a.btnOrange {width:100%;height:50px;background-color:#f7a341;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
+.btnOrangeW, a.btnOrangeW {width:100%;height:50px;background-color:#fff;border:1px solid #f7a341;padding:11px 0 9px;font-size:16px;line-height:28px;color:#f7a341;border-radius:5px}
+
+.btnMedium.wGray,
+.btnSmall.wGray {border:1px solid #aaa;color:#666;background:#fff}
+.btnMedium.wGreen,
+.btnSmall.wGreen {border:1px solid #969937;color:#969937;background:#fff}
+.btnMedium.fullGreen,
+.btnMedium.fullGreen2,
+.btnSmall.fullGreen,
+.btnSmall.fullGreen2 {background:#969937;color:#fff}
+.btnMedium.fullGray,
+.btnSmall.fullGray {background:#ccc;color:#fff}
+.btnMedium.fullDgray,
+.btnSmall.fullDgray {background:#999;color:#fff}
+.btnMedium.fullOrange,
+.btnSmall.fullOrange {background:#f7a341;color:#fff}
+.btnMedium > span {display:inline-block;min-width:80px}
+.btnSmall > span {display:inline-block;min-width:40px}
+.btnSmall.type2 {padding:0 15px}
+.btnSmall.wGray2 {border:1px solid #aaa;color:#fff;background:#aaa}
+.btnSmall.wGray3 {border:1px solid #a4abb9;color:#fff;background:#a4abb9}
+.btnSmall.wGray3cancle {border:1px solid #a4abb9;color:#7c8598;background:#fff}
+.btnSmall.wOrange {border:1px solid #f7a341;color:#fff !important;background:#f7a341}
+.btnGift{color:#222;font-size:14px;background:none;}
+.btnGift:after{content:'';display:inline-block;width:18px;height:18px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/project/icon_01.png") no-repeat;margin:0 0 3px 4px;vertical-align:middle;}
+
+.btnMedium.w210 {width:210px}
+.btnMedium.w120 {width:120px}
+.btnMedium.w100 {width:100px}
+.btnSmall.w100 {width:100px !important}
+.btnw165{width:165px;}
+.wp30{padding:0 30px;}
+
+.btnOnLayer {width:170px;height:60px;font-size:16px;border-radius:5px;}
+.btnOnLayer.fullGreen,
+.btnOnLayer.fullGreen2 {background:#ccce00;color:#fff}
+.btnOnLayer.wGreen {background:#fff;border:1px solid #ccce00;color:#ccce00}
+
+.btnLwhite {display:inline-block;height:40px;border:2px solid #fff;padding:8px 28px;border-radius:20px;background-color:transparent;font-size:14px;font-weight:bold;text-align:center;color:#fff}
+.btnLwhite::after {content:'';display:inline-block;width:8px;height:13px;padding-left:10px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow8x13_wt.png") no-repeat right 0;vertical-align:-1px}
+.btnLwhite:focus {border:2px solid #fff;}
+
+
+#directTop {display:none;position:fixed;bottom:80px;right:40px}
+#directTop button {width:55px;height:55px;background:#fff;border:1px solid #ddd;color:#666;font-size:12px}
+#directTop button > span {display:block;width:14px;height:8px;margin:0 auto 7px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_top_arrow.png") no-repeat 0 -8px}
+#directTop button:hover {background:#555;color:#fff}
+#directTop button:hover > span {background-position:0 0}
+
+
+
+
+
+
+
