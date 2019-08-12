@@ -64,6 +64,7 @@ public class MemberLoginAction implements Action{
 		//login.jsp 화면에서 입력한 아이디를 세션객체영역에 저장
 		session.setAttribute("id", id);
 		
+		
 	/*로그인 성공시.... CarMain.jsp 페이지로 이동 시킨다.*/
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 		ActionForward forward=new ActionForward();

@@ -28,11 +28,11 @@
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					%>
 					<li class="logout"><%=id %>님 <a href="./MemberLogout.me">로그아웃</a></li>
+					<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
 				<%
 				}
 				%>
-				<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
-				
+				<li class="mypage"><a href="./mypage_Main.jsp">마이페이지</a></li>
 				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
 				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
@@ -59,7 +59,6 @@
 					<a href="javascript:;" class="mymenu_layer" title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
 					<div class="recent_prd_box" style="min-height:510px;">
 						<p class="recent_tit">전체 <span>0</span>개
-						
 						<div class="no_data" style="display:none;">
 							최근 본 상품이 없습니다.
 						</div>
