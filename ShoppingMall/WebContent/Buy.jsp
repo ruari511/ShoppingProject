@@ -95,6 +95,68 @@
 			document.getElementById("buybankbook").style.display="none";
 		}
 	}
+	
+	function allcoupon_change(a) {
+		var prototal = document.getElementById("prototal").value;
+		var coutotal = document.getElementById("coutotal").value;
+		var deltotal = document.getElementById("deltotal").value;
+		var pointtotal = document.getElementById("pointtotal").value;
+		var lastprice = document.getElementById("lastprice").value;
+		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
+		
+		coutotal = prototal * a.value / 100;
+		
+		document.getElementById("coutotal").value = coutotal;
+		
+		document.getElementById("totDscntAmt_span").innerHTML = coutotal;
+		
+		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		}
+	
+	function delivery_coupon_change() {
+		
+		var prototal = document.getElementById("prototal").value;
+		var coutotal = document.getElementById("coutotal").value;
+		var deltotal = document.getElementById("deltotal").value;
+		var pointtotal = document.getElementById("pointtotal").value;
+		var lastprice = document.getElementById("lastprice").value;
+		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
+		
+		deltotal = 2500;
+		
+		document.getElementById("deltotal").value = 2500;
+		
+		if(document.getElementById("selDelCoupon").selectedIndex == 1){
+			document.getElementById("deliverycost").innerHTML = "무료";
+			totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		} else{
+			document.getElementById("deliverycost").innerHTML = "2500원";
+			deltotal = 0;
+			totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		}
+		
+		
+	}
+	
+	// var inpoint = document.getElementById("inpoint").value; //input text태그의 값
+	function pointAllIn() {
+
+		var prototal = document.getElementById("prototal").value;
+		var coutotal = document.getElementById("coutotal").value;
+		var deltotal = document.getElementById("deltotal").value;
+		var pointtotal = document.getElementById("pointtotal").value;
+		var lastprice = document.getElementById("lastprice").value;
+		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
+		
+		pointtotal = document.getElementById("memberpoint").value;
+		
+		document.getElementById("pointtotal").value = document.getElementById("memberpoint").value;
+		
+		document.getElementById("cjonePntAplyAmt_span").innerHTML = pointtotal;
+		
+		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		
+	}
 
 </script>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
@@ -147,7 +209,7 @@
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
-						<input type="hidden" id="orderPhone" value="${member.phone_tel}">
+						<input type="hidden" id="orderPhone" value="${member.phone}">
 						<select id="orderPhone_1" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
 							<option value="1">선택</option>
 
@@ -383,7 +445,6 @@
 						</select>
 						 - <input type="text" id="delivery_tel1" name="rmitCellTxnoNo" value="" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px">
 						 - <input type="text" id="delivery_tel2" name="rmitCellEndNo" value="" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px">
-						 <!-- <span class="chk_area"><input type="checkbox" id="chkSafe_new" name="chkSafe" value="456" /> <label for="chkSafe">안심번호 사용</label></span> --> 
 					     <span class="info_security"><button type="button" data-rel="layer" data-target="securityInfo" class="chk_area">안심번호 서비스 안내</button></span>
 					</td>
 				</tr>
@@ -545,7 +606,6 @@
 										<img src="" alt="장바구니 상품 임시 이미지">
 									</div>
 									<div class="prd_name">
-		
 										<span>${cartlist.brand}</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
 										<p>${cartlist.product_name}</p>
 									</div>
@@ -560,7 +620,6 @@
 								<span class="pur_price"><span class="tx_num">${(cartlist.product_price-cartlist.discount)*cartlist.product_count}</span>원</span>
 							</div>
 						</div>
-		
 					</td>
 				</tr>
 				</c:forEach>
@@ -581,39 +640,56 @@
 						<tbody>
 						<tr>
 							<th scope="row">쿠폰 할인</th>
-							<td id="dwnldCouponList">
-							<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->	
-								<div style="display:block;">
-									<select class="selH28 mgT5" style="width:300px" disabled="disabled">
-										<option>적용할 수 있는 쿠폰이 없습니다.</option>
-									</select>
-									<p class="tx_point_info">즉시할인쿠폰은 상품금액에 자동적용 되어있습니다.</p>
-								</div>
-								<div style="display:none;">
-									<select class="selH28 mgT5" style="width:300px;">
-										<option>적용할 수 있는 쿠폰이 없습니다.</option>
-									</select>
-									<p class="tx_point_info">즉시할인쿠폰은 상품금액에 자동적용 되어있습니다.</p>
-								</div>
-							<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->		
+							<td id="dlexCouponList_hd">
+							<c:set var="coupon" value="${requestScope.cou}" />
+							<c:choose>
+								<c:when test="${coupon eq null}">
+									<div style="display:block;">
+										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
+											<option>적용할 수 있는 쿠폰이 없습니다.</option>
+										</select>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div style="display:block;">
+										<select id="selAllCoupon" class="selH28 mgT5" style="width:300px" onchange="allcoupon_change(this);">
+											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
+											<c:forEach var="couponlist"  items="${requestScope.cou}">
+												<c:if test="${couponlist.coupon_type eq '전체금액'}">
+   													<option value="${couponlist.coupon_percent}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</div>
+								</c:otherwise>
+							</c:choose>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">배송비 쿠폰</th>
 							<td id="dlexCouponList_hd">
-							
-						<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->	
-								<div style="display:block;">
-									<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
-										<option>적용할 수 있는 쿠폰이 없습니다.</option>
-									</select>
-								</div>
-								<div style="display:none;">
-									<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
-										<option>적용할 수 있는 쿠폰이 없습니다.</option>
-									</select>
-								</div>
-						<!-- if문 넣어서 쿠폰이 없을 경우 뜨게하고 아니면 option에 user_coupon 테이블에서 쿠폰목록 뿌려주기 -->			
+							<c:set var="coupon" value="${requestScope.cou}" />
+							<c:choose>
+								<c:when test="${coupon eq null}">
+									<div style="display:block;">
+										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
+											<option>적용할 수 있는 쿠폰이 없습니다.</option>
+										</select>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div style="display:block;">
+										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change();">
+											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
+											<c:forEach var="couponlist"  items="${requestScope.cou}">
+												<c:if test="${couponlist.coupon_type eq '배송비'}">
+   													<option value="2500">${couponlist.coupon_name}</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</div>
+								</c:otherwise>
+							</c:choose>
 							</td>
 						</tr>
 						</tbody>
@@ -634,11 +710,11 @@
 							<td>
 								<div>
 									<span class="inp_point_wrap">
-										<input type="text" id="cjonePntAplyAmt" class="inpH28" style="width:100px"> 원 / 
+										<input type="text" id="inpoint" class="inpH28" style="width:100px" value=""> 원 / 
 										<span id="cjonePnt_span" class="tx_num colorOrange"><span id="cjonePnt">${member.point}</span>P</span>
-										<input type="hidden" name="cjonePntAplyAmt" value="0">
+										<input type="hidden" id="memberpoint" value="${member.point}">
 									</span> 
-									<button type="button" class="btnSmall wGray3" id="cjonePnt_btn" disabled=""><span>전액사용</span></button>
+									<button type="button" class="btnSmall wGray3" id="cjonePnt_btn" onclick="pointAllIn();"><span>전액사용</span></button>
 									<p class="tx_point_info">CJ ONE 포인트는 최소 1,000P 이상 보유 시 10P 단위로 사용하실 수 있습니다.</p>
 									
 								</div>
@@ -853,8 +929,7 @@
 								<tr>
 									<td colspan="2">
 										<ul class="info_dot_list type2">
-						<li>은행별로 입금가능시간이 다를 수 있습니다.</li>
-
+											<li>은행별로 입금가능시간이 다를 수 있습니다.</li>
 											<li>주문일 기준 다음날(24시간 이내)까지 입금이 되지 않으면 주문 취소 처리됩니다.</li>
 										</ul>
 									</td>
@@ -890,7 +965,7 @@
 							</tr>
 							
 							<!-- 개인소득공제용신청 시 -->
-							<tr crissucd="10" style="display: none;">
+							<tr style="display: none;">
 								<th scope="row">발급방법</th>
 								<td>
 									<div>
@@ -900,7 +975,7 @@
 								</td>
 							</tr>
 							<!-- 개인소득공제용 [휴대폰] 선택 시 -->
-							<tr crissucd="10" crissumeansctcd="3" style="display: none;">
+							<tr style="display: none;">
 								<th scope="row">휴대폰</th>
 								<td>
 									<div>
@@ -981,7 +1056,7 @@
 							</tr>
 							<!--//개인소득공제용 [휴대폰] 선택 시 -->
 							<!-- 개인소득공제용 [현금영수증카드] 선택 시 -->
-							<tr crissucd="10" crissumeansctcd="5" style="display: none;">
+							<tr style="display: none;">
 								<th scope="row">현금영수증 카드번호</th>
 								<td>
 									<div>
@@ -993,7 +1068,7 @@
 							<!--// 개인소득공제용신청 시 -->
 							
 							<!-- 사업자지출증빙용 시 -->
-							<tr crissucd="20" style="display: none;">
+							<tr style="display: none;">
 								<th scope="row">사업자등록번호</th>
 								<td>
 									<div>
@@ -1016,34 +1091,31 @@
 						<li>
 							<span class="tx_tit">총 상품금액</span> 
 							<span class="tx_cont"><span class="tx_num">${sum}</span>원</span>
-							<input type="hidden" name="goodsAmt" value="26000">
+							<input type="hidden" id="prototal" value="${sum}">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 --> 
-							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">500</span>원</span>
-							<input type="hidden" name="descentAmt" value="1300">
-							<input type="hidden" id="imdtDscntAmt" value="1300">
+							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">0</span>원</span>
+							<input type="hidden" id="coutotal" value="0">
 						</li>
-						
 						<li class="line_top2">
-							<span class="tx_tit">총 배송비 <button type="button" class="btnSmall wGray" data-rel="layer" data-target="deliveryInfo" id="dlexAmtPopLayer_btn"><span>상세보기</span></button></span> 
-							<span class="tx_cont"><span class="tx_num" id="dlexPayAmt_span">0</span>원</span>
-							<input type="hidden" name="dlexPayAmt" value="0">
+							<span class="tx_tit">총 배송비</span> 
+							<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500</span>원</span>
+							<input type="hidden" id="deltotal" value="0">
 						</li>
 						<li>
 							<span class="tx_tit"><span class="tx_num">CJ ONE</span> 포인트</span> 
 							<span class="tx_cont colorOrange"><span class="tx_num" id="cjonePntAplyAmt_span">0</span>원</span>
+							<input type="hidden" id="pointtotal" value="0">
 						</li>
 						<li class="total">
 							<span class="tx_tit">최종 결제금액</span> 
-							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum-500}</span>원</span>
-							<input type="hidden" name="remainAmt" value="24700">
-							<input type="hidden" name="ordPayAmt" value="24700">
-							<input type="hidden" name="goodsNm" value="유세린 더모 퓨리파이어 토너 1+1 기획">
+							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum+2500}</span>원</span>
+							<input type="hidden" id="lastprice" value="${sum+2500}">
 						</li>
 
 						<li>
-							<button class="btnPayment" id="btnPay" name="btnPay" type="button">결제하기<em id="giftNoti3" style="display: none;">(증정품은 결제 시 확인 가능합니다)</em> <em id="giftNotiQuick" style="display: none;">(오늘드림으로 주문 시 온라인 단독 <br>증정품이 제공되지 않습니다.)</em> </button>
+							<button class="btnPayment" id="btnPay" name="btnPay" type="button">결제하기</button>
 							<input type="hidden" id="tempOrdNo" value="">
 						</li>
 					</ul>

@@ -17,13 +17,70 @@
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
+<%int num = Integer.parseInt(request.getParameter("num")); %>
 <script>
+
+	window.onload = function(){
+	
+	check();
+		
+	var productcount = document.getElementsByName("productcount");
+	var productsel = document.getElementsByName("s_amount");
+	var product_op;
+	
+	for(var i=0; i<productcount.length; i++){
+		for(var j=0; j<productsel[i].options.length; j++){
+			if(productcount[i].value == productsel[i].options[j].value){
+				product_op = j;
+			}
+		}
+		productsel[i].selectedIndex = product_op;
+	}
+}
+	
+	function check() {
+		var num = <%=num%>;
+		if(num==1){
+			alert("수량 변경 실패");
+		} else if(num==2){
+			alert("수량 변경 완료");
+		} else if(num==3){
+			alert("삭제 실패");
+		} else if(num==4){
+			alert("삭제 완료");
+		}
+		
+	}
+	
+	function count_change(a, idx) {
+		
+		document.getElementsByName("updatecount")[idx].value = a.value;
+	}
+
+
 function checkAll(bool) {
  var all_input = document.getElementsByTagName("input");
  for(var i=0;i<all_input.length;i++) {
   if(all_input[i].type == "checkbox")
    all_input[i].checked = bool;
  }
+ 
+}
+
+function updateCart(idx) {
+	
+	var updatecount = document.getElementsByName("updatecount")[idx].value;
+	
+	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
+	
+	location.href="CartUpdateController.do?cart_num=" + updatecartnum + "&count=" + updatecount;
+}
+
+function deleteCart(idx) {
+	
+	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
+	
+	location.href="CartDeleteController.do?cart_num=" + updatecartnum;
 }
 	
 </script>
@@ -98,11 +155,12 @@ function checkAll(bool) {
 				</tr>
 				</thead>
 				<tbody>
-<c:forEach var="cartlist"  items="${requestScope.v}">
+<c:forEach var="cartlist"  items="${requestScope.v}" varStatus="idx">
 	<c:set var="sum" value="${sum = sum + cartlist.product_price*cartlist.product_count}"/>
-	<c:set var="discount" value="${discount = discount + cartlist.product_price*cartlist.product_count*cartlist.discount/100}" />
+	<c:set var="discount" value="${discount = discount + cartlist.discount*cartlist.product_count}" />
 	<fmt:parseNumber var= "pages" integerOnly= "true" value= "${discount}" />
-	<fmt:parseNumber var= "dis" integerOnly= "true" value= "${(cartlist.product_price*cartlist.product_count)-cartlist.product_price*cartlist.product_count*cartlist.discount/100}" />
+	<fmt:parseNumber var= "dis" integerOnly= "true" value= "${cartlist.discount*cartlist.product_count}" />
+	<input type="hidden" name="productcount" value="${cartlist.product_count}" />
 	<tr>
 		<td colspan="7">
 			<div class="tbl_cont_area">		
@@ -123,8 +181,8 @@ function checkAll(bool) {
 				</div>
 				<div class="tbl_cell w100">
 					<div class="prd_cnt">
-						<select class="amount" name="s_amount">
-							<option value="1" selected="">${cartlist.product_count}</option>
+						<select class="amount" name="s_amount" id="productsel" onchange="count_change(this, ${idx.index});">
+							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
@@ -137,13 +195,15 @@ function checkAll(bool) {
 							<option value="10+">10+</option>
 						</select>	
 					</div>
-					<button type="button" class="btnSmall wGray" name="btnQtyMod"><span>변경</span></button>
+					<input type="hidden" name="updatecount" value="${cartlist.product_count}">
+					<input type="hidden" name="updatecartnum" value="${cartlist.cart_num}">
+					<button type="button" class="btnSmall wGray" name="btnQtyMod" onclick="updateCart(${idx.index})"><span>변경</span></button>
 				</div>
 				<div class="tbl_cell w110">
 					<span class="org_price">
 					<span class="tx_num">${cartlist.product_price*cartlist.product_count}</span>원
 					</span>
-					<span class="pur_price"><span class="tx_num">${dis}</span>원</span>
+					<span class="pur_price"><span class="tx_num">${cartlist.product_price*cartlist.product_count-dis}</span>원</span>
 				</div>
 				<div class="tbl_cell w120  ">
 					<p class="prd_delivery">
@@ -153,7 +213,7 @@ function checkAll(bool) {
 				<div class="tbl_cell w150">
 					<div class="btn_group">
 						<button type="button" class="btnSmall wGreen" name="btn_buy"><span>바로구매</span></button>
-						<button type="button" class="btnSmall wGray delete" name="btnDelete"><span>삭제</span></button><!-- 버튼 공간(스페이스바)없이 붙여주세요. -->
+						<button type="button" class="btnSmall wGray delete" name="btnDelete" onclick="deleteCart(${idx.index})"><span>삭제</span></button><!-- 버튼 공간(스페이스바)없이 붙여주세요. -->
 					</div>
 				</div>				
 			</div>
@@ -196,7 +256,7 @@ function checkAll(bool) {
 		
 			<div class="order_btn_area order_cart">
 				<button type="submit" class="btnOrangeW" name="partOrderBtn">선택주문</button>
-				<button type="button" class="btnOrange" name="allOrderBtn">전체주문</button>
+				<button type="button" class="btnOrange" name="allOrderBtn" onclick="location.href='CartAllBuyController.do'">전체주문</button>
 			</div>
 			</form>
 		</div>

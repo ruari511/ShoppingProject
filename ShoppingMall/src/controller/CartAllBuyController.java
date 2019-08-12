@@ -18,8 +18,8 @@ import member.MemberDAO;
 import member.MemberDTO;
 
 /*CarReservation.jsp페이지에서.. 전체검색 버튼 클릭했을떄.. DB에 저장되어 있는 전체 차량 검색요청을 받는 서블릿*/
-@WebServlet("/CartBuyController.do")
-public class CartBuyController extends HttpServlet {
+@WebServlet("/CartAllBuyController.do")
+public class CartAllBuyController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		requestPro(request, response);
@@ -46,14 +46,7 @@ public class CartBuyController extends HttpServlet {
 		
 		Vector<UserCouponDTO> cou = coudao.getAllCouponList("admin");
 		
-		Vector<CartDTO> v = new Vector<CartDTO>();
-		
-		
-		for(int i=0; i<chk.length; i++){
-			System.out.println("i = " + i);
-			//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
-			v.add(cdao.getCartList(Integer.parseInt(chk[i])));
-		}
+		Vector<CartDTO> v = cdao.getAllCartList("admin");
 		
 		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);

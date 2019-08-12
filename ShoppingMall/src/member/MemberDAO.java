@@ -13,7 +13,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cart.CartDTO;
-//import jsp.util.DBConnection;
 import member.MemberDTO;
 
 public class MemberDAO {
@@ -342,6 +341,7 @@ public class MemberDAO {
 		
 		return member;
 	}
+}
 	
 	// 회원 삭제 메서드
 	public int deleteMember(String id, String pw) {
@@ -423,42 +423,5 @@ public class MemberDAO {
 	*/
 	
 
-
-////////2019 -08-10 철민 MemberDAO///////////
-
-	//아이디 중복체크를 위한 메소드 
-	//MemberServlet서블릿 클래스로부터 전달된 ID로  SQL문의 조건식에 설정한후
-	//ID에 대한 회원정보를 조회하여 그결과를 true또는 false로 반환함.
-/*	public boolean overlappedID(String id) {
-		
-		//아이디 중복 또는 중복이아니다 라는 판별값을 저장할 변수 
-		boolean result = false;
-		
-		try {
-			Connection con = null;
-			String sql = "";
-			PreparedStatement pstmt = null;
-			//커넥션풀로부터 커넥션 얻기
-			con = getConnection();
-			
-			//오라클의 decode()함수를 이용하여 서블릿에서 전달된 ID에 해당하는 데이터를 검색하여
-			//true또는 false반환하는데...
-			//검색한 갯수가 1(검색한 레코드가 존재하면)이면 true를 반환,
-			//존재 하지 않으면 false를 문자열로 반환하여 조회하는 SQL문을 작성
-			String query = "select if(count(*)>0,'true','false') as result from member";
-				   query += " where id=?";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, id);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			result = Boolean.parseBoolean(rs.getString("result"));   
-			pstmt.close();
-			rs.close();
-			con.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}	*/
 	
 	}
