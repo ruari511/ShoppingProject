@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cart.CartDAO;
 import cart.CartDTO;
+import coupon.CouponDAO;
+import coupon.UserCouponDTO;
 import member.MemberDAO;
 import member.MemberDTO;
 
@@ -40,6 +42,10 @@ public class CartBuyController extends HttpServlet {
 		
 		CartDAO cdao = new CartDAO();
 		
+		CouponDAO coudao = new CouponDAO();
+		
+		Vector<UserCouponDTO> cou = coudao.getAllCouponList("admin");
+		
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
 		
@@ -54,6 +60,8 @@ public class CartBuyController extends HttpServlet {
 		
 		//구매하기 페이지의 주문자정보 값 넘기
 		request.setAttribute("m", m);
+		
+		request.setAttribute("cou", cou);
 		
 		
 		RequestDispatcher dis = 
