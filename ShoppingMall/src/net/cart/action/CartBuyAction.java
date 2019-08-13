@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.coupon.db.UserCouponDTO;
+import net.coupon.db.CouponDAO;
 import net.member.db.MemberDAO;
 import net.member.db.MemberDTO;
 import net.cart.db.CartDAO;

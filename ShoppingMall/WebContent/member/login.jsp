@@ -75,7 +75,8 @@
             <input  type="password" id="password" name="password" class="form-control" onblur="login_check()" required autofocus/>
             <div class="check_font" id="passMessage"></div>
         </div>
-        <button type="submit" class="btn btn-primary">전송</button>
+        <button type="submit" class="btn btn-primary" style="float: right;">로그인</button>
+        <button type="button" class="btn btn-primary id/pw" style="float: left;">아이디/비밀번호 찾기</button>
     </form>
     
 </body>
