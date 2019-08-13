@@ -92,6 +92,10 @@ function deleteCart(idx) {
 	
 	location.href="CartDeleteController.do?cart_num=" + updatecartnum;
 }
+
+function selectBuy(cartnum) {
+	location.href="CartSelectBuyController.do?cart_num=" + cartnum;
+}
 	
 </script>
 </head>
@@ -217,7 +221,7 @@ function deleteCart(idx) {
 				</div>
 				<div class="tbl_cell w150">
 					<div class="btn_group">
-						<button type="button" class="btnSmall wGreen" name="btn_buy"><span>바로구매</span></button>
+						<button type="button" class="btnSmall wGreen" name="btn_buy" onclick="selectBuy(${cartlist.cart_num});"><span>바로구매</span></button>
 						<button type="button" class="btnSmall wGray delete" name="btnDelete" onclick="deleteCart(${idx.index})"><span>삭제</span></button><!-- 버튼 공간(스페이스바)없이 붙여주세요. -->
 					</div>
 				</div>				
