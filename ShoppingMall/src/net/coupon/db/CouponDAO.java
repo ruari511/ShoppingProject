@@ -37,9 +37,11 @@ public class CouponDAO {
 				 + "u.usecheck, u.id "
 				 + "from coupon c join user_coupon u "
 				 + "on c.coupon_num = u.coupon_num "
-				 + "where u.id='admin'";
+				 + "where u.id=?";
 			
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
 			
 			rs = pstmt.executeQuery();
 			
