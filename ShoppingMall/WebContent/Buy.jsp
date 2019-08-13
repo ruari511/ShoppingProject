@@ -52,7 +52,7 @@
 		
 		document.getElementById("orderPhone_2").value = split_phone[1];
 		document.getElementById("orderPhone_3").value = split_phone[2];
-
+		
 	}
 	
 	function email_change() {
@@ -109,6 +109,10 @@
 		
 		coutotal = prototal * a.value / 100;
 		
+		if(coutotal >= 5000){
+			coutotal = 5000;
+		}
+		
 		document.getElementById("coutotal").value = coutotal;
 		
 		document.getElementById("totDscntAmt_span").innerHTML = coutotal;
@@ -125,9 +129,13 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
-		deltotal = 2500;
-		
-		document.getElementById("deltotal").value = 2500;
+		if(prototal>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
+		} else{
+			deltotal = 2500;
+			document.getElementById("deltotal").value = 2500;
+		}
 		
 		if(document.getElementById("selDelCoupon").selectedIndex == 1){
 			document.getElementById("deliverycost").innerHTML = "무료";
@@ -706,7 +714,14 @@
 							<c:set var="coupon" value="${requestScope.cou}" />
 							<c:choose>
 								<c:when test="${coupon eq null}">
-									<div style="display:block;">
+									<div id="delmoneycheck" style="display:block;">
+										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
+											<option>적용할 수 있는 쿠폰이 없습니다.</option>
+										</select>
+									</div>
+								</c:when>
+								<c:when test="${sum > 20000}">
+									<div id="delmoneycheck" style="display:block;">
 										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
 											<option>적용할 수 있는 쿠폰이 없습니다.</option>
 										</select>
@@ -1093,8 +1108,14 @@
 						</li>
 						<li class="line_top2">
 							<span class="tx_tit">총 배송비</span> 
-							<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500</span>원</span>
-							<input type="hidden" id="deltotal" value="0">
+							<c:if test="${sum > 20000}">
+								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">무료</span></span>
+								<input type="hidden" id="deltotal" value="0">
+							</c:if>
+							<c:if test="${sum <= 20000}">
+								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500원</span></span>
+								<input type="hidden" id="deltotal" value="2500">
+							</c:if>
 						</li>
 						<li>
 							<span class="tx_tit"><span class="tx_num">CJ ONE</span> 포인트</span> 
@@ -1102,9 +1123,15 @@
 							<input type="hidden" id="pointtotal" value="0">
 						</li>
 						<li class="total">
-							<span class="tx_tit">최종 결제금액</span> 
+							<span class="tx_tit">최종 결제금액</span>
+							<c:if test="${sum > 20000}">
+							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum}</span>원</span>
+							<input type="hidden" id="lastprice" value="${sum}">
+							</c:if>
+							<c:if test="${sum <= 20000}">
 							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum+2500}</span>원</span>
 							<input type="hidden" id="lastprice" value="${sum+2500}">
+							</c:if>
 						</li>
 
 						<li>
