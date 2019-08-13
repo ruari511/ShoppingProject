@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.cart.db.CartDAO;
 import net.cart.db.CartDTO;
@@ -32,21 +33,23 @@ public class CartAllBuyController extends HttpServlet {
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
 		
 		//Cart.jsp에서 checked인 cart_num값을 배열로 받아오기
 		String[] chk = request.getParameterValues("cart");
 		
 		MemberDAO mdao = new MemberDAO();
 		
-		MemberDTO m = mdao.selectMember("admin");
+		MemberDTO m = mdao.selectMember(id);
 		
 		CartDAO cdao = new CartDAO();
 		
 		CouponDAO coudao = new CouponDAO();
 		
-		Vector<UserCouponDTO> cou = coudao.getAllCouponList("admin");
+		Vector<UserCouponDTO> cou = coudao.getAllCouponList(id);
 		
-		Vector<CartDTO> v = cdao.getAllCartList("admin");
+		Vector<CartDTO> v = cdao.getAllCartList(id);
 		
 		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);
