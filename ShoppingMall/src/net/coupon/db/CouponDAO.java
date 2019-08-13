@@ -1,4 +1,4 @@
-package coupon;
+package net.coupon.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,6 @@ import java.util.Vector;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import cart.CartDTO;
 
 public class CouponDAO {
 	
