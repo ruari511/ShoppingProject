@@ -45,13 +45,6 @@
 		productsel[i].selectedIndex = product_op;
 	}
 	
-	var delivery_cost_check = document.getElementById("delivery_cost_check").value;
-	
-	if(delivery_cost_check>=20000){
-		document.getElementById("deliStrongText").innerHTML = "무료배송";
-	}
-	
-	
 	
 }
 	
@@ -213,8 +206,13 @@ function deleteCart(idx) {
 				</div>
 				<div class="tbl_cell w120  ">
 					<p class="prd_delivery">
-						<strong id="deliStrongText">${cartlist.delivery_cost}</strong>
-						<input type="hidden" id="delivery_cost_check" value="${cartlist.product_price*cartlist.product_count-dis}">
+						<c:if test="${cartlist.product_price*cartlist.product_count-dis >= 20000}">
+							<strong id="deliStrongText">무료</strong>
+						</c:if>
+						<c:if test="${cartlist.product_price*cartlist.product_count-dis < 20000}">
+							<strong id="deliStrongText">2500원</strong>
+						</c:if>
+						
 					</p>
 				</div>
 				<div class="tbl_cell w150">
@@ -242,18 +240,18 @@ function deleteCart(idx) {
 				총 판매가 <span class="tx_num">${sum}</span>원 <span class="tx_sign minus">-</span>
 				 총 할인금액 <span class="tx_num">${pages}</span>원 <span class="tx_sign plus">+</span>
 				  배송비 <span class="tx_num">
-				 <c:if test="${sum-pages > 20000}">
+				 <c:if test="${sum-pages >= 20000}">
 				 0
 				 </c:if>
-				 <c:if test="${sum-pages <= 20000}">
+				 <c:if test="${sum-pages < 20000}">
 				 2500
 				 </c:if>
 				  </span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">
 				  총 결제금액 <span class="tx_price"><span class="tx_num">
-				  	<c:if test="${sum-pages > 20000}">
+				  	<c:if test="${sum-pages >= 20000}">
 				 	 ${sum-pages}
 					 </c:if>
-					 <c:if test="${sum-pages <= 20000}">
+					 <c:if test="${sum-pages < 20000}">
 					 ${sum-pages+2500}
 					 </c:if>
 				  </span>원</span></span>
@@ -268,10 +266,10 @@ function deleteCart(idx) {
 					<p class="tx_sale">총 할인금액<span><span class="tx_num">${pages}</span>원</span></p>
 					<span class="tx_sign2 plus">+</span>
 					<p>배송비 <span><span class="tx_num">
-					<c:if test="${sum-pages > 20000}">
+					<c:if test="${sum-pages >= 20000}">
 				 	 0
 					 </c:if>
-					 <c:if test="${sum-pages <= 20000}">
+					 <c:if test="${sum-pages < 20000}">
 					 2500
 					 </c:if>
 					</span>원</span></p>
@@ -279,10 +277,10 @@ function deleteCart(idx) {
 				<div class="sum_price">
 					<span class="tx_text">배송비는 쿠폰할인금액에 따라 변경될 수 있습니다.</span>
 					총 결제예상금액 <span class="tx_price"><span class="tx_num">
-					<c:if test="${sum-pages > 20000}">
+					<c:if test="${sum-pages >= 20000}">
 				 	 ${sum-pages}
 					 </c:if>
-					 <c:if test="${sum-pages <= 20000}">
+					 <c:if test="${sum-pages < 20000}">
 					 ${sum-pages+2500}
 					 </c:if>
 					</span>원</span>
