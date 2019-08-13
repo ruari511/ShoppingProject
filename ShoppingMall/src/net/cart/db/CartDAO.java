@@ -40,7 +40,7 @@ public class CartDAO {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, "admin");
+			pstmt.setString(1, id);
 			
 			rs = pstmt.executeQuery();
 			
@@ -190,6 +190,7 @@ public class CartDAO {
 	
 	
 	
+	@SuppressWarnings("resource")
 	public int insertCart(String id, ProductDTO productDTO, int count){
 		
 		int check=0;
@@ -212,7 +213,7 @@ public class CartDAO {
 			
 				pstmt = con.prepareStatement(sql);
 			
-				pstmt.setString(1, "admin");
+				pstmt.setString(1, id);
 				pstmt.setInt(2, 1);
 			
 				rs = pstmt.executeQuery();
