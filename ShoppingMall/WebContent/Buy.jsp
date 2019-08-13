@@ -91,12 +91,16 @@
 			document.getElementById("buycard").style.display="none";
 			document.getElementById("buybankbook").style.display="list-item";
 			document.getElementById("cashReceipt").style.display="list-item";
+			document.getElementById("paytype").value = a.value;
 			
 		}else if(a.value=="card"){
 			document.getElementById("buycard").style.display="list-item";
 			document.getElementById("buybankbook").style.display="none";
 			document.getElementById("cashReceipt").style.display="none";
+			document.getElementById("paytype").value = a.value;
 		}
+		
+		
 	}
 	
 	function allcoupon_change(a) {
@@ -107,7 +111,9 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
-		coutotal = prototal * a.value / 100;
+		var percent = a.value.split("-");
+		
+		coutotal = prototal * percent[1] / 100;
 		
 		if(coutotal >= 5000){
 			coutotal = 5000;
@@ -118,6 +124,7 @@
 		document.getElementById("totDscntAmt_span").innerHTML = coutotal;
 		
 		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		
 		}
 	
 	function delivery_coupon_change() {
@@ -139,10 +146,13 @@
 		
 		if(document.getElementById("selDelCoupon").selectedIndex == 1){
 			document.getElementById("deliverycost").innerHTML = "무료";
+			deltotal = 2500;
+			document.getElementById("deltotal").value = 2500;
 			totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
 		} else{
 			document.getElementById("deliverycost").innerHTML = "2500원";
 			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
 			totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
 		}
 		
@@ -168,13 +178,21 @@
 		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
 		document.getElementById("inpoint").value = pointtotal;
 		
+		
 	}
 	
 	function delivery_message(a) {
 		if(a.value==99){
 			document.getElementById("mbrMemoCont1").style.display="block";
 		}
+		
+		var delmes_sel = document.getElementById("mbrMemoCont");
+		var delmes = delmes_sel.selectedIndex;
+		//alert(delmes_sel);
+		alert(document.getElementById("mbrMemoCont").options[delmes].innerHTML);
+		document.getElementById("delivery_message_2").value = document.getElementById("mbrMemoCont").options[delmes].innerHTML;
 	}
+	
 	
 	function card_change(a){
 		if(a.value!=0){
@@ -220,7 +238,6 @@
 		<div id="Contents">
 			<!-- title_box -->
 			<div class="title_box">
-			<button onclick="spit_test()">test</button>
 				<h1>주문/결제</h1>
 				<ul class="step_list">
 					<li><span class="step_num tx_num">1</span> 장바구니</li>
@@ -230,10 +247,7 @@
 			</div>
 			<!--// title_box -->
 			
-			<form name="orderForm" id="orderForm">
-			<input type="hidden" id="quickYn" name="quickYn" value="N">	
-			<input type="hidden" id="quickInfoYn" name="quickInfoYn" value="N">			
-			<input type="hidden" id="ocbValidChk" name="ocbValidChk" value="N">
+			<form action="BuyListInsertController.do" method="post">
 			<!-- 주문자 정보 -->
 			<h2 class="sub-title2 mgT20">주문자정보</h2><!-- 2017-02-21 수정 : mgT20 클래스 추가 -->
 			<table class="tbl_inp_form">
@@ -246,13 +260,13 @@
 				<c:set var="member" value="${requestScope.m}" />
 				<tr>
 					<th scope="row">주문자명</th>
-					<td><input type="text" id="ordManNm" name="ordManNm" value="${member.name}" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
+					<td><input type="text" id="ordManNm" name="ordername" value="${member.name}" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
 				</tr>
 				
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
-						<input type="hidden" id="orderPhone" value="${member.phone}">
+						<input type="hidden" id="orderPhone" name="orderphone" value="${member.phone}">
 						<select id="orderPhone_1" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
 							<option value="1">선택</option>
 
@@ -330,7 +344,7 @@
 				<tr>
 					<th scope="row">이메일</th>
 					<td>
-						<input type="hidden" id="orderEmail" name="ordManEmailAddr" value="${member.email}">
+						<input type="hidden" id="orderEmail" name="orderemail" value="${member.email}">
 						<input type="text" id="orderEmail_1" value="" class="inpH28" style="width:120px"> 
 						@ <input type="text" id="orderEmail_2" value="" class="inpH28" style="width:120px">
 						<select id="orderEmail_sel" class="selH28" onchange="email_change();" style="width:120px">
@@ -402,21 +416,21 @@
 				<tr style="">
 					<th scope="row">배송지명</th>
 					<td class="imp_data">
-						<input type="text" id="dlvpNm_new" name="dlvpNm" value="" class="inpH28" title="배송지명을 입력해주세요." style="width:200px;">
+						<input type="text" id="dlvpNm_new" name="delivery_title" value="" class="inpH28" title="배송지명을 입력해주세요." style="width:200px;">
 					</td>
 				</tr>
 				<!--// 2017-01-18 추가 -->
 				<tr style="">
 					<th scope="row">받는분</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<input type="text" id="delivery_name" name="rmitNm" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px">
+						<input type="text" id="delivery_name" name="delivery_name" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px">
 						<span class="chk_area" onclick="deliverycheck();"><input type="checkbox" id="delivery_check">주문자정보와 동일</span><!-- 2017-01-18 수정 : 위치변경 -->
 					</td>
 				</tr>
 				<tr style="">
 					<th scope="row">연락처1</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<select id="delivery_tel" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px">
+						<select id="delivery_tel" name="delivery_tel" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px">
 							<option value="">선택</option>
 
 							<option value="010">010</option>
@@ -486,86 +500,9 @@
 							<option value="0507">0507</option>
 
 						</select>
-						 - <input type="text" id="delivery_tel1" name="rmitCellTxnoNo" value="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." style="width:90px">
-						 - <input type="text" id="delivery_tel2" name="rmitCellEndNo" value="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." style="width:90px">
+						 - <input type="text" id="delivery_tel1" name="delivery_tel1" value="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." style="width:90px">
+						 - <input type="text" id="delivery_tel2" name="delivery_tel2" value="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." style="width:90px">
 					     <span class="info_security"><button type="button" class="chk_area">안심번호 서비스 안내</button></span>
-					</td>
-				</tr>
-				<tr style="">
-					<th scope="row">연락처2</th>
-					<td>
-						<select id="rmitTelRgnNo_new" name="rmitTelRgnNo" class="selH28" title="연락처2 앞자리를 선택해주세요." style="width:90px">
-							<option value="">선택</option>
-
-							<option value="010">010</option>
-
-							<option value="011">011</option>
-
-							<option value="016">016</option>
-
-							<option value="017">017</option>
-
-							<option value="018">018</option>
-
-							<option value="019">019</option>
-
-							<option value="02">02</option>
-
-							<option value="031">031</option>
-
-							<option value="032">032</option>
-
-							<option value="033">033</option>
-
-							<option value="041">041</option>
-
-							<option value="042">042</option>
-
-							<option value="043">043</option>
-
-							<option value="044">044</option>
-
-							<option value="051">051</option>
-
-							<option value="052">052</option>
-
-							<option value="053">053</option>
-
-							<option value="054">054</option>
-
-							<option value="055">055</option>
-
-							<option value="061">061</option>
-
-							<option value="062">062</option>
-
-							<option value="063">063</option>
-
-							<option value="064">064</option>
-
-							<option value="070">070</option>
-
-							<option value="080">080</option>
-
-							<option value="0130">0130</option>
-
-							<option value="0303">0303</option>
-
-							<option value="0502">0502</option>
-
-							<option value="0503">0503</option>
-
-							<option value="0504">0504</option>
-
-							<option value="0505">0505</option>
-
-							<option value="0506">0506</option>
-
-							<option value="0507">0507</option>
-
-						</select>
-						 - <input type="text" id="rmitTelTxnoNo_new" name="rmitTelTxnoNo" value="" class="inpH28" title="연락처2 가운데 자리를 입력해주세요." style="width:90px">
-						 - <input type="text" id="rmitTelEndNo_new" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." style="width:90px">
 					</td>
 				</tr>
 				<tr style="">
@@ -591,6 +528,9 @@
 						<input type="text" id="tempRmitDtlAddr_new" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px; display: none;" this="상세 주소는">
 						<input type="hidden" id="stnmRmitDtlAddr_new" name="stnmRmitDtlAddr" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px" this="상세 주소는">
 						<input type="hidden" id="rmitDtlAddr_new" name="rmitDtlAddr" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px">
+						
+						<!-- 배송주소를 입력받을 hidden태그 -->
+						<input type="hidden" id="delivery_address" value="">
 					</td>
 				</tr>
 				<tr>
@@ -603,7 +543,7 @@
 
 							<option value="20">부재시 문앞에 놓아주세요.</option>
 
-							<option value="30">파손의 위험이 있는 상품이오니,  배송 시 주의해주세요.</option>
+							<option value="30">파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.</option>
 
 							<option value="40">배송전에 연락주세요.</option>
 
@@ -612,7 +552,8 @@
 							<option value="99">배송 메시지 직접입력</option>
 
 						</select>
-						<input type="text" id="mbrMemoCont1" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
+						<input type="text" id="mbrMemoCont1" name="delivery_message_1" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
+						<input type="hidden" name="delivery_message_2" id="delivery_message_2" value="">
 					</td>
 				</tr>
 				</tbody>
@@ -663,6 +604,7 @@
 								<span class="pur_price"><span class="tx_num">${(cartlist.product_price-cartlist.discount)*cartlist.product_count}</span>원</span>
 							</div>
 						</div>
+						<input type="hidden" name="cartnum" value="${cartlist.cart_num}"/>
 					</td>
 				</tr>
 				</c:forEach>
@@ -695,11 +637,11 @@
 								</c:when>
 								<c:otherwise>
 									<div style="display:block;">
-										<select id="selAllCoupon" class="selH28 mgT5" style="width:300px" onchange="allcoupon_change(this);">
-											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
+										<select id="selAllCoupon" name="allcouponnum" class="selH28 mgT5" style="width:300px" onchange="allcoupon_change(this);">
+											<option value="0-0" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '전체금액'}">
-   													<option value="${couponlist.coupon_percent}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+   													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -729,11 +671,11 @@
 								</c:when>
 								<c:otherwise>
 									<div style="display:block;">
-										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change();">
+										<select id="selDelCoupon" name="delcouponnum" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change(this);">
 											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '배송비'}">
-   													<option value="2500">${couponlist.coupon_name}</option>
+   													<option value="${couponlist.coupon_num}">${couponlist.coupon_name}</option>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -760,7 +702,7 @@
 							<td>
 								<div>
 									<span class="inp_point_wrap">
-										<input type="text" id="inpoint" class="inpH28" style="width:100px; text-align: right;" value=""> 원 / 
+										<input type="text" id="inpoint" name="inpoint" class="inpH28" style="width:100px; text-align: right;" value=""> 원 / 
 										<span id="cjonePnt_span" class="tx_num colorOrange"><span id="cjonePnt">${member.point}</span>P</span>
 										<input type="hidden" id="memberpoint" value="${member.point}">
 									</span> 
@@ -794,6 +736,7 @@
 							<span><input type="radio" id="payMethod_25" name="payMethod" value="25"><label for="payMethod_25">PAYCO</label></span>
 							<!-- //2017-04-18 추가 -->
 							<span><input type="radio" id="payMethod_26" name="payMethod" value="26"><label for="payMethod_26">카카오페이</label></span>
+							<input type="hidden" id="paytype" name="paytype" value="card">
 						</li>
 						<!-- 신용카드 선택 시 -->
 						<li value="11" style="display: list-item;" id="buycard">							
@@ -1110,11 +1053,11 @@
 							<span class="tx_tit">총 배송비</span> 
 							<c:if test="${sum >= 20000}">
 								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">무료</span></span>
-								<input type="hidden" id="deltotal" value="0">
+								<input type="hidden" id="deltotal" value="2500">
 							</c:if>
 							<c:if test="${sum < 20000}">
 								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500원</span></span>
-								<input type="hidden" id="deltotal" value="2500">
+								<input type="hidden" id="deltotal" value="0">
 							</c:if>
 						</li>
 						<li>
@@ -1135,7 +1078,7 @@
 						</li>
 
 						<li>
-							<button class="btnPayment" id="btnPay" name="btnPay" type="button">결제하기</button>
+							<button class="btnPayment" id="btnPay" name="btnPay" type="submit">결제하기</button>
 							<input type="hidden" id="tempOrdNo" value="">
 						</li>
 					</ul>
