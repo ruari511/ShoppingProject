@@ -13,8 +13,6 @@ public class CartDTO {
 	
 	private int cart_num;
 	
-	
-	
 	public int getCart_num() {
 		return cart_num;
 	}
