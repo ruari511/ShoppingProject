@@ -57,8 +57,8 @@
 				</li>
 				<li><h2>마이 정보</h2>
 					<ul>
-						<li class="subMenu"><a href="MemberInfoModify.jsp" myMenuId="0501">회원정보 수정</a></li>
-						<li class="subMenu"><a href="MemberOut.jsp" myMenuId="0504">회원탈퇴</a></li>
+						<li class="subMenu"><a href="./memberModify.do" myMenuId="0501">회원정보 수정</a></li>
+						<li class="subMenu"><a href="./memberOut.do" myMenuId="0504">회원탈퇴</a></li>
 					</ul>
 				</li>
 			</ul>

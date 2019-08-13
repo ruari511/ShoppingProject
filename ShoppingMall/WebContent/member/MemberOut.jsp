@@ -81,7 +81,7 @@
 	
 	
 	
-	<form name="deleteform" method="post" action="./MemberDeleteAction.me"
+	<form name="deleteform" method="post" action="./MemberDeleteAction.do"
 			onsubmit="return checkValue()">
 		
 			<table align="center">
@@ -93,7 +93,7 @@
 				</tr>
 			</table>
 			<br> 
-			<input type="button" value="취소" onclick="javascript:window.location='Main.me'">
+			<input type="button" value="취소" onclick="javascript:window.location='Main.do'">
 			<input type="submit" value="탈퇴" /> 
 	</form>
 	

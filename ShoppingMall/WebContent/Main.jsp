@@ -28,7 +28,7 @@
 	
 </head>
 <body>
-<%
+<%	
 	String section = request.getParameter("section");
 	if(section == null){
 		section = "Section.jsp";

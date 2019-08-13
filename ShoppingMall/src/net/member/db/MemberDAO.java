@@ -198,7 +198,7 @@ public class MemberDAO {
 
    
    // 회원 삭제 메서드
-   public int deleteMember(String id, String pw) {
+   public boolean deleteMember(String id, String pw) {
          
          con = null;
          pstmt = null;
@@ -207,17 +207,15 @@ public class MemberDAO {
          MemberDTO member = new MemberDTO();
          
          String dbpw = ""; // DB상의 비밀번호를 담아둘 변수
-         int x = -1;
+         boolean value = false;
 
          try {
             // 회원 삭제
-            sql = "DELETE FROM MEMBER WHERE ID=?";
+            sql = "select password from member where id=?";
             
             con = getConnection();
-
-            // 자동 커밋을 false로 한다.
-            con.setAutoCommit(false);
             
+            pstmt = con.prepareStatement(sql);
             // 1. 아이디에 해당하는 비밀번호를 조회한다.
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -226,17 +224,17 @@ public class MemberDAO {
                dbpw = rs.getString("password");
                if (dbpw.equals(pw)){ // 입력된 비밀번호와 DB비번 비교
                   // 같을경우 회원삭제 진행
+            	  sql="delete from member where id=?";
                   pstmt = con.prepareStatement(sql);
+                  
                   pstmt.setString(1, id);
                   pstmt.executeUpdate();
-                  con.commit(); 
-                  x = 1; // 삭제 성공
+                  value = true; // 삭제 성공
                } else {
-                  x = 0; // 비밀번호 비교결과 - 다름
+            	  value = false; // 비밀번호 비교결과 - 다름
                }
             }
 
-            return x;
 
          } catch (Exception e) {
                e.printStackTrace();
@@ -244,11 +242,12 @@ public class MemberDAO {
             try{
                if ( pstmt != null ){ pstmt.close(); pstmt=null; }
                if ( con != null ){ con.close(); con=null;   }
+               if ( rs != null ){ rs.close(); rs=null;   }
             }catch(Exception e){
                e.printStackTrace();
             }
          }
-         return x;
+         return value;
       }// 회원탈퇴 메소드
    
 

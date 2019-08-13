@@ -43,7 +43,7 @@ public class MemberModifyAction implements Action
 		dao.updateMember(member);
 
 		forward.setRedirect(true);
-   		forward.setPath("./login.do");
+   		forward.setPath("login.do");
 		
    		// 회원정보 수정 성공 메시지를 세션에 담는다.
    		session.setAttribute("msg", "0");
