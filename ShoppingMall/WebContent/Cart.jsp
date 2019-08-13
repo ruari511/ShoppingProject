@@ -17,7 +17,15 @@
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
-<%int num = Integer.parseInt(request.getParameter("num")); %>
+<%
+	int num;
+	
+	if(request.getParameter("num")==null){
+		num = 0;
+	} else{
+		num = Integer.parseInt(request.getParameter("num"));
+	}
+%>
 <script>
 
 	window.onload = function(){
@@ -36,6 +44,15 @@
 		}
 		productsel[i].selectedIndex = product_op;
 	}
+	
+	var delivery_cost_check = document.getElementById("delivery_cost_check").value;
+	
+	if(delivery_cost_check>=20000){
+		document.getElementById("deliStrongText").innerHTML = "무료배송";
+	}
+	
+	
+	
 }
 	
 	function check() {
@@ -196,7 +213,8 @@ function deleteCart(idx) {
 				</div>
 				<div class="tbl_cell w120  ">
 					<p class="prd_delivery">
-						<strong id="deliStrongText">배송료1000</strong>
+						<strong id="deliStrongText">${cartlist.delivery_cost}</strong>
+						<input type="hidden" id="delivery_cost_check" value="${cartlist.product_price*cartlist.product_count-dis}">
 					</p>
 				</div>
 				<div class="tbl_cell w150">
@@ -223,8 +241,22 @@ function deleteCart(idx) {
 				<div class="sum_price">
 				총 판매가 <span class="tx_num">${sum}</span>원 <span class="tx_sign minus">-</span>
 				 총 할인금액 <span class="tx_num">${pages}</span>원 <span class="tx_sign plus">+</span>
-				  배송비 <span class="tx_num">0</span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">
-				  총 결제금액 <span class="tx_price"><span class="tx_num">${sum-pages}</span>원</span></span>
+				  배송비 <span class="tx_num">
+				 <c:if test="${sum-pages > 20000}">
+				 0
+				 </c:if>
+				 <c:if test="${sum-pages <= 20000}">
+				 2500
+				 </c:if>
+				  </span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">
+				  총 결제금액 <span class="tx_price"><span class="tx_num">
+				  	<c:if test="${sum-pages > 20000}">
+				 	 ${sum-pages}
+					 </c:if>
+					 <c:if test="${sum-pages <= 20000}">
+					 ${sum-pages+2500}
+					 </c:if>
+				  </span>원</span></span>
 				  </div>
 			</div>
 			<!--// 올리브영 배송상품 결제금액 -->
@@ -235,11 +267,25 @@ function deleteCart(idx) {
 					<span class="tx_sign2 minus">-</span>
 					<p class="tx_sale">총 할인금액<span><span class="tx_num">${pages}</span>원</span></p>
 					<span class="tx_sign2 plus">+</span>
-					<p>배송비 <span><span class="tx_num">0</span>원</span></p>
+					<p>배송비 <span><span class="tx_num">
+					<c:if test="${sum-pages > 20000}">
+				 	 0
+					 </c:if>
+					 <c:if test="${sum-pages <= 20000}">
+					 2500
+					 </c:if>
+					</span>원</span></p>
 				</div>
 				<div class="sum_price">
 					<span class="tx_text">배송비는 쿠폰할인금액에 따라 변경될 수 있습니다.</span>
-					총 결제예상금액 <span class="tx_price"><span class="tx_num">${sum-pages}</span>원</span>
+					총 결제예상금액 <span class="tx_price"><span class="tx_num">
+					<c:if test="${sum-pages > 20000}">
+				 	 ${sum-pages}
+					 </c:if>
+					 <c:if test="${sum-pages <= 20000}">
+					 ${sum-pages+2500}
+					 </c:if>
+					</span>원</span>
 				</div>	
 			</div>
 		
