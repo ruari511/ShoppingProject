@@ -115,8 +115,13 @@
 		
 		coutotal = prototal * percent[1] / 100;
 		
-		if(coutotal >= 5000){
-			coutotal = 5000;
+		if(coutotal >= percent[2]){
+			coutotal = percent[2];
+		}
+		
+		if(prototal>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
 		}
 		
 		document.getElementById("coutotal").value = coutotal;
@@ -641,7 +646,7 @@
 											<option value="0-0" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '전체금액'}">
-   													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+   													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}-${couponlist.coupon_limitmax}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -672,7 +677,7 @@
 								<c:otherwise>
 									<div style="display:block;">
 										<select id="selDelCoupon" name="delcouponnum" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change(this);">
-											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
+											<option value="선택안함" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '배송비'}">
    													<option value="${couponlist.coupon_num}">${couponlist.coupon_name}</option>
@@ -1053,11 +1058,11 @@
 							<span class="tx_tit">총 배송비</span> 
 							<c:if test="${sum >= 20000}">
 								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">무료</span></span>
-								<input type="hidden" id="deltotal" value="2500">
+								<input type="hidden" id="deltotal" name="deltotal" value="2500">
 							</c:if>
 							<c:if test="${sum < 20000}">
 								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500원</span></span>
-								<input type="hidden" id="deltotal" value="0">
+								<input type="hidden" id="deltotal" name="deltotal" value="0">
 							</c:if>
 						</li>
 						<li>
@@ -1069,11 +1074,11 @@
 							<span class="tx_tit">최종 결제금액</span>
 							<c:if test="${sum >= 20000}">
 							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum}</span>원</span>
-							<input type="hidden" id="lastprice" value="${sum}">
+							<input type="hidden" id="lastprice" name="lastprice" value="${sum}">
 							</c:if>
 							<c:if test="${sum < 20000}">
 							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum+2500}</span>원</span>
-							<input type="hidden" id="lastprice" value="${sum+2500}">
+							<input type="hidden" id="lastprice" name="lastprice" value="${sum+2500}">
 							</c:if>
 						</li>
 
