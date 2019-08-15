@@ -29,6 +29,13 @@ function jusoCallBack(roadAddrPart1,addrDetail){
    
 }
 
+<%
+
+String email = request.getParameter("email");
+String name = request.getParameter("name");
+
+%>  
+
 </script>
 
 
@@ -51,18 +58,42 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 				<label>비밀번호 확인</label>
 					<input type="password" name="password2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
+				<% 
+					if(name == ""){
+				%>
 				<label>이름</label>
 					<input type="text" name="name" id="name" onblur="join_check('name')" required>
 					<div class="check_font" id="nameMessage"></div>
+				<%
+					}else{
+				%>
+					<label>이름</label>
+					<input type="text" name="name" id="name" onblur="join_check('name')" value="<%=name %>" required>
+					<div class="check_font" id="nameMessage"></div>
+				<%
+					}
+				%>
 				<label>생년월일</label>
 					<input type="date" name="birth_date" id="birth" onblur="join_check('birth')" required >
 					<div class="check_font" id="birthMessage"></div>
 				<label>성별</label>
 					남자<input type="radio" name="gender" value="남자" checked>
 					여자<input type="radio" name="gender" value="여자" ><br>
+				<% 
+					if(email == ""){
+				%>
 				<label>이메일</label>
-					<input type="email" name="email" id="email" onblur="join_check('email')" required><br>
+					<input type="email" name="email" id="email" onblur="join_check('email')" value="" required><br>
 					<div class="check_font" id="emailMessage"></div>
+				<%
+					}else{
+				%>
+				<label>이메일</label>
+					<input type="email" name="email" id="email" onblur="join_check('email')" value="<%=email %>" required><br>
+					<div class="check_font" id="emailMessage"></div>
+				<%
+					}
+				%>
 				<label>주소</label>
 					<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
             	<div id="list"></div>

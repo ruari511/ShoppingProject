@@ -22,7 +22,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "{b_4AViMK1jUwar3v5AFO}",
-				callbackUrl: "{http://localhost:8090/ShoppingMall/login/navercallback.jsp}",
+				callbackUrl: "{http://localhost:8090/ShoppingMall/member/navercallback.jsp}",
 				isPopup: false,
 				callbackHandle: true
 				/* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */
@@ -45,7 +45,7 @@
 						return;
 					}
 
-					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/ShoppingMall/login/naverlogin.jsp");
+					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "./join.do");
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}
