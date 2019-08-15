@@ -28,6 +28,26 @@
 <link rel="stylesheet" href="./asset/css/contents.css" />
 <script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 
+<script language="javascript">
+// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+function goPopup(){
+   // 주소검색을 수행할 팝업 페이지를 호출합니다.
+   // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+   var pop = window.open("./popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+   
+   // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadAddrPart1,addrDetail){
+   // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+   document.form.roadAddrPart1.value = roadAddrPart1;
+   document.form.addrDetail.value = addrDetail;
+   
+}
+
+</script>
 <script type="text/javascript" src="./asset/js/slick.min.js"></script>
 <script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
@@ -52,68 +72,39 @@
 <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 		<!-- 값(파라미터) 전송은 POST 방식 -->
 		<form method="post" action="MemberModifyAction.do" 
-				name="userInfo" onsubmit="return checkValue()">
+				 name="form" onsubmit="return checkValue()">
 				
-			<table>
-				<tr>
-					<td id="title">아이디</td>
-					<td id="title"><%=member.getId() %></td>
-				</tr>
-				<tr>
-					<td id="title">비밀번호</td>
-					<td>
-						<input type="password" name="password" maxlength="50" 
-							value="<%=member.getPassword()%>">
-					</td>
-				</tr>
-			</table>	
-			<br><br>	
-			<table>
-
-				<tr>
-					<td id="title">이름</td>
-					<td><%=member.getName() %></td>
-				</tr>
-					
-				<tr>
-					<td id="title">성별</td>
-					<td><%=member.getGender()%></td>
-				</tr>
-					
-				<tr>
-					<td id="title">생일</td>
-					<td>
-						<%=member.getBirth_date()%>
-					</td>
-				</tr>
-					
-				<tr>
-					<td id="title">이메일</td>
-					<td>
-						<input type="text" name="mail1" maxlength="50" 
-							value="<%=member.getEmail() %>">
-						
-					</td>
-				</tr>
-					
-				<tr>
-					<td id="title">휴대전화</td>
-					<td>
-						<input type="text" name="phone" value="<%=member.getPhone() %>"/>
-					</td>
-				</tr>
-				<tr>
-					<td id="title">주소</td>
-					<td>
-						<input type="text" size="50" name="address"
-							value="<%=member.getAddress_main() %>"/>
-						<input type="text" size="50" name="address"
-							value="<%=member.getAddress_detail() %>"/>
-					</td>
-				</tr>
-			</table>
+		<fieldset>
+				<legend>회원 정보 수정</legend>
+				<label>ID</label>
+					<input type="text" name="id" value="${id}" maxlength="20" required readonly><br>
+				<label>비밀번호</label>
+					<input type="password" value="${password}" name="password" id="pass" required><br>
+				<label>비밀번호 확인</label>
+					<input type="password" value="${password}" name="password2" id="pass2" onblur="join_check('pass2')" required>
+					<div class="check_font" id="passMessage"></div>
+				<label>이메일</label>
+					<input type="email" name="email" value="${email}" id="email" onblur="join_check('email')" required><br>
+					<div class="check_font" id="emailMessage"></div>
+				<label>주소</label>
+					<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
+            	<div id="list"></div>
+            	<div id="callBackDiv">
+            		<input type="text"  style="width:250px;" id="roadAddrPart1" value="${address_main}" name="address_main" class="form-control" style="width:500px;" placeholder="Enter Addr" required="true" readonly="true" /><br>
+            		<input type="text"  style="width:250px;" id="addrDetail"  value="${address_detail}" name="address_detail" />
+            	</div>
+				<label>휴대전화 번호 *</label>
+					<select name = "phone1" id="phone1">
+		              <option value="010">010</option>
+		              <option value="011">011</option>
+		              <option value="019">019</option>
+		         	</select> - 
+		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" required/> - 
+		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
+		          	<div class="check_font" id="phoneMessage"></div>
+				</fieldset>
 			<br><br>
-			<input type="button" value="취소" onclick="javascript:window.location='MainForm.do'">
+			<input type="button" value="취소" onclick="javascript:window.location='Main.do'">
 			<input type="submit" value="수정"/>  
 		</form>
 

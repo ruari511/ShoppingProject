@@ -305,8 +305,37 @@ public class MemberDAO {
 
 
    public void updateMember(MemberDTO member) {
-      // TODO Auto-generated method stub
-      
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   sql = "";
+	      
+	   try {
+		
+		   con=getConnection();	  
+		   
+		   sql="update member set password=?,email=?,address_main=?,address_detail=?,phone=?";
+		   
+		   pstmt=con.prepareStatement(sql);
+		   
+		   pstmt.setString(1, member.getPassword());
+		   pstmt.setString(2, member.getEmail());
+		   pstmt.setString(3, member.getAddress_main());
+		   pstmt.setString(4, member.getAddress_detail());
+		   pstmt.setString(5, member.getPhone());
+		   
+		   pstmt.executeUpdate();
+		   
+		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}finally {
+		if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+        if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+        if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	}
+	   
    }
 
 

@@ -38,8 +38,6 @@ public class MemberFrontController extends HttpServlet{
 		System.out.println(RequestURI);
 		
 		//  /CarProject 얻기
-		//  /CarProject 얻기
-		//  /CarProject 얻기
 		String contextPath=request.getContextPath();
 		
 		//	길이 11
@@ -152,6 +150,8 @@ public class MemberFrontController extends HttpServlet{
 			
 		//"MemberInfoModify.jsp 메인 페이지 요청"이 들어 왔을떄...
 		}else if(command.equals("/memberModify.do")){ 
+			
+			
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
@@ -162,15 +162,13 @@ public class MemberFrontController extends HttpServlet{
 		//MemberInfoModify.jsp에서... "회원수정"버튼을 눌렀을때..탈퇴 처리 요청받기!
 		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
 		}else if(command.equals("/MemberModifyAction.do")){
-			
-			//회원삭제를 위한 Action객체 생성
+			System.out.println("MemberModifyAction.do 접근");
+			//회원수정를 위한 Action객체 생성
 			action=new MemberModifyAction();
 			try{
-				//Delet.jsp에서... "회원탈퇴"요청이 들어왔을때...  
-				//세션값 "회원탈퇴성공" 메세지창을 띄어주고...
-				//CarList.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
+				//MemberInfoModift.jsp에서... "회원수정"요청이 들어왔을때...  
+				//세션값 "회원수정성공" 메세지창을 띄어주고...
 				forward=action.execute(request, response); //return null;
-	
 				
 			}catch (Exception e) {
 				e.printStackTrace();

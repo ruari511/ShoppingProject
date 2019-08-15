@@ -29,7 +29,10 @@ public class MemberModifyAction implements Action
 		
 		// 세션이 가지고있는 로그인한 ID 정보를 가져온다
 		HttpSession session = request.getSession();
-		String id = session.getAttribute("sessionID").toString();
+		String id = session.getAttribute("id").toString();
+		
+		System.out.println(request.getParameter("id"));
+		
 		
 		// 수정할 정보를 자바빈에 세팅한다.
 		MemberDTO member = new MemberDTO();
@@ -43,7 +46,6 @@ public class MemberModifyAction implements Action
 		dao.updateMember(member);
 
 		forward.setRedirect(true);
-   		forward.setPath("login.do");
 		
    		// 회원정보 수정 성공 메시지를 세션에 담는다.
    		session.setAttribute("msg", "0");
