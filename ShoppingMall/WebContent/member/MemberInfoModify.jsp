@@ -84,7 +84,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 					<input type="password" value="${password}" name="password2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
 				<label>이메일</label>
-					<input type="email" name="email" value="${email}" id="email" onblur="join_check('email')" required><br>
+					<input type="text" name="email" value="${email}" id="email" onblur="join_check('email')" required><br>
 					<div class="check_font" id="emailMessage"></div>
 				<label>주소</label>
 					<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
@@ -99,8 +99,8 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		              <option value="011">011</option>
 		              <option value="019">019</option>
 		         	</select> - 
-		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" required/> - 
-		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
+		         	<input type = "text" name ="phone2" id="phone2" maxlength="4" size = "5" required/> - 
+		          	<input type = "text" name ="phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
 		          	<div class="check_font" id="phoneMessage"></div>
 				</fieldset>
 			<br><br>

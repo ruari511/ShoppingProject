@@ -314,7 +314,7 @@ public class MemberDAO {
 		
 		   con=getConnection();	  
 		   
-		   sql="update member set password=?,email=?,address_main=?,address_detail=?,phone=?";
+		   sql="update member set password=?,email=?,address_main=?,address_detail=?,phone=? where id=?";
 		   
 		   pstmt=con.prepareStatement(sql);
 		   
@@ -323,12 +323,14 @@ public class MemberDAO {
 		   pstmt.setString(3, member.getAddress_main());
 		   pstmt.setString(4, member.getAddress_detail());
 		   pstmt.setString(5, member.getPhone());
+		   pstmt.setString(6, member.getId());
 		   
 		   pstmt.executeUpdate();
 		   
 		
 		
 	} catch (Exception e) {
+		System.out.println("updateMember()메소드 내부의 오류 : " + e);
 		e.printStackTrace();
 	}finally {
 		if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
