@@ -84,6 +84,8 @@ html, body {
 /*제품리스트*/
 .productSlide_List{
 	width: 100000px;
+	position: relative;
+	left: 0px;
 
 }
 
@@ -120,6 +122,8 @@ html, body {
 	font-size: 16px;
 	margin-top: 8px;
 	height: 40px;
+	word-wrap: break-word;
+	overflow-y: hidden;
 }
 
 .productSlide_Text *:nth-child(3){
