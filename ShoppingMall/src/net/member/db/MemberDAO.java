@@ -295,7 +295,174 @@ public class MemberDAO {
       
       return member;
    }
+   
+   /*ID 찾기 처리시.. 사용하는 메소드*/
+   //find_ID.jsp에서 사용자로부터 입력받은 이메일 값을 받아 DB에 있는지 확인
+   public int find_id(String email){
+      con=null;
+      sql="";
+      pstmt=null;
+      int check =-1;//1 -> 아이디, 비밀번호 맞음
+               //0 -> 아이디 맞음, 비밀번호 틀림
+               //-1 -> 아이디 틀림
+      rs=null;
+      try {
+         //1단계 드라이버로더
+         //2단계 디비연결
+         con=getConnection();
+         
+         //3단계 sql : email에 해당하는 email 가져오기
+         sql="select email from member where email=?";
+         pstmt=con.prepareStatement(sql);
+         pstmt.setString(1, email);
+         
+         //4단계 rs = 실행
+         rs=pstmt.executeQuery();
+        		 
+         //5단계 rs 첫번째행 이동하여.. email에 해당하는 데이터가 있으면.
+         if(rs.next()){
+            //아이디 찾을시.. 입력한 email와  DB에 저장되어 있는 email가 같으면
+            if(email.equals(rs.getString("email"))){
+               check = 1;// 이메일 맞음 판별값 저장
 
+            }
+         // 이메일에 해당하는 데이터가 없으면(아이디가 없다는 뜻과 같음)   
+         }else{
+            check =-1; //아이디 없음 판별값 저장
+         }
+      } catch (Exception e) {
+         e.printStackTrace();
+      }finally{
+         //마무리
+         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+         if(con!=null)try{con.close();}catch(SQLException ex){}
+      }
+
+      return check;
+   }
+   
+   /*PW 찾기 처리시.. 사용하는 메소드*/
+   //find_PW.jsp에서 사용자로부터 입력받은 이메일 값을 받아 DB에 있는지 확인
+   public int find_pw(String id, String phone){
+      con=null;
+      sql="";
+      pstmt=null;
+      int check = 0;//1 -> 아이디, 비밀번호 맞음
+               //0 -> 아이디 맞음, 비밀번호 틀림
+               //-1 -> 아이디 틀림
+      rs=null;
+      try {
+         //1단계 드라이버로더
+         //2단계 디비연결
+         con=getConnection();
+         
+         //3단계 sql : id에 해당하는 정보 가져오기
+         sql="select * from member where id=?";
+         pstmt=con.prepareStatement(sql);
+         pstmt.setString(1, id);
+         
+         //4단계 rs = 실행
+         rs=pstmt.executeQuery();
+        		 
+         //5단계 rs 첫번째행 이동하여.. id에 해당하는 데이터가 pass가 있으면.
+         if(rs.next()){
+            //로그인시.. 입력한 pass와  DB에 저장되어 있는 pass가 같으면
+            if(id.equals(rs.getString("id"))){
+            	if(phone.equals(rs.getString("phone"))){
+            		check = 1;// 이메일 맞음 판별값 저장
+            	}
+            }
+         // 이메일에 해당하는 데이터가 없으면(아이디가 없다는 뜻과 같음)   
+         }else{
+            check =-1; //아이디 없음 판별값 저장
+         }
+      } catch (Exception e) {
+         e.printStackTrace();
+      }finally{
+         //마무리
+         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+         if(con!=null)try{con.close();}catch(SQLException ex){}
+      }
+
+      return check;
+   }
+   
+   // 이메일 입력하여 아이디 찾기 위한 작업
+   public MemberDTO find_info_id(String email) {
+	   con=null;
+	   sql="";
+	   pstmt=null;
+	   rs=null;
+	   
+	   MemberDTO dto = new MemberDTO();
+	   
+	   try {
+	         //1단계 드라이버로더
+	         //2단계 디비연결
+	         con=getConnection();
+	         
+	         //3단계 sql : email에 해당하는 id 가져오기
+	         sql="select id from member where email=?";
+	         pstmt=con.prepareStatement(sql);
+	         pstmt.setString(1, email);
+	         
+	         //4단계 rs = 실행
+	         rs=pstmt.executeQuery();
+	        
+	         if(rs.next()){
+	        	 dto.setId(rs.getString("id"));
+	         }
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally{
+	         //마무리
+	         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+	      }
+      return dto;
+   }
+   
+   // 아이디 / 핸드폰 번호를 입력해 비밀번호 찾기 위한 작업
+   public MemberDTO find_info_pw(String id, String phone) {
+	   con=null;
+	   sql="";
+	   pstmt=null;
+	   rs=null;
+	   
+	   MemberDTO dto = new MemberDTO();
+	   
+	   try {
+	         //1단계 드라이버로더
+	         //2단계 디비연결
+	         con=getConnection();
+	         
+	         //3단계 sql : email에 해당하는 id 가져오기
+	         sql="select * from member where id=?";
+	         pstmt=con.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         
+	         //4단계 rs = 실행
+	         rs=pstmt.executeQuery();
+	        
+	         if(rs.next()){
+	        	 dto.setPassword(rs.getString("password"));
+	         }
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally{
+	         //마무리
+	         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+	      }
+      return dto;
+   }
+   
 
    public static MemberDAO getInstance() {
       // TODO Auto-generated method stub

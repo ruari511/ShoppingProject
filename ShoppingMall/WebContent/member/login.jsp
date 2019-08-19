@@ -95,7 +95,7 @@
             <div class="check_font" id="passMessage"></div>
         </div>
         <button type="submit" class="btn btn-primary" style="float: right;">로그인</button>
-        <button type="button" class="btn btn-primary id/pw" style="float: left;">아이디/비밀번호 찾기</button>
+        <input type="button" class="btn btn-primary" value="아이디/비밀번호 찾기" onclick="showPopup();" style="float: left;"/>
         
    </form>
    
@@ -303,6 +303,11 @@
 			}
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.disconnect();
+		}
+		
+		// 아이디 / 비밀번호 찾기 팝업창
+		function showPopup() {
+			window.open("./member/find_IDForm.jsp", "ID / PW 찾기", "width=600, height=520, left=1000, top=200");
 		}
 	</script>
 
