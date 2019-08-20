@@ -246,6 +246,34 @@ public class CartDAO {
 		return check;
 	}
 	
+	public void Deletecart(int cartnum){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			sql = "delete from cart where cart_num=?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cartnum);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("Deletecart()메소드 내부의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+	}
+	
 	
 	
 	
