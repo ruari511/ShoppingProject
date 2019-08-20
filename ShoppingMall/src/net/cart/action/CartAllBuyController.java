@@ -61,7 +61,7 @@ public class CartAllBuyController extends HttpServlet {
 		
 		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("Buy.jsp");
+					request.getRequestDispatcher("product/Buy.jsp");
 		//실제 재요청
 		dis.forward(request, response);	
 		

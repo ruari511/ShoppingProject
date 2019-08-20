@@ -51,7 +51,7 @@ public class CartDeleteController extends HttpServlet {
 		request.setAttribute("m", m);
 		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("Cart.jsp?num="+num);
+					request.getRequestDispatcher("product/Cart.jsp?num="+num);
 		//실제 재요청
 		dis.forward(request, response);		
 	}

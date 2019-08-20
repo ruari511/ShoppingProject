@@ -49,7 +49,7 @@ public class CartListAction extends HttpServlet {
 		request.setAttribute("m", m);
 		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("Cart.jsp");
+					request.getRequestDispatcher("product/Cart.jsp");
 		//실제 재요청
 		dis.forward(request, response);		
 	}

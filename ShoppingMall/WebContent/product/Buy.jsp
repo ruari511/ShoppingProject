@@ -236,7 +236,7 @@
 <div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="./include/Header.jsp"/>
+	<jsp:include page="../include/Header.jsp"/>
 	<!-- header// -->
 	<div id="Container">
 		<!-- #Contents -->
@@ -1111,7 +1111,7 @@
 		<button><span></span>TOP</button>
 	</div>
 	<!-- footer -->
-	<jsp:include page="./include/Footer.jsp"/>
+	<jsp:include page="../include/Footer.jsp"/>
 	<!-- footer// -->
 	</div>
 	</body>

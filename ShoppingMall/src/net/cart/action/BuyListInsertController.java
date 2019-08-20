@@ -172,7 +172,7 @@ public class BuyListInsertController extends HttpServlet {
 		request.setAttribute("buyday", thisDayMore);
 		
 		RequestDispatcher dis = 
-				request.getRequestDispatcher("BuyComplete.jsp");
+				request.getRequestDispatcher("product/BuyComplete.jsp");
 		//실제 재요청
 		dis.forward(request, response);	
 		

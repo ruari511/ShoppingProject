@@ -104,7 +104,7 @@ function selectBuy(cartnum) {
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="./include/Header.jsp"/>
+	<jsp:include page="../include/Header.jsp"/>
 	<!-- header// -->
 					
 	<div id="Container">
@@ -313,7 +313,7 @@ function selectBuy(cartnum) {
 		</div>
 	</div>
 	<!-- footer -->
-	<jsp:include page="./include/Footer.jsp"/>
+	<jsp:include page="../include/Footer.jsp"/>
 	<!-- footer// -->
 </div>
 </body>

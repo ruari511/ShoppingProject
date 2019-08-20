@@ -17,7 +17,7 @@
 	<div id="skip_navi"><a href="https://www.oliveyoung.co.kr/store/order/getOrderComplete.do#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="./include/Header.jsp"/>
+	<jsp:include page="../include/Header.jsp"/>
 	<!-- header// -->
 
 	<!-- #Container -->
@@ -186,7 +186,7 @@
 	<!--// 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
 	
 	<!-- footer -->
-	<jsp:include page="./include/Footer.jsp"/>
+	<jsp:include page="../include/Footer.jsp"/>
 	<!-- footer// -->
 </div>
 
