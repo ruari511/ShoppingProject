@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import net.buyList.db.BuyListDAO;
 import net.buyList.db.BuyListDTO;
+import net.cart.db.CartDAO;
 
 @WebServlet("/BuyListInsertController.do")
 public class BuyListInsertController extends HttpServlet {
@@ -32,14 +33,13 @@ public class BuyListInsertController extends HttpServlet {
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		
 		BuyListDTO bdto = null;
 		BuyListDAO bdao = new BuyListDAO();
+		CartDAO cdao = new CartDAO();
 		int	lastprice = 0;
 		if(request.getParameter("lastprice") != null){
 			lastprice = Integer.parseInt(request.getParameter("lastprice"));			
 		}
-		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		String ordername = request.getParameter("ordername");
@@ -79,7 +79,6 @@ public class BuyListInsertController extends HttpServlet {
 		if(allcouponnum != null){
 		String[] coupon_split = allcouponnum.split("-");
 		allcouponnum = coupon_split[0];
-		System.out.println("allcouponnum = " + allcouponnum);
 		} else{
 			allcouponnum = "0";
 		}
@@ -110,12 +109,8 @@ public class BuyListInsertController extends HttpServlet {
 		String[] cartnum = request.getParameterValues("cartnum");
 		
 		int maxbuynum = bdao.maxBuynum();
-		
 		SimpleDateFormat simpl = new SimpleDateFormat("yyyy/MM/dd");
 		String buydate = simpl.format(System.currentTimeMillis());
-		
-		SimpleDateFormat simpl1 = new SimpleDateFormat("yyyyMMdd");
-		int buydate1 = Integer.parseInt(simpl1.format(System.currentTimeMillis()))+1;
 		
 		String thisDayMore = buydate.replaceAll("/","");
         int thisDayMoreInt = Integer.parseInt(thisDayMore);
@@ -127,42 +122,40 @@ public class BuyListInsertController extends HttpServlet {
 		try {
 			date = sdfmt.parse(thisDayMore);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
         thisDayMore = new java.text.SimpleDateFormat ("yyyy.MM.dd").format(date);
         
-        System.out.println("thisDayMore = " + thisDayMore); 
-		
 		if(cartnum != null){
-		for(int i=0; i<cartnum.length; i++){
-			bdto = new BuyListDTO();
+			for(int i=0; i<cartnum.length; i++){
+				bdto = new BuyListDTO();
 			
-			bdto.setBuynum(maxbuynum);
-			bdto.setId(id);
-			bdto.setOrder_name(ordername);
-			bdto.setOrder_mtel(orderphone);
-			bdto.setOrder_email(orderemail);
-			bdto.setBuydate(buydate);
-			bdto.setProduct_num(bdao.selectPronum(Integer.parseInt(cartnum[i])));
-			bdto.setProduct_count(bdao.selectProcount(Integer.parseInt(cartnum[i])));
-			bdto.setAll_coupon_num(Integer.parseInt(allcouponnum));
-			bdto.setDelivery_coupon_num(Integer.parseInt(delcouponnum));
-			bdto.setPoint(Integer.parseInt(inpoint));
-			bdto.setDelivery_title(delivery_title);
-			bdto.setDelivery_cost(delivery_cost);
-			bdto.setDelivery_result("배송준비중");
-			bdto.setDelivery_name(delivery_name);
-			bdto.setDelivery_mtel(delivery_phone);
-			bdto.setDelivery_address("배송주소");
-			bdto.setDelivery_message(del_message);
-			bdto.setPayments(paytype);
+				bdto.setBuynum(maxbuynum);
+				bdto.setId(id);
+				bdto.setOrder_name(ordername);
+				bdto.setOrder_mtel(orderphone);
+				bdto.setOrder_email(orderemail);
+				bdto.setBuydate(buydate);
+				bdto.setProduct_num(bdao.selectPronum(Integer.parseInt(cartnum[i])));
+				bdto.setProduct_count(bdao.selectProcount(Integer.parseInt(cartnum[i])));
+				bdto.setAll_coupon_num(Integer.parseInt(allcouponnum));
+				bdto.setDelivery_coupon_num(Integer.parseInt(delcouponnum));
+				bdto.setPoint(Integer.parseInt(inpoint));
+				bdto.setDelivery_title(delivery_title);
+				bdto.setDelivery_cost(delivery_cost);
+				bdto.setDelivery_result("배송준비중");
+				bdto.setDelivery_name(delivery_name);
+				bdto.setDelivery_mtel(delivery_phone);
+				bdto.setDelivery_address("배송주소");
+				bdto.setDelivery_message(del_message);
+				bdto.setPayments(paytype);
+				
+				cdao.Deletecart(Integer.parseInt(cartnum[i]));
 			
-			bdao.insertBuyList(bdto);
-		}
-		}
-		
+				bdao.insertBuyList(bdto);
+			}
+		} 
 		
 		int totalprice = bdao.buytotalprice(maxbuynum);
 		int limit = bdao.coupon_limitmax(maxbuynum);
@@ -171,10 +164,6 @@ public class BuyListInsertController extends HttpServlet {
 		totalsaleprice = totalsaleprice + point;
 		int delivery_cost1 = bdao.delivery_cost(maxbuynum);
 		BuyListDTO buylist = bdao.getBuyList(maxbuynum);
-		
-		
-		System.out.println("totalprice = " + totalprice);
-		System.out.println("totalsaleprice = " + totalsaleprice);
 		
 		request.setAttribute("totalprice", totalprice);
 		request.setAttribute("totalsaleprice", totalsaleprice);
