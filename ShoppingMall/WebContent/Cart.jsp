@@ -133,7 +133,9 @@ function selectBuy(cartnum) {
 			</div>
 			<h2 class="sub-title2">
 						올리브영 배송상품
-			</h2>	
+			</h2>
+			
+			
 			<form action="CartBuyController.do" method="post">		
 			<table class="tbl_prd_list tableFix">
 				<caption>올리브영 배송상품 장바구니 목록</caption>
@@ -157,8 +159,17 @@ function selectBuy(cartnum) {
 					<th scope="col">선택</th>					
 				</tr>
 				</thead>
+			<c:choose>	
+				<c:when test="${requestScope.v eq '[]'}">
 				<tbody>
-<c:forEach var="cartlist"  items="${requestScope.v}" varStatus="idx">
+					<tr>
+						<td colspan="7" class="no_data">장바구니에 저장된 상품이 없습니다.</td>
+					</tr>
+				</tbody>
+				</c:when>
+				<c:otherwise>	
+				<tbody>
+				<c:forEach var="cartlist"  items="${requestScope.v}" varStatus="idx">
 	<c:set var="sum" value="${sum = sum + cartlist.product_price*cartlist.product_count}"/>
 	<c:set var="discount" value="${discount = discount + cartlist.discount*cartlist.product_count}" />
 	<fmt:parseNumber var= "pages" integerOnly= "true" value= "${discount}" />
@@ -231,8 +242,10 @@ function selectBuy(cartnum) {
 	
 </c:forEach>
 </tbody>
+</c:otherwise>
+</c:choose>
 </table>
-		
+		<c:if test="${requestScope.v ne '[]'}">
 			<!--// 올리브영 배송상품 -->
 			<!-- 올리브영 배송상품 결제금액 -->
 			<div class="basket_price_info">
@@ -295,10 +308,10 @@ function selectBuy(cartnum) {
 				<button type="submit" class="btnOrangeW" name="partOrderBtn">선택주문</button>
 				<button type="button" class="btnOrange" name="allOrderBtn" onclick="location.href='CartAllBuyController.do'">전체주문</button>
 			</div>
+			</c:if>
 			</form>
 		</div>
 	</div>
-
 	<!-- footer -->
 	<jsp:include page="./include/Footer.jsp"/>
 	<!-- footer// -->
