@@ -51,7 +51,7 @@
 						<li>
 							<p>
 								쿠폰존에서 다운받을 수 있는<br>쿠폰을 한눈에 확인하세요.
-							</p> <a href="#none" id="goCouponZon" name="goCouponZon">쿠폰존 바로가기</a>
+							</p> <a href="./Coupon.cp" id="goCouponZon" name="goCouponZon">쿠폰존 바로가기</a>
 						</li>
 						<li>
 							<p>
@@ -91,15 +91,15 @@
 								<tr data-day-cnt="30" data-cpn-cd="RpM21aGK7dc="
 									data-cpn-no="g0CzCBI3VCbN1WY2UmNt7w==" data-expire-s-date=""
 									data-expire-e-date="">
-									<td><span class="coupon-inner percent"> 5 % </span><br></td>
-									<td class="subject">앱 첫구매 5% 중복쿠폰 <span class="icon-app">APP전용</span>
+									<td><span class="coupon-inner percent"> (쿠폰퍼센트) % </span><br></td>
+									<td class="subject">(쿠폰명) 
 
 									</td>
-									<td class="colorGrey"><span class="price"> 30,000</span>원
-										이상 <br>(최대 <span class="price"> 5,000</span>원)</td>
+									<td class="colorGrey"><span class="price"> (조건)</span>원
+										이상 <br>(최대 <span class="price"> (부가조건)</span>원)</td>
 
-									<td class="colorGrey">2019.08.07 <br>~2019.09.06
-
+									<td class="colorGrey">(시작날짜) <br>~(마감날짜)
+	
 
 									</td>
 								</tr>

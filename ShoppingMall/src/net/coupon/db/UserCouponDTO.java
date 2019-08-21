@@ -1,11 +1,13 @@
-package coupon;
+package net.coupon.db;
+
+import java.sql.Timestamp;
 
 public class UserCouponDTO {
 	
 	private int coupon_num;
 	private String id;
-	private String start_date;
-	private String last_date;
+	private Timestamp start_date;
+	private Timestamp last_date;
 	private int usecheck;
 	
 	private String coupon_name;
@@ -49,16 +51,16 @@ public class UserCouponDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getStart_date() {
+	public Timestamp getStart_date() {
 		return start_date;
 	}
-	public void setStart_date(String start_date) {
+	public void setStart_date(Timestamp start_date) {
 		this.start_date = start_date;
 	}
-	public String getLast_date() {
+	public Timestamp getLast_date() {
 		return last_date;
 	}
-	public void setLast_date(String last_date) {
+	public void setLast_date(Timestamp last_date) {
 		this.last_date = last_date;
 	}
 	public int getUsecheck() {

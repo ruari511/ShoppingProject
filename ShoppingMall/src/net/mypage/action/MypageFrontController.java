@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.action.Action;
 import net.action.ActionForward;
+import net.member.action.MemberJoinAction;
 
 
 public class MypageFrontController extends HttpServlet{
@@ -46,8 +47,9 @@ public class MypageFrontController extends HttpServlet{
 	
 		//자식 Action 객체들을 담을 인터페이스 타입의 참조변수 선언
 		Action action=null;
-			
-		if(command.equals("/mypage.mypage")){
+		
+		// 마이페이지 메인
+		if(command.equals("/mypage.mp")){
 		
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
@@ -56,8 +58,88 @@ public class MypageFrontController extends HttpServlet{
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
 			forward.setPath("./Main.jsp?section=./myPage/mypage_Main.jsp");
 			
-		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
+		// 마이페이지 주문취소리스트
+		}else if(command.equals("/mypage_OrderCancelList.mp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./myPage/mypage_OrderCancelList.jsp");
+		
+		// 마이페이지 장바구니
+		}else if(command.equals("/Cart.jsp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./Cart.jsp");
+		
+		// 마이페이지 포인트
+		}else if(command.equals("/mypage_PointInfo.mp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./myPage/mypage_PointInfo.jsp");
+		
+		// 마이페이지 상품평
+		}else if(command.equals("/mypage_coupon.mp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./myPage/mypage_coupon.jsp");
+		
+		// 마이페이지 상품평
+		}else if(command.equals("/mypage_Review.mp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./myPage/mypage_Review.jsp");
+		
+		// 마이페이지 상품Q&A	
+		}else if(command.equals("/mypage_GoodsQnaList.mp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./myPage/mypage_GoodsQnaList.jsp");
+		
+		// 마이페이지 회원정보 수정	
+		}else if(command.equals("/MemberInfoModify.jsp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./member/MemberInfoModify.jsp");
+		
+		// 마이페이지 회원탈퇴	
+		}else if(command.equals("/MemberOut.jsp")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./member/MemberOut.jsp");
+			
 		}
+				
 		
 		//주소 이동
 		if(forward!=null){ //new ActionForward()객체가 존재 하고..

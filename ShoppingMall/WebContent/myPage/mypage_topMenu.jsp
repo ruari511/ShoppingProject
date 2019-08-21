@@ -41,18 +41,18 @@
 				<li><h2>마이 쇼핑</h2>
 					<ul class="first">
 						<li class="subMenu"><a href="javascript:;" myMenuId="0101">주문/배송 조회</a></li>
-						<li class="subMenu"><a href="mypage_OrderCancelList.jsp" myMenuId="0102">취소/반품/교환 내역</a></li>
+						<li class="subMenu"><a href="mypage_OrderCancelList.mp" myMenuId="0102">취소/반품/교환 내역</a></li>
 						<li class="subMenu"><a href="Cart.jsp" myMenuId="0201">장바구니</a></li>
 					</ul>
 					<ul>
-						<li class="subMenu"><a href="mypage_PointInfo.jsp" myMenuId="0301">포인트</a></li>
-						<li class="subMenu"><a href="mypage_coupon.jsp" myMenuId="0302">쿠폰</a></li>
+						<li class="subMenu"><a href="mypage_PointInfo.mp" myMenuId="0301">포인트</a></li>
+						<li class="subMenu"><a href="mypage_coupon.mp" myMenuId="0302">쿠폰</a></li>
 					</ul>
 				</li>
 				<li><h2>마이 활동</h2>
 					<ul>
-						<li class="subMenu"><a href="mypage_Review.jsp" myMenuId="0402">상품평</a></li>
-						<li class="subMenu"><a href="mypage_GoodsQnaList.jsp" myMenuId="0403">상품Q&amp;A내역</a></li>
+						<li class="subMenu"><a href="mypage_Review.mp" myMenuId="0402">상품평</a></li>
+						<li class="subMenu"><a href="mypage_GoodsQnaList.mp" myMenuId="0403">상품Q&amp;A내역</a></li>
 					</ul>
 				</li>
 				<li><h2>마이 정보</h2>
