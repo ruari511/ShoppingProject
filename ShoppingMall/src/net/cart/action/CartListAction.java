@@ -33,8 +33,6 @@ public class CartListAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
-		/*DB에 존재하는 전체 차량 을 검색하기 위한 작업 */
-		//데이터베이스에 접근해서 작업할  자바빈 역할을 하는 CarDAO객체 생성
 		CartDAO cdao = new CartDAO();
 		
 		MemberDAO mdao = new MemberDAO();
