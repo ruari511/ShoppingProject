@@ -62,12 +62,6 @@
 		
 	}
 	
-	function count_change(a, idx) {
-		
-		document.getElementsByName("updatecount")[idx].value = a.value;
-	}
-
-
 function checkAll(bool) {
  var all_input = document.getElementsByTagName("input");
  for(var i=0;i<all_input.length;i++) {
@@ -77,9 +71,9 @@ function checkAll(bool) {
  
 }
 
-function updateCart(idx) {
+function updateCart_text(idx) {
 	
-	var updatecount = document.getElementsByName("updatecount")[idx].value;
+	var updatecount = document.getElementsByName("product_text")[idx].value;
 	
 	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
 	
@@ -195,23 +189,10 @@ function selectBuy(cartnum) {
 				</div>
 				<div class="tbl_cell w100">
 					<div class="prd_cnt">
-						<select class="amount" name="s_amount" id="productsel" onchange="count_change(this, ${idx.index});">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="10+">10+</option>
-						</select>	
+						<input type="text" name="product_text" width="60px;" value="${cartlist.product_count}">
 					</div>
-					<input type="hidden" name="updatecount" value="${cartlist.product_count}">
 					<input type="hidden" name="updatecartnum" value="${cartlist.cart_num}">
-					<button type="button" class="btnSmall wGray" name="btnQtyMod" onclick="updateCart(${idx.index})"><span>변경</span></button>
+					<button type="button" class="btnSmall wGray" name="btnQtyMod" onclick="updateCart_text(${idx.index})"><span>변경</span></button>
 				</div>
 				<div class="tbl_cell w110">
 					<span class="org_price">
