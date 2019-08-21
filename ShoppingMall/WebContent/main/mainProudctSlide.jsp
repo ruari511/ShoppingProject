@@ -106,11 +106,11 @@
 				</div>
 				
 					<div class="productSlide_ArrowBtn_Left">
-						<input type="button" value="&lt;" onclick="LeftButton(1);" >
+						<input type="button" class="slick-arrow slick-prev" onclick="LeftButton(1);" >
 					</div>
 				
 					<div class="productSlide_ArrowBtn_Right">
-						<input type="button" value="&gt" onclick="RightButton(1);">
+						<input type="button" class="slick-arrow slick-next" onclick="RightButton(1);">
 					</div>
 				
 				<div class="productSlide_Contents_Wrap">
