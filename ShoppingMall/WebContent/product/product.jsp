@@ -1,43 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../asset/css/global.css"/> 
-<link rel="stylesheet" href="../asset/css/product.css"/> 
+<link rel="stylesheet" href="./asset/css/global.css"/> 
+<link rel="stylesheet" href="./asset/css/product.css"/> 
+<% String id = (String)session.getAttribute("id"); %>
+<script type="text/javascript">
+function minuscount(num){
+	var product_price = document.getElementById("product_price").value;
+	var count = Number(document.getElementById("product_count").value) + num;
+	
+	if(count<1){
+		count=1;
+		alert("최소 1개이상 구매할 수 있는 상품입니다.");
+	}
+	document.getElementById("product_count").value = count;
+	document.getElementById("totalPrice").value = product_price*count;
+	document.getElementById("totalPriceTxt").innerHTML = product_price*count;
+}
+
+function pluscount(num){
+	var product_price = document.getElementById("product_price").value;
+	var count = Number(document.getElementById("product_count").value) + num;
+	
+	document.getElementById("product_count").value = count;
+	document.getElementById("totalPrice").value = product_price*count;
+	document.getElementById("totalPriceTxt").innerHTML = product_price*count;
+}
+
+function product_detailOn(){
+	document.getElementById("productInfo").setAttribute("class", "on");
+	document.getElementById("buyInfo").removeAttribute("class");
+	document.getElementById("product_detail").style.display="block";
+	document.getElementById("buy_detail").style.display="none";
+}
+
+function buy_detailOn(){
+	document.getElementById("buyInfo").setAttribute("class", "on");
+	document.getElementById("productInfo").removeAttribute("class");
+	document.getElementById("product_detail").style.display="none";
+	document.getElementById("buy_detail").style.display="block";
+}
+
+function goCart() {
+	var id = '<%=id%>';
+	var product_num = document.getElementById("product_num").value;
+	var product_count = document.getElementById("product_count").value;
+	
+	if(id==null){
+		location.href="./login.do";
+	} else{
+		location.href="CartInsertController.do?product_num="+product_num+"&product_count="+product_count;
+	}
+}
+</script>
 </head>
 <body>
-
-
-
-
 <!-- header -->
 	<jsp:include page="../include/Header.jsp"/>
 <!-- header// -->
 	
 <div id="Container">
 	<div id="Contents">
+	<c:set var="product" value="${requestScope.pdto}" />
+	<input type="hidden" id="product_num" value="${product.product_num}">
 		<!-- 상단 카테고리 history -->
 		<div class="page_location">
 			<a href="" class="loc_home">홈</a>
 			<ul class="loc_history">
 				<li>
-					<a href="" class="cate_y">건강/위생용품</a>
+					<a href="" class="cate_y">${product.category_main}</a>
 					<div class="history_cate_box" style="width: 122px;">
 						<ul>
-							<li><a href="" class="on">건강/위생용품</a></li>
+							<li><a href="" class="on">${product.category_main}</a></li>
 							<li><a href="" class="goods_category1">건강식품</a></li>
 							<li><a href="" class="goods_category1">일반식품</a></li>
 						</ul>
 					</div>
 				</li>
 				<li>
-					<a href="" class="cate_y">덴탈케어</a>
+					<a href="" class="cate_y">${product.category_sub}</a>
 					<div class="history_cate_box" style="width: 122px;">
 						<ul>
-							<li><a href="" class="on">덴탈케어</a></li>
+							<li><a href="" class="on">${product.category_sub}</a></li>
 							<li><a href="" class="goods_category2">아이케어</a></li>
 							<li><a href="" class="goods_category2">여성/위생용품</a></li>
 							<li><a href="" class="goods_category2">마사지/교정/헬스용품</a></li>
@@ -46,11 +95,11 @@
 					</div>
 				</li>
 				<li>
-					<a href="" class="cate_y">치약</a>
+					<a href="" class="cate_y">${product.category_sub}</a>
 					<div class="history_cate_box" style="width: 122px;">
 						<ul>
 							<li><a href="" class="goods_category3">칫솔</a></li>
-							<li><a href="" class="on">치약</a></li>
+							<li><a href="" class="on">${product.category_sub}</a></li>
 							<li><a href="" class="goods_category3">전동칫솔</a></li>
 							<li><a href="" class="goods_category3">치실/치간칫솔</a></li>
 							<li><a href="" class="goods_category3">치아미백용품</a></li>
@@ -66,11 +115,11 @@
 		<div class="prd_detail_box">
 			<div class="left_area">
 				<div class="prd_img">
-					<img src="../asset/image/product_sum.jpg" alt="상품명 이미지">
+					<img src="./asset/image/${product.img_main}" alt="상품명 이미지">
 				</div>
 				<ul class="prd_thumb_list">
-					<li class="sel"><a href=""><img src="../asset/image/product_sum.jpg" alt="썸네일이미지""></a></li>
-					<li class=""><a href=""><img src="../asset/image/product_sum2.jpg" alt="썸네일이미지"></a></li>
+					<li class="sel"><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지""></a></li>
+					<li class=""><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
 				</ul>
 			</div>
 			<div class="right_area">
@@ -82,18 +131,19 @@
 						루치펠로
 						<a href="javascript:;" class="link_brand2 goods_brandall" id="moveBrandShop">브랜드 상품 전체보기</a>
 					</p>
-					<p class="prd_name">[온라인단독] 루치펠로 치약3종</p>
+					<p class="prd_name">[온라인단독] ${product.product_name}</p>
 					<p class="prd_flag">				
 						<span class="icon_flag sale">세일</span>
 					</p>
 					<ul class="info_list">
 						<li>
 							<span class="tx_tit">판매가</span> 
-							<span class="tx_cont org_price"><span class="tx_num">29,400</span>원</span>
+							<span class="tx_cont org_price"><span class="tx_num">${product.product_price}</span>원</span>
 						</li>
 						<li>
 							<span class="tx_tit">세일가</span> 
-							<span class="tx_cont cur_price"><span class="tx_num">25,750</span>원</span>
+							<span class="tx_cont cur_price"><span class="tx_num">${product.product_price-product.product_sale_price}</span>원</span>
+							<input type="hidden" id="product_price" value="${product.product_price-product.product_sale_price}">
 						</li>
 						<li>
 							<span class="tx_tit">카드할인혜택 <a href="javascript:goods.detail.openCardFullPop();" class="ico_info">카드혜택안내 레이어열기</a></span>
@@ -132,22 +182,21 @@
 						<div class="tit_area"><span>구매수량</span></div>
 						<div class="cont_area">
 							<span class="option_cnt_box">
-								<button class="btnCalc minus" onclick="">수량 1감소</button>
-								<input type="text" id="cartCnt_A000000120659001" name="cartCnt_A000000120659001" value="1" class="tx_num" title="구매수량">
-								<button class="btnCalc plus" onclick="">수량 1증가</button>
+								<button class="btnCalc minus" onclick="minuscount(-1);">수량 1감소</button>
+								<input type="text" id="product_count" name="product_count" value="1" class="tx_num" title="구매수량">
+								<button class="btnCalc plus" onclick="pluscount(1);">수량 1증가</button>
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="prd_total_price">
 					<span class="tx_tit">상품금액 합계</span>
-					<input type="hidden" id="totalCnt" value="1" name="totalCnt">
-					<input type="hidden" id="totalPrc" value="25750" name="totalPrc">
-					<span class="tx_cont"><span class="tx_num" id="totalPrcTxt">25,750</span>원</span>
+					<input type="hidden" id="totalPrice" value="${product.product_price-product.product_sale_price}" name="totalPrice">
+					<span class="tx_cont"><span class="tx_num" id="totalPriceTxt">${product.product_price-product.product_sale_price}</span>원</span>
 				</div>
 				<div class="prd_btn_area">
-					<button class="btnBasket  goods_cart" onclick="">장바구니</button>
-					<button class="btnBuy goods_buy" id="cartBtn" onclick="">구매하기</button>
+					<button class="btnBasket  goods_cart" onclick="goCart();">장바구니</button>
+					<button class="btnBuy goods_buy" id="cartBtn" onclick="goBuy();">구매하기</button>
 					<button class="btnZzim  goods_wish">찜하기</button>
 				</div>
 			</div>
@@ -156,16 +205,18 @@
 		<div class="curation_area_a003_lead"></div>
 		<!-- 큐레이션 2차 E -->
 		<ul class="prd_detail_tab" id="tabList">
-			<li class="on" id="productInfo"><a href="javascript:;" class="goods_detailinfo">상세정보</a></li>
-			<li id="buyInfo"><a href="javascript:;" class="goods_buyinfo">구매정보</a></li>
+			<li class="on" id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo">상세정보</a></li>
+			<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo">구매정보</a></li>
 			<li id="reviewInfo"><a href="javascript:;" class="goods_reputation">상품평<span>(0)</span></a></li>
 			<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
 		</ul>
+		
+		
 		<!-- 상세정보 탭이 on일경우 -->
-		<div class="tabConts prd_detail_cont show" style="display:block;">
+		<div class="tabConts prd_detail_cont show" id="product_detail" style="display:block;">
 			<div class="detail_area">
 				<div class="contEditor">
-					<img alt="" src="../asset/image/product.jpg">
+					<img alt="" src="./asset/image/${product.img_contents}">
 				</div>
 				<div style="text-align:center;padding:20px 0px 0px 0px;">
 					<p style="display:inline-block;font-size:14px;border:1px solid #ddd;padding:10px 40px 10px 40px;text-align:center;">본 상품 정보(상품 상세, 상품 설명 등)의 내용은 협력사가 직접 등록한 것 입니다.</p>
@@ -174,8 +225,11 @@
 		</div>
 		<!-- 상세정보 탭이 on일경우 -->
 		
+		
+		
+		
 		<!-- 구매정보 탭이 on일경우 -->
-		<div class="tabConts prd_detail_cont" style="display:none;">
+		<div class="tabConts prd_detail_cont" id="buy_detail" style="display:none;">
 			<h3 class="detail_tit">상품정보 제공고시</h3>
 			<div id="artcInfo">		
 				<dl class="detail_info_list">
