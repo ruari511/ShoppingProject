@@ -57,6 +57,18 @@ function goCart() {
 		location.href="CartInsertController.do?product_num="+product_num+"&product_count="+product_count;
 	}
 }
+
+function goBuy() {
+	var id = '<%=id%>';
+	var product_num = document.getElementById("product_num").value;
+	var product_count = document.getElementById("product_count").value;
+	
+	if(id==null){
+		location.href="./login.do";
+	} else{
+		location.href="GoBuyController.do?product_num="+product_num+"&product_count="+product_count;
+	}
+}
 </script>
 </head>
 <body>
