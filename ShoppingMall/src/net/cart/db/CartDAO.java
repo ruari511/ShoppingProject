@@ -120,6 +120,56 @@ public class CartDAO {
 		return cartDTO;
 	}//getCartList() 메소드 끝
 	
+	public void InsertCart(int product_num, String id, int count){
+		
+		int pro_count = 0;
+		int cart_num = 0;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			sql = "select product_count, cart_num from cart where product_num=? and id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_num);
+			pstmt.setString(2, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				pro_count = rs.getInt(1);
+				cart_num = rs.getInt(2);
+				sql = "update cart set product_count=? where cart_num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, pro_count+count);
+				pstmt.setInt(2, cart_num);
+				pstmt.executeUpdate();
+			}else{
+				sql = "insert into cart values(null, ?, ?, ?)";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_num);
+				pstmt.setString(2, id);
+				pstmt.setInt(3, count);
+				
+				pstmt.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("insertCart()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
 	public int updateCart(int cart_num, int count){
 		
 		int up = 1;
