@@ -32,10 +32,19 @@ html, body {
 }
 
 #mainBanner_Btn{
-	position: absolute;
-	top: 380px;
-	left: 60%;
 	z-index: 10;
+    position: absolute;
+    top: 0;
+    width: 1020px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#mainBanner_Btn_Wrap{
+	position: absolute;
+    left: 20%;
+    top: 380px;
 }
 
 #mainBanner_Btn Button{
@@ -64,6 +73,10 @@ html, body {
 	position:relative;
 }
 
+#pauseBtn{
+	background:url(../image/ico_autoplay.png) no-repeat 0 0;text-indent:-9999px 
+}
+
 .mainBanner_Img_Wrap a{
 position: relative;
 	left: 50%;
@@ -87,7 +100,7 @@ position: relative;
 }
 
 .mainBanner_Img_Text *:nth-child(1){
-	font-size: 30px;
+	font-size: 24px;
 }
 .mainBanner_Img_Text *:nth-child(1)::after{
 	content: '';
@@ -101,12 +114,12 @@ position: relative;
 
 .mainBanner_Img_Text *:nth-child(2){
 	margin-top: 20px;
-	font-size: 48px;
+	font-size: 40px;
 	line-height: 1.5;
 }
 .mainBanner_Img_Text *:nth-child(3){
 	margin-top: 20px;
-	font-size: 40px;
+	font-size: 30px;
 	line-height: 1.5;
 }
 

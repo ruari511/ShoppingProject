@@ -1,0 +1,140 @@
+@CHARSET "UTF-8";
+*{box-sizing: border-box;}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#content{
+	width: 1020px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#productSlide{
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.productSlide_Wrap{
+	position:relative;
+	width: 1020px;
+	height: 400px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/*왼쪽 오른쪽 버튼*/
+.productSlide_ArrowBtn_Left{
+	position: absolute;
+	left: -60px;	
+}
+
+.productSlide_ArrowBtn_Right{
+	position: absolute;
+	right: -60px;	
+}
+
+
+.productSlide_ArrowBtn_Left, .productSlide_ArrowBtn_Right{
+	top: 50%;
+	z-index: 999;
+}
+.productSlide_ArrowBtn_Left>*, .productSlide_ArrowBtn_Right>*{
+	top: 50%;
+	font-size: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+/*타이틀*/
+.productSlide_Title{
+	margin: 10px 0;
+	height: 30px;
+}
+
+.productSlide_Title>p{
+	text-align: center;	
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.productSlide_Title>p::after{
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background-color: gray;
+	margin-top: 20px;
+}
+
+/*제품영역*/
+.productSlide_Contents_Wrap{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding-top: 20px;
+	z-index: 1;
+}
+
+/*제품리스트*/
+.productSlide_List{
+	width: 100000px;
+	position: relative;
+	left: 0px;
+}
+
+
+.productSlide_Content{
+	float: left;
+	display: inline;
+	width: 255px;
+	padding:0 30px;
+}
+
+.productSlide_Content *{
+	clear: both;
+	text-align: center;
+}
+
+.productSlide_Content img{
+	width: 100%;
+	height: 200px;
+}
+
+
+.productSlide_Text {
+	margin-top: 10px;
+}
+
+.productSlide_Text *:nth-child(1){
+	font-size: 15px;
+	font-weight: bold;
+	color: gray;
+}
+
+.productSlide_Text *:nth-child(2){
+	font-size: 16px;
+	margin-top: 8px;
+	height: 40px;
+	word-wrap: break-word;
+	overflow-y: hidden;
+}
+
+.productSlide_Text *:nth-child(3){
+	font-size: 18px;
+	color: orange;
+	font-weight: bold;
+	margin-top: 5px;
+
+}
+
+
+
+
