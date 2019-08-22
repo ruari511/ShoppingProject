@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="net.product.db.ProductDTO"%>
+<%@page import="net.product.db.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,23 +15,6 @@
 
 <script type="text/javascript">
 
-	/* input hidden으로 각 슬라이드마다 현재 인덱스값을 저장
-	
-	전체인덱스값은...음... ul의 갯수 새기..?
-			
-	로 할려고 했는 데 data-* 값 이용하기
-	https://www.zerocho.com/category/HTML&DOM/post/5a76d1eaabd090001b981ba6
-	
-	
-	오른쪽 이동 : 현재 인덱스값 +1 * 1020
-	
-	왼쪽: 반대
-	
-	번호 눌러서 이동 : 선택한번호값 * 1020
-	
-	마지막번호인지 첫ㅅ번재 번호인지 꼭 확인 
-	
-	슬라이드만들때 : 맨앞에 마지막꺼 붙이고 맨뒤엔 첫번재꺼 중복으로 붙인다 */
 	$(function(){
 		
 		$(".productSlide_List").each(function(index, item){

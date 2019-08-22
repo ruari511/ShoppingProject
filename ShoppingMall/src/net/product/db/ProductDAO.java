@@ -3,6 +3,7 @@ package net.product.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -70,7 +71,58 @@ public class ProductDAO {
 	}
 	
 	
-	
+	//190821김현정 
+	//메인 슬라이드에서 상품 목록 불러오는 함수
+	public ArrayList<ProductDTO> getProductLimitList(int category_main, int category_sub, int limit){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ArrayList<ProductDTO> arr = new ArrayList<ProductDTO>();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select * from product where category_main=? and category_sub=? limit ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, category_main);
+			pstmt.setInt(2, category_sub);
+			pstmt.setInt(3, limit);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				ProductDTO pdto = new ProductDTO();
+				
+
+				pdto.setCategory_main(rs.getString("category_main"));
+				pdto.setCategory_sub(rs.getString("category_sub"));
+				pdto.setProduct_name(rs.getString("product_name"));
+				pdto.setProduct_price(rs.getInt("product_price"));
+				pdto.setImg_main(rs.getString("img_main"));
+				pdto.setBrand(rs.getString("brand"));
+				pdto.setPrice_count(rs.getInt("price_count"));
+				
+				arr.add(pdto);
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getProductLimit()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		
+		
+		return arr;
+	}
 	
 	
 }
