@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- 현재 페이지에서 JSTL의 core라이브러리에 속한 태그들을 사용 하기 위한 설정
+	core라이브러리에 속한 태그는? 접두사 c를 이용한다. 
+ --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 <html>
 <head>
 <meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -85,23 +90,23 @@
 								</tr>
 							</thead>
 							<tbody id="onCpnList" name="onCpnList">
-
-
-
 								<tr data-day-cnt="30" data-cpn-cd="RpM21aGK7dc="
 									data-cpn-no="g0CzCBI3VCbN1WY2UmNt7w==" data-expire-s-date=""
 									data-expire-e-date="">
-									<td><span class="coupon-inner percent"> (쿠폰퍼센트) % </span><br></td>
-									<td class="subject">(쿠폰명) 
-
-									</td>
-									<td class="colorGrey"><span class="price"> (조건)</span>원
-										이상 <br>(최대 <span class="price"> (부가조건)</span>원)</td>
-
-									<td class="colorGrey">(시작날짜) <br>~(마감날짜)
-	
-
-									</td>
+									<c:set var="coupon" value="${requestScope.cou}"/>
+									<c:choose>
+										<c:when test="${coupon eq null}">
+											<td colspan="4"> 사용 가능한 쿠폰이 없습니다.</td>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="couponlist" items="${requestScope.cou}">
+											<td><span class="coupon-inner percent"> ${couponlist.coupon_percent} %</span></td>
+											<td class="subject">${couponlist.coupon_name}</td>
+											<td class="colorGrey"><span class="price"> 최대 <span class="price">${couponlist.coupon_limitmax}</span>원</td>
+											<td class="colorGrey">${couponlist.start_date} <br>~${couponlist.last_date}</td>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 							</tbody>
 						</table>

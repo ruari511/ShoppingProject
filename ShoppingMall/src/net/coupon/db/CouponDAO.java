@@ -201,12 +201,15 @@ public Vector<UserCouponDTO> getAllCouponList_MP(String id){
 	try {
 		con = getConnection();
 		
-		sql  = "select c.coupon_name, c.coupon_percent, "
-			 + "c.coupon_limitmax, c.coupon_type, u.start_date, u.last_date, "
-			 + "u.usecheck"
-			 + "from coupon c join user_coupon u "
-			 + "on c.coupon_num = u.coupon_num "
-			 + "where u.id=?";
+//		sql  = "select c.coupon_name, c.coupon_percent, "
+//			 + "c.coupon_limitmax, c.coupon_type, u.start_date, u.last_date, u.usecheck"
+//			 + "from coupon c join user_coupon u "
+//			 + "on c.coupon_num = u.coupon_num "
+//			 + "where u.id= 'master' ";
+		
+		sql = "select * from coupon natural join user_coupon where id = ?";
+		
+		
 		
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
@@ -217,20 +220,20 @@ public Vector<UserCouponDTO> getAllCouponList_MP(String id){
 			
 			UserCouponDTO ucouDTO = new UserCouponDTO();
 			
-			ucouDTO.setUsecheck(rs.getInt("usecheck"));
+			ucouDTO.setCoupon_name(rs.getString("coupon_name"));
 			ucouDTO.setCoupon_percent(rs.getInt("coupon_percent"));
 			ucouDTO.setCoupon_limitmax(rs.getInt("coupon_limitmax"));
+			ucouDTO.setCoupon_type(rs.getString("coupon_type"));
 			ucouDTO.setStart_date(rs.getTimestamp("start_date"));
 			ucouDTO.setLast_date(rs.getTimestamp("last_date"));
-			ucouDTO.setCoupon_name(rs.getString("coupon_ ame"));
-			ucouDTO.setCoupon_type(rs.getString("coupon_type"));
-			
+			ucouDTO.setUsecheck(rs.getInt("usecheck"));
+				
 			couponList.add(ucouDTO);
 			
 		}
 		
 	} catch (Exception e) {
-		System.out.println("getAllCouponList()메소드 내부에서의 오류 : " + e);
+		System.out.println("getAllCouponList_MP()메소드 내부에서의 오류 : " + e);
 	} finally{
 		if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
 		if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}

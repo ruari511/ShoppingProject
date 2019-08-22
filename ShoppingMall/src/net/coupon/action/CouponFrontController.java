@@ -72,8 +72,7 @@ public class CouponFrontController extends HttpServlet{
 			forward.setPath("./Main.jsp?section=./Coupon.jsp");
 			
 		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
-		}
-		else if(command.equals("/CouponInsertAction.cp")){
+		}else if(command.equals("/CouponInsertAction.cp")){
 	
 			
 			//쿠폰 삽입 처리를 위한 Action객체 생성
@@ -89,6 +88,17 @@ public class CouponFrontController extends HttpServlet{
 			
 		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
 		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
+		}else if(command.equals("/CouponMypageAction.cp")){
+
+			//쿠폰 삽입 처리를 위한 Action객체 생성
+			action=new CouponMypageAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		//주소 이동

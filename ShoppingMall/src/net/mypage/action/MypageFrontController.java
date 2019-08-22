@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.action.Action;
 import net.action.ActionForward;
+import net.coupon.action.CouponMypageAction;
 import net.member.action.MemberJoinAction;
 
 
@@ -92,12 +93,13 @@ public class MypageFrontController extends HttpServlet{
 		}else if(command.equals("/mypage_coupon.mp")){
 		
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
-			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
-			forward.setRedirect(false);
-			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?section=./myPage/mypage_coupon.jsp");
-		
+			action = new CouponMypageAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		// 마이페이지 상품평
 		}else if(command.equals("/mypage_Review.mp")){
 		
