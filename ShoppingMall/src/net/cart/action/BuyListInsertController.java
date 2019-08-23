@@ -47,6 +47,7 @@ public class BuyListInsertController extends HttpServlet {
 		String orderemail = request.getParameter("orderemail");
 		String delivery_title = request.getParameter("delivery_title");
 		String delivery_name = request.getParameter("delivery_name");
+		
 		int delivery_cost = 0;
 		if(request.getParameter("lastprice") != null){
 			delivery_cost = Integer.parseInt(request.getParameter("deltotal"));		
@@ -62,6 +63,10 @@ public class BuyListInsertController extends HttpServlet {
 		
 		String delivery_phone = delivery_tel + "-" + delivery_tel1 + "-" + delivery_tel2;
 //		System.out.println("delivery_phone = " + delivery_phone);
+		
+		String delivery_address = request.getParameter("delivery_address") + " " + request.getParameter("delivery_address2");
+		
+		System.out.println(delivery_address);
 		
 		//둘 중 하나는 null임 message_1은 직접 메세지 입력하는 input의 값
 		String delivery_message = request.getParameter("delivery_message_2");
@@ -147,7 +152,7 @@ public class BuyListInsertController extends HttpServlet {
 				bdto.setDelivery_result("배송준비중");
 				bdto.setDelivery_name(delivery_name);
 				bdto.setDelivery_mtel(delivery_phone);
-				bdto.setDelivery_address("배송주소");
+				bdto.setDelivery_address(delivery_address);
 				bdto.setDelivery_message(del_message);
 				bdto.setPayments(paytype);
 				
