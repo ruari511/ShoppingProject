@@ -75,5 +75,35 @@ public class CouponDAO {
 		
 	}
 	
+	public void UpdateUserCoupon(int couponNum, String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "Update user_coupon set usecheck=1 where coupon_num=? && id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, couponNum);
+			pstmt.setString(2, id);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("DeleteUserCoupon()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+	}
+	
 	
 }
