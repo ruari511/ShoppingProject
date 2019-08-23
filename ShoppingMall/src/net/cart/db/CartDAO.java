@@ -120,6 +120,60 @@ public class CartDAO {
 		return cartDTO;
 	}//getCartList() 메소드 끝
 	
+	
+	
+	public CartDTO getGoBuyList(int product_num, int product_count){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		CartDTO cartDTO = new CartDTO();
+		
+		System.out.println("product_num = " + product_num);
+		
+		try {
+			con = getConnection();
+			
+			sql = "select product_num, product_name, img_main, brand, product_price, product_sale_price "
+				+ "from product where product_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_num);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				System.out.println("product_name = " + rs.getString("product_name"));
+				
+				cartDTO = new CartDTO();
+				
+				cartDTO.setCart_num(0);
+				cartDTO.setProduct_num(rs.getInt("product_num"));
+				cartDTO.setProduct_name(rs.getString("product_name"));
+				cartDTO.setImg_main(rs.getString("img_main"));
+				cartDTO.setBrand(rs.getString("brand"));
+				cartDTO.setProduct_price(rs.getInt("product_price"));
+				cartDTO.setProduct_count(product_count);
+				cartDTO.setDiscount(rs.getInt("product_sale_price"));
+				
+			}//while문 끝
+			
+		} catch (Exception e) {
+			System.out.println("getGoBuyList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	
+		return cartDTO;
+	}//getCartList() 메소드 끝
+	
+	
+	
 	public void InsertCart(int product_num, String id, int count){
 		
 		int pro_count = 0;
@@ -307,12 +361,14 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
+			if(cartnum != 0){
 			sql = "delete from cart where cart_num=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, cartnum);
 			
 			pstmt.executeUpdate();
+			}
 			
 		} catch (Exception e) {
 			System.out.println("Deletecart()메소드 내부의 오류 : " + e);
