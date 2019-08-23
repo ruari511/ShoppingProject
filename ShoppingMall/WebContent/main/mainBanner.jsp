@@ -149,8 +149,8 @@
  -->					
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.naver.com">
-							<img src="../asset/image/bannertest1.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest1.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -164,8 +164,8 @@
 					</div>
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.daum.net">
-							<img src="../asset/image/bannertest2.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest2.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -179,8 +179,8 @@
 					</div>
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.daum.net">
-							<img src="../asset/image/bannertest2.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest3.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -194,8 +194,8 @@
 					</div>
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.daum.net">
-							<img src="../asset/image/bannertest2.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest4.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>

@@ -116,7 +116,7 @@
 						<c:forEach var="item" items="${category[category_length-1]}">
 						<div class="productSlide_Content">
 
-							<a href="#">
+							<a href="ProductDetailAction.do?product_num=${item.product_num }">
 								<img src="${item.img_main }">
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
@@ -135,7 +135,7 @@
 						<li>
 						<c:forEach var="item" items="${slide}">
 							<div class="productSlide_Content">
-								<a href="#">
+								<a href="ProductDetailAction.do?product_num=${item.product_num }">
 									<img src="${item.img_main }">
 									<div class="productSlide_Text">
 									<p class="productSlide_Text_Brand">${item.brand }</p>
@@ -154,7 +154,7 @@
 						<c:forEach var="item" items="${category[0]}">
 						<div class="productSlide_Content">
 
-							<a href="#">
+							<a href="ProductDetailAction.do?product_num=${item.product_num }">
 								<img src="${item.img_main }">
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
