@@ -230,6 +230,15 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
+		if(lastprice>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
+		}
+		
+		if(pointtotal>=lastprice){
+			document.getElementById("inpoint").value = lastprice;
+		}
+		
 		pointtotal = document.getElementById("memberpoint").value;
 		
 		document.getElementById("pointtotal").value = document.getElementById("memberpoint").value;
@@ -250,7 +259,6 @@
 		var delmes_sel = document.getElementById("mbrMemoCont");
 		var delmes = delmes_sel.selectedIndex;
 		//alert(delmes_sel);
-		alert(document.getElementById("mbrMemoCont").options[delmes].innerHTML);
 		document.getElementById("delivery_message_2").value = document.getElementById("mbrMemoCont").options[delmes].innerHTML;
 	}
 	
@@ -730,7 +738,9 @@
 											<option value="0-0" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '전체금액'}">
+													<c:if test="${couponlist.usecheck eq '0'}">
    													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}-${couponlist.coupon_limitmax}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+													</c:if>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -764,7 +774,9 @@
 											<option value="선택안함" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '배송비'}">
+													<c:if test="${couponlist.usecheck eq '0'}">
    													<option value="${couponlist.coupon_num}">${couponlist.coupon_name}</option>
+   													</c:if>
 												</c:if>
 											</c:forEach>
 										</select>
