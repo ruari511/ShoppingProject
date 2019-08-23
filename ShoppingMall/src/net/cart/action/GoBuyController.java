@@ -47,11 +47,15 @@ public class GoBuyController extends HttpServlet {
 		
 		CouponDAO coudao = new CouponDAO();
 		
+		cdao.waitInsertCart(product_num, id, product_count);
+		
+		int cart_num = cdao.getMaxCartNum(id);
+		
 		Vector<UserCouponDTO> cou = coudao.getAllCouponList(id);
 		//chk에 null값 들어오는거 예외처리 !!
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
-	//	v.add(cdao.getCartList(cart_num));
+		v.add(cdao.getCartList(cart_num));
 		
 		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);
@@ -61,6 +65,7 @@ public class GoBuyController extends HttpServlet {
 		
 		request.setAttribute("cou", cou);
 		
+		cdao.Deletecart(cart_num);
 		
 		RequestDispatcher dis = 
 					request.getRequestDispatcher("product/Buy.jsp");
