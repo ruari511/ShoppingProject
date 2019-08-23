@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <head>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../asset/css/mainBanner.css"/> 
 <link rel="stylesheet" href="../asset/css/global.css"/> 
@@ -113,6 +116,9 @@
 
 </head>
 <body>
+<c:forEach var="category" items="${requestScope.v}" >
+		${category.product_name}<br>
+</c:forEach>
 <!--190808 김현정 메인 배너 틀 제작-->
 	<div id="content"> <!-- content 나중에 제거하고 main에 추가-->
 		<section id="mainBanner">

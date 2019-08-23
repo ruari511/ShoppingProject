@@ -152,10 +152,17 @@ public class MemberFrontController extends HttpServlet{
 			
 				//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
 		}else if(command.equals("/Main.do")){
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
+			/*//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 			forward=new ActionForward();
 			forward.setRedirect(false); //주소값 노출 x
 			forward.setPath("./Main.jsp"); //이동할 페이지 저장
+*/			
+			action = new MainAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 		

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -73,13 +74,13 @@ public class ProductDAO {
 	
 	//190821김현정 
 	//메인 슬라이드에서 상품 목록 불러오는 함수
-	public ArrayList<ProductDTO> getProductLimitList(int category_main, int category_sub, int limit){
+	public Vector<ProductDTO> getProductLimitList(int category_main, int category_sub, int limit){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		ArrayList<ProductDTO> arr = new ArrayList<ProductDTO>();
+		Vector<ProductDTO> v = new Vector<ProductDTO>();
 		
 		try {
 			con = getConnection();
@@ -96,18 +97,17 @@ public class ProductDAO {
 			
 			while(rs.next()){
 				
+			
 				ProductDTO pdto = new ProductDTO();
 				
-
-				pdto.setCategory_main(rs.getString("category_main"));
-				pdto.setCategory_sub(rs.getString("category_sub"));
+				pdto.setProduct_num(rs.getInt("product_num"));
 				pdto.setProduct_name(rs.getString("product_name"));
 				pdto.setProduct_price(rs.getInt("product_price"));
 				pdto.setImg_main(rs.getString("img_main"));
 				pdto.setBrand(rs.getString("brand"));
-				pdto.setPrice_count(rs.getInt("price_count"));
 				
-				arr.add(pdto);
+				
+				v.add(pdto);
 				
 			}
 			
@@ -121,7 +121,7 @@ public class ProductDAO {
 		
 		
 		
-		return arr;
+		return v;
 	}
 	
 	

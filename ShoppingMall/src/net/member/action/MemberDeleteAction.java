@@ -36,7 +36,7 @@ public class MemberDeleteAction implements Action {
 		if(check==1){
 			session.invalidate();//회원정보 담긴 세션 삭제
 			forward.setRedirect(true);
-			forward.setPath("./Main.me"); 
+			forward.setPath("./Main.do"); 
 			
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();

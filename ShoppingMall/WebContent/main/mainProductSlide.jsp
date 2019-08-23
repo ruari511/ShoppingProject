@@ -3,6 +3,10 @@
 <%@page import="net.product.db.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,9 +86,14 @@
 
 </head>
 <body>
-<!-- 상품이름 줄바꾸기 설정해야함 -->
 	<div id="content"> <!-- content 나중에 제거하고 main에 추가-->
 		<section id="productSlide">
+		
+			<!-- 카테고리 배열 가져오기 -->
+			<c:set var="category" value="${requestScope.category}"/>
+			<!-- 카테고리 배열 길이 -->
+			<c:set var="category_length" value="${fn:length(category) }"/>
+			
 			<div class="productSlide_Wrap">
 				<div class="productSlide_Title">
 					<p>{Title}</p>
@@ -100,330 +109,68 @@
 					</div>
 				
 				<div class="productSlide_Contents_Wrap">
-					<ul class="productSlide_List" data-category="1" data-max-index="4" data-current-index="1">
+					<ul class="productSlide_List" data-category="1" data-max-index="2" data-current-index="1">
+					
+					<!-- 마지막꺼  -->
 					<li>
+						<c:forEach var="item" items="${category[category_length-1]}">
 						<div class="productSlide_Content">
 
 							<a href="#">
-								<img src="../asset/image/testImg/test4.png">
+								<img src="${item.img_main }">
 								<div class="productSlide_Text">
-								<p class="productSlide_Text_Brand">{Brand}</p>
-								<p class="productSlide_Text_Name">{Name}</p>
-								<p class="productSlide_Text_Price">{####} 원</p>
+								<p class="productSlide_Text_Brand">${item.brand }</p>
+								<p class="productSlide_Text_Name">${item.product_name }</p>
+								<p class="productSlide_Text_Price">${item.product_price } 원</p>
 
 								</div>
 							</a>
 						</div>
-
-						<div class="productSlide_Content">
-							<a href="#">
-								<img src="../asset/image/testImg/test4.png">
-								<div class="productSlide_Text">
-								<p class="productSlide_Text_Brand">{Brand}</p>
-								<p class="productSlide_Text_Name">{Name}<br>
-									sfsfds</p>
-								<p class="productSlide_Text_Price">{####} 원</p>
-
-								</div>
-							</a>
-						</div>
-
-						<div class="productSlide_Content">				
-							<a href="#">
-								<img src="../asset/image/testImg/test4.png">
-								<div class="productSlide_Text">
-								<p class="productSlide_Text_Brand">{Brand}</p>
-								<p class="productSlide_Text_Name">{Name}<br>
-									sfsfds</p>
-								<p class="productSlide_Text_Price">{####} 원</p>
-
-								</div>
-							</a>
-						</div>
-
-						<div class="productSlide_Content">			
-							<a href="#">
-								<img src="../asset/image/testImg/test4.png">
-								<div class="productSlide_Text">
-								<p class="productSlide_Text_Brand">{Brand}</p>
-								<p class="productSlide_Text_Name">{Name}</p>
-								<p class="productSlide_Text_Price">{####} 원</p>
-
-								</div>
-							</a>
-						</div>
-						</li>
+						</c:forEach>	
+					</li>
 						
 						
-						
+					<!-- 순서대로 불러주기 -->
+					<c:forEach var="slide" items="${category}">
 						<li>
-							<div class="productSlide_Content">
-
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
+						<c:forEach var="item" items="${slide}">
 							<div class="productSlide_Content">
 								<a href="#">
-									<img src="../asset/image/testImg/test1.png"">
+									<img src="${item.img_main }">
 									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
+									<p class="productSlide_Text_Brand">${item.brand }</p>
+									<p class="productSlide_Text_Name">${item.product_name }</p>
+									<p class="productSlide_Text_Price">${item.product_price } 원</p>
 
-									</div>
-								</a>
+								</div>
+							</a>
 							</div>
-
-							<div class="productSlide_Content">				
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png"">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">			
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-							</li>
+						</c:forEach>							
+						</li>
+					</c:forEach>
 							
-							<li>
-							<div class="productSlide_Content">
+					<!-- 처음꺼  -->
+					<li>
+						<c:forEach var="item" items="${category[0]}">
+						<div class="productSlide_Content">
 
-								<a href="#">
-									<img src="../asset/image/testImg/test2.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
+							<a href="#">
+								<img src="${item.img_main }">
+								<div class="productSlide_Text">
+								<p class="productSlide_Text_Brand">${item.brand }</p>
+								<p class="productSlide_Text_Name">${item.product_name }</p>
+								<p class="productSlide_Text_Price">${item.product_price } 원</p>
 
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">
-								<a href="#">
-									<img src="../asset/image/testImg/test2.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">				
-								<a href="#">
-									<img src="../asset/image/testImg/test2.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">			
-								<a href="#">
-									<img src="../asset/image/testImg/test2.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-							</li>
+								</div>
+							</a>
+						</div>
+						</c:forEach>	
+					</li>		
 							
-							<li>
-							<div class="productSlide_Content">
 
-								<a href="#">
-									<img src="../asset/image/testImg/test3.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">
-								<a href="#">
-									<img src="../asset/image/testImg/test3.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">				
-								<a href="#">
-									<img src="../asset/image/testImg/test3.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">			
-								<a href="#">
-									<img src="../asset/image/testImg/test3.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-							</li>
-							
-							<li>
-							<div class="productSlide_Content">
-
-								<a href="#">
-									<img src="../asset/image/testImg/test4.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">
-								<a href="#">
-									<img src="../asset/image/testImg/test4.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">				
-								<a href="#">
-									<img src="../asset/image/testImg/test4.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">			
-								<a href="#">
-									<img src="../asset/image/testImg/test4.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-							</li>
-							
-							<li>
-							<div class="productSlide_Content">
-
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png"">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">				
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png"">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}<br>
-										sfsfds</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-
-							<div class="productSlide_Content">			
-								<a href="#">
-									<img src="../asset/image/testImg/test1.png">
-									<div class="productSlide_Text">
-									<p class="productSlide_Text_Brand">{Brand}</p>
-									<p class="productSlide_Text_Name">{Name}</p>
-									<p class="productSlide_Text_Price">{####} 원</p>
-
-									</div>
-								</a>
-							</div>
-							</li>
-
-						</ul>
+					</ul>
 				
-					</div>
+				</div>
 			</div>	
 				
 		</section>
