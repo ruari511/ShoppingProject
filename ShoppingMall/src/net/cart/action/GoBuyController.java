@@ -65,8 +65,6 @@ public class GoBuyController extends HttpServlet {
 		
 		request.setAttribute("cou", cou);
 		
-		cdao.Deletecart(cart_num);
-		
 		RequestDispatcher dis = 
 					request.getRequestDispatcher("product/Buy.jsp");
 		//실제 재요청
