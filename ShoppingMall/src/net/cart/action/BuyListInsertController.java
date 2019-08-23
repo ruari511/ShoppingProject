@@ -19,7 +19,6 @@ import net.cart.db.CartDAO;
 import net.coupon.db.CouponDAO;
 import net.member.db.MemberDAO;
 
-@WebServlet("/BuyListInsertController.do")
 public class BuyListInsertController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -141,12 +140,15 @@ public class BuyListInsertController extends HttpServlet {
 		if(inpoint==null || inpoint.length()==0 || inpoint==""){
 			inpoint = "0";
 		}
-		
+		session.setAttribute("inpoint", inpoint);
 //		System.out.println("inpoint = " + inpoint);
 		String paytype = request.getParameter("paytype");
 //		System.out.println("paytype = " + paytype);
 		
 		String[] cartnum = request.getParameterValues("cartnum");
+		String[] product_num = request.getParameterValues("product_num");
+		System.out.println("product_num = " + product_num[0]);
+		String[] product_count = request.getParameterValues("product_count");
 		
 		int maxbuynum = bdao.maxBuynum();
 		SimpleDateFormat simpl = new SimpleDateFormat("yyyy/MM/dd");
@@ -167,6 +169,8 @@ public class BuyListInsertController extends HttpServlet {
         
         thisDayMore = new java.text.SimpleDateFormat ("yyyy.MM.dd").format(date);
         
+        session.setAttribute("buyday", thisDayMore);
+        
 		if(cartnum != null){
 			for(int i=0; i<cartnum.length; i++){
 				bdto = new BuyListDTO();
@@ -177,8 +181,8 @@ public class BuyListInsertController extends HttpServlet {
 				bdto.setOrder_mtel(orderphone);
 				bdto.setOrder_email(orderemail);
 				bdto.setBuydate(buydate);
-				bdto.setProduct_num(bdao.selectPronum(Integer.parseInt(cartnum[i])));
-				bdto.setProduct_count(bdao.selectProcount(Integer.parseInt(cartnum[i])));
+				bdto.setProduct_num(Integer.parseInt(product_num[i]));
+				bdto.setProduct_count(Integer.parseInt(product_count[i]));
 				bdto.setAll_coupon_num(Integer.parseInt(allcouponnum));
 				bdto.setDelivery_coupon_num(Integer.parseInt(delcouponnum));
 				bdto.setPoint(Integer.parseInt(inpoint));
