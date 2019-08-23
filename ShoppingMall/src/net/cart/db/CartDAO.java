@@ -324,6 +324,72 @@ public class CartDAO {
 		
 	}
 	
+	public int getMaxCartNum(String id){
+		
+		int cartNum = 0;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			sql = "select max(cart_num) from cart where id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				cartNum = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getMaxCartNum()메소드 내부의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		return cartNum;
+	}
+	
+	//잠시 Insert
+	public void waitInsertCart(int product_num, String id, int count){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			
+			sql = "insert into cart values(null, ?, ?, ?)";
+				
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_num);
+			pstmt.setString(2, id);
+			pstmt.setInt(3, count);
+				
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("waitInsertCart()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
 	
 	
 	

@@ -295,6 +295,214 @@ public class MemberDAO {
       
       return member;
    }
+   
+   //회원 등급 조회 메소드
+   public String GradeCheck(String id){
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   
+	   String grade = "";
+	   
+	   try {
+		   con = getConnection();
+	       
+	       sql  = "select grade from member where id=?";
+	       
+	       pstmt = con.prepareStatement(sql);
+	       
+	       pstmt.setString(1, id);
+	       
+	       rs = pstmt.executeQuery();
+	       
+	       if(rs.next()){
+	    	   grade = rs.getString(1);
+	       }
+		
+	   } catch (Exception e) {
+		System.out.println("GradeCheck()메소드 내부에서의 오류 : " + e);
+	   } finally{
+        if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+        if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+        if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	   }
+	   
+	   return grade;
+	   
+   }
+   
+   //회원의 포인트를 조회하는 메소드
+   public int getPoint(String id){
+	   
+	   int point=0;
+	   
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   
+	   try {
+		   con = getConnection();
+	       
+	       sql  = "select point from member where id=?";
+	       
+	       pstmt = con.prepareStatement(sql);
+	       
+	       pstmt.setString(1, id);
+	       
+	       rs = pstmt.executeQuery();
+	       
+	       if(rs.next()){
+	    	   point = rs.getInt(1);
+	       }
+		
+	   } catch (Exception e) {
+		System.out.println("getPoint()메소드 내부에서의 오류 : " + e);
+	   } finally{
+        if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+        if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+        if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	   }
+	   
+	   return point;
+   }
+   
+   //(조회한 현재 포인트-사용한 포인트)의 값을 Update하는 메소드
+   public void UpdatePoint(int point, String id){
+	   
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   
+	   try {
+		   con = getConnection();
+		   
+		   sql  = "update member set point=? where id=?";
+		   
+		   pstmt = con.prepareStatement(sql);
+		   
+		   pstmt.setInt(1, point);
+		   pstmt.setString(2, id);
+		   
+		   pstmt.executeUpdate();
+		
+	   } catch (Exception e) {
+		System.out.println("getPoint()메소드 내부에서의 오류 : " + e);
+	   } finally{
+        if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+        if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+        if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	   }
+   }
+   
+   //회원등급 업데이트를 위한 회원의 총 구매액을 조회하는 메소드
+   public int getTotalprice(String id){
+	   
+	   int totalprice = 0;
+	   
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   
+	   try {
+		   con = getConnection();
+		   
+		   sql  = "select totalprice from member where id=?";
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, id);
+		   
+		   rs = pstmt.executeQuery();
+		   
+		   if(rs.next()){
+			   totalprice = rs.getInt(1);
+		   }
+		
+	   } catch (Exception e) {
+		   System.out.println("getTotalprice()메소드 내부에서의 오류 : " + e);
+	   } finally{
+	     if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+	     if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+	     if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	   }
+	   
+	   return totalprice;
+   }
+   
+   public void UpdateTotalPrice(String id, int totalprice){
+	   
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   
+	   try {
+		   con = getConnection();
+		   
+		   sql  = "update member set totalprice=? where id=?";
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setInt(1, totalprice);
+		   pstmt.setString(2, id);
+		   
+		   pstmt.executeUpdate();
+		
+	   } catch (Exception e) {
+		 System.out.println("UpdateTotalPrice()메소드 내부에서의 오류 : " + e);
+	   } finally{
+	     if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+	     if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+	     if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	   }
+   }
+   
+   //회원등급 업데이트 메소드
+   public void UpdateGrade(String id, int totalprice){
+	   
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   
+	   String grade = "";
+	   
+	   if(totalprice>=0 && totalprice<500000){
+		   grade = "아이언";
+	   } else if(totalprice>=5000000 && totalprice<1000000){
+		   grade = "브론즈";
+	   } else if(totalprice>=1000000 && totalprice<3000000){
+		   grade = "실버";
+	   } else if(totalprice>=3000000 && totalprice<5000000){
+		   grade = "골드";
+	   } else if(totalprice>=5000000 && totalprice<7000000){
+		   grade = "플래티넘";
+	   } else if(totalprice>=7000000){
+		   grade = "다이아";
+	   }
+	   
+	   try {
+		   
+		   con = getConnection();
+		   
+		   sql = "update member set grade=? where id=?";
+		   
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, grade);
+		   pstmt.setString(2, id);
+		   
+		   pstmt.executeUpdate();
+		
+	   } catch (Exception e) {
+		System.out.println("getTotalprice()메소드 내부에서의 오류 : " + e);
+	   } finally{
+	     if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+	     if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+	     if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	   }
+	   
+   }
+ 
+   
+   
+   
+   
+   
+   
 
 
    public static MemberDAO getInstance() {

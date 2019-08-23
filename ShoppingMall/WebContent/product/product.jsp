@@ -66,7 +66,7 @@ function goBuy() {
 	if(id==null){
 		location.href="./login.do";
 	} else{
-		location.href="GoBuyController.do?product_num="+product_num+"&product_count="+product_count;
+		location.href="GoBuyController.buy?product_num="+product_num+"&product_count="+product_count;
 	}
 }
 </script>

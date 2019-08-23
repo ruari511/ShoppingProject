@@ -10,6 +10,62 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").innerHTML = addr;
+                document.getElementById("sample6_address1").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+                document.getElementById("delivery_address").value = "(" + data.zonecode +") " + addr;
+                
+            }
+        }).open();
+    }
+</script>
+
+
+
 <script type="text/javascript">
 
 	window.onload = function (){
@@ -174,6 +230,15 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
+		if(lastprice>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
+		}
+		
+		if(pointtotal>=lastprice){
+			document.getElementById("inpoint").value = lastprice;
+		}
+		
 		pointtotal = document.getElementById("memberpoint").value;
 		
 		document.getElementById("pointtotal").value = document.getElementById("memberpoint").value;
@@ -194,7 +259,6 @@
 		var delmes_sel = document.getElementById("mbrMemoCont");
 		var delmes = delmes_sel.selectedIndex;
 		//alert(delmes_sel);
-		alert(document.getElementById("mbrMemoCont").options[delmes].innerHTML);
 		document.getElementById("delivery_message_2").value = document.getElementById("mbrMemoCont").options[delmes].innerHTML;
 	}
 	
@@ -223,6 +287,43 @@
 		}
 	}
 	
+	function nullCheck() {
+		
+		var delevery_title = document.getElementById("dlvpNm_new").value;
+		var delevery_name = document.getElementById("delivery_name").value;
+		var delivery_tel = document.getElementById("delivery_tel").value;
+		var delivery_tel1 = document.getElementById("delivery_tel1").value;
+		var delivery_tel2 = document.getElementById("delivery_tel2").value;
+		var delivery_address = document.getElementById("sample6_postcode").value;
+		
+		if(delevery_title == ""){
+			alert("배송지명을 입력해주세요.");
+			document.getElementById("dlvpNm_new").focus();
+			return false;
+		} else if(delevery_name == ""){
+			alert("받는분을 입력해주세요.");
+			document.getElementById("delivery_name").focus();
+			return false;
+		} else if(delivery_tel == ""){
+			alert("휴대폰 번호를 입력해주세요.");
+			document.getElementById("delivery_tel").focus();
+			return false;
+		} else if(delivery_tel1 == ""){
+			alert("휴대폰 번호를 입력해주세요.");
+			document.getElementById("delivery_tel1").focus();
+			return false;
+		} else if(delivery_tel2 == ""){
+			alert("휴대폰 번호를 입력해주세요.");
+			document.getElementById("delivery_tel2").focus();
+			return false;
+		} else if(delivery_address == ""){
+			alert("주소를 입력해주세요.");
+			document.getElementById("sample6_postcode").focus();
+			return false;
+		} else{
+			return true;
+		}
+	}
 
 </script>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
@@ -252,7 +353,7 @@
 			</div>
 			<!--// title_box -->
 			
-			<form action="BuyListInsertController.do" method="post">
+			<form action="BuyListInsertController.do" method="post" onsubmit="return nullCheck();">
 			<!-- 주문자 정보 -->
 			<h2 class="sub-title2 mgT20">주문자정보</h2><!-- 2017-02-21 수정 : mgT20 클래스 추가 -->
 			<table class="tbl_inp_form">
@@ -513,29 +614,20 @@
 				<tr style="">
 					<th scope="row">주소</th>
 					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
-						<input type="text" id="stnmRmitPostNo_new" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
-						<input type="hidden" id="rmitPostNo_new" name="stnmRmitPostNo" value="" title="우편번호를 검색해주세요.">
-						<button type="button" class="btnSmall wGreen w100" id="search-zipcode-pop_new"><span>우편번호 찾기</span></button>
+						<input type="text" id="sample6_postcode" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
+						<button type="button" class="btnSmall wGreen w100" id="" onclick="sample6_execDaumPostcode()"><span>우편번호 찾기</span></button>
 						<div class="addr_box">
-							<input type="hidden" id="stnmRmitPostAddr_new" name="stnmRmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
-							<input type="hidden" id="rmitBaseAddr_new" name="rmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
 							<!-- 주소 입력 시 보여지는 부분 -->
 							<p class="addr_new">
-								<span class="tx_tit">도로명</span> : 
-								<span class="tx_addr" id="stnmPostAddr_new"></span><!--  도로명주소를 넣어주세요 -->
-							</p>
-							<p class="addr_old">
-								<span class="tx_tit">지번</span> : 
-								<span class="tx_addr" id="baseAddr_new"></span><!--  지번주소를 넣어주세요 -->
+								<span class="tx_addr" id="sample6_address"></span>
+								<input type="hidden" id="sample6_address1" name="" value="">
 							</p>
 							<!--// 주소 입력 시 보여지는 부분 -->
 						</div>
-						<input type="text" id="tempRmitDtlAddr_new" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px; display: none;" this="상세 주소는">
-						<input type="hidden" id="stnmRmitDtlAddr_new" name="stnmRmitDtlAddr" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px" this="상세 주소는">
-						<input type="hidden" id="rmitDtlAddr_new" name="rmitDtlAddr" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px">
-						
+						<input type="text" id="sample6_detailAddress" name="delivery_address2" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px; display: block;" this="상세 주소는">
+						<input type="hidden" id="sample6_extraAddress">
 						<!-- 배송주소를 입력받을 hidden태그 -->
-						<input type="hidden" id="delivery_address" value="">
+						<input type="hidden" id="delivery_address" name="delivery_address" value="">
 					</td>
 				</tr>
 				<tr>
@@ -646,7 +738,9 @@
 											<option value="0-0" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '전체금액'}">
+													<c:if test="${couponlist.usecheck eq '0'}">
    													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}-${couponlist.coupon_limitmax}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+													</c:if>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -680,7 +774,9 @@
 											<option value="선택안함" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '배송비'}">
+													<c:if test="${couponlist.usecheck eq '0'}">
    													<option value="${couponlist.coupon_num}">${couponlist.coupon_name}</option>
+   													</c:if>
 												</c:if>
 											</c:forEach>
 										</select>
