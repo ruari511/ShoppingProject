@@ -28,9 +28,10 @@ public class ProductDetailAction extends HttpServlet{
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		String product_num=request.getParameter("product_num");
 		
 		ProductDAO pdao = new ProductDAO();
-		ProductDTO pdto = pdao.getProduct(1);
+		ProductDTO pdto = pdao.getProduct(Integer.parseInt(product_num));
 		
 		request.setAttribute("pdto", pdto);
 		request.setAttribute("id", id);
