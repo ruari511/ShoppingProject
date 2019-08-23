@@ -140,7 +140,7 @@ function goBuy() {
 					08.19  - 09.05 
 				</strong>
 					<p class="prd_brand">
-						루치펠로
+						${product.brand}
 						<a href="javascript:;" class="link_brand2 goods_brandall" id="moveBrandShop">브랜드 상품 전체보기</a>
 					</p>
 					<p class="prd_name">[온라인단독] ${product.product_name}</p>
