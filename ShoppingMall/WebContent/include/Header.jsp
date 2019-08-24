@@ -28,7 +28,7 @@
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					%>
 					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
-					<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
+					<li class="cart"><a href="./CartListAction.buy">장바구니<span id="cartToCnt"></span></a></li>
 					<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
 				<%
 				}

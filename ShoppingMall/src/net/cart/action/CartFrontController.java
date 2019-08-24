@@ -112,11 +112,33 @@ public class CartFrontController extends HttpServlet{
 			forward.setPath("./product/Buy.jsp");
 			
 		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
+		}else if(command.equals("/Cart.buy")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./product/Cart.jsp");
+			
+		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
 		}else if(command.equals("/CartBuyAction.buy")){
 	
 			
 			//회원가입 처리를 위한 Action객체 생성
 			action=new CartBuyAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/CartListAction.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new CartListAction();
 			
 			try {
 				forward=action.execute(request, response);

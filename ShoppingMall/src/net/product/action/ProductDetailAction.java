@@ -1,7 +1,6 @@
 package net.product.action;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import net.product.db.ProductDAO;
 import net.product.db.ProductDTO;
+
+
 
 @WebServlet("/ProductDetailAction.do")
 public class ProductDetailAction extends HttpServlet{
