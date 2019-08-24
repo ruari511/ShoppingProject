@@ -12,7 +12,7 @@ import net.buyList.db.BuyListDTO;
 import net.member.db.MemberDAO;
 
 
-public class BuyListInsertController2 implements Action{
+public class BuyMemberUpdateAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {

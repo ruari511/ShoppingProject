@@ -15,7 +15,7 @@ import net.buyList.db.BuyListDTO;
 import net.cart.db.CartDAO;
 import net.coupon.db.CouponDAO;
 
-public class BuyListInsertController3 implements Action{
+public class BuyListInsertAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
