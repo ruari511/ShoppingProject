@@ -19,7 +19,7 @@ public class BuyListInsertAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		System.out.println("BuyListInsertController3 execute()");
+		System.out.println("BuyListInsertAction execute()");
 		
 		request.setCharacterEncoding("utf-8");
 		

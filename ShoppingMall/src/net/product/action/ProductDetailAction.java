@@ -31,7 +31,6 @@ public class ProductDetailAction extends HttpServlet{
 		String product_num=request.getParameter("product_num");
 		ProductDAO pdao = new ProductDAO();
 		ProductDTO pdto = pdao.getProduct(Integer.parseInt(product_num));
-		System.out.println("product_img="+pdto.getImg_main());
 		request.setAttribute("pdto", pdto);
 		request.setAttribute("id", id);
 		

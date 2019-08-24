@@ -353,7 +353,7 @@
 			</div>
 			<!--// title_box -->
 			
-			<form action="BuyListInsert.Buy" method="post" onsubmit="return nullCheck();">
+			<form action="./BuyListInsert.buy" method="post" onsubmit="return nullCheck();">
 			<!-- 주문자 정보 -->
 			<h2 class="sub-title2 mgT20">주문자정보</h2><!-- 2017-02-21 수정 : mgT20 클래스 추가 -->
 			<table class="tbl_inp_form">

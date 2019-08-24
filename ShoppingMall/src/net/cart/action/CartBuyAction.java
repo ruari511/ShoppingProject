@@ -1,38 +1,30 @@
 package net.cart.action;
 
-import java.io.IOException;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.member.db.MemberDAO;
-import net.member.db.MemberDTO;
+import net.action.Action;
+import net.action.ActionForward;
 import net.cart.db.CartDAO;
 import net.cart.db.CartDTO;
 import net.coupon.db.CouponDAO;
 import net.coupon.db.UserCouponDTO;
+import net.member.db.MemberDAO;
+import net.member.db.MemberDTO;
 
-/*CarReservation.jsp페이지에서.. 전체검색 버튼 클릭했을떄.. DB에 저장되어 있는 전체 차량 검색요청을 받는 서블릿*/
-@WebServlet("/CartBuyController.do")
-public class CartBuyAction extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		requestPro(request, response);
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		requestPro(request, response);
-	}
-
-	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class CartBuyAction implements Action{
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		System.out.println("CartBuyAction execute()");
 		
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
+		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -52,10 +44,10 @@ public class CartBuyAction extends HttpServlet {
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
 		if(chk != null){
-		for(int i=0; i<chk.length; i++){
-			//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
-			v.add(cdao.getCartList(Integer.parseInt(chk[i])));
-		}
+			for(int i=0; i<chk.length; i++){
+				//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
+				v.add(cdao.getCartList(Integer.parseInt(chk[i])));
+			}
 		}
 		
 		
@@ -67,14 +59,12 @@ public class CartBuyAction extends HttpServlet {
 		
 		request.setAttribute("cou", cou);
 		
+		ActionForward forward=new ActionForward();
+
+		forward.setRedirect(false);
+
+		forward.setPath("./Buy.buy");
 		
-		RequestDispatcher dis = 
-					request.getRequestDispatcher("product/Buy.jsp");
-		//실제 재요청
-		dis.forward(request, response);	
-		
+		return forward;
 	}
 }
-
-
-

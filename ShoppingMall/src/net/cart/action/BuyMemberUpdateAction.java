@@ -16,7 +16,7 @@ public class BuyMemberUpdateAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		System.out.println("BuyListInsertController2 execute()");
+		System.out.println("BuyMemberUpdateAction execute()");
 		
 		request.setCharacterEncoding("utf-8");
 		
