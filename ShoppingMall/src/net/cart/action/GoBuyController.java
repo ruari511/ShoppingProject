@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.coupon.db.UserCouponDTO;
-import net.coupon.db.CouponDAO;
 import net.member.db.MemberDAO;
 import net.member.db.MemberDTO;
 import net.cart.db.CartDAO;
@@ -20,15 +18,17 @@ import net.cart.db.CartDTO;
 import net.coupon.db.CouponDAO;
 import net.coupon.db.UserCouponDTO;
 
-/*CarReservation.jsp페이지에서.. 전체검색 버튼 클릭했을떄.. DB에 저장되어 있는 전체 차량 검색요청을 받는 서블릿*/
-@WebServlet("/CartBuyController.do")
-public class CartBuyAction extends HttpServlet {
+/*바로구매 버튼 클릭했을떄.. */
+@WebServlet("/GoBuyController.buy")
+public class GoBuyController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("get방식 요청됨@@");
 		requestPro(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("post방식 요청됨");
 		requestPro(request, response);
 	}
 
@@ -38,8 +38,9 @@ public class CartBuyAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
-		//Cart.jsp에서 checked인 cart_num값을 배열로 받아오기
-		String[] chk = request.getParameterValues("cart");
+		int product_num = Integer.parseInt(request.getParameter("product_num"));
+		System.out.println("product_num = " + product_num);
+		int product_count = Integer.parseInt(request.getParameter("product_count"));
 		
 		MemberDAO mdao = new MemberDAO();
 		
@@ -49,17 +50,15 @@ public class CartBuyAction extends HttpServlet {
 		
 		CouponDAO coudao = new CouponDAO();
 		
+//		cdao.waitInsertCart(product_num, id, product_count);
+		
+//		int cart_num = cdao.getMaxCartNum(id);
+//		
 		Vector<UserCouponDTO> cou = coudao.getAllCouponList(id);
 		//chk에 null값 들어오는거 예외처리 !!
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
-		if(chk != null){
-		for(int i=0; i<chk.length; i++){
-			//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
-			v.add(cdao.getCartList(Integer.parseInt(chk[i])));
-		}
-		}
-		
+		v.add(cdao.getGoBuyList(product_num, product_count));
 		
 		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);
@@ -69,9 +68,8 @@ public class CartBuyAction extends HttpServlet {
 		
 		request.setAttribute("cou", cou);
 		
-		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("product/Buy.jsp");
+				request.getRequestDispatcher("product/Buy.jsp");
 		//실제 재요청
 		dis.forward(request, response);	
 		

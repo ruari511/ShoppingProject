@@ -61,10 +61,12 @@
 		$("#pauseBtn").click(function(){
 			if(isUpdate){
 				clearInterval(mainBanner);
+				$("#pauseBtn").css("background-position", "0 -40px");
 				isUpdate=false;
 			}else{
 				isUpdate=true;
 				mainBanner=setInterval(function(){mainBannerUpdate(1);}, changeS);
+				$("#pauseBtn").css("background-position", "0 0px");
 			}
 			console.log(isUpdate);
 		});
@@ -206,11 +208,13 @@
 				
 				<!-- 배너 버튼 -->
 				<div id="mainBanner_Btn">
-				<!-- 앞으로가는버튼: +1, 뒤로가는버튼 -1; -->
-					<Button onclick="mainBannerUpdate(-1)">&lt;</Button>
-					<span id="mainBannerIndex"></span>
-					<Button onclick="mainBannerUpdate(1)">&gt;</Button>	
-					<Button id="pauseBtn">3</Button>	
+					<div id="mainBanner_Btn_Wrap">
+					<!-- 앞으로가는버튼: +1, 뒤로가는버튼 -1; -->
+						<Button class="slick-arrow slick-prev" onclick="mainBannerUpdate(-1)">prev</Button>
+						<span id="mainBannerIndex"></span>
+						<Button class="slick-arrow slick-next" onclick="mainBannerUpdate(1)">next</Button>	
+						<Button id="pauseBtn">3</Button>	
+					</div>
 				</div>
 			
 			</div>

@@ -11,6 +11,15 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>CartFrontController</servlet-name>
+  	<servlet-class>net.cart.action.CartFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CartFrontController</servlet-name>
+  	<url-pattern>*.buy</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>MypageFrontController</servlet-name>
   	<servlet-class>net.mypage.action.MypageFrontController</servlet-class>
   </servlet>

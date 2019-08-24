@@ -93,6 +93,7 @@
 .tbl_prd_list tbody td .prd_cnt+button {width:60px;margin:5px 0 0}
 .tbl_prd_list tbody td .prd_cnt input {height:28px;padding:0 5px;color:#222;border-color:#ccc;font-size:12px;text-align:center}
 .tbl_prd_list tbody td .prd_cnt input:focus {border-color:#969937}
+.tbl_prd_list tbody td .prd_cnt input[type="text"] {width: 60px;}
 
 .tbl_prd_list tbody td .org_price {display:block;font-size:12px;color:#b5b5b5;text-decoration:line-through}
 .tbl_prd_list tbody td .org_price .tx_num {font-weight:normal}

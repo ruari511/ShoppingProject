@@ -10,6 +10,62 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").innerHTML = addr;
+                document.getElementById("sample6_address1").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+                document.getElementById("delivery_address").value = "(" + data.zonecode +") " + addr;
+                
+            }
+        }).open();
+    }
+</script>
+
+
+
 <script type="text/javascript">
 
 	window.onload = function (){
@@ -52,7 +108,7 @@
 		
 		document.getElementById("orderPhone_2").value = split_phone[1];
 		document.getElementById("orderPhone_3").value = split_phone[2];
-
+		
 	}
 	
 	function email_change() {
@@ -91,12 +147,16 @@
 			document.getElementById("buycard").style.display="none";
 			document.getElementById("buybankbook").style.display="list-item";
 			document.getElementById("cashReceipt").style.display="list-item";
+			document.getElementById("paytype").value = a.value;
 			
 		}else if(a.value=="card"){
 			document.getElementById("buycard").style.display="list-item";
 			document.getElementById("buybankbook").style.display="none";
 			document.getElementById("cashReceipt").style.display="none";
+			document.getElementById("paytype").value = a.value;
 		}
+		
+		
 	}
 	
 	function allcoupon_change(a) {
@@ -107,13 +167,25 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
-		coutotal = prototal * a.value / 100;
+		var percent = a.value.split("-");
+		
+		coutotal = prototal * percent[1] / 100;
+		
+		if(coutotal >= percent[2]){
+			coutotal = percent[2];
+		}
+		
+		if(prototal>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
+		}
 		
 		document.getElementById("coutotal").value = coutotal;
 		
 		document.getElementById("totDscntAmt_span").innerHTML = coutotal;
 		
 		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
+		
 		}
 	
 	function delivery_coupon_change() {
@@ -125,16 +197,23 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
-		deltotal = 2500;
-		
-		document.getElementById("deltotal").value = 2500;
+		if(prototal>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
+		} else{
+			deltotal = 2500;
+			document.getElementById("deltotal").value = 2500;
+		}
 		
 		if(document.getElementById("selDelCoupon").selectedIndex == 1){
 			document.getElementById("deliverycost").innerHTML = "무료";
+			deltotal = 2500;
+			document.getElementById("deltotal").value = 2500;
 			totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
 		} else{
 			document.getElementById("deliverycost").innerHTML = "2500원";
 			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
 			totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
 		}
 		
@@ -151,6 +230,15 @@
 		var lastprice = document.getElementById("lastprice").value;
 		var totPayAmt_sum_span = document.getElementById("totPayAmt_sum_span");
 		
+		if(lastprice>=20000){
+			deltotal = 0;
+			document.getElementById("deltotal").value = 0;
+		}
+		
+		if(pointtotal>=lastprice){
+			document.getElementById("inpoint").value = lastprice;
+		}
+		
 		pointtotal = document.getElementById("memberpoint").value;
 		
 		document.getElementById("pointtotal").value = document.getElementById("memberpoint").value;
@@ -160,13 +248,20 @@
 		totPayAmt_sum_span.innerHTML = lastprice - coutotal - deltotal - pointtotal;
 		document.getElementById("inpoint").value = pointtotal;
 		
+		
 	}
 	
 	function delivery_message(a) {
 		if(a.value==99){
 			document.getElementById("mbrMemoCont1").style.display="block";
 		}
+		
+		var delmes_sel = document.getElementById("mbrMemoCont");
+		var delmes = delmes_sel.selectedIndex;
+		//alert(delmes_sel);
+		document.getElementById("delivery_message_2").value = document.getElementById("mbrMemoCont").options[delmes].innerHTML;
 	}
+	
 	
 	function card_change(a){
 		if(a.value!=0){
@@ -192,6 +287,43 @@
 		}
 	}
 	
+	function nullCheck() {
+		
+		var delevery_title = document.getElementById("dlvpNm_new").value;
+		var delevery_name = document.getElementById("delivery_name").value;
+		var delivery_tel = document.getElementById("delivery_tel").value;
+		var delivery_tel1 = document.getElementById("delivery_tel1").value;
+		var delivery_tel2 = document.getElementById("delivery_tel2").value;
+		var delivery_address = document.getElementById("sample6_postcode").value;
+		
+		if(delevery_title == ""){
+			alert("배송지명을 입력해주세요.");
+			document.getElementById("dlvpNm_new").focus();
+			return false;
+		} else if(delevery_name == ""){
+			alert("받는분을 입력해주세요.");
+			document.getElementById("delivery_name").focus();
+			return false;
+		} else if(delivery_tel == ""){
+			alert("휴대폰 번호를 입력해주세요.");
+			document.getElementById("delivery_tel").focus();
+			return false;
+		} else if(delivery_tel1 == ""){
+			alert("휴대폰 번호를 입력해주세요.");
+			document.getElementById("delivery_tel1").focus();
+			return false;
+		} else if(delivery_tel2 == ""){
+			alert("휴대폰 번호를 입력해주세요.");
+			document.getElementById("delivery_tel2").focus();
+			return false;
+		} else if(delivery_address == ""){
+			alert("주소를 입력해주세요.");
+			document.getElementById("sample6_postcode").focus();
+			return false;
+		} else{
+			return true;
+		}
+	}
 
 </script>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
@@ -205,14 +337,13 @@
 <div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="./include/Header.jsp"/>
+	<jsp:include page="../include/Header.jsp"/>
 	<!-- header// -->
 	<div id="Container">
 		<!-- #Contents -->
 		<div id="Contents">
 			<!-- title_box -->
 			<div class="title_box">
-			<button onclick="spit_test()">test</button>
 				<h1>주문/결제</h1>
 				<ul class="step_list">
 					<li><span class="step_num tx_num">1</span> 장바구니</li>
@@ -222,10 +353,7 @@
 			</div>
 			<!--// title_box -->
 			
-			<form name="orderForm" id="orderForm">
-			<input type="hidden" id="quickYn" name="quickYn" value="N">	
-			<input type="hidden" id="quickInfoYn" name="quickInfoYn" value="N">			
-			<input type="hidden" id="ocbValidChk" name="ocbValidChk" value="N">
+			<form action="BuyListInsertController.buy" method="post" onsubmit="return nullCheck();">
 			<!-- 주문자 정보 -->
 			<h2 class="sub-title2 mgT20">주문자정보</h2><!-- 2017-02-21 수정 : mgT20 클래스 추가 -->
 			<table class="tbl_inp_form">
@@ -238,13 +366,13 @@
 				<c:set var="member" value="${requestScope.m}" />
 				<tr>
 					<th scope="row">주문자명</th>
-					<td><input type="text" id="ordManNm" name="ordManNm" value="${member.name}" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
+					<td><input type="text" id="ordManNm" name="ordername" value="${member.name}" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
 				</tr>
 				
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
-						<input type="hidden" id="orderPhone" value="${member.phone}">
+						<input type="hidden" id="orderPhone" name="orderphone" value="${member.phone}">
 						<select id="orderPhone_1" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
 							<option value="1">선택</option>
 
@@ -322,7 +450,7 @@
 				<tr>
 					<th scope="row">이메일</th>
 					<td>
-						<input type="hidden" id="orderEmail" name="ordManEmailAddr" value="${member.email}">
+						<input type="hidden" id="orderEmail" name="orderemail" value="${member.email}">
 						<input type="text" id="orderEmail_1" value="" class="inpH28" style="width:120px"> 
 						@ <input type="text" id="orderEmail_2" value="" class="inpH28" style="width:120px">
 						<select id="orderEmail_sel" class="selH28" onchange="email_change();" style="width:120px">
@@ -394,21 +522,21 @@
 				<tr style="">
 					<th scope="row">배송지명</th>
 					<td class="imp_data">
-						<input type="text" id="dlvpNm_new" name="dlvpNm" value="" class="inpH28" title="배송지명을 입력해주세요." style="width:200px;">
+						<input type="text" id="dlvpNm_new" name="delivery_title" value="" class="inpH28" title="배송지명을 입력해주세요." style="width:200px;">
 					</td>
 				</tr>
 				<!--// 2017-01-18 추가 -->
 				<tr style="">
 					<th scope="row">받는분</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<input type="text" id="delivery_name" name="rmitNm" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px">
+						<input type="text" id="delivery_name" name="delivery_name" value="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px">
 						<span class="chk_area" onclick="deliverycheck();"><input type="checkbox" id="delivery_check">주문자정보와 동일</span><!-- 2017-01-18 수정 : 위치변경 -->
 					</td>
 				</tr>
 				<tr style="">
 					<th scope="row">연락처1</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<select id="delivery_tel" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px">
+						<select id="delivery_tel" name="delivery_tel" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px">
 							<option value="">선택</option>
 
 							<option value="010">010</option>
@@ -478,111 +606,28 @@
 							<option value="0507">0507</option>
 
 						</select>
-						 - <input type="text" id="delivery_tel1" name="rmitCellTxnoNo" value="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." style="width:90px">
-						 - <input type="text" id="delivery_tel2" name="rmitCellEndNo" value="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." style="width:90px">
+						 - <input type="text" id="delivery_tel1" name="delivery_tel1" value="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." style="width:90px">
+						 - <input type="text" id="delivery_tel2" name="delivery_tel2" value="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." style="width:90px">
 					     <span class="info_security"><button type="button" class="chk_area">안심번호 서비스 안내</button></span>
-					</td>
-				</tr>
-				<tr style="">
-					<th scope="row">연락처2</th>
-					<td>
-						<select id="rmitTelRgnNo_new" name="rmitTelRgnNo" class="selH28" title="연락처2 앞자리를 선택해주세요." style="width:90px">
-							<option value="">선택</option>
-
-							<option value="010">010</option>
-
-							<option value="011">011</option>
-
-							<option value="016">016</option>
-
-							<option value="017">017</option>
-
-							<option value="018">018</option>
-
-							<option value="019">019</option>
-
-							<option value="02">02</option>
-
-							<option value="031">031</option>
-
-							<option value="032">032</option>
-
-							<option value="033">033</option>
-
-							<option value="041">041</option>
-
-							<option value="042">042</option>
-
-							<option value="043">043</option>
-
-							<option value="044">044</option>
-
-							<option value="051">051</option>
-
-							<option value="052">052</option>
-
-							<option value="053">053</option>
-
-							<option value="054">054</option>
-
-							<option value="055">055</option>
-
-							<option value="061">061</option>
-
-							<option value="062">062</option>
-
-							<option value="063">063</option>
-
-							<option value="064">064</option>
-
-							<option value="070">070</option>
-
-							<option value="080">080</option>
-
-							<option value="0130">0130</option>
-
-							<option value="0303">0303</option>
-
-							<option value="0502">0502</option>
-
-							<option value="0503">0503</option>
-
-							<option value="0504">0504</option>
-
-							<option value="0505">0505</option>
-
-							<option value="0506">0506</option>
-
-							<option value="0507">0507</option>
-
-						</select>
-						 - <input type="text" id="rmitTelTxnoNo_new" name="rmitTelTxnoNo" value="" class="inpH28" title="연락처2 가운데 자리를 입력해주세요." style="width:90px">
-						 - <input type="text" id="rmitTelEndNo_new" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." style="width:90px">
 					</td>
 				</tr>
 				<tr style="">
 					<th scope="row">주소</th>
 					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
-						<input type="text" id="stnmRmitPostNo_new" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
-						<input type="hidden" id="rmitPostNo_new" name="stnmRmitPostNo" value="" title="우편번호를 검색해주세요.">
-						<button type="button" class="btnSmall wGreen w100" id="search-zipcode-pop_new"><span>우편번호 찾기</span></button>
+						<input type="text" id="sample6_postcode" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
+						<button type="button" class="btnSmall wGreen w100" id="" onclick="sample6_execDaumPostcode()"><span>우편번호 찾기</span></button>
 						<div class="addr_box">
-							<input type="hidden" id="stnmRmitPostAddr_new" name="stnmRmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
-							<input type="hidden" id="rmitBaseAddr_new" name="rmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
 							<!-- 주소 입력 시 보여지는 부분 -->
 							<p class="addr_new">
-								<span class="tx_tit">도로명</span> : 
-								<span class="tx_addr" id="stnmPostAddr_new"></span><!--  도로명주소를 넣어주세요 -->
-							</p>
-							<p class="addr_old">
-								<span class="tx_tit">지번</span> : 
-								<span class="tx_addr" id="baseAddr_new"></span><!--  지번주소를 넣어주세요 -->
+								<span class="tx_addr" id="sample6_address"></span>
+								<input type="hidden" id="sample6_address1" name="" value="">
 							</p>
 							<!--// 주소 입력 시 보여지는 부분 -->
 						</div>
-						<input type="text" id="tempRmitDtlAddr_new" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px; display: none;" this="상세 주소는">
-						<input type="hidden" id="stnmRmitDtlAddr_new" name="stnmRmitDtlAddr" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px" this="상세 주소는">
-						<input type="hidden" id="rmitDtlAddr_new" name="rmitDtlAddr" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px">
+						<input type="text" id="sample6_detailAddress" name="delivery_address2" value="" class="inpH28" title="상세주소를 입력해주세요." style="width:500px; display: block;" this="상세 주소는">
+						<input type="hidden" id="sample6_extraAddress">
+						<!-- 배송주소를 입력받을 hidden태그 -->
+						<input type="hidden" id="delivery_address" name="delivery_address" value="">
 					</td>
 				</tr>
 				<tr>
@@ -595,7 +640,7 @@
 
 							<option value="20">부재시 문앞에 놓아주세요.</option>
 
-							<option value="30">파손의 위험이 있는 상품이오니,  배송 시 주의해주세요.</option>
+							<option value="30">파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.</option>
 
 							<option value="40">배송전에 연락주세요.</option>
 
@@ -604,7 +649,8 @@
 							<option value="99">배송 메시지 직접입력</option>
 
 						</select>
-						<input type="text" id="mbrMemoCont1" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
+						<input type="text" id="mbrMemoCont1" name="delivery_message_1" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
+						<input type="hidden" name="delivery_message_2" id="delivery_message_2" value="">
 					</td>
 				</tr>
 				</tbody>
@@ -632,6 +678,8 @@
 				<tbody>
 				<c:forEach var="cartlist"  items="${requestScope.v}">
 				<c:set var="sum" value="${sum = sum + (cartlist.product_price-cartlist.discount)*cartlist.product_count}"/>
+				<input type="hidden" name="product_num" value="${cartlist.product_num}">
+				<input type="hidden" name="product_count" value="${cartlist.product_count}">
 				<tr>
 					<td colspan="5">
 						<div class="tbl_cont_area">
@@ -655,6 +703,7 @@
 								<span class="pur_price"><span class="tx_num">${(cartlist.product_price-cartlist.discount)*cartlist.product_count}</span>원</span>
 							</div>
 						</div>
+						<input type="hidden" name="cartnum" value="${cartlist.cart_num}"/>
 					</td>
 				</tr>
 				</c:forEach>
@@ -687,11 +736,13 @@
 								</c:when>
 								<c:otherwise>
 									<div style="display:block;">
-										<select id="selAllCoupon" class="selH28 mgT5" style="width:300px" onchange="allcoupon_change(this);">
-											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
+										<select id="selAllCoupon" name="allcouponnum" class="selH28 mgT5" style="width:300px" onchange="allcoupon_change(this);">
+											<option value="0-0" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '전체금액'}">
-   													<option value="${couponlist.coupon_percent}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+													<c:if test="${couponlist.usecheck eq '0'}">
+   													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}-${couponlist.coupon_limitmax}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
+													</c:if>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -706,7 +757,14 @@
 							<c:set var="coupon" value="${requestScope.cou}" />
 							<c:choose>
 								<c:when test="${coupon eq null}">
-									<div style="display:block;">
+									<div id="delmoneycheck" style="display:block;">
+										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
+											<option>적용할 수 있는 쿠폰이 없습니다.</option>
+										</select>
+									</div>
+								</c:when>
+								<c:when test="${sum >= 20000}">
+									<div id="delmoneycheck" style="display:block;">
 										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
 											<option>적용할 수 있는 쿠폰이 없습니다.</option>
 										</select>
@@ -714,11 +772,13 @@
 								</c:when>
 								<c:otherwise>
 									<div style="display:block;">
-										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change();">
-											<option value="0" selected="selected">쿠폰을 선택해주세요.</option>
+										<select id="selDelCoupon" name="delcouponnum" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change(this);">
+											<option value="선택안함" selected="selected">쿠폰을 선택해주세요.</option>
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '배송비'}">
-   													<option value="2500">${couponlist.coupon_name}</option>
+													<c:if test="${couponlist.usecheck eq '0'}">
+   													<option value="${couponlist.coupon_num}">${couponlist.coupon_name}</option>
+   													</c:if>
 												</c:if>
 											</c:forEach>
 										</select>
@@ -745,7 +805,7 @@
 							<td>
 								<div>
 									<span class="inp_point_wrap">
-										<input type="text" id="inpoint" class="inpH28" style="width:100px; text-align: right;" value=""> 원 / 
+										<input type="text" id="inpoint" name="inpoint" class="inpH28" style="width:100px; text-align: right;" value=""> 원 / 
 										<span id="cjonePnt_span" class="tx_num colorOrange"><span id="cjonePnt">${member.point}</span>P</span>
 										<input type="hidden" id="memberpoint" value="${member.point}">
 									</span> 
@@ -779,6 +839,7 @@
 							<span><input type="radio" id="payMethod_25" name="payMethod" value="25"><label for="payMethod_25">PAYCO</label></span>
 							<!-- //2017-04-18 추가 -->
 							<span><input type="radio" id="payMethod_26" name="payMethod" value="26"><label for="payMethod_26">카카오페이</label></span>
+							<input type="hidden" id="paytype" name="paytype" value="card">
 						</li>
 						<!-- 신용카드 선택 시 -->
 						<li value="11" style="display: list-item;" id="buycard">							
@@ -1093,8 +1154,14 @@
 						</li>
 						<li class="line_top2">
 							<span class="tx_tit">총 배송비</span> 
-							<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500</span>원</span>
-							<input type="hidden" id="deltotal" value="0">
+							<c:if test="${sum >= 20000}">
+								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">무료</span></span>
+								<input type="hidden" id="deltotal" name="deltotal" value="2500">
+							</c:if>
+							<c:if test="${sum < 20000}">
+								<span class="tx_cont" id="deliverycost"><span class="tx_num" id="dlexPayAmt_span">2500원</span></span>
+								<input type="hidden" id="deltotal" name="deltotal" value="0">
+							</c:if>
 						</li>
 						<li>
 							<span class="tx_tit"><span class="tx_num">CJ ONE</span> 포인트</span> 
@@ -1102,13 +1169,19 @@
 							<input type="hidden" id="pointtotal" value="0">
 						</li>
 						<li class="total">
-							<span class="tx_tit">최종 결제금액</span> 
+							<span class="tx_tit">최종 결제금액</span>
+							<c:if test="${sum >= 20000}">
+							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum}</span>원</span>
+							<input type="hidden" id="lastprice" name="lastprice" value="${sum}">
+							</c:if>
+							<c:if test="${sum < 20000}">
 							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${sum+2500}</span>원</span>
-							<input type="hidden" id="lastprice" value="${sum+2500}">
+							<input type="hidden" id="lastprice" name="lastprice" value="${sum+2500}">
+							</c:if>
 						</li>
 
 						<li>
-							<button class="btnPayment" id="btnPay" name="btnPay" type="button">결제하기</button>
+							<button class="btnPayment" id="btnPay" name="btnPay" type="submit">결제하기</button>
 							<input type="hidden" id="tempOrdNo" value="">
 						</li>
 					</ul>
@@ -1136,7 +1209,7 @@
 		<button><span></span>TOP</button>
 	</div>
 	<!-- footer -->
-	<jsp:include page="./include/Footer.jsp"/>
+	<jsp:include page="../include/Footer.jsp"/>
 	<!-- footer// -->
 	</div>
 	</body>

@@ -17,7 +17,15 @@
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
-<%int num = Integer.parseInt(request.getParameter("num")); %>
+<%
+	int num;
+	
+	if(request.getParameter("num")==null){
+		num = 0;
+	} else{
+		num = Integer.parseInt(request.getParameter("num"));
+	}
+%>
 <script>
 
 	window.onload = function(){
@@ -36,6 +44,8 @@
 		}
 		productsel[i].selectedIndex = product_op;
 	}
+	
+	
 }
 	
 	function check() {
@@ -52,12 +62,6 @@
 		
 	}
 	
-	function count_change(a, idx) {
-		
-		document.getElementsByName("updatecount")[idx].value = a.value;
-	}
-
-
 function checkAll(bool) {
  var all_input = document.getElementsByTagName("input");
  for(var i=0;i<all_input.length;i++) {
@@ -67,9 +71,9 @@ function checkAll(bool) {
  
 }
 
-function updateCart(idx) {
+function updateCart_text(idx) {
 	
-	var updatecount = document.getElementsByName("updatecount")[idx].value;
+	var updatecount = document.getElementsByName("product_text")[idx].value;
 	
 	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
 	
@@ -82,6 +86,10 @@ function deleteCart(idx) {
 	
 	location.href="CartDeleteController.do?cart_num=" + updatecartnum;
 }
+
+function selectBuy(cartnum) {
+	location.href="CartSelectBuyController.do?cart_num=" + cartnum;
+}
 	
 </script>
 </head>
@@ -90,7 +98,7 @@ function deleteCart(idx) {
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="./include/Header.jsp"/>
+	<jsp:include page="../include/Header.jsp"/>
 	<!-- header// -->
 					
 	<div id="Container">
@@ -119,7 +127,9 @@ function deleteCart(idx) {
 			</div>
 			<h2 class="sub-title2">
 						올리브영 배송상품
-			</h2>	
+			</h2>
+			
+			
 			<form action="CartBuyController.do" method="post">		
 			<table class="tbl_prd_list tableFix">
 				<caption>올리브영 배송상품 장바구니 목록</caption>
@@ -143,8 +153,17 @@ function deleteCart(idx) {
 					<th scope="col">선택</th>					
 				</tr>
 				</thead>
+			<c:choose>	
+				<c:when test="${requestScope.v eq '[]'}">
 				<tbody>
-<c:forEach var="cartlist"  items="${requestScope.v}" varStatus="idx">
+					<tr>
+						<td colspan="7" class="no_data">장바구니에 저장된 상품이 없습니다.</td>
+					</tr>
+				</tbody>
+				</c:when>
+				<c:otherwise>	
+				<tbody>
+				<c:forEach var="cartlist"  items="${requestScope.v}" varStatus="idx">
 	<c:set var="sum" value="${sum = sum + cartlist.product_price*cartlist.product_count}"/>
 	<c:set var="discount" value="${discount = discount + cartlist.discount*cartlist.product_count}" />
 	<fmt:parseNumber var= "pages" integerOnly= "true" value= "${discount}" />
@@ -170,23 +189,10 @@ function deleteCart(idx) {
 				</div>
 				<div class="tbl_cell w100">
 					<div class="prd_cnt">
-						<select class="amount" name="s_amount" id="productsel" onchange="count_change(this, ${idx.index});">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="10+">10+</option>
-						</select>	
+						<input type="text" name="product_text" width="60px;" value="${cartlist.product_count}">
 					</div>
-					<input type="hidden" name="updatecount" value="${cartlist.product_count}">
 					<input type="hidden" name="updatecartnum" value="${cartlist.cart_num}">
-					<button type="button" class="btnSmall wGray" name="btnQtyMod" onclick="updateCart(${idx.index})"><span>변경</span></button>
+					<button type="button" class="btnSmall wGray" name="btnQtyMod" onclick="updateCart_text(${idx.index})"><span>변경</span></button>
 				</div>
 				<div class="tbl_cell w110">
 					<span class="org_price">
@@ -196,12 +202,18 @@ function deleteCart(idx) {
 				</div>
 				<div class="tbl_cell w120  ">
 					<p class="prd_delivery">
-						<strong id="deliStrongText">배송료1000</strong>
+						<c:if test="${cartlist.product_price*cartlist.product_count-dis >= 20000}">
+							<strong id="deliStrongText">무료</strong>
+						</c:if>
+						<c:if test="${cartlist.product_price*cartlist.product_count-dis < 20000}">
+							<strong id="deliStrongText">2500원</strong>
+						</c:if>
+						
 					</p>
 				</div>
 				<div class="tbl_cell w150">
 					<div class="btn_group">
-						<button type="button" class="btnSmall wGreen" name="btn_buy"><span>바로구매</span></button>
+						<button type="button" class="btnSmall wGreen" name="btn_buy" onclick="selectBuy(${cartlist.cart_num});"><span>바로구매</span></button>
 						<button type="button" class="btnSmall wGray delete" name="btnDelete" onclick="deleteCart(${idx.index})"><span>삭제</span></button><!-- 버튼 공간(스페이스바)없이 붙여주세요. -->
 					</div>
 				</div>				
@@ -211,8 +223,10 @@ function deleteCart(idx) {
 	
 </c:forEach>
 </tbody>
+</c:otherwise>
+</c:choose>
 </table>
-		
+		<c:if test="${requestScope.v ne '[]'}">
 			<!--// 올리브영 배송상품 -->
 			<!-- 올리브영 배송상품 결제금액 -->
 			<div class="basket_price_info">
@@ -223,8 +237,22 @@ function deleteCart(idx) {
 				<div class="sum_price">
 				총 판매가 <span class="tx_num">${sum}</span>원 <span class="tx_sign minus">-</span>
 				 총 할인금액 <span class="tx_num">${pages}</span>원 <span class="tx_sign plus">+</span>
-				  배송비 <span class="tx_num">0</span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">
-				  총 결제금액 <span class="tx_price"><span class="tx_num">${sum-pages}</span>원</span></span>
+				  배송비 <span class="tx_num">
+				 <c:if test="${sum-pages >= 20000}">
+				 0
+				 </c:if>
+				 <c:if test="${sum-pages < 20000}">
+				 2500
+				 </c:if>
+				  </span>원 <span class="tx_sign equal">=</span> <span class="tx_total_price">
+				  총 결제금액 <span class="tx_price"><span class="tx_num">
+				  	<c:if test="${sum-pages >= 20000}">
+				 	 ${sum-pages}
+					 </c:if>
+					 <c:if test="${sum-pages < 20000}">
+					 ${sum-pages+2500}
+					 </c:if>
+				  </span>원</span></span>
 				  </div>
 			</div>
 			<!--// 올리브영 배송상품 결제금액 -->
@@ -235,11 +263,25 @@ function deleteCart(idx) {
 					<span class="tx_sign2 minus">-</span>
 					<p class="tx_sale">총 할인금액<span><span class="tx_num">${pages}</span>원</span></p>
 					<span class="tx_sign2 plus">+</span>
-					<p>배송비 <span><span class="tx_num">0</span>원</span></p>
+					<p>배송비 <span><span class="tx_num">
+					<c:if test="${sum-pages >= 20000}">
+				 	 0
+					 </c:if>
+					 <c:if test="${sum-pages < 20000}">
+					 2500
+					 </c:if>
+					</span>원</span></p>
 				</div>
 				<div class="sum_price">
 					<span class="tx_text">배송비는 쿠폰할인금액에 따라 변경될 수 있습니다.</span>
-					총 결제예상금액 <span class="tx_price"><span class="tx_num">${sum-pages}</span>원</span>
+					총 결제예상금액 <span class="tx_price"><span class="tx_num">
+					<c:if test="${sum-pages >= 20000}">
+				 	 ${sum-pages}
+					 </c:if>
+					 <c:if test="${sum-pages < 20000}">
+					 ${sum-pages+2500}
+					 </c:if>
+					</span>원</span>
 				</div>	
 			</div>
 		
@@ -247,12 +289,12 @@ function deleteCart(idx) {
 				<button type="submit" class="btnOrangeW" name="partOrderBtn">선택주문</button>
 				<button type="button" class="btnOrange" name="allOrderBtn" onclick="location.href='CartAllBuyController.do'">전체주문</button>
 			</div>
+			</c:if>
 			</form>
 		</div>
 	</div>
-
 	<!-- footer -->
-	<jsp:include page="./include/Footer.jsp"/>
+	<jsp:include page="../include/Footer.jsp"/>
 	<!-- footer// -->
 </div>
 </body>
