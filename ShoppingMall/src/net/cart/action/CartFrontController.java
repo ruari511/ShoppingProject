@@ -85,6 +85,20 @@ public class CartFrontController extends HttpServlet{
 			}
 		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
 		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
+		}else if(command.equals("/BuyListInsertController2.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new BuyListInsertController2();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
+		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
 		}/*else if(command.equals("/login.do")){ 
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
