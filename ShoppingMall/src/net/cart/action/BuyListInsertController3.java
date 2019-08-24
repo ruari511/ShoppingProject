@@ -1,16 +1,13 @@
 package net.cart.action;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.member.db.MemberDTO;
 import net.action.Action;
 import net.action.ActionForward;
 import net.buyList.db.BuyListDAO;
@@ -34,25 +31,16 @@ public class BuyListInsertController3 implements Action{
 		CouponDAO coudao = new CouponDAO();
 		MemberDAO mdao = new MemberDAO();
 		
-		int ia = 0;
-		System.out.println("i = " + ia);
-		ia++;
-		
 		String laprice = request.getParameter("lastprice");
 		
 		int	lastprice = 0;
 		
 		if(request.getParameter("lastprice") != null){
 			lastprice = Integer.parseInt(laprice);
-		}else{
-			RequestDispatcher dis = 
-					request.getRequestDispatcher("product/BuyComplete.jsp");
-			dis.forward(request, response);	
 		}
+			
 		System.out.println("lastprice = " + laprice);
-//		if(request.getParameter("lastprice") != null){
-//		lastprice = Integer.parseInt(laprice);			
-//		}
+		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		System.out.println("id = " + id);
@@ -135,17 +123,17 @@ public class BuyListInsertController3 implements Action{
 		if(inpoint==null || inpoint.length()==0 || inpoint==""){
 			inpoint = "0";
 		}
+		
 		session.setAttribute("inpoint", inpoint);
-//		System.out.println("inpoint = " + inpoint);
+		
 		String paytype = request.getParameter("paytype");
-//		System.out.println("paytype = " + paytype);
 		
 		String[] cartnum = request.getParameterValues("cartnum");
 		String[] product_num = request.getParameterValues("product_num");
-		System.out.println("product_num = " + product_num[0]);
 		String[] product_count = request.getParameterValues("product_count");
 		
 		int maxbuynum = bdao.maxBuynum();
+		
 		SimpleDateFormat simpl = new SimpleDateFormat("yyyy/MM/dd");
 		String buydate = simpl.format(System.currentTimeMillis());
 		
@@ -202,7 +190,7 @@ public class BuyListInsertController3 implements Action{
 			coudao.UpdateUserCoupon(Integer.parseInt(allcouponnum), id);
 		}
 		
-		//회원 등급을 조회(포인트 적립비율을 위한 조회) 예)아이언이면 1%적립 브론즈2% 실버3%...
+		/*//회원 등급을 조회(포인트 적립비율을 위한 조회) 예)아이언이면 1%적립 브론즈2% 실버3%...
 		String grade = mdao.GradeCheck(id);
 		System.out.println("grade = " + grade);
 		
@@ -229,8 +217,6 @@ public class BuyListInsertController3 implements Action{
 		
 		//실제로 구매하는 금액 (총 상품금액 - 할인금액 - 배송비) <-- 포인트 적립을 위한 update용도
 		int realprice = totalprice-totalsaleprice-delivery_cost1;
-		
-		System.out.println("realprice = " + realprice);
 		
 		int grade_percent = 0;
 		if(grade == "아이언" || grade.equals("아이언")){
@@ -267,16 +253,16 @@ public class BuyListInsertController3 implements Action{
 		request.setAttribute("totalsaleprice", totalsaleprice);
 		request.setAttribute("delivery_cost", delivery_cost1);
 		request.setAttribute("buylist", buylist);
-		request.setAttribute("buyday", thisDayMore);
+		request.setAttribute("buyday", thisDayMore);*/
 		
 		/*회원 가입 성공시.... 로그인 페이지로 이동 시킨다.*/
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 		ActionForward forward=new ActionForward();
 		//페이지 이동 방식 여부 값 true로 저장  
 		//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
-		forward.setRedirect(false);
+		forward.setRedirect(true);
 		// ./member/login.jsp 이동할 페이지 주소 저장
-		forward.setPath("./BuyComplete.buy");
+		forward.setPath("./BuyListInsertController2.buy");
 		
 		//페이지 이동 방식 여부 값 true와...
 		// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..
