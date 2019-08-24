@@ -54,7 +54,7 @@ public class CartFrontController extends HttpServlet{
 		//자식 Action 객체들을 담을 인터페이스 타입의 참조변수 선언
 		Action action=null;
 			
-		//Top.jsp에서.. join링크를 누르면 회원가입페이지로 이동하는 요청이 들어 왔을때..
+		//모든 구매하기 동작이 완료된 후 구매완료 페이지로 이동하는 부분
 		if(command.equals("/BuyComplete.buy")){
 		
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
@@ -64,8 +64,8 @@ public class CartFrontController extends HttpServlet{
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
 			forward.setPath("./product/BuyComplete.jsp");
 			
-		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
-		}else if(command.equals("/BuyListInsertController.buy")){
+		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
+		}else if(command.equals("/BuyListInsert.Buy")){
 	
 			
 			//회원가입 처리를 위한 Action객체 생성
@@ -77,9 +77,8 @@ public class CartFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
-		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
-		}else if(command.equals("/BuyListInsertController2.buy")){
+		//결제하기 버튼을 눌러서 구매목록이 insert되고 난 후 Member의 정보를 업데이트 하는 부분
+		}else if(command.equals("/BuyMemberUpdate.buy")){
 	
 			
 			//회원가입 처리를 위한 Action객체 생성

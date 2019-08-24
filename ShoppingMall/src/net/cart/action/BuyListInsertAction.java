@@ -181,7 +181,7 @@ public class BuyListInsertAction implements Action{
 
 		forward.setRedirect(true);
 
-		forward.setPath("./BuyListInsertController2.buy");
+		forward.setPath("./BuyMemberUpdate.buy");
 		
 		return forward;
 	}
