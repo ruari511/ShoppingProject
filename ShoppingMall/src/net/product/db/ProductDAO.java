@@ -41,7 +41,6 @@ public class ProductDAO {
 			while(rs.next()){
 				
 				pdto = new ProductDTO();
-				
 				pdto.setProduct_num(product_num);
 				pdto.setCategory_main(rs.getString("category_main"));
 				pdto.setCategory_sub(rs.getString("category_sub"));

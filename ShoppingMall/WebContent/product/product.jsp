@@ -79,7 +79,7 @@ function goBuy() {
 <div id="Container">
 	<div id="Contents">
 	<c:set var="product" value="${requestScope.pdto}" />
-	<input type="hidden" id="product_num" value="${product.product_num}">
+	<input type="hidden" id="product_num" name="product_num" value="${product.product_num}">
 		<!-- 상단 카테고리 history -->
 		<div class="page_location">
 			<a href="" class="loc_home">홈</a>

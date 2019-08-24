@@ -33,7 +33,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num "
+			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num, c.product_num "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.id=?";
@@ -56,7 +56,7 @@ public class CartDAO {
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("product_sale_price"));
-				cartDTO.setCart_num(rs.getInt("cart_num"));
+				cartDTO.setProduct_num(rs.getInt("product_num"));
 				
 				cartList.add(cartDTO);
 			}//while문 끝
@@ -83,7 +83,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price "
+			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.product_num "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.cart_num=?";
@@ -105,7 +105,7 @@ public class CartDAO {
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("product_sale_price"));
-				cartDTO.setCart_num(rs.getInt("cart_num"));
+				cartDTO.setProduct_num(rs.getInt("product_num"));
 				
 			}//while문 끝
 			
