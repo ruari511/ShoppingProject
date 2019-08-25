@@ -45,7 +45,7 @@
 		<div class="header_inner">
 			<h1><a href="Main.jsp"><img src="./asset/image/logo.png" alt="###" /></a></h1>
 			<div class="search_box" id="w_search_box">
-			<input type="text" id="query" name="" value="" class="inp_placeholder"/>
+			<input type="text" id="query" name="" value="" class="inp_placeholder" style="width: 270px;"/>
 			<input type="hidden" name="chkButton" id="chkButton" value="" />		
 				<button id="searchSubmit">검색</button>
 			</div>

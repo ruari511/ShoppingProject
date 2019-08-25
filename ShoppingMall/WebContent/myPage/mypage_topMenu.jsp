@@ -11,7 +11,7 @@
 	
 	<!-- 마이페이지 탑 -->
 	<div class="mypage-head iconGrade4">
-		<h1 class="tit"><a href="https://www.oliveyoung.co.kr/store/mypage/myPageMain.do">마이페이지</a>PAGE</h1>
+		<h1 class="tit"><a href="./mypage.mypage">마이페이지</a>PAGE</h1>
 		<p class="text">(이름)님의 멤버십 등급은 <span>(등급)</span>입니다.</p>
 		<ul class="infor execu">
 			<li>
@@ -35,7 +35,6 @@
 	<!-- 마이페이지 탑 -->
 			
 	<!-- 마이페이지 왼측 메뉴바 -->
-	<div class="mypage-ix">
 		<div class="mypage-lnb">
 			<ul>
 				<li><h2>마이 쇼핑</h2>
@@ -63,6 +62,8 @@
 				</li>
 			</ul>
 		</div>
+	
+
 		<!-- 마이페이지 왼측 메뉴바 -->
 		<!-- //마이페이지 SUB 메뉴 -->
 
