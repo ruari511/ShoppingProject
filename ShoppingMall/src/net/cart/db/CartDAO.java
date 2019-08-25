@@ -444,6 +444,43 @@ public class CartDAO {
 		}
 	}
 	
+	//Header영역에 장바구니(숫자)를 하기위한 장바구니에 담긴 숫자 카운트 메소드
+	public int CartCount(String id){
+		
+		int cartCount = 0;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select count(*) from cart where id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				cartCount = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("CartCount()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		return cartCount;
+		
+	}
+	
 	
 	
 	

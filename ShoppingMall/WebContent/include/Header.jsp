@@ -1,3 +1,4 @@
+<%@page import="net.cart.db.CartDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
+
 <body>
 	
 	<div id="Header">
@@ -26,9 +28,11 @@
 					<li class="join"><a href="./join.do">회원가입</a></li>	
 					<%
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
+					CartDAO cdao = new CartDAO();
+					int cartCount = cdao.CartCount(id);
 					%>
 					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
-					<li class="cart"><a href="./CartListAction.buy">장바구니<span id="cartToCnt"></span></a></li>
+					<li class="cart"><a href="./CartListAction.buy">장바구니(<%=cartCount%>)<span id="cartToCnt"></span></a></li>
 					<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
 				<%
 				}

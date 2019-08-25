@@ -40,7 +40,7 @@ public class CartInsertAction implements Action{
 		
 		out.write("<script>");
 		out.write("alert('장바구니에 저장이 완료되었습니다.');");
-		out.write("history.go(-1);");
+		out.write("location.href='ProductDetailAction.pro?product_num="+ product_num + "';");
 		out.write("</script>");
 		
 		return null;
