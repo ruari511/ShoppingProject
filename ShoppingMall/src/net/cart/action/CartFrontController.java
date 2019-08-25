@@ -146,7 +146,71 @@ public class CartFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/CartUpdateAction.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new CartUpdateAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/CartSelectBuyAction.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new CartSelectBuyAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/CartDeleteAction.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new CartDeleteAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/CartInsertAction.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new CartInsertAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/GoBuyAction.buy")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new GoBuyAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
+		
+		
 		
 		//주소 이동
 		if(forward!=null){ //new ActionForward()객체가 존재 하고..

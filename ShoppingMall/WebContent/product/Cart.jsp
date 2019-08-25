@@ -77,18 +77,18 @@ function updateCart_text(idx) {
 	
 	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
 	
-	location.href="CartUpdateController.do?cart_num=" + updatecartnum + "&count=" + updatecount;
+	location.href="CartUpdateAction.buy?cart_num=" + updatecartnum + "&count=" + updatecount;
 }
 
 function deleteCart(idx) {
 	
 	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
 	
-	location.href="CartDeleteController.do?cart_num=" + updatecartnum;
+	location.href="CartDeleteAction.buy?cart_num=" + updatecartnum;
 }
 
 function selectBuy(cartnum) {
-	location.href="CartSelectBuyController.do?cart_num=" + cartnum;
+	location.href="CartSelectBuyAction.buy?cart_num=" + cartnum;
 }
 	
 </script>

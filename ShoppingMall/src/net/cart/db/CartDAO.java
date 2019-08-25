@@ -146,8 +146,6 @@ public class CartDAO {
 			
 			while(rs.next()){
 				
-				System.out.println("product_name = " + rs.getString("product_name"));
-				
 				cartDTO = new CartDTO();
 				
 				cartDTO.setCart_num(0);

@@ -20,6 +20,17 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>ProductFrontController</servlet-name>
+  	<servlet-class>net.product.action.ProductFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductFrontController</servlet-name>
+  	<url-pattern>*.pro</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <servlet>
   	<servlet-name>MypageFrontController</servlet-name>
   	<servlet-class>net.mypage.action.MypageFrontController</servlet-class>
   </servlet>

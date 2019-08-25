@@ -54,7 +54,7 @@ function goCart() {
 	if(id==null){
 		location.href="./login.do";
 	} else{
-		location.href="CartInsertController.do?product_num="+product_num+"&product_count="+product_count;
+		location.href="CartInsertAction.buy?product_num="+product_num+"&product_count="+product_count;
 	}
 }
 
@@ -66,7 +66,7 @@ function goBuy() {
 	if(id==null){
 		location.href="./login.do";
 	} else{
-		location.href="GoBuyController.buy?product_num="+product_num+"&product_count="+product_count;
+		location.href="GoBuyAction.buy?product_num="+product_num+"&product_count="+product_count;
 	}
 }
 </script>
