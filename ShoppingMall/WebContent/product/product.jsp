@@ -217,10 +217,10 @@ function goBuy() {
 		<div class="curation_area_a003_lead"></div>
 		<!-- 큐레이션 2차 E -->
 		<ul class="prd_detail_tab" id="tabList">
-			<li class="on" id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo">상세정보</a></li>
-			<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo">구매정보</a></li>
-			<li id="reviewInfo"><a href="javascript:;" class="goods_reputation">상품평<span>(0)</span></a></li>
-			<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
+			<li class="on" id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo" style="cursor: pointer;">상세정보</a></li>
+			<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo" style="cursor: pointer;">구매정보</a></li>
+			<li id="reviewInfo"><a href="javascript:;" class="goods_reputation" style="cursor: pointer;">상품평<span>(0)</span></a></li>
+			<li id="qnaInfo"><a href="javascript:;" class="goods_qna" style="cursor: pointer;">Q&amp;A<span>(1)</span></a></li>
 		</ul>
 		
 		
