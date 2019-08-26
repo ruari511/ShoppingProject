@@ -60,7 +60,7 @@
 						<tbody>
 						<tr>
 							<th scope="row">입금하실 금액</th>
-							<td><span class="tx_price"><span class="tx_num">${requestScope.totalprice-requestScope.totalsaleprice-requestScope.delivery_cost}</span>원</span></td>
+							<td><span class="tx_price"><span class="tx_num">${requestScope.totalprice-requestScope.totalsaleprice+requestScope.delivery_cost}</span>원</span></td>
 						</tr>
 						<tr>
 							<th scope="row">입금은행</th>
@@ -118,7 +118,7 @@
 						<tr class="last_tot_price">
 							<th scope="row">최종 결제금액</th>
 							<td>
-								<span class="tx_price"><span class="tx_num">${requestScope.totalprice-requestScope.totalsaleprice-requestScope.delivery_cost}</span>원</span>
+								<span class="tx_price"><span class="tx_num">${requestScope.totalprice-requestScope.totalsaleprice+requestScope.delivery_cost}</span>원</span>
 		
 			
 			
