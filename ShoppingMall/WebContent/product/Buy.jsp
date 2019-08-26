@@ -67,7 +67,7 @@
 
 
 <script type="text/javascript">
-
+	
 	window.onload = function (){
 		
 		var email = document.getElementById("orderEmail").value;
@@ -295,6 +295,8 @@
 		var delivery_tel1 = document.getElementById("delivery_tel1").value;
 		var delivery_tel2 = document.getElementById("delivery_tel2").value;
 		var delivery_address = document.getElementById("sample6_postcode").value;
+		var paytype = document.getElementById("paytype").value;
+		var cardNum = document.getElementById("cardNum").value;
 		
 		if(delevery_title == ""){
 			alert("배송지명을 입력해주세요.");
@@ -320,9 +322,28 @@
 			alert("주소를 입력해주세요.");
 			document.getElementById("sample6_postcode").focus();
 			return false;
+		} else if(paytype == "card" && cardNum == ""){
+			
+			cardOpen();
+			
+			return false;
+		} else if(paytype == "bankbook"){
+			
+			var fm1 = document.getElementById("fm1");
+			fm1.action = "./BuyListInsertBankBook.buy";
+			fm1.submit();
+			
 		} else{
 			return true;
 		}
+	}
+	
+	function cardOpen() {
+		
+		var card = document.getElementById("acqrCd").value;
+		var card_installment = document.getElementById("instMmCnt").value;
+		var buyCard = window.open("./product/buyCard.jsp?card="+card+"&card_installment="+card_installment, "", "width=400, height=200, top=350, left=800");
+
 	}
 
 </script>
@@ -353,7 +374,7 @@
 			</div>
 			<!--// title_box -->
 			
-			<form action="./BuyListInsert.buy" method="post" onsubmit="return nullCheck();">
+			<form action="./BuyListInsertCard.buy" id="fm1" method="post" onsubmit="return nullCheck();">
 			<!-- 주문자 정보 -->
 			<h2 class="sub-title2 mgT20">주문자정보</h2><!-- 2017-02-21 수정 : mgT20 클래스 추가 -->
 			<table class="tbl_inp_form">
@@ -855,40 +876,40 @@
 									<td>
 										<div id="cardDscnt_div">
 											<input type="hidden" id="cardCouponIndex" value="">
-											<select id="acqrCd" name="acqrCd" class="selH28" title="결제하실 카드를 선택해주세요." style="width:200px" onchange="card_change(this);">
+											<select id="acqrCd" name="bank" class="selH28" title="결제하실 카드를 선택해주세요." style="width:200px" onchange="card_change(this);">
 												<option value="0">카드를 선택해주세요.</option>
 
-												<option value="BCC">BC카드</option>
+												<option value="BC카드">BC카드</option>
 
-												<option value="HNB">하나비자</option>
+												<option value="하나비자">하나비자</option>
 
-												<option value="PHB">우리카드</option>
+												<option value="우리카드">우리카드</option>
 
-												<option value="SYH">신협카드</option>
+												<option value="신협카드">신협카드</option>
 
-												<option value="NFF">수협카드</option>
+												<option value="수협카드">수협카드</option>
 
-												<option value="CBB">전북카드</option>
+												<option value="전북카드">전북카드</option>
 
-												<option value="CIT">씨티카드</option>
+												<option value="씨티카">씨티카드</option>
 
-												<option value="WIN">삼성카드</option>
+												<option value="삼성카드">삼성카드</option>
 
-												<option value="LGC">신한카드</option>
+												<option value="신한카드">신한카드</option>
 
-												<option value="KJB">광주비자</option>
+												<option value="광주비자">광주비자</option>
 
-												<option value="CJB">제주카드</option>
+												<option value="제주카드">제주카드</option>
 
-												<option value="DIN">현대카드</option>
+												<option value="현대카드">현대카드</option>
 
-												<option value="AMX">롯데카드</option>
+												<option value="롯데카드">롯데카드</option>
 
-												<option value="CNB">KB카드</option>
+												<option value="KB카드">KB카드</option>
 
-												<option value="NLC">NH카드</option>
+												<option value="NH카드">NH카드</option>
 
-												<option value="KEB">외환카드</option>
+												<option value="외환카드">외환카드</option>
 
 											</select>
 
@@ -899,16 +920,16 @@
 									<th scope="row">할부종류</th>
 									<td>
 										<div>
-											<select id="instMmCnt" name="instMmCnt" class="selH28" style="width:200px" disabled="">
-												<option value="00">일시불</option>
-												<option value="02">2개월</option>
-												<option value="03">3개월</option>
-												<option value="04">4개월</option>
-												<option value="05">5개월</option>
-												<option value="06">6개월</option>
-												<option value="07">7개월</option>
-												<option value="08">8개월</option>
-												<option value="09">9개월</option>
+											<select id="instMmCnt" name="installment" class="selH28" style="width:200px" disabled="">
+												<option value="0">일시불</option>
+												<option value="2">2개월</option>
+												<option value="3">3개월</option>
+												<option value="4">4개월</option>
+												<option value="5">5개월</option>
+												<option value="6">6개월</option>
+												<option value="7">7개월</option>
+												<option value="8">8개월</option>
+												<option value="9">9개월</option>
 												<option value="10">10개월</option>
 												<option value="11">11개월</option>
 												<option value="12">12개월</option>
@@ -918,7 +939,11 @@
 									</td>
 								</tr>
 								</tbody>
-							</table>							
+							</table>
+							<input type="hidden" id="cardNum" name="cardNum">	
+							<input type="hidden" id="cardDate" name="cardDate">
+							<input type="hidden" id="cardCvc" name="cardCvc">
+							<input type="hidden" id="cardPass" name="cardPass">						
 						</li>
 						<!--// 신용카드 선택 시 -->
 						<!-- 무통장입금 선택 시 -->
@@ -1145,7 +1170,7 @@
 						<li>
 							<span class="tx_tit">총 상품금액</span> 
 							<span class="tx_cont"><span class="tx_num">${sum}</span>원</span>
-							<input type="hidden" id="prototal" value="${sum}">
+							<input type="hidden" id="prototal" name="prototal" value="${sum}">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 --> 
