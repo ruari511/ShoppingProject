@@ -45,7 +45,7 @@ public class CartFrontController extends HttpServlet{
 		// /MemberJoinAction.do
 		//  /MemberLogin.do 얻기 
 		String command=RequestURI.substring(contextPath.length());
-		System.out.println(command);
+		System.out.println("command = " +command);
 					
 		/*주소 비교*/	
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체를 저장할 참조변수 선언 
@@ -65,11 +65,42 @@ public class CartFrontController extends HttpServlet{
 			forward.setPath("./product/BuyComplete.jsp");
 			
 		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
-		}else if(command.equals("/BuyListInsert.buy")){
-	
+		}else if(command.equals("/BuyFail.buy")){
+		
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./product/BuyFail.jsp");
 			
-			//회원가입 처리를 위한 Action객체 생성
-			action=new BuyListInsertAction();
+		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
+		}else if(command.equals("/BuyFailIn.buy")){
+		
+			action=new BuyFailIn();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
+		}else if(command.equals("/BuyListInsertCard.buy")){
+	
+			action=new BuyListInsertCardAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		//결제하기 버튼을 눌러서 구매목록이 insert되고 난 후 Member의 정보를 업데이트 하는 부분
+		}else if(command.equals("/BuyListInsertBankBook.buy")){
+	
+			action=new BuyListInsertBankBookAction();
 			
 			try {
 				forward=action.execute(request, response);

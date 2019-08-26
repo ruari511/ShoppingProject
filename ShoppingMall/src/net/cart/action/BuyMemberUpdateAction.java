@@ -9,6 +9,8 @@ import net.action.Action;
 import net.action.ActionForward;
 import net.buyList.db.BuyListDAO;
 import net.buyList.db.BuyListDTO;
+import net.buycard.db.BuyCardDTO;
+import net.buycard.db.CardDAO;
 import net.member.db.MemberDAO;
 
 
@@ -22,6 +24,7 @@ public class BuyMemberUpdateAction implements Action{
 		
 		BuyListDAO bdao = new BuyListDAO();
 		MemberDAO mdao = new MemberDAO();
+		CardDAO cardDAO = new CardDAO();
 		
 		HttpSession session = request.getSession();
 		
@@ -92,7 +95,12 @@ public class BuyMemberUpdateAction implements Action{
 		int mtotalprice = mdao.getTotalprice(id);
 		mdao.UpdateTotalPrice(id, mtotalprice+realprice);
 		mdao.UpdateGrade(id, mtotalprice);
-				
+		
+		if(session.getAttribute("bcnum") != null){
+		int bcnum = (int) session.getAttribute("bcnum");
+		BuyCardDTO bcDTO = cardDAO.selectBuyCard(bcnum);
+		request.setAttribute("bcDTO", bcDTO);
+		}
 		request.setAttribute("totalprice", totalprice);
 		request.setAttribute("totalsaleprice", totalsaleprice);
 		request.setAttribute("delivery_cost", delivery_cost1);
@@ -100,7 +108,7 @@ public class BuyMemberUpdateAction implements Action{
 		request.setAttribute("buyday", buyday);
 		
 		}
-		
+		session.removeAttribute("bcnum");
 		session.removeAttribute("buyday");
 		session.removeAttribute("inpoint");
 		
