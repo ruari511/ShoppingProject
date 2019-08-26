@@ -86,10 +86,11 @@ public class review extends HttpServlet {
 				
 
 		// review.jsp로 이동
-		String site = "/product/product.jsp";
-
-		RequestDispatcher dis = request.getRequestDispatcher(site);
-		dis.forward(request, response);
+		RequestDispatcher dis = 
+				request.getRequestDispatcher("product/product.jsp");
+		
+		//실제 재요청
+		dis.forward(request, response);		
 
 	}
 

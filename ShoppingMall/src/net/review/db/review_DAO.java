@@ -148,11 +148,11 @@ public class review_DAO {
 	// 총 레코드수(게시글 수)를 구함.
 	public int review_getPageCount() throws Exception {
 		con=null;
-		
+		sql="";
 		con=getConnection();
 
 		// 쿼리문
-		String sql = "SELECT COUNT(*) FROM " + "reviewboard";
+		sql = "SELECT COUNT(*) FROM " + "reviewboard";
 
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
@@ -172,6 +172,7 @@ public class review_DAO {
 	// 리뷰글을 읽어오는 메서드
 	public ReviewDTO review_read(int num) throws Exception {
 		con=null;
+		sql="";
 		
 		// 빈객체 생성
 		ReviewDTO dto = new ReviewDTO();
@@ -180,7 +181,7 @@ public class review_DAO {
 		con=getConnection();
 
 		// SQL
-		String sql = "SELECT * FROM reviewboard WHERE REVIEW_NUM=" + num;
+		sql = "SELECT * FROM reviewboard WHERE REVIEW_NUM=" + num;
 
 		Statement stmt = con.createStatement();
 
@@ -219,14 +220,21 @@ public class review_DAO {
 	public void review_delete(int num) throws Exception{
 		
 		con=null;
+	    sql="";
+	    pstmt=null;
+	    rs=null;
 		
 		con=getConnection();
 
-		// SQL
-		String sql = "DELETE FROM reviewboard WHERE REVIEW_NUM=" + num;
-
-		Statement stmt = con.createStatement();
-		stmt.executeQuery(sql);
+		// SQL										
+		sql = "DELETE FROM reviewboard WHERE REVIEW_NUM=?";
+		pstmt = con.prepareStatement(sql);
+		
+		//?에 값을 대입
+		pstmt.setInt(1, num);
+		
+		//쿼리를 실행하시오.
+		pstmt.executeUpdate();
 		
 		if(con!=null)try{con.close();}catch(SQLException ex){}
 	
