@@ -32,7 +32,7 @@ html, body {
 }
 
 #mainBanner_Btn{
-	z-index: 10;
+	z-index: 7;
     position: absolute;
     top: 0;
     width: 1020px;
