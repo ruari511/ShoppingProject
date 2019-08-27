@@ -1,5 +1,44 @@
 @CHARSET "UTF-8";
 
+input {
+	width:100%;
+	height:38px;
+	margin:0;
+	padding:0;
+	border:1px solid #d0d0d0;
+	color:#888;
+	background:none;
+	border-radius:5px;
+	border-radius:5px;
+	-ms-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	-moz-border-radius:5px;
+	/*outline:none;*/
+	box-shadow:none;
+	-webkit-appearance:none;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	letter-spacing:0.5px;
+	vertical-align:top;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="tel"] {
+	padding:0 10px;
+	background-color:#fff;
+	font-size:14px;
+	line-height:20px;
+	color:#888;
+}
+
+input[type="submit"],
+button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-serif;font-weight:700}
+
+
+
 /* 검색결과 텍스트 + 검색창*/
 .searchResultArea {overflow:hidden;position:relative;padding:34px 0 14px;border-bottom:2px solid #666;}
 .searchResultArea .resultTxt {padding-right:250px;font-size:20px;line-height:40px;color:#333;}
@@ -274,42 +313,7 @@
 #directTop button:hover > span {background-position:0 0}
 
 
-input {
-	width:100%;
-	height:38px;
-	margin:0;
-	padding:0;
-	border:1px solid #d0d0d0;
-	color:#888;
-	background:none;
-	border-radius:5px;
-	border-radius:5px;
-	-ms-border-radius:5px;
-	-webkit-border-radius:5px;
-	-o-border-radius:5px;
-	-moz-border-radius:5px;
-	/*outline:none;*/
-	box-shadow:none;
-	-webkit-appearance:none;
-	-webkit-appearance:none;
-	-moz-appearance:none;
-	letter-spacing:0.5px;
-	vertical-align:top;
-}
 
-
-input[type="text"],
-input[type="password"],
-input[type="tel"] {
-	padding:0 10px;
-	background-color:#fff;
-	font-size:14px;
-	line-height:20px;
-	color:#888;
-}
-
-input[type="submit"],
-button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-serif;font-weight:700}
 
 
 
