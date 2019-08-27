@@ -181,32 +181,32 @@
 						<c:when test="${idx.index < 4}">
 							<c:if test="${idx.index % 4 == 0}">
 								<ul class="sublist show" id="subfirstlist">	
-									<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 							</c:if>
 							<c:if test="${idx.index % 4 == 1}">
-								<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 							</c:if>
 							<c:if test="${idx.index % 4 == 2}">
-								<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 							</c:if>
 							<c:if test="${idx.index % 4 == 3}">
-								<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 								</ul>
 							</c:if>
 						</c:when>
 						<c:otherwise>
 							<c:if test="${idx.index % 4 == 0}">
 								<ul class="sublist ">	
-									<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 							</c:if>
 							<c:if test="${idx.index % 4 == 1}">
-								<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 							</c:if>
 							<c:if test="${idx.index % 4 == 2}">
-								<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 							</c:if>
 							<c:if test="${idx.index % 4 == 3}">
-								<li><a href="" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
+								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
 								</ul>
 							</c:if>
 						</c:otherwise>

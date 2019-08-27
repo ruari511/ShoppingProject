@@ -24,17 +24,26 @@ public class ProductSelectAction implements Action{
 		if(request.getParameter("query") != null){
 		ProductDAO pdao = new ProductDAO();
 		String query = request.getParameter("query");
+		String startrow = request.getParameter("startrow");
+		Vector<ProductDTO> productList = pdao.selectProduct(query, Integer.parseInt(startrow), 24);
+		int count = pdao.selectProductCount(query);
 		ArrayList<String> category = pdao.selectProductcate(query);
 		ArrayList<String> brand = pdao.selectProductbrand(query);
 		
 		if(request.getParameter("cate") != null){
 			String cate = request.getParameter("cate");
 			ArrayList<String> subcategory = pdao.selectProductsubcate(query, cate);
+			count = pdao.selectProductcateCount(query, cate);
+			productList = pdao.selectProductcate(query, Integer.parseInt(startrow), 24, cate);
 			request.setAttribute("subcategory", subcategory);
 		}
-		String startrow = request.getParameter("startrow");
-		Vector<ProductDTO> productList = pdao.selectProduct(query, Integer.parseInt(startrow), 24);
-		int count = pdao.selectProductCount(query);
+		
+		if(request.getParameter("subcate") != null){
+			String cate = request.getParameter("cate");
+			String subcate = request.getParameter("subcate");
+			count = pdao.selectProductsubcateCount(query, cate, subcate);
+			productList = pdao.selectProductsubcate(query, Integer.parseInt(startrow), 24, cate, subcate);
+		}
 		
 		request.setAttribute("brand", brand);
 		request.setAttribute("productList", productList);
