@@ -17,18 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("*.credu")  //서블릿 호출명
 public class ControllerServlet extends HttpServlet {
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ControllerServlet() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	
 		System.out.println("ControllerServlet");
 		
@@ -63,7 +57,7 @@ public class ControllerServlet extends HttpServlet {
 		}
 		else if(url.equals("review.credu")){
 			// review.credu 요청
-			site = "review";
+			site = "ProductDetailAction.do";
 			
 		}
 		else if(url.equals("review_read.credu")){

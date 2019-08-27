@@ -426,9 +426,11 @@ function goBuy() {
 		<c:url var="review_write" value="review_write.credu"></c:url>
 		<%-- review 삭제 서블릿 호출 --%>
 		<c:url var="review_delete" value="review_delete.credu"></c:url>
+		
 		<%
-		String product_num=request.getParameter("product_num");
+			String product_num=request.getParameter("product_num");
 		 %>
+		 
 		<!-- 리뷰정보 탭이 on일경우 -->
 		<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:none;">
 

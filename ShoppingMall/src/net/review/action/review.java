@@ -18,23 +18,14 @@ import net.review.db.*;
  */
 @WebServlet("/review")
 public class review extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public review() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		review_DAO dao = new review_DAO();
-
+		
 		System.out.println("review.credu");
 
 		int pagenum = 1; // 페이지 번호
@@ -85,7 +76,7 @@ public class review extends HttpServlet {
 		request.setAttribute("tot", tot);
 				
 
-		// review.jsp로 이동
+		// product.jsp로 이동
 		RequestDispatcher dis = 
 				request.getRequestDispatcher("product/product.jsp");
 		
