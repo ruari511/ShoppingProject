@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.product.db.ProductDAO;
+import net.product.db.ProductDTO;
 import net.review.db.*;
 
 /**
@@ -24,7 +26,11 @@ public class review extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int product_num=Integer.parseInt(request.getParameter("product_num"));
+		
 		review_DAO dao = new review_DAO();
+		ArrayList<ReviewDTO> dto = dao.getReview(product_num);
 		
 		System.out.println("review.credu");
 
@@ -65,10 +71,10 @@ public class review extends HttpServlet {
 		
 		System.out.println(start);
 		System.out.println(end);
-
+		System.out.println("상품번호: " + product_num);
 		// 리뷰게시판 불러오기.
-		ArrayList<ReviewDTO> list = dao.review_get(start, end);
-
+//		ArrayList<ReviewDTO> list = dao.review_get(start, end);
+		ArrayList<ReviewDTO> list = dao.getReview(product_num);
 		// request 객체에 list를 담아준다.
 		request.setAttribute("list", list);
 		

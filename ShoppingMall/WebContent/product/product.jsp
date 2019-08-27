@@ -510,6 +510,7 @@ function goBuy() {
 						 <% for(int i = 1 ; i<=tot ; i++){ %>
    						 
    						 <a href="review.credu?Page_num=<%=i%>"><%=i%></a>
+<%--    						 <a href="ProductDetailAction.do?product_num=1?Page_num=<%=i%>"><%=i%></a> --%>
   						 
   						 <% } %>
 										
