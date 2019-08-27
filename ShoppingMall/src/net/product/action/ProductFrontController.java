@@ -79,6 +79,27 @@ public class ProductFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		//결제하기 버튼을 눌러서 구매목록이 insert되고 난 후 Member의 정보를 업데이트 하는 부분
+		}else if(command.equals("/ProductSelectAction.pro")){
+	
+			
+			//회원가입 처리를 위한 Action객체 생성
+			action=new ProductSelectAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		//결제하기 버튼을 눌러서 구매목록이 insert되고 난 후 Member의 정보를 업데이트 하는 부분
+		}else if(command.equals("/ProductSelect.pro")){
+	
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false);
+			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+			forward.setPath("./ProductSelect.jsp");
 		}
 		
 		

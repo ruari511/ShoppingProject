@@ -43,12 +43,14 @@
 			</form>
 		</div>
 		<div class="header_inner">
+		<form action="./ProductSelectAction.pro" method="post">
+			<input type="hidden" name="startrow" value="0">
 			<h1><a href="Main.jsp"><img src="./asset/image/logo.png" alt="###" /></a></h1>
 			<div class="search_box" id="w_search_box">
-			<input type="text" id="query" name="" value="" class="inp_placeholder" style="width: 270px;"/>
-			<input type="hidden" name="chkButton" id="chkButton" value="" />		
+				<input type="text" id="query" name="query" value="" class="inp_placeholder" style="width: 270px;"/>
 				<button id="searchSubmit">검색</button>
 			</div>
+		</form>
 			<!--// 검색영역 -->
 			<ul class="mymenu_area">
 				<li class="store ">

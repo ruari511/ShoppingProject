@@ -196,6 +196,27 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 .detailSearch.new .tooltip .toolClose{position:absolute;top:5px;right:5px;width:9px;height:9px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/btn_close_9.png") no-repeat 0 0;}
 
 
+.detailSearch.new .search_box.subcate .sublist{display:none;margin:0;height:54px;padding:14px 0;overflow:visible;overflow-y:visible;}
+.detailSearch.new .search_box.subcate .sublist.show{display:block;}
+.detailSearch.new .search_box .sublist>li{position:relative;float:left;width:170px;padding:0 0 0 15px;line-height:26px;}
+.detailSearch.new .search_box .sublist>li input[type="checkbox"] {width:12px;height:12px;margin-right:8px;background:none;-webkit-appearance:checkbox;-webkit-appearance:checkbox;vertical-align:middle;}
+.detailSearch.new .search_box .sublist>li input[type="checkbox"]:disabled+label{color:#aaa;}
+.detailSearch.new .search_box .sublist>li>a,
+.detailSearch.new .search_box .sublist>li>label {display:inline-block;max-width:125px;font-size:12px;color:#333;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+.detailSearch.new .search_box .sublist>li:nth-child(5n)>label{max-width:115px;}
+.detailSearch.new .search_box .sublist>li span.num{display:inline-block;margin:0 0 0 3px;vertical-align:middle;font-family: "montserrat";font-size:12px;color:#999;}
+.detailSearch.new .search_box .sublist>li>a{font-size:12px;color:#333;}
+.detailSearch.new .search_box .sublist>li>a.on{color:#f47330;}
+.detailSearch.new .search_box .sublist>li>a.active:after{content:'';display:block;position:absolute;top:26px;left:15px;width:21px;height:10px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bul_arr_search.png") no-repeat 0;}
+.detailSearch.new .search_box.subcate .list+.sublist_subbox+.list{margin-top:-28px;}
+.detailSearch.new .search_box.subcate .list+.sublist_subbox.show+.list{margin-top:-14px;}
+#subcateOnOff{ height: 55px;}
+#subcateOnOff .inner{ height: 54px;}
+#subfirstlist.sublist.show{ margin: 0; height: 54px; padding: 14px 0; overflow: visible; overflow-y: visible;}
+#subfirstlist.sublist{ margin: 0; height: 54px; padding: 14px 0; overflow: visible; overflow-y: visible;}
+#subfirstlist.sublist li{ position: relative; float: left; width: 170px; padding: 0 0 0 15px; line-height: 26px;}
+
+   
 
 
 
@@ -298,6 +319,8 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 .pageing {padding:30px 0 0;font-size:0;text-align:center;line-height:0;}
 .pageing a, .pageing strong {display:inline-block;width:30px;height:30px;margin:0 2px;border:1px solid #e5e5e5;color:#888;font-size:14px;line-height:28px;vertical-align:top;box-sizing:border-box;font-weight:700}
 .pageing a {text-decoration:none;}
+.pageing a.on{border: 1px solid #666; color: #333; font-weight: 700;}
+.pageing a.off{border: 1px solid #e5e5e5; color: #888;}
 .pageing .prev, .pageing .next {height:30px;padding:0;font-size:0;text-indent:-99999px;line-height:0;}
 .pageing .prev {margin-right:8px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_prev7x11.png") no-repeat center center;}
 .pageing .next {margin-left:8px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_next7x11.png") no-repeat center center;}
@@ -311,8 +334,6 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 #directTop button > span {display:block;width:14px;height:8px;margin:0 auto 7px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_top_arrow.png") no-repeat 0 -8px}
 #directTop button:hover {background:#555;color:#fff}
 #directTop button:hover > span {background-position:0 0}
-
-
 
 
 
