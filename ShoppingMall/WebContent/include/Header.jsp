@@ -22,15 +22,25 @@
 				//세션값 없음  -> MemberFrontController서블릿에.. 로그인 | 회원가입 처리 요청  
 				if(id==null){
 					%>                  
-					<li class="login"><a href="./login.do">로그인</a></li>
-					<li class="join"><a href="./join.do">회원가입</a></li>	
+						<li class="login"><a href="./login.do">로그인</a></li>
+						<li class="join"><a href="./join.do">회원가입</a></li>	
 					<%
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					%>
 					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
-					<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
-					<li class="mypage"><a href="./mypage.mp">마이페이지</a></li>
-					<li class="order"><a href="#">주문배송</a></li>
+					<%
+					if(id.equals("admin")){
+					%>
+						<li><input type="button" value="관리자메뉴" onclick="adminMenu()"/></li>
+					<%		
+					}else{
+					%>
+						<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
+						<li class="mypage"><a href="./mypage.mp">마이페이지</a></li>
+						<li class="order"><a href="#">주문배송</a></li>
+					<%
+					}
+					%>
 				<%
 				}
 				%>
@@ -154,4 +164,9 @@
 	</div>
 	
 </body>
+<script type="text/javascript">
+	function adminMenu() {
+		location.href="./adminMenu.ad";
+	}
+</script>
 </html>

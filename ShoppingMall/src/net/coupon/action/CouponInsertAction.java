@@ -65,7 +65,7 @@ public class CouponInsertAction implements Action{
 		//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
 		forward.setRedirect(true);
 		// ./member/login.jsp 이동할 페이지 주소 저장
-		forward.setPath("./Main.jsp?section=./myPage/mypage_coupon.jsp");
+		forward.setPath("./mypage_coupon.mp");
 		
 		//페이지 이동 방식 여부 값 true와...
 		//new ActionForward()객체를 MemberFrontController로 리턴  

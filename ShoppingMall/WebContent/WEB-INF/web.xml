@@ -28,6 +28,15 @@
   	<url-pattern>*.cp</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>AdminFrontController</servlet-name>
+  	<servlet-class>net.admin.action.AdminFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminFrontController</servlet-name>
+  	<url-pattern>*.ad</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

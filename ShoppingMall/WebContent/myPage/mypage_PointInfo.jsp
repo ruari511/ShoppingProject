@@ -1,5 +1,8 @@
+<%@page import="net.member.db.MemberDTO"%>
+<%@page import="net.member.db.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -25,6 +28,17 @@
 <script type="text/javascript" src="../asset/js/slick.min.js"></script>
 <script type="text/javascript" src="../asset/js/common.js"></script>
 </head>
+<%	
+	String id = (String)session.getAttribute("id");	
+
+	MemberDAO mdao = new MemberDAO();
+	MemberDTO member = mdao.selectMember(id);
+	
+	request.setAttribute("memberInfo", member);
+	
+	
+	
+%>
 <body>
 	<div id="Wrapper">
 
@@ -36,7 +50,7 @@
 
 				<div class="mypage-conts">
 					<script
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
+						src="http s://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
 					<script>
 						$(window).ready(function() {
 							mypage.header.init();
@@ -44,30 +58,17 @@
 					</script>
 
 
-
-					<div class="title-area linezero">
-						<h2 class="tit">사용 가능한 CJ ONE 포인트</h2>
+					<div style="margin-top: 20px;">
 					</div>
 					<ul class="point-cjone">
 						<li>
-							<p class="tit">사용 가능한 CJ ONE 포인트</p>
+							<p class="tit">사용 가능한 포인트</p>
 							<p class="num">
-
-
-
-
-								0 <em>P</em>
+								<fmt:formatNumber value="${memberInfo.point}" pattern="###,###" />
+								<em>P</em>
 							</p>
 						</li>
-						<li>
-							<p class="txt">당월 소멸 예정</p> <a class="btn" href="#none"
-							id="schMonExtinPlanPnt" name="schMonExtinPlanPnt">조회하기</a>
-						</li>
-
-
-
 					</ul>
-
 
 					<fieldset class="search-period">
 						<legend></legend>

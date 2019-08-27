@@ -152,7 +152,7 @@ public class CouponDAO {
 		return cpNum;
 	}
 	
-public int SelectCouponPercent(String cpName){
+	public int SelectCouponPercent(String cpName){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -189,62 +189,91 @@ public int SelectCouponPercent(String cpName){
 	}
 	
 	
-public Vector<UserCouponDTO> getAllCouponList_MP(String id){
+	public Vector<UserCouponDTO> getAllCouponList_MP(String id){
 	
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	String sql = "";
-	
-	Vector<UserCouponDTO> couponList = new Vector<UserCouponDTO>();
-	
-	try {
-		con = getConnection();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
 		
-//		sql  = "select c.coupon_name, c.coupon_percent, "
-//			 + "c.coupon_limitmax, c.coupon_type, u.start_date, u.last_date, u.usecheck"
-//			 + "from coupon c join user_coupon u "
-//			 + "on c.coupon_num = u.coupon_num "
-//			 + "where u.id= 'master' ";
+		Vector<UserCouponDTO> couponList = new Vector<UserCouponDTO>();
 		
-		sql = "select * from coupon natural join user_coupon where id = ?";
-		
-		
-		
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, id);
-		
-		rs = pstmt.executeQuery();
-		
-		while(rs.next()){
+		try {
+			con = getConnection();
 			
-			UserCouponDTO ucouDTO = new UserCouponDTO();
+	//		sql  = "select c.coupon_name, c.coupon_percent, "
+	//			 + "c.coupon_limitmax, c.coupon_type, u.start_date, u.last_date, u.usecheck"
+	//			 + "from coupon c join user_coupon u "
+	//			 + "on c.coupon_num = u.coupon_num "
+	//			 + "where u.id= 'master' ";
 			
-			ucouDTO.setCoupon_name(rs.getString("coupon_name"));
-			ucouDTO.setCoupon_percent(rs.getInt("coupon_percent"));
-			ucouDTO.setCoupon_limitmax(rs.getInt("coupon_limitmax"));
-			ucouDTO.setCoupon_type(rs.getString("coupon_type"));
-			ucouDTO.setStart_date(rs.getTimestamp("start_date"));
-			ucouDTO.setLast_date(rs.getTimestamp("last_date"));
-			ucouDTO.setUsecheck(rs.getInt("usecheck"));
+			sql = "select * from coupon natural join user_coupon where id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
 				
-			couponList.add(ucouDTO);
+				UserCouponDTO ucouDTO = new UserCouponDTO();
+				
+				ucouDTO.setCoupon_name(rs.getString("coupon_name"));
+				ucouDTO.setCoupon_percent(rs.getInt("coupon_percent"));
+				ucouDTO.setCoupon_limitmax(rs.getInt("coupon_limitmax"));
+				ucouDTO.setCoupon_type(rs.getString("coupon_type"));
+				ucouDTO.setStart_date(rs.getTimestamp("start_date"));
+				ucouDTO.setLast_date(rs.getTimestamp("last_date"));
+				ucouDTO.setUsecheck(rs.getInt("usecheck"));
+					
+				couponList.add(ucouDTO);
+				
+			}
 			
+		} catch (Exception e) {
+			System.out.println("getAllCouponList_MP()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	
+		return couponList;
+		
+	}
+	
+	public int CouponNum(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int cpNum = 0;
+		
+		try {
+			con = getConnection();
+
+			sql = "select count(id) from user_coupon where id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				cpNum = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("CouponNum() 메소드 내부에서의 오류 : " + e);
+		} finally {
+			 if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
 		}
 		
-	} catch (Exception e) {
-		System.out.println("getAllCouponList_MP()메소드 내부에서의 오류 : " + e);
-	} finally{
-		if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
-		if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
-		if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		return cpNum;
 	}
-
-	return couponList;
-	
-}
-	
-	
 	
 	
 	

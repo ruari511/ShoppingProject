@@ -51,7 +51,6 @@ public class MemberFrontController extends HttpServlet{
 		// /MemberJoinAction.do
 		//  /MemberLogin.do 얻기 
 		String command=RequestURI.substring(contextPath.length());
-		System.out.println(command);
 					
 		/*주소 비교*/	
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체를 저장할 참조변수 선언 
@@ -76,14 +75,14 @@ public class MemberFrontController extends HttpServlet{
 			
 			//회원가입 처리를 위한 Action객체 생성
 			action=new MemberJoinAction();
-			
+			 
 			try {
 				forward=action.execute(request, response);
 						
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+			 
 			
 		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
 		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
@@ -131,7 +130,7 @@ public class MemberFrontController extends HttpServlet{
 				//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 				forward.setRedirect(false); //주소값 노출 안됨
 				//이동할 페이지 경로(탈퇴 페이지) 주소값 저장
-				forward.setPath("./Main.jsp?center=./member/MemberOut.jsp"); 
+				forward.setPath("./Main.jsp?section=./member/MemberOut.jsp"); 
 			
 			//Delet.jsp에서... "회원탈퇴"버튼을 눌렀을때..탈퇴 처리 요청받기!
 			//사용자가 입력한 id와 패스워드를 request영역에 담아오기

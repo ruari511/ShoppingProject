@@ -102,7 +102,7 @@
 .point-cjone {overflow:hidden;width:100%;border:1px solid #e6e6e6;border-radius:5px;}
 .point-cjone li {overflow:hidden;float:left;width:231px;height:27px;margin:26px 0 0;padding:4px 0 0;border-left:1px solid #e4e4e4;font-size:0;line-height:0;}
 .point-cjone li:first-child {width:554px;height:auto;margin:0;padding:22px 0 16px;border:0;}
-.point-cjone li .tit {float:left;height:34px;margin:0 0 0 30px;padding:8px 0 0 48px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_point34x34.png") no-repeat 0 50%;color:#222;font-size:18px;line-height:22px;}
+.point-cjone li .tit {float:left;height:34px;margin:0 0 0 30px;padding:8px 0 0 48px;color:#222;font-size:18px;line-height:22px;}
 .point-cjone li .num {float:right;margin:0 20px 0 0;color:#fe8840;font-size:34px;line-height:40px;font-weight:700}
 .point-cjone li .num em {display:inline-block;margin:0 0 0 3px;font-style:normal;font-size:20px;line-height:26px;vertical-align:-1px;}
 .point-cjone li .txt {float:left;margin:0 0 0 20px;color:#666;font-size:14px;line-height:18px;}

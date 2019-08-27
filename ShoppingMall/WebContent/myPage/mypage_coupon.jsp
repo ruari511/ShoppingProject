@@ -90,24 +90,28 @@
 								</tr>
 							</thead>
 							<tbody id="onCpnList" name="onCpnList">
-								<tr data-day-cnt="30" data-cpn-cd="RpM21aGK7dc="
-									data-cpn-no="g0CzCBI3VCbN1WY2UmNt7w==" data-expire-s-date=""
-									data-expire-e-date="">
-									<c:set var="coupon" value="${requestScope.cou}"/>
-									<c:choose>
-										<c:when test="${coupon eq null}">
-											<td colspan="4"> 사용 가능한 쿠폰이 없습니다.</td>
-										</c:when>
-										<c:otherwise>
-											<c:forEach var="couponlist" items="${requestScope.cou}">
+								<c:set var="coupon" value="${requestScope.cou}"/>
+								<c:choose>
+									<c:when test="${coupon eq null}">
+									<tr>
+										<td colspan="4"> 사용 가능한 쿠폰이 없습니다.</td>
+									</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="couponlist" items="${requestScope.cou}">
+										<tr>
 											<td><span class="coupon-inner percent"> ${couponlist.coupon_percent} %</span></td>
 											<td class="subject">${couponlist.coupon_name}</td>
-											<td class="colorGrey"><span class="price"> 최대 <span class="price">${couponlist.coupon_limitmax}</span>원</td>
-											<td class="colorGrey">${couponlist.start_date} <br>~${couponlist.last_date}</td>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tr>
+											<td class="colorGrey"><span class="price"> 최대 <span class="price"><fmt:formatNumber value="${couponlist.coupon_limitmax}" pattern="###,###" /></span>원</td>
+											<td class="colorGrey">
+												<fmt:formatDate value="${couponlist.start_date}" pattern="yyyy.MM.dd"/> 
+												<br> ~ <br>
+												<fmt:formatDate value="${couponlist.last_date}" pattern="yyyy.MM.dd"/>
+											</td>
+										</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 						<div class="usage-guide">
