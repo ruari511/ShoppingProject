@@ -94,12 +94,17 @@ public class review_DAO {
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			sql =  "select * from (select review_num as rnum, a1.* from (select review_num, id, product_num, review_title, review_content, review_cnt, review_star, review_regdate FROM reviewboard ORDER BY review_num DESC) a1) a2 where a2.rnum >= ? and a2.rnum <= ? and product_num = ?";
 			
-			System.out.println("리스트 연결");
+			System.out.println("상품 리스트 연결");
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			pstmt.setInt(3, product_num);
+			
+			System.out.println("상품 리스트 시작 끝 상품번호");
+			System.out.println(start);
+			System.out.println(end);
+			System.out.println(product_num);
 
 			// SQL 실행
 			rs=pstmt.executeQuery();

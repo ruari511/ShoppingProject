@@ -59,7 +59,7 @@ String name = request.getParameter("name");
 					<input type="password" name="password2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
 				<% 
-					if(name == ""){
+					if(name == "" || name == null){
 				%>
 				<label>이름</label>
 					<input type="text" name="name" id="name" onblur="join_check('name')" required>
@@ -80,7 +80,7 @@ String name = request.getParameter("name");
 					남자<input type="radio" name="gender" value="남자" checked>
 					여자<input type="radio" name="gender" value="여자" ><br>
 				<% 
-					if(email == ""){
+					if(email == "" || email == null){
 				%>
 				<label>이메일</label>
 					<input type="email" name="email" id="email" onblur="join_check('email')" value="" required><br>

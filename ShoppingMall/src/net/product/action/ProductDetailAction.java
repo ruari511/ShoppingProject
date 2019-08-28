@@ -80,7 +80,8 @@ public class ProductDetailAction extends HttpServlet{
 		// 2page 16 ~ 30 15개
 		// 3page 31 ~ 45 15개
 		
-		int end = pagenum * size;
+//		int end = pagenum * size;
+		int end = 30;
 		int start = end - size + 1;
 		
 		System.out.println(start);
@@ -94,6 +95,7 @@ public class ProductDetailAction extends HttpServlet{
 		
 		// request 객체에 총 페이지수를 담아준다.
 		request.setAttribute("tot", tot);
+		System.out.println("-===End");
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -142,8 +144,8 @@ public class ProductDetailAction extends HttpServlet{
 //		System.out.println("상품번호: " + product_num);
 //		
 //		// 리뷰게시판 불러오기.
-//		ArrayList<ReviewDTO> list = dao.review_get(start, end, Integer.parseInt(product_num));
-////		ArrayList<ReviewDTO> list = dao.getReview(Integer.parseInt(product_num));
+////		ArrayList<ReviewDTO> list = dao.review_get(start, end, Integer.parseInt(product_num));
+//		ArrayList<ReviewDTO> list = dao.getReview(Integer.parseInt(product_num));
 //		// request 객체에 list를 담아준다.
 //		request.setAttribute("list", list);
 //		
@@ -160,3 +162,4 @@ public class ProductDetailAction extends HttpServlet{
 		
 	}
 }
+
