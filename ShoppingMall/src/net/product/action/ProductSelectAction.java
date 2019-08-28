@@ -30,19 +30,21 @@ public class ProductSelectAction implements Action{
 		ArrayList<String> category = pdao.selectProductcate(query);
 		ArrayList<String> brand = pdao.selectProductbrand(query);
 		
-		if(request.getParameter("cate") != null){
+		if(request.getParameter("cate") != null && request.getParameter("cate").length() != 0){
 			String cate = request.getParameter("cate");
 			ArrayList<String> subcategory = pdao.selectProductsubcate(query, cate);
 			count = pdao.selectProductcateCount(query, cate);
 			productList = pdao.selectProductcate(query, Integer.parseInt(startrow), 24, cate);
 			request.setAttribute("subcategory", subcategory);
+			request.setAttribute("cate", cate);
 		}
 		
-		if(request.getParameter("subcate") != null){
+		if(request.getParameter("subcate") != null && request.getParameter("subcate").length() != 0){
 			String cate = request.getParameter("cate");
 			String subcate = request.getParameter("subcate");
 			count = pdao.selectProductsubcateCount(query, cate, subcate);
 			productList = pdao.selectProductsubcate(query, Integer.parseInt(startrow), 24, cate, subcate);
+			request.setAttribute("subcate", subcate);
 		}
 		
 		request.setAttribute("brand", brand);

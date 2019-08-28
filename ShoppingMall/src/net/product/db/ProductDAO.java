@@ -136,7 +136,7 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select * from product where product_name like ? || product_subname like ? && category_main=? limit ?,?";
+			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? limit ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -191,14 +191,14 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select * from product where product_name like ? || product_subname like ? && category_main=? && category_sub=? limit ?,?";
+			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? limit ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, "%"+query+"%");
 			pstmt.setString(2, "%"+query+"%");
 			pstmt.setString(3, cate);
-			pstmt.setString(3, subcate);
+			pstmt.setString(4, subcate);
 			pstmt.setInt(5, startRow);
 			pstmt.setInt(6, pageSize);
 			
@@ -320,7 +320,7 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select distinct category_sub from product where product_name like ? || product_subname like ? && category_main=?";
+			sql = "select distinct category_sub from product where (product_name like ? || product_subname like ?) && category_main=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, "%"+query+"%");
@@ -356,7 +356,7 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select count(*) from product where product_name like ? || product_subname like ? && category_main=?";
+			sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, "%"+query+"%");
@@ -392,13 +392,13 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select count(*) from product where product_name like ? || product_subname like ? && category_main=? && category_sub=?";
+			sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, "%"+query+"%");
 			pstmt.setString(2, "%"+query+"%");
 			pstmt.setString(3, cate);
-			pstmt.setString(3, subcate);
+			pstmt.setString(4, subcate);
 			
 			rs = pstmt.executeQuery();
 			
