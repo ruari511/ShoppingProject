@@ -14,7 +14,197 @@ html, body {
 	height: 100%;
 	margin: 0 auto;
 }
+/*메인 카테고리*/
+#proudctList_Category_Main>h1{
+	font-size: 24px;
+	margin-top: 20px;
+	
+}
 
+/*메인 카테고리 끝*/
+
+/*서브 카테고리*/
+#proudctList_Category_Sub ul{
+	width: 100%;
+	font-size: 0;
+	margin-top: 30px;
+}
+#proudctList_Category_Sub li{
+	float: left;
+	height:40px;
+	width: 16.766%;
+	border: 1px solid gray;
+	font-size: 15px;
+	margin: -1px 0 0 -1px; /*테두리가 겹쳐서 굵게 나오는 것을 방지*/
+	overflow: hidden;
+}
+
+#proudctList_Category_Sub a{
+	display: block;
+	height:40px;
+	padding: 10px;
+}
+
+#proudctList_Category_Sub a:hover{
+	color: coral;
+}
+.on a{
+	border: 2px solid coral;
+	color: coral;
+	font-weight: bold;
+	margin: -1px;
+	line-height: -1;
+}
+
+
+#proudctList_Category_Sub::after{ /*float 해제*/
+	content: '';
+	display: block;
+	clear: both;
+}
+
+
+/*서브 카테고리 끝*/
+
+/*브랜드*/
+#productList_Brand{
+	margin-top: 30px;
+	margin-bottom: 60px;
+	border: 1px solid lightgray;
+	border-top: 3px solid coral;
+	width: 100%;
+	min-height: 75px;
+	position: relative;
+}
+
+#productList_Brand_Title{
+	float: left;
+	width: 15%;	
+	margin: 15px;
+}
+
+#productList_Brand_Title p:nth-child(1){
+	font-size: 18px;
+	font-weight: bold;
+	color: black;
+}
+
+#productList_Brand_Title :nth-child(2){
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+	color: coral;
+}
+
+#productList_Brand_List ul{
+	float: left;
+	width: 82%;	
+	padding: 10px;
+	min-height: 75px;
+    max-height: 200px;
+	margin-bottom: -1px;
+	border-left: 1px solid lightgray;
+}
+
+#productList_Brand_List li{
+	float: left;
+	width: 140px;
+	margin: 10px;
+
+}
+#productList_Brand_List input{
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+#productList_Brand_List label{
+	font-size: 16px;
+}
+
+#productList_Brand_List::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+#productList_Brand_Btn{
+	position: absolute;
+}
+
+.List_moreBtn{	
+	position: absolute;
+	z-index: 2;
+	background-color: white;
+	border: 1px solid lightgray;
+	border-top: 1px solid white;
+	margin-left: -1px;
+	font-size: 14px;
+	font-weight: 600;
+	width: 80px;
+	height: 35px;
+}
+
+.Check_resetBtn{
+	width: 1020px;;
+	background-color: lightgray;
+	z-index: 1;
+	top: 0;
+	position: absolute;
+	padding-left: 940px;
+}
+
+.Check_resetBtn *{	
+	height: 35px;
+	background-color: transparent;
+	color: white;
+	font-weight: 300;
+}
+
+#productList_Brand_Btn::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
+/*브랜드 끝*/
+
+/*제품개수*/
+#productList_Num{
+	margin-top: 20px;
+}
+
+#productList_Num *{
+	text-align: center;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+#productList_Num span{
+	color: orange;
+}
+
+/*제품개수 끝*/
+
+
+
+/*제품정렬*/
+#productList_Align_Wrap{
+	border-top: 5px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	margin-top: 30px;
+}
+
+#productList_Align_Wrap li{
+	display: inline-block;
+	margin: 14px 10px;
+}
+#productList_Align_Wrap *{
+	color: gray;
+}
+
+/*제품정렬 끝*/
+
+
+/* 제품 목록 */
 #productList_Product_Wrap{
 	width: 100%;
 	margin: 0 auto;	
@@ -80,3 +270,4 @@ html, body {
 	font-weight: bold;
 	margin-top: 5px;
 }
+/*제품목록 끝*/

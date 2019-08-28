@@ -80,6 +80,7 @@
 	
 	//배너 바꾸기 반복 함수	
 	function mainBannerUpdate(n){
+		if(!$(".mainBanner_Img_Wrap").is(':animated')){
 		//현재 배너 값 저장
 		var currentIndex = index;
 		//새 인덱스
@@ -109,6 +110,7 @@
 			//새배너 오퍼시티 1이 되면 현재배너 오퍼시티 0
 			$(".mainBanner_Img_Wrap").eq(currentIndex).css("opacity", 0);				
 		});	
+		}
 	} //mainBannerUpdate끝
 
 	
