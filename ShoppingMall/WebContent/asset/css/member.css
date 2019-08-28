@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+/* ul{
+	list-style: none;
+} */
+
+.join input.join{
+	list-style: none;
+	width: 300px;
+	padding: 0 20px;
+    height: 50px;
+    line-height: 60px;
+    vertical-align: middle;
+  	border-radius: 1px 1px 5px 5px;
+    font-family: 'montserrat', 'noto';
+	border: 10px;
+}
+
+form#join {
+    padding: 50px;
+    width: 850px;
+    padding-bottom: 51px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-top: 5px solid #babc00;
+    background-color: #fff;
+    font-size: 14px
+    padding: 0 10px;
+    color: #888;
+    
+}
+.jointo{
+	margin: 0 0 0 120px;
+}
+    /* padding: 92px 0 145px 0; */
+    
+.submit, .cancel{
+	text-align: center;
+    color: #fff;
+    width: 50%;
+    height: 50px;
+    background-color: #969937;
+    padding: 11px 0 9px;
+    font-size: 18px;
+    line-height: 30px;
+    border-radius: 5px;
+}
+
+.join_title {
+    margin: 19px 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
