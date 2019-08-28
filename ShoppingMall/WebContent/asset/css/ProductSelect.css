@@ -113,14 +113,6 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 .finderArea>li .listBenefit li label {display:inline-block;color:#333;vertical-align:middle}
 .finderArea>li .listBenefit li span {color:#666;vertical-align:middle;margin-left:2px}
 
-/* 가격대 */
-.finderArea>li .priceSearch {overflow:hidden;display:table-cell;width:930px;border-bottom:1px solid #e6e6e6;padding:14px 20px}
-.finderArea>li .priceSearch> * {float:left;}
-.finderArea>li .priceSearch input[type="text"]{width:100px;height:28px;font-size:12px;line-height:15px;color:#333;}
-.finderArea>li .priceSearch input[type="text"]:first-child{}
-.finderArea>li .priceSearch input[type="submit"] {margin-left:6px;width:90px;height:28px;border:1px solid #aaa;font-size:12px;color:#666;letter-spacing:-0.5px;}
-.finderArea>li .priceSearch span {display:inline-block;width:20px;height:28px;font-size:16px;line-height:28px;color:#333;text-align:center;}
-
 
 /* 검색결과 없을 시 */
 .search_no_data {border-bottom:1px solid #e6e6e6;width:100%;padding:190px 15px 74px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_nodata104x104.png") no-repeat center 60px;}
@@ -179,7 +171,7 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 .detailSearch.new .search_box .priceSearch> * {float:left;}
 .detailSearch.new .search_box .priceSearch input[type="text"]{width:100px;height:28px;font-size:12px;line-height:15px;color:#333;}
 .detailSearch.new .search_box .priceSearch input[type="text"]:first-child{}
-.detailSearch.new .search_box .priceSearch input[type="submit"] {margin-left:6px;width:90px;height:28px;border:1px solid #aaa;font-size:12px;color:#666;letter-spacing:-0.5px;}
+.detailSearch.new .search_box .priceSearch input[type="button"] {margin-left:6px;width:90px;height:28px;border:1px solid #aaa;font-size:12px;color:#666;letter-spacing:-0.5px;}
 .detailSearch.new .search_box .priceSearch span {display:inline-block;width:20px;height:28px;font-size:16px;line-height:28px;color:#333;text-align:center;}
 .detailSearch.new .btnBox{position:relative;margin:0;padding:10px 0 11px 0;min-height:48px;;border-bottom:1px solid #e6e6e6;}
 .detailSearch.new .btnBox .btnReset{position:absolute;top:10px;right:0px;}
@@ -336,7 +328,7 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 #directTop button:hover > span {background-position:0 0}
 
 
-
+#price_button {margin-left:6px;width:90px;height:28px;border:1px solid #aaa;font-size:12px;color:#666;letter-spacing:-0.5px;}
 
 
 

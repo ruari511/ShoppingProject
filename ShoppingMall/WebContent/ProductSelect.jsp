@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="./asset/css/ProductSelect.css"/> 
 <title>Insert title here</title>
 <script type="text/javascript">
+	
 	function brandOnOff(){
 		var check = document.getElementById("brandOnOffCheck").value;
 		if(check == "off"){
@@ -96,6 +97,16 @@
 			});
 		});
 	
+	function checksubmit() {
+		var frm = document.getElementById("frm");
+		frm.submit();
+	}
+	
+	function pricesubmit() {
+		var frm1 = document.getElementById("frm1");
+		frm1.submit();
+	}
+	
 </script>
 </head>
 <body>
@@ -113,7 +124,7 @@
 		<div id="Contents">
 			<!-- 검색어오류 영역 추가 (2017-01-13 추가)  -->
 			<div class="searchResultArea"> 
-				<p class="resultTxt"><strong>로션</strong>검색결과 (전체 <span>${count}개</span>의 상품)					
+				<p class="resultTxt"><strong>${query}</strong>검색결과 (전체 <span>${count}개</span>의 상품)					
 				</p>
 				<div class="searchWrap">
 					<input type="text" title="결과 내 검색창" placeholder="결과 내 검색" id="reChk">
@@ -278,25 +289,111 @@
 			</div>	
 			</c:if>							
 				<!-- //서브카테고리 -->
+			<c:if test="${requestScope.checkbrand != null}">
 			<div class="search_box brand" id="brandOnOff">
 				<div class="inner">
 					<h4 class="tit_th">브랜드<button class="btnMore" onclick="brandOnOff();">열기/닫기</button></h4>
 					<input type="hidden" id="brandOnOffCheck" value="off">
+					<form action="./ProductSelectAction.pro" id="frm" method="get">
+					<input type="hidden" name="query" value="${query}">
+					<input type="hidden" name="cate" value="${cate}">
+					<input type="hidden" name="subcate" value="${subcate}">
+					<input type="hidden" name="startrow" value="0">
 					<ul class="list scrbar">
+					<%-- <c:set var="i" value="0"/>
+					<c:set var="break" value="false" />
 					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
-						<li><input type="checkbox" id="" name="brand_check" value="A000451" onclick=""><label for="inpChk1_A000451">${brand}</label></li>
+					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
+						<c:if test="${brand == checkbrand}">
+							<li>
+								<input type="checkbox" id="brand${i}" name="brand_check" checked="checked" value="${brand}" onclick="checksubmit();">
+								<label for="brand${i}" onclick="checksubmit();">${brand}</label>
+							</li>
+							<c:set var="break" value="true"/>
+						</c:if>
+						<c:if test="${brand != checkbrand}">
+							<li>
+								<input type="checkbox" id="brand${i}" name="brand_check" value="${brand}" onclick="checksubmit();">
+								<label for="brand${i}" onclick="checksubmit();">${brand}</label>
+							</li>
+							<c:set var="break" value="true"/>
+						</c:if>	
+					<c:set var="i" value="${i+1}"/>			
+					</c:forEach>
+					<c:set var="break" value="false"/>
+					</c:forEach> --%>
+					<% 
+						int i=0; 
+					%>
+					<c:set var="break" value="false" />
+					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
+						<li>
+							<input type="checkbox" id="brand<%=i %>" name="brand_check" value="${brand}" onclick="checksubmit();">
+							<label for="brand<%=i %>" onclick="checksubmit();">${brand}</label>
+						</li>
+					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
+						<c:if test="${brand == checkbrand}">
+							<script type="text/javascript">
+								document.getElementById("brand<%=i%>").checked=true;
+							</script>
+						</c:if>
+					</c:forEach>
+					<% i++; %>	
 					</c:forEach>
 					</ul>
+					</form>
 					</div>
 				</div><!-- //브랜드 -->
+				</c:if>
+				
+			<c:if test="${requestScope.checkbrand == null}">
+			<div class="search_box brand" id="brandOnOff">
+				<div class="inner">
+					<h4 class="tit_th">브랜드<button class="btnMore" onclick="brandOnOff();">열기/닫기</button></h4>
+					<input type="hidden" id="brandOnOffCheck" value="off">
+					<form action="./ProductSelectAction.pro" id="frm" method="get">
+					<input type="hidden" name="query" value="${query}">
+					<input type="hidden" name="cate" value="${cate}">
+					<input type="hidden" name="subcate" value="${subcate}">
+					<input type="hidden" name="startrow" value="0">
+					<ul class="list scrbar">
+					<c:set var="i" value="0"/>
+					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
+						<li>
+							<input type="checkbox" id="brand${idx.index}" name="brand_check" value="${brand}" onclick="checksubmit();">
+							<label for="brand${idx.index}" onclick="checksubmit();">${brand}</label>
+						</li>
+					</c:forEach>
+					</ul>
+					</form>
+					</div>
+				</div><!-- //브랜드 -->
+				</c:if>
+				
 				<!-- //카테고리 -->
 		<div class="search_box">
 			<div class="inner">
 				<h4 class="tit_th">가격대</h4>
 				<div class="priceSearch">
-					<input type="text" id="sale_below_price" name="sale_below_price" placeholder="최저가" value="" title=""><span>~</span>
-					<input type="text" id="sale_over_price" name="sale_over_price" placeholder="최고가" value="" title="">
-					<input type="submit" value="가격대 적용" title="가격대 적용" onclick="return Price_Search()">
+				<form action="./ProductSelectAction.pro" id="frm1" method="get">
+					<input type="hidden" name="query" value="${query}">
+					<input type="hidden" name="cate" value="${cate}">
+					<input type="hidden" name="subcate" value="${subcate}">
+					<input type="hidden" name="startrow" value="0">
+					
+					<c:set var="break" value="false" />
+					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
+					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
+						<c:if test="${brand == checkbrand}">
+							<input type="hidden" name="brand_check" value="${brand}">
+						</c:if>
+					</c:forEach>
+					</c:forEach>
+					
+					<input type="text" id="low_price" name="low_price" placeholder="최저가" value="" title=""><span>~</span>
+					<input type="text" id="high_price" name="high_price" placeholder="최고가" value="" title="">
+					<input type="button" id="price_button" value="가격대 적용" title="가격대 적용" onclick="pricesubmit();">
+				</form>
 				</div>
 			</div>
 		</div><!-- //가격대 -->
