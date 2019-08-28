@@ -29,101 +29,80 @@ function jusoCallBack(roadAddrPart1,addrDetail){
    
 }
 
+<%
+
+String email = request.getParameter("email");
+String name = request.getParameter("name");
+
+%>  
+
 </script>
-<link rel="stylesheet" href="./asset/css/member.css"/> 
+
 
 </head>
 <body>
 <!-- 본문내용 -->
-			
+	<section>
+		<article>
+			<h1>Join Us</h1>
 			<%--MemberFrontController서블릿에.. 회원가입 처리 요청! --%>
-			
-			<div>
 			<form action="./MemberJoinAction.do" id="join" name="form" method="post">
-				<div class="jointo">
 				
-				<h1 align="center">Join Us</h1>
-				<h3 align="center">회원가입을 통해 다양한 상품을 구매하세요!</h3>
-				
-				
-				
-				<div>
-				<h3 class="join_title">
-				<label for="id">아이디</label>
-				</h3>
-					<input type="text" name="id" class="id join" id="id" onblur="join_check('check')" placeholder="아이디"/>
+				<fieldset>
+				<legend>회원가입 정보</legend>
+				<label>아이디</label>
+					<input type="text" name="id" class="id" id="id" onblur="join_check('check')" />
 					<div class="check_font" id="idMessage"></div>
-				</div>
-
-				<div>
-				<h3 class="join_title">
-				<label for="pass">비밀번호</label>
-				</h3>
-					<input type="password" name="password" class="join" id="pass" required><br>
-				</div>
-				
-				
-				<div>
-				<h3 class="join_title">
-				<label for="pass2">비밀번호 확인</label>
-				</h3>
-					<input type="password" name="password2" class="join" id="pass2" onblur="join_check('pass2')" required>
+				<label>비밀번호</label>
+					<input type="password" name="password" id="pass" required><br>
+				<label>비밀번호 확인</label>
+					<input type="password" name="password2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
-				</div>
-
-				
-				
-				<div>
-				<h3 class="join_title">
-				<label for="name">이름</label>
-				</h3>
-					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" required>
+				<% 
+					if(name == ""){
+				%>
+				<label>이름</label>
+					<input type="text" name="name" id="name" onblur="join_check('name')" required>
 					<div class="check_font" id="nameMessage"></div>
-				</div>
-
-
-				<div>
-				<h3 class="join_title">
-				<label for="birth">생년월일</label>
-				</h3>
-					<input type="date" name="birth_date" class="join" id="birth" onblur="join_check('birth')" required >
+				<%
+					}else{
+				%>
+					<label>이름</label>
+					<input type="text" name="name" id="name" onblur="join_check('name')" value="<%=name %>" required>
+					<div class="check_font" id="nameMessage"></div>
+				<%
+					}
+				%>
+				<label>생년월일</label>
+					<input type="date" name="birth_date" id="birth" onblur="join_check('birth')" required >
 					<div class="check_font" id="birthMessage"></div>
-				</div>
-
-				<div>
-				<h3 class="join_title">
-				<label for="">성별</label>
-				</h3>
-					남자<input type="radio" name="gender" value="남자" checked> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          
+				<label>성별</label>
+					남자<input type="radio" name="gender" value="남자" checked>
 					여자<input type="radio" name="gender" value="여자" ><br>
-				</div>
-
-				<div>
-				<h3 class="join_title">
+				<% 
+					if(email == ""){
+				%>
 				<label>이메일</label>
-				</h3>
-					<input type="email" name="email" class="join" id="email" onblur="join_check('email')" required><br>
+					<input type="email" name="email" id="email" onblur="join_check('email')" value="" required><br>
 					<div class="check_font" id="emailMessage"></div>
-				</div>				
-				
-				
-				
-				<div>
-				<h3 class="join_title">
+				<%
+					}else{
+				%>
+				<label>이메일</label>
+					<input type="email" name="email" id="email" onblur="join_check('email')" value="<%=email %>" required><br>
+					<div class="check_font" id="emailMessage"></div>
+				<%
+					}
+				%>
 				<label>주소</label>
-				</h3>
-				<br><input type="button" onClick="goPopup();" value="팝업_domainChk"/>
+					<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
             	<div id="list"></div>
             	<div id="callBackDiv">
-            		<input type="text" class="join" id="roadAddrPart1" name="address_main" class="form-control" placeholder="Enter Addr" required="true" readonly="true" /><br>
-            		<input type="text" class="join" id="addrDetail" name="address_detail" /><br>
+            		<input type="text"  style="width:250px;" id="roadAddrPart1"  name="address_main" class="form-control" style="width:500px;" placeholder="Enter Addr" required="true" readonly="true" /><br>
+            		<input type="text"  style="width:250px;" id="addrDetail"  name="address_detail" />
             	</div>
-            	
-				<div>
-				<h3 class="join_title">
 				<label>휴대전화 번호 *</label>
-				</h3>
-					<select name = "phone1" id="phone1"  class="join">
+					<select name = "phone1" id="phone1">
 		              <option value="010">010</option>
 		              <option value="011">011</option>
 		              <option value="019">019</option>
@@ -131,17 +110,15 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" required/> - 
 		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
 		          	<div class="check_font" id="phoneMessage"></div>
-				</div>
-
-						<input type="submit" value="Submit" class="submit">
+				</fieldset>
 				
-
+				<fieldset>
+						<input type="submit" value="Submit" class="submit">
 						<input type="reset" value="Cancel" class="cancel">
-				</div><!-- jointo끝 -->
-
-				</div>
+				</fieldset>			
 			</form>
-	</div>
+		</article>
+	</section>
 <!-- 본문내용 -->
 </body>
 <script type="text/javascript">

@@ -67,7 +67,7 @@ public class MemberLoginAction implements Action{
 		session.setAttribute("id", id);
 		
 		
-	/*로그인 성공시.... CarMain.jsp 페이지로 이동 시킨다.*/
+	/*로그인 성공시.... Main.jsp 페이지로 이동 시킨다.*/
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 		ActionForward forward=new ActionForward();
 		
@@ -75,11 +75,11 @@ public class MemberLoginAction implements Action{
 		//true sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.	
 		forward.setRedirect(true);
 		
-		// ./CarMain.jsp 이동할 페이지 주소 저장
+		// ./Main.jsp 이동할 페이지 주소 저장
 		forward.setPath("./Main.do"); 
 		
 		//페이지 이동 방식 여부 값 true와...
-		// 이동할페이지 주소 (./CarMain.jsp)를 담고 있는..
+		// 이동할페이지 주소 (./Main.jsp)를 담고 있는..
 		//new ActionForward()객체를 MemberFrontController로 리턴  
 		return forward;
 	}

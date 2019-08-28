@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +17,7 @@
 	<div id="skip_navi"><a href="https://www.oliveyoung.co.kr/store/order/getOrderComplete.do#Container">본문바로가기</a></div>
 	
 	<!-- header -->
-	<jsp:include page="./include/Header.jsp"/>
+	<jsp:include page="../include/Header.jsp"/>
 	<!-- header// -->
 
 	<!-- #Container -->
@@ -33,6 +34,7 @@
 				</ul>
 			</div>
 			<!--// title_box -->
+			<c:set var="member" value="${requestScope.buylist}" />
 			<div class="order_end_box"><!-- 2017-01-20 수정 : div 추가 -->
 				<!-- 무통장 입금 결제 시 -->
 				<div class="order_title">
@@ -58,7 +60,7 @@
 						<tbody>
 						<tr>
 							<th scope="row">입금하실 금액</th>
-							<td><span class="tx_price"><span class="tx_num">24,700</span>원</span></td>
+							<td><span class="tx_price"><span class="tx_num">${requestScope.totalprice-requestScope.totalsaleprice-requestScope.delivery_cost}</span>원</span></td>
 						</tr>
 						<tr>
 							<th scope="row">입금은행</th>
@@ -66,11 +68,11 @@
 						</tr>
 						<tr>
 							<th scope="row">입금계좌</th>
-							<td> 79012760775643(예금주 씨제이올리브네트웍스)</td>
+							<td> 3560439203333(예금주 박정현)</td>
 						</tr>
 						<tr>
 							<th scope="row">입금기한</th>
-							<td>2019.08.10 12시까지</td>
+							<td>${requestScope.buyday} &nbsp;12시까지</td>
 						</tr>
 						</tbody>
 					</table>
@@ -88,20 +90,20 @@
 						<tbody>
 						<tr>
 							<th scope="row">총상품금액</th><!-- 2017-01-20 수정 : 총상품금액, 총배송비, 총 할인금액 추가 -->
-							<td><span class="tx_num">24,700</span>원</td>
+							<td><span class="tx_num">${requestScope.totalprice}</span>원</td>
 						</tr>
 						<tr>
 							<th scope="row">총할인금액</th>
 							<td>
 		
-								<span class="tx_price"><span class="tx_num">0</span>원</span>
+								<span class="tx_price"><span class="tx_num">${requestScope.totalsaleprice}</span>원</span>
 		
 		
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">총배송비</th>
-							<td><span class="tx_num">0</span>원</td>
+							<td><span class="tx_num">${requestScope.delivery_cost}</span>원</td>
 						</tr>
 						<!-- 기타 보조결제수단 -->
 		
@@ -116,7 +118,7 @@
 						<tr class="last_tot_price">
 							<th scope="row">최종 결제금액</th>
 							<td>
-								<span class="tx_price"><span class="tx_num">24,700</span>원</span>
+								<span class="tx_price"><span class="tx_num">${requestScope.totalprice-requestScope.totalsaleprice-requestScope.delivery_cost}</span>원</span>
 		
 			
 			
@@ -131,7 +133,6 @@
 					</table>
 					<!--// 결제정보 -->
 				</div>
-				
 				<div class="inner_box">					
 					<!-- 배송정보 -->
 					<h2 class="sub-title2">배송정보</h2>
@@ -144,18 +145,17 @@
 						<tbody>
 						<tr>
 							<th scope="row">받는분</th>
-							<td>박정현</td>
+							<td>${member.delivery_name}</td>
 						</tr>
 						<tr>
 							<th scope="row">연락처1</th>
-							<td>010-5172-8187</td>
+							<td>${member.delivery_mtel}</td>
 						</tr>
 		
 						<tr>
 							<th scope="row">주소</th>
 							<td>
-								<p>도로명 주소 : 경기도 고양시 덕양구 고골길 123 123123</p>
-								<p class="colorGrey">지번주소 : 경기도 고양시 덕양구 관산동 630-2 123123</p>
+								<p>${member.delivery_address}</p>
 							</td>
 						</tr>
 						</tbody>
@@ -164,8 +164,8 @@
 				</div>
 		
 				<div class="order_btn_area">
-					<button class="btnGreenW" onclick="location.href=&#39;https://www.oliveyoung.co.kr/store/index.do&#39;;">쇼핑계속</button>
-					<button class="btnGreen" onclick="location.href=&#39;https://www.oliveyoung.co.kr/store/mypage/getOrderDetail.do?ordNo=Y1908091247119&#39;;">주문내역조회</button>
+					<button class="btnGreenW" onclick="location.href='Main.jsp'">쇼핑계속</button>
+					<button class="btnGreen" onclick="location.href='mypage.mypage'">주문내역조회</button>
 				</div>
 	
 	
@@ -186,7 +186,7 @@
 	<!--// 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
 	
 	<!-- footer -->
-	<jsp:include page="./include/Footer.jsp"/>
+	<jsp:include page="../include/Footer.jsp"/>
 	<!-- footer// -->
 </div>
 

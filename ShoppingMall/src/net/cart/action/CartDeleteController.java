@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.cart.db.CartDAO;
 import net.cart.db.CartDTO;
@@ -29,6 +30,8 @@ public class CartDeleteController extends HttpServlet {
 
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
 		
 		int cart_num = Integer.parseInt(request.getParameter("cart_num"));
 		
@@ -38,9 +41,9 @@ public class CartDeleteController extends HttpServlet {
 		
 		MemberDAO mdao = new MemberDAO();
 		
-		MemberDTO m = mdao.selectMember("admin");
+		MemberDTO m = mdao.selectMember(id);
 		
-		Vector<CartDTO> v = cdao.getAllCartList("admin");
+		Vector<CartDTO> v = cdao.getAllCartList(id);
 		
 		request.setAttribute("v", v);
 		
@@ -48,7 +51,7 @@ public class CartDeleteController extends HttpServlet {
 		request.setAttribute("m", m);
 		
 		RequestDispatcher dis = 
-					request.getRequestDispatcher("Cart.jsp?num="+num);
+					request.getRequestDispatcher("product/Cart.jsp?num="+num);
 		//실제 재요청
 		dis.forward(request, response);		
 	}

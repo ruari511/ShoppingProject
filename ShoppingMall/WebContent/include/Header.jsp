@@ -29,11 +29,10 @@
 					%>
 					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
 					<li class="cart"><a href="CartListController.do">장바구니<span id="cartToCnt"></span></a></li>
+					<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
 				<%
 				}
 				%>
-				<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
-				<li class="order"><a href="#">주문배송</a></li>
 				<li class="customer"><a href="#">고객센터</a></li>
 				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
 			</ul>

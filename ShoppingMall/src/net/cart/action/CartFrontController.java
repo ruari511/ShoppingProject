@@ -1,4 +1,4 @@
-package net.member.action;
+package net.cart.action;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import net.action.Action;
 import net.action.ActionForward;
 
 
-public class MemberFrontController extends HttpServlet{
+public class CartFrontController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -38,6 +38,8 @@ public class MemberFrontController extends HttpServlet{
 		System.out.println(RequestURI);
 		
 		//  /CarProject 얻기
+		//  /CarProject 얻기
+		//  /CarProject 얻기
 		String contextPath=request.getContextPath();
 		
 		//	길이 11
@@ -59,21 +61,21 @@ public class MemberFrontController extends HttpServlet{
 		Action action=null;
 			
 		//Top.jsp에서.. join링크를 누르면 회원가입페이지로 이동하는 요청이 들어 왔을때..
-		if(command.equals("/join.do")){
+		if(command.equals("/BuyComplete.buy")){
 		
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 			forward.setRedirect(false);
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?section=./member/join.jsp");
+			forward.setPath("./product/BuyComplete.jsp");
 			
 		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
-		}else if(command.equals("/MemberJoinAction.do")){
+		}else if(command.equals("/BuyListInsertController.buy")){
 	
 			
 			//회원가입 처리를 위한 Action객체 생성
-			action=new MemberJoinAction();
+			action=new BuyListInsertController3();
 			
 			try {
 				forward=action.execute(request, response);
@@ -81,11 +83,9 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
 		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
 		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
-		}else if(command.equals("/login.do")){ 
+		}/*else if(command.equals("/login.do")){ 
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 			forward=new ActionForward();
 			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher forward() 방식
@@ -129,7 +129,7 @@ public class MemberFrontController extends HttpServlet{
 				//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
 				forward.setRedirect(false); //주소값 노출 안됨
 				//이동할 페이지 경로(탈퇴 페이지) 주소값 저장
-				forward.setPath("./Main.jsp?section=./member/MemberOut.jsp"); 
+				forward.setPath("./Main.jsp?center=./member/MemberOut.jsp"); 
 			
 			//Delet.jsp에서... "회원탈퇴"버튼을 눌렀을때..탈퇴 처리 요청받기!
 			//사용자가 입력한 id와 패스워드를 request영역에 담아오기
@@ -148,43 +148,14 @@ public class MemberFrontController extends HttpServlet{
 					e.printStackTrace();
 				}
 			
-		//"MemberInfoModify.jsp 메인 페이지 요청"이 들어 왔을떄...
-		}else if(command.equals("/memberModify.do")){ 
-			
-			
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
-			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
-			forward.setRedirect(false); //주소값 노출 안됨
-			//이동할 페이지 경로(탈퇴 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?section=./member/MemberInfoModify.jsp"); 
-		
-		//MemberInfoModify.jsp에서... "회원수정"버튼을 눌렀을때..탈퇴 처리 요청받기!
-		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
-		}else if(command.equals("/MemberModifyAction.do")){
-			System.out.println("MemberModifyAction.do 접근");
-			//회원수정를 위한 Action객체 생성
-			action=new MemberModifyAction();
-			try{
-				//MemberInfoModift.jsp에서... "회원수정"요청이 들어왔을때...  
-				//세션값 "회원수정성공" 메세지창을 띄어주고...
-				forward=action.execute(request, response); //return null;
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		
-			//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
-	}else if(command.equals("/Main.do")){
+				//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
+		}else if(command.equals("/Main.do")){
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 			forward=new ActionForward();
 			forward.setRedirect(false); //주소값 노출 x
 			forward.setPath("./Main.jsp"); //이동할 페이지 저장
 			
-		
-		//find_ID.jsp에서... "찾기"버튼을 눌렀을때.. 처리 요청받기!
-		//사용자가 입력한 email을 request영역에 담아오기
-		}
+		}*/
 		
 		//주소 이동
 		if(forward!=null){ //new ActionForward()객체가 존재 하고..
