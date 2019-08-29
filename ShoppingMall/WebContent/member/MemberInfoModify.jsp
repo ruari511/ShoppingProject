@@ -13,7 +13,7 @@
 	request.setCharacterEncoding("utf-8");
 	String id = (String)session.getAttribute("id");
 	MemberDAO dao = new MemberDAO();
-	MemberDTO dto = dao.getUser(id);
+	MemberDTO dto = dao.getId(id);
 	
 	String email = dto.getEmail();
 	String address_main = dto.getaddress_main();
@@ -89,9 +89,9 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		<fieldset>
 				<legend>회원 정보 수정</legend>
 				<label>ID</label>
-					<input type="text" name="id" value="${id}" maxlength="20" required readonly><br>
+					<input type="text" name="id" value="<%=id %>" maxlength="20" required readonly><br>
 				<label>비밀번호</label>
-					<input type="password" value="${password}" name="password" id="pass" required><br>
+					<input type="password" value="<% %>" name="password" id="pass" required><br>
 				<label>비밀번호 확인</label>
 					<input type="password" value="${password}" name="password2" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
