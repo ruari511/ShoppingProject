@@ -320,6 +320,7 @@ public class MemberDAO {
     		  
     		  mdto = new MemberDTO();
     		  
+    		  mdto.setNum(rs.getInt("num"));
     		  mdto.setId(rs.getString("id"));
     		  mdto.setPassword(rs.getString("password"));
     		  mdto.setName(rs.getString("name"));
@@ -344,13 +345,12 @@ public class MemberDAO {
            if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
            if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
         }
-     System.out.println("memberDAO : " + memberList);
        
 	return memberList;
 	   
    }
    
-   public int deleteMember(String id){
+   public int deleteMember(int num){
 	   
 	   con = null;
        pstmt = null;
@@ -362,11 +362,11 @@ public class MemberDAO {
        try {
 		con = getConnection();
 		
-		sql = "delete from member where id = ?";
+		sql = "delete from member where num = ?";
 		
 		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, id);
-		pstmt.executeUpdate();
+		pstmt.setInt(1, num);
+		check = pstmt.executeUpdate();
 		
 		
 		

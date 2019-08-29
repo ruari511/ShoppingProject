@@ -31,7 +31,7 @@
 					<%
 					if(id.equals("admin")){
 					%>
-						<li><input type="button" value="관리자메뉴" onclick="adminMenu()"/></li>
+						<li><a href="./adminMenu.ad">관리자 메뉴</a></li>
 					<%		
 					}else{
 					%>
@@ -164,9 +164,9 @@
 	</div>
 	
 </body>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function adminMenu() {
 		location.href="./adminMenu.ad";
 	}
-</script>
+</script> -->
 </html>

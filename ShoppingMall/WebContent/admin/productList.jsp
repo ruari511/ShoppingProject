@@ -27,58 +27,56 @@
 	<section>
 		<div id="Container">
 			<div id="Contents">
-				회원관리
+				상품리스트
 				<table>
 					<tr align="center">
 						<td>번호</td>
-						<td>아이디</td>
-						<td>비밀번호</td>
-						<td>이름</td>
-						<td>생년월일</td>
-						<td>성별</td>
-						<td>이메일</td>
-						<td>회원가입일</td>
-						<td>메인주소</td>
-						<td>상세주소</td>
-						<td>등급</td>
-						<td>총구매액</td>
-						<td>포인트</td>
-						<td>핸드폰번호</td>
+						<td>상품이름</td>
+						<td>상품세부이름</td>
+						<td>브랜드</td>
+						<td>가격</td>
+						<td>상품이미지</td>
+						<td>내용이미지</td>
+						<td>메인카테고리</td>
+						<td>서브카테고리</td>
+						<td>구매갯수</td>
+						<td>할인</td>
 					</tr>
-					<c:forEach items="${memberList}" var="member">
+					<c:forEach items="${productList}" var="product">
 					<tr align="center">
-						<td>${member.num}</td>
-						<td>${member.id}</td>
-						<td>${member.password}</td>
-						<td>${member.name}</td>
-						<td>${member.birth_date}</td>
-						<td>${member.gender}</td>
-						<td>${member.email}</td>
-						<td>${member.reg_date}</td>
-						<td>${member.address_main}</td>
-						<td>${member.address_detail}</td>
-						<td>${member.grade}</td>
-						<td>${member.totalprice}</td>
-						<td>${member.point}</td>
-						<td>${member.phone}</td>
-						<td><button onclick="deleteMember(${member.num})">삭제</button></td>
+						<td>${product.product_num}</td>
+						<td>${product.product_name}</td>
+						<td>${product.product_subname}</td>
+						<td>${product.brand}</td>
+						<td>${product.product_price}</td>
+						<td>${product.img_main}</td>
+						<td>${product.img_contents}</td>
+						<td>${product.category_main}</td>
+						<td>${product.category_sub}</td>
+						<td>${product.price_count}</td>
+						<td>${product.discount}</td>
+						<td><button onclick="deleteProduct(${product.product_num})">삭제</button></td>
 					</tr>
 					</c:forEach>
 				</table>
 				
+				<input type="button" onclick="productAdd()" value="상품추가"/>		
 			</div>
 		</div>
 	</section>
 </body>
 <script type="text/javascript">
-	function deleteMember(num){
+	function deleteProduct(num){
 		
 		if (confirm("정말 삭제하시겠습니까?") == true){    //확인
 		    //document.form.submit();
-			location.href="MemberDeleteAction.ad?num=" + num;
+			location.href="ProductDeleteAction.ad?product_num=" + num;
 		}else{   //취소
 		    return;
 		}
+	}
+	function productAdd() {
+		location.href='./productAdd.ad';
 	}
 
 </script>

@@ -14,7 +14,7 @@
 		<div id="Container">
 			<div id="Contents">
 				<a href="./memberCheck.ad"><img alt="회원관리" src="./asset/image/member.png"> <br>회원 관리</a>
-				<a href="./productAdd.ad"><img alt="상품등록" src="./asset/image/product.png"> <br>상품 등록</a>
+				<a href="./productList.ad"><img alt="상품등록" src="./asset/image/product.png"> <br>상품 등록</a>
 			</div>
 		</div>
 	</section>

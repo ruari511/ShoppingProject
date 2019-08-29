@@ -94,7 +94,7 @@
 								<c:choose>
 									<c:when test="${coupon eq null}">
 									<tr>
-										<td colspan="4"> 사용 가능한 쿠폰이 없습니다.</td>
+										<td colspan="4"> ${coupon}사용 가능한 쿠폰이 없습니다.</td>
 									</tr>
 									</c:when>
 									<c:otherwise>
@@ -123,36 +123,10 @@
 							</ul>
 						</div>
 					</div>
-
-					<!-- CJ ONE 시스템점검 알림 Alert -->
-
-					<script
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/coupon.js?dumm=2019080133412"></script>
-					<script>
-						$(window).ready(function() {
-							mypage.coupon.list.init();
-						});
-					</script>
-
-
 				</div>
 			</div>
 
 		</div>
-
-		<script type="text/javascript"
-			src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
-		<script type="text/javascript"
-			src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdas.js?dumm=2019080133412"></script>
-		<script>
-			HDC_PATH = $
-					.parseJSON('{"00":"http://nexs.cjgls.com/web/service02_01.jsp?slipno=","10":"http://www.hanjinexpress.hanjin.net/customer/plsql/hddcw07.result?wbl_num=","20":"http://www.lotteglogis.com/personalService/tracking/06/tracking_goods_result.jsp?InvNo=","30":"http://nexs.cjgls.com/web/detail.jsp?slipno=","50":"http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","70":"http://www.ilogen.com/d2d/delivery/invoice_search_popup.jsp?viewType=type2&invoiceNum=","91":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","92":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","93":"http://kdexp.com/basicNewDelivery.kd?barcode=","94":null,"200":"http://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE=","210":"http://www.dhl.co.kr/content/kr/ko/express/tracking.shtml?brand=DHL&AWB="}');
-
-			$(document).ready(function() {
-				mypage.orderList.init();
-			});
-		</script>
-		
 	</div>
 </body>	
 </html>

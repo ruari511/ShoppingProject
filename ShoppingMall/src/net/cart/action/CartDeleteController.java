@@ -36,7 +36,7 @@ public class CartDeleteController extends HttpServlet {
 		
 		int num = cdao.deleteCart(cart_num);
 		
-		MemberDAO mdao = new MemberDAO();
+		ProductDAO mdao = new ProductDAO();
 		
 		MemberDTO m = mdao.selectMember("admin");
 		

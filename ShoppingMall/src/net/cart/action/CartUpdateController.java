@@ -37,7 +37,7 @@ public class CartUpdateController extends HttpServlet {
 		
 		int num = cdao.updateCart(cart_num, count);
 		
-		MemberDAO mdao = new MemberDAO();
+		ProductDAO mdao = new ProductDAO();
 		
 		MemberDTO m = mdao.selectMember("admin");
 		

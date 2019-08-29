@@ -1,16 +1,32 @@
 package net.product.db;
 
 public class ProductDTO {
-	private int product_num;
-	private String product_name;
-	private int product_price;
-	private String product_contents;
-	private int category_main;
-	private int category_sub;
-	private int price_count;
-	private String img;
-	private int discount;
+	private int product_num; // 상품번호
+	private String product_name; // 상품이름
+	private String product_subname; // 상품세부이름
+	private int product_price; // 가격
+	private String img_main; // 이미지메인
+	private String img_contents; // 이미지
+	private String category_main; // 메인카테고리
+	private String category_sub; // 서브카테고리
+	private int price_count; // 구매갯수
+	private int discount; // 할인
+	private String brand; // 브랜드
 	
+	
+	
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getProduct_subname() {
+		return product_subname;
+	}
+	public void setProduct_subname(String product_subname) {
+		this.product_subname = product_subname;
+	}
 	public int getProduct_num() {
 		return product_num;
 	}
@@ -29,22 +45,16 @@ public class ProductDTO {
 	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
-	public String getProduct_contents() {
-		return product_contents;
-	}
-	public void setProduct_contents(String product_contents) {
-		this.product_contents = product_contents;
-	}
-	public int getCategory_main() {
+	public String getCategory_main() {
 		return category_main;
 	}
-	public void setCategory_main(int category_main) {
+	public void setCategory_main(String category_main) {
 		this.category_main = category_main;
 	}
-	public int getCategory_sub() {
+	public String getCategory_sub() {
 		return category_sub;
 	}
-	public void setCategory_sub(int category_sub) {
+	public void setCategory_sub(String category_sub) {
 		this.category_sub = category_sub;
 	}
 	public int getPrice_count() {
@@ -53,18 +63,25 @@ public class ProductDTO {
 	public void setPrice_count(int price_count) {
 		this.price_count = price_count;
 	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}
 	public int getDiscount() {
 		return discount;
 	}
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
+	public String getImg_main() {
+		return img_main;
+	}
+	public void setImg_main(String img_main) {
+		this.img_main = img_main;
+	}
+	public String getImg_contents() {
+		return img_contents;
+	}
+	public void setImg_contents(String img_contents) {
+		this.img_contents = img_contents;
+	}
+	
 	
 	
 }

@@ -9,7 +9,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="utf-8">
-<!-- 	<meta http-equiv="Content-Script-Type" content="text/javascript">
+<!--<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<meta name="format-detection" content="telephone=no">
@@ -36,7 +36,7 @@
 %>
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
-	
+	 
 	<!-- header -->
 	<jsp:include page="./include/Header.jsp"/>
 	<!-- header// -->

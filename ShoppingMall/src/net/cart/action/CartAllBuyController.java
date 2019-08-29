@@ -36,7 +36,7 @@ public class CartAllBuyController extends HttpServlet {
 		//Cart.jsp에서 checked인 cart_num값을 배열로 받아오기
 		String[] chk = request.getParameterValues("cart");
 		
-		MemberDAO mdao = new MemberDAO();
+		ProductDAO mdao = new ProductDAO();
 		
 		MemberDTO m = mdao.selectMember("admin");
 		

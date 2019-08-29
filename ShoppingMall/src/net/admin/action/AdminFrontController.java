@@ -67,6 +67,19 @@ public class AdminFrontController extends HttpServlet{
 			forward.setRedirect(false); //주소값 노출 x
 			forward.setPath("./Main.jsp?section=./admin/adminMenu.jsp"); //이동할 페이지 저장
 			
+		}else if(command.equals("/productList.ad")){
+			//로그아웃 처리를 위한 Action객체 생성  
+			action=new ProductListAction();
+			try {
+				//top.jsp에서  로그아웃 요청이 들어왔을때...  
+				//세션값 초기화후~ 로그아웃 메세지창을 띄어주고...
+				//CarList.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
+				forward=action.execute(request, response); //return null;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}else if(command.equals("/productAdd.ad")){
 			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 			forward=new ActionForward();
@@ -77,6 +90,38 @@ public class AdminFrontController extends HttpServlet{
 			
 			//로그아웃 처리를 위한 Action객체 생성  
 			action=new MemberListAction();
+			try {
+				//top.jsp에서  로그아웃 요청이 들어왔을때...  
+				//세션값 초기화후~ 로그아웃 메세지창을 띄어주고...
+				//CarList.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
+				forward=action.execute(request, response); //return null;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+			//MemberOut.jsp에서 ..회원탈퇴링크를 클릭하여 메인화면으로 이동하라 라는 요청이 들어 왔을때...	
+			//또는 회원탈퇴후!.. 메인화면으로 이동하라 라는 요청이 들어 왔을떄...
+		}else if(command.equals("/MemberDeleteAction.ad")){
+			
+			//로그아웃 처리를 위한 Action객체 생성  
+			action=new MemberDeleteAction();
+			try {
+				//top.jsp에서  로그아웃 요청이 들어왔을때...  
+				//세션값 초기화후~ 로그아웃 메세지창을 띄어주고...
+				//CarList.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
+				forward=action.execute(request, response); //return null;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+			//MemberOut.jsp에서 ..회원탈퇴링크를 클릭하여 메인화면으로 이동하라 라는 요청이 들어 왔을때...	
+			//또는 회원탈퇴후!.. 메인화면으로 이동하라 라는 요청이 들어 왔을떄...
+		}else if(command.equals("/ProductDeleteAction.ad")){
+			
+			//로그아웃 처리를 위한 Action객체 생성  
+			action=new ProductDeleteAction();
 			try {
 				//top.jsp에서  로그아웃 요청이 들어왔을때...  
 				//세션값 초기화후~ 로그아웃 메세지창을 띄어주고...

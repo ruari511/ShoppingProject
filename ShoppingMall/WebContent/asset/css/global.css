@@ -59,7 +59,7 @@ ul, ol, li, dl, dt, dd, form, fieldset, input, select, label, textarea, img, a {
 body {word-spacing:-1px;color:#666;font-size:14px;line-height:20px;font-family:'montserrat', 'noto', 'Roboto', sans-serif;letter-spacing:-0.04em}/* montserrat & Montserrat */
 ul, ol {list-style:none;}
 table {border-spacing:0; border:0;}
-img, input, select, textarea, button {border:0; vertical-align:top; color:#666;}
+img, input, select, textarea, button {border:1px; vertical-align:top; color:#666;}
 legend {position:absolute; overflow:hidden; visibility:hidden; height:0; z-index:-1;}
 hr {display:none;}
 a {color:#666; text-decoration:none;}
@@ -110,7 +110,7 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 
 /* 헤더 검색 영역 */
 .header_inner .search_box {float:left;position:relative;width:340px;height:40px;margin:22px 0 0 90px;padding:0 45px 0 20px;border:2px solid #2E2EFE;background:#fff;border-radius:20px}
-.header_inner .search_box input[type="text"] {height:36px;border:0;padding:8px 10px 8px 0;font-family:'dotum', '돋움';font-size:12px;outline:0}
+input[type="text"] {height:36px;border:0;padding:8px 10px 8px 0;font-family:'dotum', '돋움';font-size:12px;outline:0}
 .header_inner .search_box #searchSubmit {position:absolute;top:7px;right:18px;width:21px;height:21px;background:url(../image/ico_search.png) no-repeat 50% 50%;text-indent:-9999px}
 
 
