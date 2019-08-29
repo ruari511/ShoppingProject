@@ -148,10 +148,9 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 .detailSearch.new .search_box.cate .list.show{display:block;}
 .detailSearch.new .search_box .list>li{position:relative;float:left;width:170px;padding:0 0 0 15px;line-height:26px;}
 .detailSearch.new .search_box .list>li:nth-child(5n){width:150px;}
-.detailSearch.new .search_box .list>li:nth-child(1n+6){display:none;}
+.detailSearch.new .search_box .list>li:nth-child(1n+6){display:block;}
 .detailSearch.new .search_box.on .list>li:nth-child(1n+6){display:block;}
 .detailSearch.new .search_box .list>li input[type="checkbox"] {width:12px;height:12px;margin-right:8px;background:none;-webkit-appearance:checkbox;-webkit-appearance:checkbox;vertical-align:middle;}
-.detailSearch.new .search_box .list>li input[type="checkbox"]:disabled+label{color:#aaa;}
 .detailSearch.new .search_box .list>li>a,
 .detailSearch.new .search_box .list>li>label {display:inline-block;max-width:125px;font-size:12px;color:#333;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
 .detailSearch.new .search_box .list>li:nth-child(5n)>label{max-width:115px;}
@@ -227,11 +226,11 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 
 /* 정렬순 */
 .cate_align_box .align_sort {width:774px;padding:15px 0 0}
-.cate_align_box .align_sort > ul {overflow:hidden}
-.cate_align_box .align_sort > ul > li {float:left}
-.cate_align_box .align_sort > ul > li+li {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x14.png") no-repeat 0 50%;padding-left:1px}
-.cate_align_box .align_sort > ul > li > a {display:block;margin:0 20px;color:#888}
-.cate_align_box .align_sort > ul > li.on > a {color:#222;font-weight:700}
+.cate_align_box .align_sort > form > ul {overflow:hidden}
+.cate_align_box .align_sort > form > ul > li {float:left}
+.cate_align_box .align_sort > form > ul > li+li {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x14.png") no-repeat 0 50%;padding-left:1px}
+.cate_align_box .align_sort > form > ul > li > a {display:block;margin:0 20px;color:#888}
+.cate_align_box .align_sort > form > ul > li.on > a {color:#222;font-weight:700}
 /* 상품갯수 */
 .cate_align_box .count_sort {width:158px;padding:15px 20px 0}
 .cate_align_box .count_sort .tx_view {float:left;width:40px;color:#222;text-align:center}

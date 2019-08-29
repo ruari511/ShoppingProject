@@ -79,6 +79,9 @@
 		});
 	$(function(){
 		var flag = true;
+		if($('#subcateOnOffCheck').val() == 'on'){
+			flag = false;
+		}
 		$('#subcateBtn').each(function(index,items){
 			$('#subcateBtn').click(function(){
 				if(flag==true){
@@ -107,6 +110,12 @@
 		frm1.submit();
 	}
 	
+	function ordersubmit(a) {
+		document.getElementById("order").value = a;
+		var frm2 = document.getElementById("frm2");
+		frm2.submit();
+	}
+	
 </script>
 </head>
 <body>
@@ -119,6 +128,8 @@
 	<c:set var="productList" value="${requestScope.productList}" />
 	<c:set var="count" value="${requestScope.count}" />
 	<c:set var="query" value="${requestScope.query}" />
+	<c:set var="low" value="${requestScope.low}" />
+	<c:set var="high" value="${requestScope.high}" />
 	<div id="Container">
 		<!-- #Contents -->
 		<div id="Contents">
@@ -133,8 +144,105 @@
 			</div>
 			<!-- 상품 속성 정보 검색 서비스 개선 -->
 			<div class="detailSearch new">
-			    <!-- 카테고리 -->
-				<div class="search_box cate" id="cateOnOff">
+			<!-- 카테고리 -->
+			<c:if test="${cate != null}">
+			<div class="search_box cate on" id="cateOnOff">
+				<c:set var="cate" value="${requestScope.cate }"/>
+				<c:set var="categorylength" value="${requestScope.category }"/>
+				<c:set var="high" value="${requestScope.high}"/>
+				<c:set var="low" value="${requestScope.low}"/>
+				<div class="inner">
+					<h4 class="tit_th">카테고리
+					<c:if test="${fn:length(categorylength) >= 4}">
+						<button id="cateBtn" class="btnMore" onclick="cateOnOff();">열기/닫기</button>
+					</c:if>
+					</h4><!-- 버튼은 6개 이상만 노출 --><!-- 카테고리는 서브 텝 존재로 구조가 다름 -->
+					<input type="hidden" id="cateOnOffCheck" value="on">
+					
+					<c:forEach var="category" items="${requestScope.category}" varStatus="idx">
+						<c:choose>
+						<c:when test="${idx.index < 4}">
+							<c:if test="${idx.index % 4 == 0}">
+								<ul class="list show" id="firstlist">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 1}">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 2}">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 3}">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+								</ul>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${idx.index % 4 == 0}">
+								<ul class="list show">	
+									<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 1}">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 2}">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 3}">
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
+								</ul>
+							</c:if>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${fn:length(category) <= 4}"></ul></c:if>
+				</div>
+			</div>	
+			</c:if>
+			
+			<c:if test="${cate == null}">
+			<div class="search_box cate" id="cateOnOff">
+				<c:set var="cate" value="${requestScope.cate }"/>
 				<c:set var="categorylength" value="${requestScope.category }"/>
 				<div class="inner">
 					<h4 class="tit_th">카테고리
@@ -143,38 +251,78 @@
 					</c:if>
 					</h4><!-- 버튼은 6개 이상만 노출 --><!-- 카테고리는 서브 텝 존재로 구조가 다름 -->
 					<input type="hidden" id="cateOnOffCheck" value="off">
-					<c:set var="cate" value="${requestScope.cate }"/>
-				<c:forEach var="category" items="${requestScope.category}" varStatus="idx">
+					
+					<c:forEach var="category" items="${requestScope.category}" varStatus="idx">
 						<c:choose>
 						<c:when test="${idx.index < 4}">
 							<c:if test="${idx.index % 4 == 0}">
-								<ul class="list show" id="firstlist">	
-									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+							<ul class="list show" id="firstlist">	
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${idx.index % 4 == 1}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${idx.index % 4 == 2}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${idx.index % 4 == 3}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 								</ul>
 							</c:if>
 						</c:when>
 						<c:otherwise>
 							<c:if test="${idx.index % 4 == 0}">
 								<ul class="list ">	
-									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+									<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${idx.index % 4 == 1}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${idx.index % 4 == 2}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${idx.index % 4 == 3}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" id="category_10000010001" onclick="">${category}<span></span></a></li>
+								<c:if test="${cate == category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" class="on" onclick="">${category}<span></span></a></li>
+								</c:if>
+								<c:if test="${cate != category}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${category}" onclick="">${category}<span></span></a></li>
+								</c:if>
 								</ul>
 							</c:if>
 						</c:otherwise>
@@ -182,63 +330,20 @@
 					</c:forEach>
 					<c:if test="${fn:length(category) <= 4}"></ul></c:if>
 				</div>
-			</div>								
-				<!-- //카테고리 -->
-				<!-- 서브카테고리 -->
-				<c:set var="subcate" value="${requestScope.subcategory}"/>
-				<c:set var="subcategorylength" value="${requestScope.subcategory}"/>
-				<c:if test="${subcate == null}">
-				<div class="search_box subcate" id="subcateOnOff" style="display:none;">
-				<div class="inner">
-					<h4 class="tit_th">서브카테고리
-					<c:if test="${fn:length(subcategorylength) >= 4}">
-						<button id="subcateBtn" class="btnMore" onclick="subcateOnOff();">열기/닫기</button>
-					</c:if>
-					</h4><!-- 버튼은 6개 이상만 노출 --><!-- 카테고리는 서브 텝 존재로 구조가 다름 -->
-					<input type="hidden" id="subcateOnOffCheck" value="off">
-				<c:forEach var="subcategory" items="${requestScope.subcategory}" varStatus="idx">
-						<c:choose>
-						<c:when test="${idx.index < 4}">
-							<c:if test="${idx.index % 4 == 0}">
-								<ul class="sublist show" id="subfirstlist">	
-									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-							</c:if>
-							<c:if test="${idx.index % 4 == 1}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-							</c:if>
-							<c:if test="${idx.index % 4 == 2}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-							</c:if>
-							<c:if test="${idx.index % 4 == 3}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-								</ul>
-							</c:if>
-						</c:when>
-						<c:otherwise>
-							<c:if test="${idx.index % 4 == 0}">
-								<ul class="sublist ">	
-									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-							</c:if>
-							<c:if test="${idx.index % 4 == 1}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-							</c:if>
-							<c:if test="${idx.index % 4 == 2}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-							</c:if>
-							<c:if test="${idx.index % 4 == 3}">
-								<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" id="category_10000010001" onclick="">${subcategory}<span></span></a></li>
-								</ul>
-							</c:if>
-						</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${fn:length(subcategory) <= 4}"></ul></c:if>
-				</div>
 			</div>	
-			</c:if>	
+			</c:if>
+											
+			<!-- //카테고리 -->
+			<!-- 서브카테고리 -->
+			<c:set var="subcate" value="${requestScope.subcategory}"/>
+			<c:set var="subcategorylength" value="${requestScope.subcategory}"/>
+			
 			<c:if test="${subcate != null}">
+			
 			<c:set var="subcategorylength" value="${requestScope.subcategory}"/>
 			<c:set var="subcate" value="${requestScope.subcate}"/>
+			
+			<c:if test="${subcate == null}">
 				<div class="search_box subcate" id="subcateOnOff" style="display:block;">
 				<div class="inner">
 					<h4 class="tit_th">서브카테고리
@@ -247,8 +352,7 @@
 					</c:if>
 					</h4><!-- 버튼은 6개 이상만 노출 --><!-- 카테고리는 서브 텝 존재로 구조가 다름 -->
 					<input type="hidden" id="subcateOnOffCheck" value="off">
-					
-				<c:forEach var="subcategory" items="${requestScope.subcategory}" varStatus="idx">
+					<c:forEach var="subcategory" items="${requestScope.subcategory}" varStatus="idx">
 						<c:choose>
 						<c:when test="${idx.index < 4}">
 							<c:if test="${idx.index % 4 == 0}">
@@ -287,41 +391,118 @@
 					<c:if test="${fn:length(subcategory) <= 4}"></ul></c:if>
 				</div>
 			</div>	
+			</c:if>
+			
+			<c:if test="${subcate != null}">
+			<div class="search_box subcate on" id="subcateOnOff" style="display:block; height: 109px;">
+				<div class="inner" style="height: 108px;">
+					<h4 class="tit_th">서브카테고리
+					<c:if test="${fn:length(subcategorylength) >= 4}">
+						<button id="subcateBtn" class="btnMore" onclick="subcateOnOff();">열기/닫기</button>
+					</c:if>
+					</h4><!-- 버튼은 6개 이상만 노출 --><!-- 카테고리는 서브 텝 존재로 구조가 다름 -->
+					<input type="hidden" id="subcateOnOffCheck" value="on">
+					<c:forEach var="subcategory" items="${requestScope.subcategory}" varStatus="idx">
+						<c:choose>
+						<c:when test="${idx.index < 4}">
+							<c:if test="${idx.index % 4 == 0}">
+								<ul class="sublist show" id="subfirstlist">	
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 1}">
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 2}">
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}&" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 3}">
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								</ul>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${idx.index % 4 == 0}">
+								<ul class="sublist show">	
+									<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 1}">
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 2}">
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+							</c:if>
+							<c:if test="${idx.index % 4 == 3}">
+								<c:if test="${subcate != subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								<c:if test="${subcate == subcategory}">
+									<li><a href="./ProductSelectAction.pro?query=${query}&startrow=0&cate=${cate}&subcate=${subcategory}" class="on" onclick="">${subcategory}<span></span></a></li>
+								</c:if>
+								</ul>
+							</c:if>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${fn:length(subcategory) <= 4}"></ul></c:if>
+				</div>
+			</div>	
+			</c:if>
+			
 			</c:if>							
 				<!-- //서브카테고리 -->
 			<c:if test="${requestScope.checkbrand != null}">
+			<c:set var="brandlength" value="${requestScope.brand}"/>
 			<div class="search_box brand" id="brandOnOff">
 				<div class="inner">
-					<h4 class="tit_th">브랜드<button class="btnMore" onclick="brandOnOff();">열기/닫기</button></h4>
+					<h4 class="tit_th">브랜드
+					<c:if test="${fn:length(brandlength) >= 6}">
+						<button class="btnMore" onclick="brandOnOff();">열기/닫기</button>
+					</c:if>
+					</h4>
 					<input type="hidden" id="brandOnOffCheck" value="off">
 					<form action="./ProductSelectAction.pro" id="frm" method="get">
 					<input type="hidden" name="query" value="${query}">
 					<input type="hidden" name="cate" value="${cate}">
 					<input type="hidden" name="subcate" value="${subcate}">
 					<input type="hidden" name="startrow" value="0">
+					<input type="hidden" name="low_price" value="${low}">
+					<input type="hidden" name="high_price" value="${high}">
 					<ul class="list scrbar">
-					<%-- <c:set var="i" value="0"/>
-					<c:set var="break" value="false" />
-					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
-					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
-						<c:if test="${brand == checkbrand}">
-							<li>
-								<input type="checkbox" id="brand${i}" name="brand_check" checked="checked" value="${brand}" onclick="checksubmit();">
-								<label for="brand${i}" onclick="checksubmit();">${brand}</label>
-							</li>
-							<c:set var="break" value="true"/>
-						</c:if>
-						<c:if test="${brand != checkbrand}">
-							<li>
-								<input type="checkbox" id="brand${i}" name="brand_check" value="${brand}" onclick="checksubmit();">
-								<label for="brand${i}" onclick="checksubmit();">${brand}</label>
-							</li>
-							<c:set var="break" value="true"/>
-						</c:if>	
-					<c:set var="i" value="${i+1}"/>			
-					</c:forEach>
-					<c:set var="break" value="false"/>
-					</c:forEach> --%>
 					<% 
 						int i=0; 
 					%>
@@ -347,15 +528,22 @@
 				</c:if>
 				
 			<c:if test="${requestScope.checkbrand == null}">
+			<c:set var="brandlength" value="${requestScope.brand}"/>
 			<div class="search_box brand" id="brandOnOff">
 				<div class="inner">
-					<h4 class="tit_th">브랜드<button class="btnMore" onclick="brandOnOff();">열기/닫기</button></h4>
+					<h4 class="tit_th">브랜드
+					<c:if test="${fn:length(brandlength) >= 6}">
+						<button class="btnMore" onclick="brandOnOff();">열기/닫기</button>
+					</c:if>
+					</h4>
 					<input type="hidden" id="brandOnOffCheck" value="off">
 					<form action="./ProductSelectAction.pro" id="frm" method="get">
 					<input type="hidden" name="query" value="${query}">
 					<input type="hidden" name="cate" value="${cate}">
 					<input type="hidden" name="subcate" value="${subcate}">
 					<input type="hidden" name="startrow" value="0">
+					<input type="hidden" name="low_price" value="${low}">
+					<input type="hidden" name="high_price" value="${high}">
 					<ul class="list scrbar">
 					<c:set var="i" value="0"/>
 					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
@@ -380,8 +568,9 @@
 					<input type="hidden" name="cate" value="${cate}">
 					<input type="hidden" name="subcate" value="${subcate}">
 					<input type="hidden" name="startrow" value="0">
+					<input type="hidden" name="low_price" value="${low}">
+					<input type="hidden" name="high_price" value="${high}">
 					
-					<c:set var="break" value="false" />
 					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
 					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
 						<c:if test="${brand == checkbrand}">
@@ -407,13 +596,58 @@
 			<!-- 상품 정렬 조건 영역 -->
 			<div class="cate_align_box">
 				<div class="align_sort"> 
+				<form action="./ProductSelectAction.pro" id="frm2" method="get">
+					<input type="hidden" name="query" value="${query}">
+					<input type="hidden" name="cate" value="${cate}">
+					<input type="hidden" name="subcate" value="${subcate}">
+					<input type="hidden" name="startrow" value="0">
+					<input type="hidden" name="low_price" value="${low}">
+					<input type="hidden" name="high_price" value="${high}">
+					
+					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
+					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
+						<c:if test="${brand == checkbrand}">
+							<input type="hidden" name="brand_check" value="${brand}">
+						</c:if>
+					</c:forEach>
+					</c:forEach>
+					<c:set var="order" value="${requestScope.order}"/>
 					<ul>
-						<li class="on"><a href="" onclick="">인기순</a></li>
-						<li><a href="" onclick="">최근등록순</a></li>
-						<li><a href="" onclick="">판매수량순</a></li>
-						<li><a href="" onclick="">낮은 가격순</a></li>
-						<li><a href="" onclick="">높은 가격순</a></li>
+					<c:choose>
+						<c:when test="${order == null}">
+							<li class="on"><a onclick="ordersubmit('price_count');" style="cursor: pointer;">인기순</a></li>
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최근등록순</a></li>
+							<li><a onclick="ordersubmit('low_price');" style="cursor: pointer;">낮은 가격순</a></li>
+							<li><a onclick="ordersubmit('high_price');" style="cursor: pointer;">높은 가격순</a></li>
+						</c:when>
+						<c:when test="${order eq 'price_count'}">
+							<li class="on"><a onclick="ordersubmit('price_count');" style="cursor: pointer;">인기순</a></li>
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최근등록순</a></li>
+							<li><a onclick="ordersubmit('low_price');" style="cursor: pointer;">낮은 가격순</a></li>
+							<li><a onclick="ordersubmit('high_price');" style="cursor: pointer;">높은 가격순</a></li>
+						</c:when>
+						<c:when test="${order eq 'high_price'}">
+							<li><a onclick="ordersubmit('price_count');" style="cursor: pointer;">인기순</a></li>
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최근등록순</a></li>
+							<li><a onclick="ordersubmit('low_price');" style="cursor: pointer;">낮은 가격순</a></li>
+							<li class="on"><a onclick="ordersubmit('high_price');" style="cursor: pointer;">높은 가격순</a></li>
+						</c:when>
+						<c:when test="${order eq 'low_price'}">
+							<li><a onclick="ordersubmit('price_count');" style="cursor: pointer;">인기순</a></li>
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최근등록순</a></li>
+							<li class="on"><a onclick="ordersubmit('low_price');" style="cursor: pointer;">낮은 가격순</a></li>
+							<li><a onclick="ordersubmit('high_price');" style="cursor: pointer;">높은 가격순</a></li>
+						</c:when>
+						<c:when test="${order eq 'insert_product'}">
+							<li><a onclick="ordersubmit('price_count');" style="cursor: pointer;">인기순</a></li>
+							<li class="on"><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최근등록순</a></li>
+							<li><a onclick="ordersubmit('low_price');" style="cursor: pointer;">낮은 가격순</a></li>
+							<li><a onclick="ordersubmit('high_price');" style="cursor: pointer;">높은 가격순</a></li>
+						</c:when>
+					</c:choose>
 					</ul>
+					<input type="hidden" name="order" id="order" value="price_count">
+				</form>
 				</div>
 				<div class="type_sort" style="float: right;">
 					<button class="btn_thumb active">컬럼형식으로 보기</button>
@@ -431,13 +665,13 @@
 					<li class="flag">
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
-						<a href="" class="prd_thumb">
+						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
 							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
 						<div class="prd_name">
-							<a href="">
+							<a href="ProductDetailAction.pro?product_num=${productList.product_num}">
 								<span class="tx_brand">${productList.brand}</span>
 								<p class="tx_name">${productList.product_name}</p>
 							</a>							
@@ -456,13 +690,13 @@
 					<li class="flag">
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
-						<a href="" class="prd_thumb">
+						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
 							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
 						<div class="prd_name">
-							<a href="">
+							<a href="ProductDetailAction.pro?product_num=${productList.product_num}">
 								<span class="tx_brand">${productList.brand}</span>
 								<p class="tx_name">${productList.product_name}</p>
 							</a>							
@@ -481,13 +715,13 @@
 					<li class="flag">
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
-						<a href="" class="prd_thumb">
+						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
 							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
 						<div class="prd_name">
-							<a href="">
+							<a href="ProductDetailAction.pro?product_num=${productList.product_num}">
 								<span class="tx_brand">${productList.brand}</span>
 								<p class="tx_name">${productList.product_name}</p>
 							</a>							
@@ -506,13 +740,13 @@
 					<li class="flag">
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
-						<a href="" class="prd_thumb">
+						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
 							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
 						<div class="prd_name">
-							<a href="">
+							<a href="ProductDetailAction.pro?product_num=${productList.product_num}">
 								<span class="tx_brand">${productList.brand}</span>
 								<p class="tx_name">${productList.product_name}</p>
 							</a>							
@@ -541,11 +775,12 @@
 				<c:set var="i" value="1" />
 				<c:set var="j" value="0" />
 				<c:set var="startrow" value="${requestScope.startrow}"/>
+				<c:set var="brand" value="${requestScope.pagebrandquery}"/>
 				<c:forEach begin="0" end="${count}" varStatus="idx">
 					<c:if test="${idx.index % 24 == 0}">
 						<c:choose>
-							<c:when test="${startrow==j}"><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}" title="Paging" class="page123 on"> ${idx.index%24+i} </a></c:when>
-							<c:otherwise><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}" title="Paging" class="page123"> ${idx.index%24+i} </a></c:otherwise>
+							<c:when test="${startrow==j}"><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}${brand}&low_price=${low}&high_price=${high}" title="Paging" class="page123 on"> ${idx.index%24+i} </a></c:when>
+							<c:otherwise><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}${brand}&low_price=${low}&high_price=${high}" title="Paging" class="page123"> ${idx.index%24+i} </a></c:otherwise>
 						</c:choose>
 						<c:set var="i" value="${i+1}"/>
 					</c:if>

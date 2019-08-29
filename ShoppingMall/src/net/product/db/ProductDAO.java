@@ -70,7 +70,7 @@ public class ProductDAO {
 		return pdto;
 	}
 	
-	public Vector<ProductDTO> selectProduct(String query, int startRow, int pageSize){
+	public Vector<ProductDTO> selectProduct(String query, int startRow, int pageSize, String order){
 		
 		Vector<ProductDTO> productList = new Vector<ProductDTO>();
 		
@@ -82,7 +82,9 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select * from product where product_name like ? || product_subname like ? limit ?,?";
+			sql = "select * from product where product_name like ? || product_subname like ?";
+			sql += order;
+			sql += " limit ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -90,6 +92,8 @@ public class ProductDAO {
 			pstmt.setString(2, "%"+query+"%");
 			pstmt.setInt(3, startRow);
 			pstmt.setInt(4, pageSize);
+			
+			System.out.println("sql = " + sql);
 			
 			rs = pstmt.executeQuery();
 					
@@ -124,7 +128,7 @@ public class ProductDAO {
 	}
 	
 	
-	public Vector<ProductDTO> selectProductcate(String query, int startRow, int pageSize, String cate){
+	public Vector<ProductDTO> selectProductcate(String query, int startRow, int pageSize, String cate, String order){
 		
 		Vector<ProductDTO> productList = new Vector<ProductDTO>();
 		
@@ -136,8 +140,9 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? limit ?,?";
-			
+			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? ";
+			sql += order;
+			sql += " limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, "%"+query+"%");
@@ -179,7 +184,7 @@ public class ProductDAO {
 	}
 	
 	
-	public Vector<ProductDTO> selectProductsubcate(String query, int startRow, int pageSize, String cate, String subcate){
+	public Vector<ProductDTO> selectProductsubcate(String query, int startRow, int pageSize, String cate, String subcate, String order){
 		
 		Vector<ProductDTO> productList = new Vector<ProductDTO>();
 		
@@ -191,7 +196,9 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? limit ?,?";
+			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? ";
+			sql += order;
+			sql += " limit ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -483,10 +490,10 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && between ? and ?";
+			sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price between ? and ?";
 			if(cate == null || cate.length() == 0){
 				
-				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && between ? and ?";
+				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && product_price between ? and ?";
 				sql += brandquery;
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -496,7 +503,7 @@ public class ProductDAO {
 				
 			} else if(subcate == null || subcate.length() == 0){
 				
-				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && between ? and ?";
+				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && product_price between ? and ?";
 				sql += brandquery;
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -516,7 +523,6 @@ public class ProductDAO {
 				pstmt.setInt(5, Integer.parseInt(low));
 				pstmt.setInt(6, Integer.parseInt(high));
 			}
-			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -650,7 +656,7 @@ public class ProductDAO {
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
 				}else{
-					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && between ? and ?";
+					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && product_price between ? and ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
@@ -666,7 +672,7 @@ public class ProductDAO {
 					pstmt.setString(2, "%"+query+"%");
 					pstmt.setString(3, cate);
 				}else{
-					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && between ? and ?";
+					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && product_price between ? and ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
@@ -685,7 +691,7 @@ public class ProductDAO {
 					pstmt.setString(3, cate);
 					pstmt.setString(4, subcate);
 				}else{
-					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && between ? and ?";
+					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price between ? and ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
@@ -695,7 +701,6 @@ public class ProductDAO {
 					pstmt.setInt(6, Integer.parseInt(high));
 				}
 			}
-			System.out.println("sql = " + sql);
 			
 			rs = pstmt.executeQuery();
 			
@@ -716,7 +721,7 @@ public class ProductDAO {
 
 
 	
-	public Vector<ProductDTO> selectProductbrand(String query, int startRow, int pageSize, String cate, String subcate, String brandquery){
+	public Vector<ProductDTO> selectProductbrand(String query, int startRow, int pageSize, String cate, String subcate, String brandquery, String order){
 		
 		Vector<ProductDTO> productList = new Vector<ProductDTO>();
 		
@@ -734,6 +739,7 @@ public class ProductDAO {
 				
 				sql = "select * from product where (product_name like ? || product_subname like ?)";
 				sql += brandquery;
+				sql += order;
 				sql += " limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -745,6 +751,7 @@ public class ProductDAO {
 				
 				sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? ";
 				sql += brandquery;
+				sql += order;
 				sql += " limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -756,6 +763,7 @@ public class ProductDAO {
 			} else{
 				
 				sql += brandquery;
+				sql += order;
 				sql += " limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -798,7 +806,7 @@ public class ProductDAO {
 		return productList;
 	}
 	
-	public Vector<ProductDTO> selectProductPrice(String query, int startRow, int pageSize, String cate, String subcate, String brandquery, String low, String high){
+	public Vector<ProductDTO> selectProductPrice(String query, int startRow, int pageSize, String cate, String subcate, String brandquery, String low, String high, String order){
 		
 		Vector<ProductDTO> productList = new Vector<ProductDTO>();
 		
@@ -808,56 +816,55 @@ public class ProductDAO {
 		String sql = "";
 		
 		try {
-			
 			con = getConnection();
-			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && between ? and ?";
+			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price between ? and ?";
 			
 			if(cate == null || cate.length() == 0){
-				
-				sql = "select * from product where (product_name like ? || product_subname like ?) && between ? and ?";
+				sql = "select * from product where (product_name like ? || product_subname like ?) && product_price between ? and ?";
 				sql += brandquery;
+				sql += order;
 				sql += " limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
 				pstmt.setString(2, "%"+query+"%");
-				pstmt.setInt(3, startRow);
-				pstmt.setInt(4, pageSize);
-				pstmt.setInt(5, Integer.parseInt(low));
-				pstmt.setInt(6, Integer.parseInt(high));
+				pstmt.setInt(3, Integer.parseInt(low));
+				pstmt.setInt(4, Integer.parseInt(high));
+				pstmt.setInt(5, startRow);
+				pstmt.setInt(6, pageSize);
 				
 			} else if(subcate == null || subcate.length() == 0){
-				
-				sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && between ? and ?";
+				sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && product_price between ? and ?";
 				sql += brandquery;
+				sql += order;
 				sql += " limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
 				pstmt.setString(2, "%"+query+"%");
 				pstmt.setString(3, cate);
-				pstmt.setInt(4, startRow);
-				pstmt.setInt(5, pageSize);
-				pstmt.setInt(6, Integer.parseInt(low));
-				pstmt.setInt(7, Integer.parseInt(high));
+				pstmt.setInt(4, Integer.parseInt(low));
+				pstmt.setInt(5, Integer.parseInt(high));
+				pstmt.setInt(6, startRow);
+				pstmt.setInt(7, pageSize);
 				
 			} else{
-				
 				sql += brandquery;
+				sql += order;
 				sql += " limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
 				pstmt.setString(2, "%"+query+"%");
 				pstmt.setString(3, cate);
 				pstmt.setString(4, subcate);
-				pstmt.setInt(5, startRow);
-				pstmt.setInt(6, pageSize);
-				pstmt.setInt(7, Integer.parseInt(low));
-				pstmt.setInt(8, Integer.parseInt(high));
-			}
-			
-			rs = pstmt.executeQuery();
-					
-			while(rs.next()){
+				pstmt.setInt(5, Integer.parseInt(low));
+				pstmt.setInt(6, Integer.parseInt(high));
+				pstmt.setInt(7, startRow);
+				pstmt.setInt(8, pageSize);
 				
+			}
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				System.out.println("product_name = " + rs.getString("product_name"));
 				ProductDTO pdto = new ProductDTO();
 				
 				pdto.setProduct_num(rs.getInt("product_num"));
