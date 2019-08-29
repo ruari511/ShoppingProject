@@ -1,12 +1,11 @@
 @CHARSET "UTF-8";
 
-/* ul{
-	list-style: none;
-} */
+/* 회원가입 */
 
+/* 기본 입력창 */
 input.join{
 	list-style: none;
-	width: 400px;
+	width: 500px;
 	padding: 0 20px;
     height: 50px;
     line-height: 60px;
@@ -14,6 +13,7 @@ input.join{
   	border-radius: 1px 1px 5px 5px;
     font-family: 'montserrat', 'noto';
 	border: solid 1px #dadada;
+	font-size: 15px;
 }
 
 form#join {
@@ -25,18 +25,33 @@ form#join {
     margin-bottom: 40px;
     border-top: 5px solid #babc00;
     background-color: #fff;
-    font-size: 14px
+    font-size: 14px;
     padding: 0 10px;
     color: #888;
+   
     
 }
 .jointo{
-	margin: 0 auto;
+	margin: 20px 0 0 0;
 }
 .joinin{
-	margin: 0 0 0 180px;
+	margin: 50px 0 0 160px;
 }
-    /* padding: 92px 0 145px 0; */
+input#roadAddrPart1 {
+    width: 400px;
+}
+.adbtn {
+    height: 50px;
+    margin: 0 0 0 8px;
+    border-radius: 1px 1px 5px 5px;
+    width: 90px;
+    background-color: #969937;
+    color: #fff;
+    font-size: 15px;
+}
+.ad{
+	    margin: 0 0 -10px 0;
+}
 h3.join_title {
     margin: 30px 0 0 0;
 }  
@@ -54,12 +69,12 @@ input#m, #g {
     height: 50px;
     background-color: #969937;
     padding: 11px 0 9px;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 30px;
     border-radius: 5px;
 }
 .cancel{
-	margin: 0 0 0 55px;
+	margin: 0 0 0 75px;
 	}
 .join_title {
     margin: 19px 0 8px;
@@ -69,3 +84,77 @@ input#m, #g {
 .join_SR{
 	margin: 60px 0 0 0;
 }
+/* 회원가입 */
+
+
+/* 로그인 */
+form#login {
+    padding: 50px;
+    width: 850px;
+    padding-bottom: 51px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-top: 5px solid #babc00;
+    background-color: #fff;
+    font-size: 14px;
+    padding: 0 10px;
+    color: #888;
+   
+    
+}
+
+input.form-control{
+	list-style: none;
+	width: 500px;
+	padding: 0 20px;
+    height: 50px;
+    line-height: 60px;
+    vertical-align: middle;
+  	border-radius: 1px 1px 5px 5px;
+    font-family: 'montserrat', 'noto';
+	border: solid 1px #dadada;
+	font-size: 15px;
+}
+
+
+.loginto{
+	margin: 20px 0 0 0;
+}
+
+ .btn-primary{
+	text-align: center;
+    background-color: #fff;
+    
+} 
+.btn-primary2{
+	text-align: center;
+    background-color: #fff;
+    margin: 0 0 0 310px;
+} 
+
+.submit_l{
+	text-align: center;
+    color: #fff;
+    width: 500px;
+    height: 50px;
+    background-color: #969937;
+    padding: 11px 0 9px;
+    font-size: 15px;
+    line-height: 30px;
+    border-radius: 5px;
+    margin: 60px 0 0 0;
+}
+
+.fond_btn {
+    margin: 10px 0 0 3px;
+}
+
+.loginin{
+	margin: 50px 0 0 0;
+}
+
+/* .qqq{
+	    margin: 0 0 0 230px;
+} */
+/* 로그인 */

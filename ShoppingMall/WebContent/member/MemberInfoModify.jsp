@@ -1,3 +1,4 @@
+<%@page import="net.member.db.MemberDAO"%>
 <%@page import="net.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,6 +9,16 @@
 <%
 	// MemberInfoAction에서 넘긴 회원정보를 추출한다.
 	MemberDTO member=(MemberDTO)request.getAttribute("join");
+
+	request.setCharacterEncoding("utf-8");
+	String id = (String)session.getAttribute("id");
+	MemberDAO dao = new MemberDAO();
+	MemberDTO dto = dao.getUser(id);
+	
+	String email = dto.getEmail();
+	String address_main = dto.getaddress_main();
+	String address_detail = dto.getaddress_detail();
+	String mtel = dto.getMtel();
 %>
 
 <html>
@@ -52,6 +63,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 <script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
 <body>
+
 	<div id="Wrapper">
 
 		<div id="Container">

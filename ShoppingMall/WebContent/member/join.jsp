@@ -49,7 +49,7 @@ String name = request.getParameter("name");
 				<div class="jointo">
 				
 				<h1 align="center" class="tit">Join Us</h1>
-				<h3 align="center">회원가입을 통해 다양한 상품을 구매하세요!</h3>
+				<h3 align="center">회원가입을 통해 다양한 서비스와 혜택을 누리세요.</h3>
 				
 				<div class="joinin">
 				
@@ -110,7 +110,7 @@ String name = request.getParameter("name");
 
 				<div>
 				<h3 class="join_title">
-				<label for="">성별</label>
+				<label>성별</label>
 				</h3>
 					<label for="m">남자</label><input type="radio" name="gender" id="m" value="남자" checked> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          
 					<label for="g">여자</label><input type="radio" name="gender" id="g" value="여자" ><br>
@@ -120,7 +120,7 @@ String name = request.getParameter("name");
 				%>
 				<div>
 				<h3 class="join_title">
-				<label>이메일</label>
+				<label for="email">이메일</label>
 				</h3>
 					<input type="email" name="email" class="join" id="email" onblur="join_check('email')" required><br>
 					<div class="check_font" id="emailMessage"></div>
@@ -130,7 +130,7 @@ String name = request.getParameter("name");
 				%>
 				<div>
 				<h3 class="join_title">
-				<label>이메일</label>
+				<label for="email">이메일</label>
 				</h3>
 					<input type="email" name="email" class="join" id="email" onblur="join_check('email')" value="<%=email %>" required><br>
 					<div class="check_font" id="emailMessage"></div>
@@ -140,19 +140,18 @@ String name = request.getParameter("name");
 				%>
 				<div>
 				<h3 class="join_title">
-				<label>주소</label>
+				<label onClick="goPopup();">주소</label>
 				</h3>
-				<br><input type="button" onClick="goPopup();" value="팝업_domainChk"/>
-            	<div id="list"></div>
             	<div id="callBackDiv">
-            		<input type="text" class="join" id="roadAddrPart1" name="address_main" class="form-control" placeholder="Enter Addr" required="true" readonly="true" /><br>
+            		<div class="ad"><input type="text" class="join" id="roadAddrPart1" name="address_main" class="form-control" placeholder="Enter Addr" required="true" readonly="true" />
+            		<input type="button" onClick="goPopup();" value="주소 찾기" class="adbtn"/></div><br>
             		<input type="text" class="join" id="addrDetail" name="address_detail" /><br>
             	</div>
             	</div>
             	
 				<div>
 				<h3 class="join_title">
-				<label>휴대전화 번호 *</label>
+				<label for="phone2">휴대전화 번호 *</label>
 				</h3>
 				<span class="sp">
 					<select name = "phone1" id="phone1"  class="join">
@@ -167,9 +166,9 @@ String name = request.getParameter("name");
 				</div>
 
 
-				<div class="join_SR">
-						<input type="submit" value="Submit" class="submit">
-						<input type="reset" value="Cancel" class="cancel">
+				<div class="login_SR">
+						<input type="submit" value="회원가입" class="submit">
+						<input type="reset" value="다시쓰기" class="cancel">
 				</div>
 				</div>
 				</div><!-- jointo끝 -->
