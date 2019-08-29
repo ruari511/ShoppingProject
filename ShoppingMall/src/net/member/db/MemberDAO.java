@@ -463,7 +463,7 @@ public class MemberDAO {
 	   
 	   if(totalprice>=0 && totalprice<500000){
 		   grade = "아이언";
-	   } else if(totalprice>=5000000 && totalprice<1000000){
+	   } else if(totalprice>=500000 && totalprice<1000000){
 		   grade = "브론즈";
 	   } else if(totalprice>=1000000 && totalprice<3000000){
 		   grade = "실버";

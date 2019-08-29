@@ -77,18 +77,18 @@ function updateCart_text(idx) {
 	
 	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
 	
-	location.href="CartUpdateController.do?cart_num=" + updatecartnum + "&count=" + updatecount;
+	location.href="CartUpdateAction.buy?cart_num=" + updatecartnum + "&count=" + updatecount;
 }
 
 function deleteCart(idx) {
 	
 	var updatecartnum = document.getElementsByName("updatecartnum")[idx].value;
 	
-	location.href="CartDeleteController.do?cart_num=" + updatecartnum;
+	location.href="CartDeleteAction.buy?cart_num=" + updatecartnum;
 }
 
 function selectBuy(cartnum) {
-	location.href="CartSelectBuyController.do?cart_num=" + cartnum;
+	location.href="CartSelectBuyAction.buy?cart_num=" + cartnum;
 }
 	
 </script>
@@ -130,7 +130,7 @@ function selectBuy(cartnum) {
 			</h2>
 			
 			
-			<form action="CartBuyController.do" method="post">		
+			<form action="CartBuyAction.buy" method="post">		
 			<table class="tbl_prd_list tableFix">
 				<caption>올리브영 배송상품 장바구니 목록</caption>
 				<colgroup>
@@ -287,7 +287,7 @@ function selectBuy(cartnum) {
 		
 			<div class="order_btn_area order_cart">
 				<button type="submit" class="btnOrangeW" name="partOrderBtn">선택주문</button>
-				<button type="button" class="btnOrange" name="allOrderBtn" onclick="location.href='CartAllBuyController.do'">전체주문</button>
+				<button type="button" class="btnOrange" name="allOrderBtn" onclick="location.href='CartAllBuy.buy'">전체주문</button>
 			</div>
 			</c:if>
 			</form>

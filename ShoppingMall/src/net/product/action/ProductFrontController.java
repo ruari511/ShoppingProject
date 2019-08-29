@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.action.Action;
 import net.action.ActionForward;
+import net.product.action.ProductDetailAction;
 
-public class ProductFrontController extends HttpServlet {
+
+public class ProductFrontController extends HttpServlet{
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -23,21 +26,81 @@ public class ProductFrontController extends HttpServlet {
 			throws ServletException, IOException {
 		doProcess(request, response);
 	}
+
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		//ê°€ìƒìš”ì²­ ì£¼ì†Œ ê°€ì ¸ì˜¤ê¸°
+		//°¡»ó¿äÃ» ÁÖ¼Ò °¡Á®¿À±â
+		//  /CarProject/MemberJoin.do
 		String RequestURI=request.getRequestURI();
-		String contextPath=request.getContextPath();
-		String command=RequestURI.substring(contextPath.length());
-		/*ì£¼ì†Œ ë¹„êµ*/	
-		//íŽ˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’,ì´ë™íŽ˜ì´ì§€ ê²½ë¡œ ê°’ ì €ìž¥ í•˜ì—¬ ë¦¬í„´ í•´ì£¼ëŠ” ê°ì²´ë¥¼ ì €ìž¥í•  ì°¸ì¡°ë³€ìˆ˜ ì„ ì–¸ 
-		ActionForward forward=null;
+		System.out.println(RequestURI);
 		
-		//ìžì‹ Action ê°ì²´ë“¤ì„ ë‹´ì„ ì¸í„°íŽ˜ì´ìŠ¤ íƒ€ìž…ì˜ ì°¸ì¡°ë³€ìˆ˜ ì„ ì–¸
+		//  /CarProject ¾ò±â
+		String contextPath=request.getContextPath();
+		
+		//	±æÀÌ 11
+		System.out.println(contextPath.length());
+		
+		//  /MemberJoin.do ¾ò±â
+		// /MemberJoinAction.do
+		//  /MemberLogin.do ¾ò±â 
+		String command=RequestURI.substring(contextPath.length());
+		System.out.println(command);
+					
+		/*ÁÖ¼Ò ºñ±³*/	
+		//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼¸¦ ÀúÀåÇÒ ÂüÁ¶º¯¼ö ¼±¾ð 
+		ActionForward forward=null;
+	
+		//ÀÚ½Ä Action °´Ã¼µéÀ» ´ãÀ» ÀÎÅÍÆäÀÌ½º Å¸ÀÔÀÇ ÂüÁ¶º¯¼ö ¼±¾ð
 		Action action=null;
-		if(command.equals("/products/productList")){
+			
+		//¸ðµç ±¸¸ÅÇÏ±â µ¿ÀÛÀÌ ¿Ï·áµÈ ÈÄ ±¸¸Å¿Ï·á ÆäÀÌÁö·Î ÀÌµ¿ÇÏ´Â ºÎºÐ
+		if(command.equals("/Product.pro")){
+		
+			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼ »ý¼º 
+			forward=new ActionForward();
+			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª false·Î ÀúÀå-> RequestDispatcher  forward() ¹æ½Ä
+			forward.setRedirect(false);
+			//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î(È¸¿ø°¡ÀÔ ÆäÀÌÁö) ÁÖ¼Ò°ª ÀúÀå
+			forward.setPath("./product/product.jsp");
+			
+		//±¸¸ÅÇÏ±â ÆäÀÌÁö¿¡¼­ °áÁ¦ÇÏ±â ¹öÆ°À» ´­·¶À»‹š µ¿ÀÛÇÏ´Â ºÎºÐ
+		}else if(command.equals("/ProductDetailAction.pro")){
+	
+			
+			//È¸¿ø°¡ÀÔ Ã³¸®¸¦ À§ÇÑ Action°´Ã¼ »ý¼º
+			action=new ProductDetailAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		//°áÁ¦ÇÏ±â ¹öÆ°À» ´­·¯¼­ ±¸¸Å¸ñ·ÏÀÌ insertµÇ°í ³­ ÈÄ MemberÀÇ Á¤º¸¸¦ ¾÷µ¥ÀÌÆ® ÇÏ´Â ºÎºÐ
+		}else if(command.equals("/ProductSelectAction.pro")){
+	
+			
+			//È¸¿ø°¡ÀÔ Ã³¸®¸¦ À§ÇÑ Action°´Ã¼ »ý¼º
+			action=new ProductSelectAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		//°áÁ¦ÇÏ±â ¹öÆ°À» ´­·¯¼­ ±¸¸Å¸ñ·ÏÀÌ insertµÇ°í ³­ ÈÄ MemberÀÇ Á¤º¸¸¦ ¾÷µ¥ÀÌÆ® ÇÏ´Â ºÎºÐ
+		}else if(command.equals("/ProductSelect.pro")){
+	
+			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼ »ý¼º 
+			forward=new ActionForward();
+			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª false·Î ÀúÀå-> RequestDispatcher  forward() ¹æ½Ä
+			forward.setRedirect(false);
+			//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î(È¸¿ø°¡ÀÔ ÆäÀÌÁö) ÁÖ¼Ò°ª ÀúÀå
+			forward.setPath("./ProductSelect.jsp");
+		}else if(command.equals("/ProductList.pro")){
 			action = new ProductListAction();
 			
 			try {
@@ -45,20 +108,30 @@ public class ProductFrontController extends HttpServlet {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+		
 		}
 		
 		
-		//ì£¼ì†Œ ì´ë™
-		if(forward!=null){
-			if(forward.isRedirect()){
+		
+		//ÁÖ¼Ò ÀÌµ¿
+		if(forward!=null){ //new ActionForward()°´Ã¼°¡ Á¸Àç ÇÏ°í..
+			if(forward.isRedirect()){//true -> sendRedirect() ¹æ½ÄÀÏ‹š..
+				//¸®´ÙÀÌ·ºÆ® ¹æ½ÄÀ¸·Î ÆäÀÌÁö ÀÌµ¿!  ÆäÀÌÁö ÁÖ¼Ò °æ·Î ³ëÃâ ÇÔ 
+				//join.jspÈ­¸é ÀÌµ¿
+				//login.jspÈ­¸é ÀÌµ¿
+				//CarMain.jspÈ­¸é ÀÌµ¿½Ã session¿µ¿ª Àü´Þ
 				response.sendRedirect(forward.getPath());
-				System.out.println("redirect");
 				
-			}else{
+			}else{//false -> forward() ¹æ½ÄÀÏ¶§...
+				
 				RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
-		}
+		}//if 
 		
-	}
-}
+	}//	doProcess ¸Þ¼Òµå ³¡
+	
+}//¼­ºí¸´ ³¡
+
+
+

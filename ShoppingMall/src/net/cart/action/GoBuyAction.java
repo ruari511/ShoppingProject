@@ -17,19 +17,19 @@ import net.member.db.MemberDAO;
 import net.member.db.MemberDTO;
 
 
-public class CartBuyAction implements Action{
+public class GoBuyAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		System.out.println("CartBuyAction execute()");
+		System.out.println("GoBuyAction execute()");
 		
 		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
-		//Cart.jsp에서 checked인 cart_num값을 배열로 받아오기
-		String[] chk = request.getParameterValues("cart");
+		int product_num = Integer.parseInt(request.getParameter("product_num"));
+		int product_count = Integer.parseInt(request.getParameter("product_count"));
 		
 		MemberDAO mdao = new MemberDAO();
 		
@@ -40,21 +40,13 @@ public class CartBuyAction implements Action{
 		CouponDAO coudao = new CouponDAO();
 		
 		Vector<UserCouponDTO> cou = coudao.getAllCouponList(id);
-		//chk에 null값 들어오는거 예외처리 !!
+
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
-		if(chk != null){
-			for(int i=0; i<chk.length; i++){
-				//cart_num값을 검색하여 구매하기 페이지의 상품 리스트를 벡터타입으로 저장
-				v.add(cdao.getCartList(Integer.parseInt(chk[i])));
-			}
-		}
+		v.add(cdao.getGoBuyList(product_num, product_count));
 		
-		
-		//장바구니에 체크된 값만 벡터로 넘기기
 		request.setAttribute("v", v);
 		
-		//구매하기 페이지의 주문자정보 값 넘기
 		request.setAttribute("m", m);
 		
 		request.setAttribute("cou", cou);

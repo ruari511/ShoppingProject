@@ -12,8 +12,15 @@ public class ProductDTO {
 	private String img_contents;
 	private String brand;
 	private int price_count;
+	private String product_subname;
 	
 	
+	public String getProduct_subname() {
+		return product_subname;
+	}
+	public void setProduct_subname(String product_subname) {
+		this.product_subname = product_subname;
+	}
 	public int getProduct_count() {
 		return product_count;
 	}

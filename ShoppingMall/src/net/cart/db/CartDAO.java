@@ -33,7 +33,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num "
+			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num, c.product_num "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.id=?";
@@ -56,7 +56,7 @@ public class CartDAO {
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("product_sale_price"));
-				cartDTO.setCart_num(rs.getInt("cart_num"));
+				cartDTO.setProduct_num(rs.getInt("product_num"));
 				
 				cartList.add(cartDTO);
 			}//while문 끝
@@ -83,7 +83,7 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price "
+			sql  = "select c.cart_num, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.product_num "
 					+"from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.cart_num=?";
@@ -105,7 +105,7 @@ public class CartDAO {
 				cartDTO.setProduct_price(rs.getInt("product_price"));
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("product_sale_price"));
-				cartDTO.setCart_num(rs.getInt("cart_num"));
+				cartDTO.setProduct_num(rs.getInt("product_num"));
 				
 			}//while문 끝
 			
@@ -119,6 +119,58 @@ public class CartDAO {
 	
 		return cartDTO;
 	}//getCartList() 메소드 끝
+	
+	
+	
+	public CartDTO getGoBuyList(int product_num, int product_count){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		CartDTO cartDTO = new CartDTO();
+		
+		System.out.println("product_num = " + product_num);
+		
+		try {
+			con = getConnection();
+			
+			sql = "select product_num, product_name, img_main, brand, product_price, product_sale_price "
+				+ "from product where product_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_num);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				cartDTO = new CartDTO();
+				
+				cartDTO.setCart_num(0);
+				cartDTO.setProduct_num(rs.getInt("product_num"));
+				cartDTO.setProduct_name(rs.getString("product_name"));
+				cartDTO.setImg_main(rs.getString("img_main"));
+				cartDTO.setBrand(rs.getString("brand"));
+				cartDTO.setProduct_price(rs.getInt("product_price"));
+				cartDTO.setProduct_count(product_count);
+				cartDTO.setDiscount(rs.getInt("product_sale_price"));
+				
+			}//while문 끝
+			
+		} catch (Exception e) {
+			System.out.println("getGoBuyList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	
+		return cartDTO;
+	}//getCartList() 메소드 끝
+	
+	
 	
 	public void InsertCart(int product_num, String id, int count){
 		
@@ -307,12 +359,14 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
+			if(cartnum != 0){
 			sql = "delete from cart where cart_num=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, cartnum);
 			
 			pstmt.executeUpdate();
+			}
 			
 		} catch (Exception e) {
 			System.out.println("Deletecart()메소드 내부의 오류 : " + e);
@@ -388,6 +442,43 @@ public class CartDAO {
 			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
 			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
 		}
+	}
+	
+	//Header영역에 장바구니(숫자)를 하기위한 장바구니에 담긴 숫자 카운트 메소드
+	public int CartCount(String id){
+		
+		int cartCount = 0;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select count(*) from cart where id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				cartCount = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("CartCount()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		return cartCount;
+		
 	}
 	
 	
