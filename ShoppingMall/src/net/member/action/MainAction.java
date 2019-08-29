@@ -25,7 +25,6 @@ public class MainAction implements Action {
 		
 		Vector<Vector> category = Make2DArray(v);
 		
-		System.out.println(category.get(0));
 		request.setAttribute("category", category);
 		
 		forward.setRedirect(false);

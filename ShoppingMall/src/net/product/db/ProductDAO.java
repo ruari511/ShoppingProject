@@ -123,6 +123,59 @@ public class ProductDAO {
 		
 		return v;
 	}
+
+	public Vector<ProductDTO> getProductListAll(int category_main, int category_sub, String sort, int pageNum ) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		Vector<ProductDTO> v = new Vector<ProductDTO>();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select * from product where category_main=? and category_sub=? order by ? desc limit ?, ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, category_main);
+			pstmt.setInt(2, category_sub);
+			pstmt.setString(3, sort);
+			
+			/*pstmt.setString(4, sort);
+			pstmt.setString(4, sort);
+			*/
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+			
+				ProductDTO pdto = new ProductDTO();
+				
+				pdto.setProduct_num(rs.getInt("product_num"));
+				pdto.setProduct_name(rs.getString("product_name"));
+				pdto.setProduct_price(rs.getInt("product_price"));
+				pdto.setImg_main(rs.getString("img_main"));
+				pdto.setBrand(rs.getString("brand"));
+				
+				
+				v.add(pdto);
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getProductLimit()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		
+		
+		return v;
+	}
 	
 	
 }

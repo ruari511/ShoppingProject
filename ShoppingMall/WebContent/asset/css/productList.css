@@ -101,9 +101,10 @@ html, body {
 	width: 82%;	
 	padding: 10px;
 	min-height: 75px;
-    max-height: 200px;
+    max-height: 140px;
 	margin-bottom: -1px;
 	border-left: 1px solid lightgray;
+	overflow: hidden;
 }
 
 #productList_Brand_List li{
@@ -201,13 +202,18 @@ html, body {
 	color: gray;
 }
 
+#productList_Align_Wrap .on{
+	color: black;
+	font-weight: bolder;
+}
+
 /*제품정렬 끝*/
 
 
 /* 제품 목록 */
 #productList_Product_Wrap{
 	width: 100%;
-	margin: 0 auto;	
+	float: left;
 }
 
 .productList_Product_Row{
@@ -270,4 +276,26 @@ html, body {
 	font-weight: bold;
 	margin-top: 5px;
 }
+
+
 /*제품목록 끝*/
+
+/*페이지 인덱스 버튼*/
+#pageIndex_Btn_Wrap{
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+.pageIndex_Btn{
+	width: 30px;
+	height: 30px;
+	margin: 3px;
+	background-color: white;
+	border: 1px solid lightgray;
+	color: gray;
+}
+
+.pageIndex_Btn:hover, #pageIndex_Btn_Wrap .on{
+	color: black;
+	border-color: black;
+}
