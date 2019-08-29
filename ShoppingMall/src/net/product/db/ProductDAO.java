@@ -896,7 +896,7 @@ public class ProductDAO {
 	
 	//190821김현정 
 	//메인 슬라이드에서 상품 목록 불러오는 함수
-	public Vector<ProductDTO> getProductLimitList(int category_main, int category_sub, int limit){
+	public Vector<ProductDTO> getProductLimitList(String category_main, String category_sub, int limit){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -911,8 +911,8 @@ public class ProductDAO {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, category_main);
-			pstmt.setInt(2, category_sub);
+			pstmt.setString(1, category_main);
+			pstmt.setString(2, category_sub);
 			pstmt.setInt(3, limit);
 			
 			rs = pstmt.executeQuery();
@@ -946,12 +946,18 @@ public class ProductDAO {
 		return v;
 	}
 
-	public Vector<ProductDTO> getProductListAll(int category_main, int category_sub, String sort, int pageNum ) {
+	//상품목록 페이지 
+	//메인카테고리/서브카테고리/정렬방법/페이지번호
+	//한페이지에 나타나는 상품 갯수는 24개로 고정
+	public Vector<ProductDTO> getProductListAll(String category_main, String category_sub, String sort, int pageNum ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		Vector<ProductDTO> v = new Vector<ProductDTO>();
+		
+		//한페이지에 최대 표시되는 상품 갯수
+		int MaxNum = 24;
 		
 		try {
 			con = getConnection();
@@ -960,13 +966,20 @@ public class ProductDAO {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, category_main);
-			pstmt.setInt(2, category_sub);
+			pstmt.setString(1, category_main);
+			
+			//서브카테고리가 선택되어있지않으면 전체 표시 (category_sub=category_sub)
+			if(category_sub.equals("all")){
+				pstmt.setString(2, "category_sub");
+			}else{
+				pstmt.setString(2, category_sub);
+			}
+			
 			pstmt.setString(3, sort);
 			
-			/*pstmt.setString(4, sort);
-			pstmt.setString(4, sort);
-			*/
+			pstmt.setInt(4, (pageNum-1)*MaxNum+1);
+			pstmt.setInt(5, pageNum*MaxNum);
+			
 			
 			rs = pstmt.executeQuery();
 			
@@ -987,7 +1000,7 @@ public class ProductDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("getProductLimit()메소드 내부에서의 오류 : " + e);
+			System.out.println("getProductListAll()메소드 내부에서의 오류 : " + e);
 		} finally{
 			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
 			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
@@ -998,6 +1011,84 @@ public class ProductDAO {
 		
 		return v;
 	}
+
+	//현재 브랜드 목록을 불러오는 함수
+	public Vector<String> getBrandList(String category_main, String category_sub) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		Vector<String> v = new Vector<String>();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select distinct brand from product where category_main=? and category_sub=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, category_main);
+			pstmt.setString(2, category_sub);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				v.add(rs.getString("brand"));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getBrandList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		
+		
+		return v;
+	}
+
+	
+	//총 상품 개수 불러오기
+	public int getProductCount(String category_main, String category_sub) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int count = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql = "select count(*) from product where category_main=? and category_sub=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, category_main);
+			pstmt.setString(2, category_sub);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getBrandList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		
+		
+		
+		return count;
+	}
+	
+	
+	//브랜드있고없고 쿼리문 리턴하는 함수 만들기...(함수안에서 브랜드 이름 미리 셋팅)-> 본함수로 돌아와서 + orderby~ 붙여주기
 	
 	
 }

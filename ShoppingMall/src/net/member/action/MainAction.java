@@ -21,7 +21,7 @@ public class MainAction implements Action {
 		ProductDAO pdao = new ProductDAO();
 		//카테고리 불러오기
 		//DB에 저장해서 우르르불러오면 좋을 것 같다...
-		Vector<ProductDTO> v = pdao.getProductLimitList(1, 1, 8);
+		Vector<ProductDTO> v = pdao.getProductLimitList("1", "1", 8);
 		
 		Vector<Vector> category = Make2DArray(v);
 		

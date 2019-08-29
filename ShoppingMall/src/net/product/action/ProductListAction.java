@@ -19,27 +19,40 @@ public class ProductListAction implements Action {
 		ActionForward forward = new ActionForward();
 		
 		//메인카테고리 불러오기
-		int category_main = Integer.parseInt(request.getParameter("main"));
-		
+		String category_main =request.getParameter("main");		
 		//서브 카테고리 불러오기
-		int category_sub = Integer.parseInt(request.getParameter("sub"));
-
+		String  category_sub = request.getParameter("sub");
 		//정렬방법 불러오기
-		String sort = request.getParameter("sort");
-		
+		String sort = request.getParameter("sort");		
 		//페이지번호 불러오기
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
+		//선택한 브랜드 불러오기
+		String[] brand = request.getParameterValues("brand");
+		
 		ProductDAO pdao = new ProductDAO();
 		
-		//전체선택
-		Vector<ProductDTO> v = pdao.getProductListAll(category_main, category_sub, sort, pageNum);
+		if(brand==null){
+			//전체선택
+			Vector<ProductDTO> productList = pdao.getProductListAll(category_main, category_sub, sort, pageNum);	
+			request.setAttribute("productList", productList);
+		}else{
+			//브랜드 필터 선택
+			
+		}
 		
-		//브랜드 필터 선택
+		
 		
 		//기타.. 일자 정렬?
 		
-		request.setAttribute("categoryList", v);
+		
+		//브랜드목록 불러오기
+			Vector<String> brandList = pdao.getBrandList(category_main, category_sub);
+			request.setAttribute("brandList", brandList);
+		
+		//상품 총 갯수 불러오기
+			int productCount = pdao.getProductCount(category_main, category_sub);
+		
 		
 		forward.setRedirect(false);
 		forward.setPath("../product/productList.jsp");
