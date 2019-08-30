@@ -16,6 +16,7 @@ import net.buycard.db.CardDAO;
 import net.buycard.db.CardDTO;
 import net.cart.db.CartDAO;
 import net.coupon.db.CouponDAO;
+import net.product.db.ProductDAO;
 
 public class BuyListInsertCardAction implements Action{
 	@Override
@@ -61,8 +62,9 @@ public class BuyListInsertCardAction implements Action{
 			BuyListDTO bdto = null;
 			CartDAO cdao = new CartDAO();
 			CouponDAO coudao = new CouponDAO();
+			ProductDAO pdao = new ProductDAO();
 			
-			cardDAO.BuyCardInsert(id, cardCheck, cardDTO);
+			cardDAO.BuyCardInsert(id, cardCheck, cardDTO, maxbuynum);
 			
 			int bcnum = cardDAO.maxBcNum(id);
 			
@@ -204,8 +206,15 @@ public class BuyListInsertCardAction implements Action{
 					bdto.setDelivery_message(del_message);
 					bdto.setPayments(paytype);
 					
+					
 					cdao.Deletecart(Integer.parseInt(cartnum[i]));
-				
+					
+					int up_product_count = pdao.getProduct_count(Integer.parseInt(product_num[i]))-Integer.parseInt(product_count[i]);
+					pdao.UpdateProduct_count(up_product_count, Integer.parseInt(product_num[i]));
+					
+					int up_price_count = pdao.getPrice_count(Integer.parseInt(product_num[i]))+Integer.parseInt(product_count[i]);
+					pdao.UpdatePrice_count(up_price_count, Integer.parseInt(product_num[i]));
+					
 					bdao.insertBuyList(bdto);
 				}
 			}
@@ -225,7 +234,7 @@ public class BuyListInsertCardAction implements Action{
 			return forward;
 		}else{
 			
-			cardDAO.BuyCardInsert(id, cardCheck, cardDTO);
+			cardDAO.BuyCardInsert(id, cardCheck, cardDTO, 0);
 			
 			int bcnum = cardDAO.maxBcNum(id);
 			

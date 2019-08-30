@@ -56,7 +56,7 @@ public class CardDAO {
 		return cardCheck;
 	}
 	
-	public void BuyCardInsert(String id, int passfail, CardDTO cdto){
+	public void BuyCardInsert(String id, int passfail, CardDTO cdto, int buynum){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -66,7 +66,7 @@ public class CardDAO {
 		try {
 			
 			con = getConnection();
-			sql = "insert into buycard values(null,?,?,?,?,?,?,?,?)";
+			sql = "insert into buycard values(null,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, cdto.getCardNum());
@@ -76,6 +76,7 @@ public class CardDAO {
 			pstmt.setInt(6, passfail);
 			pstmt.setString(7, cdto.getBank());
 			pstmt.setInt(8, cdto.getInstallment());
+			pstmt.setInt(9, buynum);
 			
 			pstmt.executeUpdate();
 			
