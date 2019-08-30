@@ -893,6 +893,129 @@ public class ProductDAO {
 		return productList;
 	}
 	
+	//상품 구매시 줄어드는 상품수량을 업데이트하기 위해 현재 상품 수량을 검색하는 메소드
+	public int getProduct_count(int product_num){
+
+		int product_count = 0;
+		   
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		   
+		try {
+			con = getConnection();
+			   
+			sql  = "select product_count from product where product_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_num);
+			   
+			rs = pstmt.executeQuery();
+			   
+			if(rs.next()){
+				product_count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			   System.out.println("getProduct_count()메소드 내부에서의 오류 : " + e);
+		} finally{
+		  if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+		  if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		  if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		   
+		return product_count;
+	}
+	
+	//상품 구매시 줄어드는 상품 구매수량을 업데이트하기 위해 현재 상품 구매수량을 검색하는 메소드
+	public int getPrice_count(int product_num){
+
+		int price_count = 0;
+		   
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		   
+		try {
+			con = getConnection();
+			   
+			sql  = "select price_count from product where product_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_num);
+			   
+			rs = pstmt.executeQuery();
+			   
+			if(rs.next()){
+				price_count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			   System.out.println("getPrice_count()메소드 내부에서의 오류 : " + e);
+		} finally{
+		  if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+		  if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		  if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		   
+		return price_count;
+	}
+	
+	
+	//상품 구매시 상품의 남은 수량을 업데이트 하는 메소드
+	public void UpdateProduct_count(int product_count, int product_num){
+		   
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		   
+		try {
+			con = getConnection();
+			   
+			sql  = "update product set product_count=? where product_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_count);
+			pstmt.setInt(2, product_num);
+			   
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			 System.out.println("UpdateProduct_count()메소드 내부에서의 오류 : " + e);
+		} finally{
+		  if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+		  if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		  if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
+	//상품 구매시 상품의 늘어난 구매수량을 업데이트하는 메소드
+	public void UpdatePrice_count(int price_count, int product_num){
+		   
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		   
+		try {
+			con = getConnection();
+			   
+			sql  = "update product set price_count=? where product_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, price_count);
+			pstmt.setInt(2, product_num);
+			   
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			 System.out.println("UpdatePrice_count()메소드 내부에서의 오류 : " + e);
+		} finally{
+		  if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+		  if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		  if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
 	
 	
 	

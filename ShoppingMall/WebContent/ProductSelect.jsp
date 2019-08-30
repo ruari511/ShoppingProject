@@ -779,8 +779,8 @@
 				<c:forEach begin="0" end="${count}" varStatus="idx">
 					<c:if test="${idx.index % 24 == 0}">
 						<c:choose>
-							<c:when test="${startrow==j}"><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}${brand}&low_price=${low}&high_price=${high}" title="Paging" class="page123 on"> ${idx.index%24+i} </a></c:when>
-							<c:otherwise><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}${brand}&low_price=${low}&high_price=${high}" title="Paging" class="page123"> ${idx.index%24+i} </a></c:otherwise>
+							<c:when test="${startrow==j}"><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}${brand}&low_price=${low}&high_price=${high}" title="Paging" class="on"> ${idx.index%24+i} </a></c:when>
+							<c:otherwise><a href="./ProductSelectAction.pro?query=${query}&startrow=${(i-1)*24}&cate=${cate}&subcate=${subcate}${brand}&low_price=${low}&high_price=${high}" title="Paging"> ${idx.index%24+i} </a></c:otherwise>
 						</c:choose>
 						<c:set var="i" value="${i+1}"/>
 					</c:if>

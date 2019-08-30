@@ -50,11 +50,17 @@ function goCart() {
 	var id = '<%=id%>';
 	var product_num = document.getElementById("product_num").value;
 	var product_count = document.getElementById("product_count").value;
+	var pro_count = document.getElementById("pro_count").value;
 	
 	if(id==null){
 		location.href="./login.do";
 	} else{
+		if(pro_count>=product_count){
 		location.href="CartInsertAction.buy?product_num="+product_num+"&product_count="+product_count;
+		}else{
+			alert("상품의 남은 수량보다 많은 수량을 선택하셨습니다.");
+			document.getElementById("product_count").focus();
+		}
 	}
 }
 
@@ -62,11 +68,18 @@ function goBuy() {
 	var id = '<%=id%>';
 	var product_num = document.getElementById("product_num").value;
 	var product_count = document.getElementById("product_count").value;
+	var pro_count = document.getElementById("pro_count").value;
 	
 	if(id==null){
 		location.href="./login.do";
 	} else{
-		location.href="GoBuyAction.buy?product_num="+product_num+"&product_count="+product_count;
+		if(pro_count>=product_count){
+			location.href="GoBuyAction.buy?product_num="+product_num+"&product_count="+product_count;
+		}else{
+			alert("상품의 남은 수량보다 많은 수량을 선택하셨습니다.");
+			document.getElementById("product_count").focus();
+		}
+		
 	}
 }
 </script>
@@ -147,6 +160,7 @@ function goBuy() {
 					<p class="prd_flag">				
 						<span class="icon_flag sale">세일</span>
 					</p>
+					<input type="hidden" id="pro_count" value="${product.product_count}">
 					<ul class="info_list">
 						<li>
 							<span class="tx_tit">판매가</span> 
@@ -162,9 +176,9 @@ function goBuy() {
 							<span class="tx_cont bene_price">The CJ카드 추가 10%</span>
 						</li>
 						<li class="line_top">
-							<span class="tx_tit">CJ ONE 포인트 예상적립</span>
+							<span class="tx_tit">남은 수량</span>
 							<span class="tx_cont">
-								<span class="tx_num">2%</span>적립
+								<span class="tx_num">${product.product_count}</span>개
 							</span>
 						</li>
 	<!-- 노출할 배송비 -->
