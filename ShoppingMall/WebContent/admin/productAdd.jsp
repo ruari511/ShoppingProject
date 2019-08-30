@@ -25,7 +25,7 @@
 		<div id="Container">
 			<div id="Contents">
 				<h2>상품등록</h2>
-				<form action="productAddAction.ad" id="fm" name="fm" enctype="multipart/form-data" method="post">
+				<form action="./productAddAction.ad" id="fm" name="fm" enctype="multipart/form-data" method="post">
 					<table border="1">
 						<tr>
 							<td>상품이름</td>
@@ -78,7 +78,7 @@
 						<tr>
 							<td>할인</td>
 							<td>
-								<select name="price_count">
+								<select name="discount">
 									<option value="1">10</option>
 									<option value="2">20</option>
 									<option value="3">30</option>

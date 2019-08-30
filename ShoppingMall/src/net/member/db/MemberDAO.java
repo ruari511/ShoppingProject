@@ -195,7 +195,6 @@ public class MemberDAO {
 
    }// insertMember()메소드
 
-
    
    // 회원 삭제 메서드
    public int deleteMember(String id, String pw) {

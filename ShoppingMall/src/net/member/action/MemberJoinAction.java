@@ -1,6 +1,5 @@
 package net.member.action;
 
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
