@@ -13,16 +13,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
 <title>상품 리스트</title>
 <script type="text/javascript">
 
-	$(function(){
-		
-		//브랜드 셋팅
-		var on = $("[data-category-sub="+"<c:out value='${param.sub}'/>"+"]").addClass("on");
-		on.addClass("on");
-	});
+
+
 	//브랜드 전체보여주기/일부만 보여주기 함수
 	function BrandToggle(){
 		var toggle = $("#productList_Brand_List").data("toggle");
@@ -44,23 +40,25 @@
 	<div id="content"> <!-- content 나중에 제거하고 main에 추가-->
 		<!--메인카테고리 이름-->
 		<div  id="proudctList_Category_Main">
-			<h1>${param.main}</h1>
+			<h1>{product_main_category}</h1>
 		</div>
 		
 		<!--서브카테고리 이름-->
 		<!--6개씩 출력-->
 		<div id="proudctList_Category_Sub">
 			<ul>
-				<li data-category-sub="전체"><a href="#">전체</a></li>
-				<c:forEach var="sub" items="${requestScope.subList}">
-					<li data-category-sub="${sub}"><a href="#">${sub}</a></li>
-				</c:forEach>
-				
-				<!-- 남은 빈칸 채워주기 -->
-				<c:set var="nbsp" value="${6-((fn:length(requestScope.subList)+1)%6)}"/>
-				<c:forEach begin="1" end="${nbsp}">
-					<li>&nbsp;</li>
-				</c:forEach>
+				<li class="on"><a href="#">전체</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li><a href="#">{sub_category}</a></li>
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
 
 			</ul>
 		</div>
@@ -75,11 +73,56 @@
 			
 			<div id="productList_Brand_List" data-toggle="up">
 				<ul>
-					<c:forEach var="brand" items="${requestScope.brandList }">
-						<li>
-							<input id="${brand}" name="${brand}" type="checkbox" value="${brand}"><label for="${brand}">${brand}</label>
-						</li>
-					</c:forEach>
+					<li>
+						<input id="brand1" name="brand" type="checkbox" value="brand1"><label for="brand1">brand1</label>
+					</li>
+					<li>
+						<input id="brand2" name="brand" type="checkbox" value="brand1"><label for="brand2">brand2</label>
+					</li>
+					<li>
+						<input id="brand3" name="brand" type="checkbox" value="brand1"><label for="brand3">brand3</label>
+					</li>
+					<li>
+						<input id="brand4" name="brand" type="checkbox" value="brand1"><label for="brand4">brand4</label>
+					</li>
+					
+					
+					<li>
+						<input id="brand1" name="brand" type="checkbox" value="brand1"><label for="brand1">brand1</label>
+					</li>
+					<li>
+						<input id="brand2" name="brand" type="checkbox" value="brand1"><label for="brand2">brand2</label>
+					</li>
+					<li>
+						<input id="brand3" name="brand" type="checkbox" value="brand1"><label for="brand3">brand3</label>
+					</li>
+					<li>
+						<input id="brand4" name="brand" type="checkbox" value="brand1"><label for="brand4">brand4</label>
+					</li>
+					<li>
+						<input id="brand1" name="brand" type="checkbox" value="brand1"><label for="brand1">brand1</label>
+					</li>
+					<li>
+						<input id="brand2" name="brand" type="checkbox" value="brand1"><label for="brand2">brand2</label>
+					</li>
+					<li>
+						<input id="brand3" name="brand" type="checkbox" value="brand1"><label for="brand3">brand3</label>
+					</li>
+					<li>
+						<input id="brand4" name="brand" type="checkbox" value="brand1"><label for="brand4">brand4</label>
+					</li>
+					<li>
+						<input id="brand1" name="brand" type="checkbox" value="brand1"><label for="brand1">brand1</label>
+					</li>
+					<li>
+						<input id="brand2" name="brand" type="checkbox" value="brand1"><label for="brand2">brand2</label>
+					</li>
+					<li>
+						<input id="brand3" name="brand" type="checkbox" value="brand1"><label for="brand3">brand3</label>
+					</li>
+					<li>
+						<input id="brand4" name="brand" type="checkbox" value="brand1"><label for="brand4">brand4</label>
+					</li>
 				</ul>
 			</div>
 			<div id="productList_Brand_Btn">
@@ -90,21 +133,21 @@
 		
 		<!--상품 갯수-->
 		<div id="productList_Num">
-		<p>${param.sub} 카테고리에 <span>${requestScope.productCount}</span>개의 상품이 등록되어 있습니다.</p>
+		<p>{product_name} 카테고리에 <span>{num}</span>개의 상품이 등록되어 있습니다.</p>
 		</div>
 		
 		<!--상품 정렬-->
 		<div id="productList_Align_Wrap">
 			<ul>
-				<li data-sort="like"><a href="#" class="on">인기순</a></li>
+				<li><a href="#" class="on">인기순</a></li>
 				<li>|</li>
-				<li data-sort="recent"><a href="#">최근등록순</a></li>
+				<li><a href="#">최근등록순</a></li>
 				<li>|</li>
-				<li data-sort="price_count"><a href="#">판매수량순</a></li>
+				<li><a href="#">판매수량순</a></li>
 				<li>|</li>
-				<li data-sort="product_price"><a href="#">낮은가격순</a></li>
+				<li><a href="#">낮은가격순</a></li>
 				<li>|</li>
-				<li data-sort="product_price"><a href="#">높은가격순</a></li>
+				<li><a href="#">높은가격순</a></li>
 			</ul>
 		</div>
 		

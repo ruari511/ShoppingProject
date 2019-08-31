@@ -28,34 +28,35 @@ public class ProductListAction implements Action {
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		//선택한 브랜드 불러오기
-		String[] brand = request.getParameterValues("brand");
+		String[] brands = request.getParameterValues("brand");
+
 		
 		ProductDAO pdao = new ProductDAO();
-		
-		if(brand==null){
-			//전체선택
-			Vector<ProductDTO> productList = pdao.getProductListAll(category_main, category_sub, sort, pageNum);	
-			request.setAttribute("productList", productList);
-		}else{
-			//브랜드 필터 선택
-			
-		}
+
+		Vector<ProductDTO> productList = pdao.getProductListAll(category_main, category_sub, sort, pageNum, brands);	
+
+		request.setAttribute("productList", productList);
+
 		
 		
 		
 		//기타.. 일자 정렬?
 		
+		//서브카테고리 목록불러오기
 		
+			Vector<String> subList = pdao.getSubList(category_main);
+			request.setAttribute("subList", subList);
 		//브랜드목록 불러오기
 			Vector<String> brandList = pdao.getBrandList(category_main, category_sub);
 			request.setAttribute("brandList", brandList);
-		
+
 		//상품 총 갯수 불러오기
-			int productCount = pdao.getProductCount(category_main, category_sub);
-		
+			int productCount = pdao.getProductCount(category_main, category_sub, brands);
+			request.setAttribute("productCount", productCount);
+
 		
 		forward.setRedirect(false);
-		forward.setPath("../product/productList.jsp");
+		forward.setPath("product/productList.jsp");
 		return forward;
 	}
 	

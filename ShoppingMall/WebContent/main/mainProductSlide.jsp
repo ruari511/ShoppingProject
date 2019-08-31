@@ -109,7 +109,7 @@
 					</div>
 				
 				<div class="productSlide_Contents_Wrap">
-					<ul class="productSlide_List" data-category="1" data-max-index="2" data-current-index="1">
+					<ul class="productSlide_List" data-category="1" data-max-index="${category_length}" data-current-index="1">
 					
 					<!-- 마지막꺼  -->
 					<li>

@@ -73,13 +73,13 @@ html, body {
 	border: 1px solid lightgray;
 	border-top: 3px solid coral;
 	width: 100%;
-	min-height: 75px;
+	min-height: 80px;
 	position: relative;
 }
 
 #productList_Brand_Title{
 	float: left;
-	width: 15%;	
+	width: 13.5%;
 	margin: 15px;
 }
 
@@ -100,7 +100,7 @@ html, body {
 	float: left;
 	width: 82%;	
 	padding: 10px;
-	min-height: 75px;
+	min-height: 80px;
     max-height: 140px;
 	margin-bottom: -1px;
 	border-left: 1px solid lightgray;

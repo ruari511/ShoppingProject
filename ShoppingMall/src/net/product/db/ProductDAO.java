@@ -949,7 +949,7 @@ public class ProductDAO {
 	//상품목록 페이지 
 	//메인카테고리/서브카테고리/정렬방법/페이지번호
 	//한페이지에 나타나는 상품 갯수는 24개로 고정
-	public Vector<ProductDTO> getProductListAll(String category_main, String category_sub, String sort, int pageNum ) {
+	public Vector<ProductDTO> getProductListAll(String category_main, String category_sub, String sort, int pageNum, String[] brands  ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -962,24 +962,28 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			
-			sql = "select * from product where category_main=? and category_sub=? order by ? desc limit ?, ?";
+			//낮은가격순 높은가격순 어떻게..?
+			sql = "select * from product ";
+			sql += getBrandQuery(brands, category_sub);
+			sql += "order by ? desc limit ?, ?";
+			//sql = "select * from product where category_main=? and category_sub=? order by ? desc limit ?, ?";
+			
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, category_main);
 			
-			//서브카테고리가 선택되어있지않으면 전체 표시 (category_sub=category_sub)
-			if(category_sub.equals("all")){
-				pstmt.setString(2, "category_sub");
+			//서브카테고리가 선택되어있지않으면 전체 표시
+			if(category_sub.equals("전체")){
+				pstmt.setString(2, sort);				
+				pstmt.setInt(3, (pageNum-1)*MaxNum);
+				pstmt.setInt(4, MaxNum);
 			}else{
-				pstmt.setString(2, category_sub);
+				pstmt.setString(3, sort);			
+				pstmt.setInt(4, (pageNum-1)*MaxNum);
+				pstmt.setInt(5, MaxNum);
 			}
-			
-			pstmt.setString(3, sort);
-			
-			pstmt.setInt(4, (pageNum-1)*MaxNum+1);
-			pstmt.setInt(5, pageNum*MaxNum);
-			
+
 			
 			rs = pstmt.executeQuery();
 			
@@ -1051,7 +1055,7 @@ public class ProductDAO {
 
 	
 	//총 상품 개수 불러오기
-	public int getProductCount(String category_main, String category_sub) {
+	public int getProductCount(String category_main, String category_sub, String[] brands) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1061,12 +1065,16 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			
-			sql = "select count(*) from product where category_main=? and category_sub=?";
+			//sql = "select count(*) from product where category_main=? and category_sub=?";
+			sql = "select count(*) from product ";
+			sql += getBrandQuery(brands, category_sub);
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, category_main);
-			pstmt.setString(2, category_sub);
+			
+			if(!category_sub.equals("전체"))
+				pstmt.setString(2, category_sub);
 			
 			rs = pstmt.executeQuery();
 			
@@ -1087,8 +1095,66 @@ public class ProductDAO {
 		return count;
 	}
 	
+	//서브카테고리 목록 불러오는 함수
+	public Vector<String> getSubList(String category_main) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		Vector<String> v = new Vector<String>();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select distinct category_sub from product where category_main =? ";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, category_main);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				v.add(rs.getString(1));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getSubList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+
+		return v;
+	}
 	
-	//브랜드있고없고 쿼리문 리턴하는 함수 만들기...(함수안에서 브랜드 이름 미리 셋팅)-> 본함수로 돌아와서 + orderby~ 붙여주기
+	
+	//브랜드유무, 서브카테고리 전체 여부에 따라 쿼리문 만들어주는 함수
+	private String getBrandQuery(String[] brands, String category_sub){
+		String sql_temp = "where category_main=?";
+		
+		//카테고리가 전체이면 where절에서 sub카테고리 제거
+		if(!category_sub.equals("전체")){
+			sql_temp+=" and category_sub=?";
+		}
+		//브랜드가 null이 아닐 때만 브랜드를 쿼리문에 셋팅
+		if(brands!=null){
+			
+			//첫번째 브랜드 먼저 셋팅
+			sql_temp+=" and brand in('"+brands[0]+"'";
+			
+			//남은브랜드와 쉼표 셋팅
+			for(int i = 1; i<brands.length; i++){
+				sql_temp+=", '"+brands[i]+"'";
+			}
+			//괄호닫기
+			sql_temp+=") ";
+		}
+		
+		return sql_temp;
+	}
+
 	
 	
 }
