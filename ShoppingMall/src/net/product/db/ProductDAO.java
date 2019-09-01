@@ -925,6 +925,8 @@ public class ProductDAO {
 				pdto.setProduct_num(rs.getInt("product_num"));
 				pdto.setProduct_name(rs.getString("product_name"));
 				pdto.setProduct_price(rs.getInt("product_price"));
+				pdto.setProduct_sale_price(rs.getInt("product_sale_price"));
+				pdto.setProduct_count(rs.getInt("product_count"));
 				pdto.setImg_main(rs.getString("img_main"));
 				pdto.setBrand(rs.getString("brand"));
 				
@@ -949,39 +951,33 @@ public class ProductDAO {
 	//상품목록 페이지 
 	//메인카테고리/서브카테고리/정렬방법/페이지번호
 	//한페이지에 나타나는 상품 갯수는 24개로 고정
-	public Vector<ProductDTO> getProductListAll(String category_main, String category_sub, String sort, int pageNum, String[] brands  ) {
+	public Vector<ProductDTO> getProductListAll(String category_main, String category_sub, String sort_query, int pageNum, String[] brands, int MaxNum  ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		Vector<ProductDTO> v = new Vector<ProductDTO>();
 		
-		//한페이지에 최대 표시되는 상품 갯수
-		int MaxNum = 24;
-		
 		try {
 			con = getConnection();
 			
-			//낮은가격순 높은가격순 어떻게..?
 			sql = "select * from product ";
 			sql += getBrandQuery(brands, category_sub);
-			sql += "order by ? desc limit ?, ?";
-			//sql = "select * from product where category_main=? and category_sub=? order by ? desc limit ?, ?";
-			
+			sql += sort_query;
+			sql += " limit ?, ?";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, category_main);
 			
 			//서브카테고리가 선택되어있지않으면 전체 표시
-			if(category_sub.equals("전체")){
-				pstmt.setString(2, sort);				
+			if(category_sub.equals("all")){			
+				pstmt.setInt(2, (pageNum-1)*MaxNum);
+				pstmt.setInt(3, MaxNum);
+			}else{
+				pstmt.setString(2, category_sub);		
 				pstmt.setInt(3, (pageNum-1)*MaxNum);
 				pstmt.setInt(4, MaxNum);
-			}else{
-				pstmt.setString(3, sort);			
-				pstmt.setInt(4, (pageNum-1)*MaxNum);
-				pstmt.setInt(5, MaxNum);
 			}
 
 			
@@ -997,6 +993,8 @@ public class ProductDAO {
 				pdto.setProduct_price(rs.getInt("product_price"));
 				pdto.setImg_main(rs.getString("img_main"));
 				pdto.setBrand(rs.getString("brand"));
+				pdto.setProduct_count(rs.getInt("product_count"));
+				pdto.setProduct_sale_price(rs.getInt("product_sale_price"));
 				
 				
 				v.add(pdto);
@@ -1027,12 +1025,16 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			
-			sql = "select distinct brand from product where category_main=? and category_sub=?";
+			sql = "select distinct brand from product where category_main=?";
 			
+			if(!category_sub.equals("all"))
+				sql += " and category_sub=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, category_main);
-			pstmt.setString(2, category_sub);
+			
+			if(!category_sub.equals("all"))
+				pstmt.setString(2, category_sub);
 			
 			rs = pstmt.executeQuery();
 			
@@ -1073,7 +1075,7 @@ public class ProductDAO {
 			
 			pstmt.setString(1, category_main);
 			
-			if(!category_sub.equals("전체"))
+			if(!category_sub.equals("all"))
 				pstmt.setString(2, category_sub);
 			
 			rs = pstmt.executeQuery();
@@ -1135,7 +1137,7 @@ public class ProductDAO {
 		String sql_temp = "where category_main=?";
 		
 		//카테고리가 전체이면 where절에서 sub카테고리 제거
-		if(!category_sub.equals("전체")){
+		if(!category_sub.equals("all")){
 			sql_temp+=" and category_sub=?";
 		}
 		//브랜드가 null이 아닐 때만 브랜드를 쿼리문에 셋팅

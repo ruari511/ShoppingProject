@@ -13,15 +13,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 <title>상품 리스트</title>
 <script type="text/javascript">
 
 	$(function(){
 		
+		//서브카테고리 셋팅
+		$("[data-category-sub=<c:out value='${param.sub}'/>]").addClass("on");		
+		//페이지 번호 셋팅
+		$(".pageIndex_Btn[value=<c:out value='${param.pageNum}'/>]").addClass("on");
 		//브랜드 셋팅
-		var on = $("[data-category-sub="+"<c:out value='${param.sub}'/>"+"]").addClass("on");
-		on.addClass("on");
+		
+		
+		//정렬방법 셋팅
+		$("#productList_Align_Wrap li[data-sort=<c:out value='${param.sort}'/>] a").addClass("on");
 	});
 	//브랜드 전체보여주기/일부만 보여주기 함수
 	function BrandToggle(){
@@ -34,6 +41,14 @@
 			$("#productList_Brand_List ul").css("max-height", "140px");
 			$("#productList_Brand_List").data("toggle", "up");
 		}
+		
+	}
+
+	function selectBrand(){
+		
+	}
+	
+	function selectPage(){
 		
 	}
 
@@ -51,9 +66,9 @@
 		<!--6개씩 출력-->
 		<div id="proudctList_Category_Sub">
 			<ul>
-				<li data-category-sub="전체"><a href="#">전체</a></li>
+				<li data-category-sub="all"><a href="ProductList.pro?main=${param.main}&sub=all&sort=${param.sort}&pageNum=1">전체</a></li>
 				<c:forEach var="sub" items="${requestScope.subList}">
-					<li data-category-sub="${sub}"><a href="#">${sub}</a></li>
+					<li data-category-sub="${sub}"><a href="ProductList.pro?main=${param.main}&sub=${sub}&sort=${param.sort}&pageNum=1">${sub}</a></li>
 				</c:forEach>
 				
 				<!-- 남은 빈칸 채워주기 -->
@@ -90,85 +105,82 @@
 		
 		<!--상품 갯수-->
 		<div id="productList_Num">
-		<p>${param.sub} 카테고리에 <span>${requestScope.productCount}</span>개의 상품이 등록되어 있습니다.</p>
+		<p>
+		<c:choose>
+			<c:when test="${param.sub eq 'all'}">전체</c:when>
+			<c:otherwise>${param.sub}</c:otherwise>
+		</c:choose>
+		카테고리에 <span>${requestScope.productCount}</span>개의 상품이 등록되어 있습니다.</p>
 		</div>
 		
 		<!--상품 정렬-->
 		<div id="productList_Align_Wrap">
 			<ul>
-				<li data-sort="like"><a href="#" class="on">인기순</a></li>
+				<li data-sort="pop"><a href="#">인기순</a></li>
 				<li>|</li>
 				<li data-sort="recent"><a href="#">최근등록순</a></li>
 				<li>|</li>
 				<li data-sort="price_count"><a href="#">판매수량순</a></li>
 				<li>|</li>
-				<li data-sort="product_price"><a href="#">낮은가격순</a></li>
+				<li data-sort="low_price"><a href="#">낮은가격순</a></li>
 				<li>|</li>
-				<li data-sort="product_price"><a href="#">높은가격순</a></li>
+				<li data-sort="high_price"><a href="#">높은가격순</a></li>
 			</ul>
 		</div>
 		
 		<!--상품 목록-->
 		<div id="productList_Product_Wrap">
-			<ul class="productList_Product_Row">
-				<li class="productList_Product">
-					<a href="#">
-						<img src="{item.img_main }">
-						<div class="productList_Product_Text">
-							<p class="productList_Text_Brand">{item.brand }</p>
-							<p class="productList_Text_Name">{item.product_name }</p>
-							<p class="producteList_Text_Price">{item.product_price } 원</p>	
-						</div>
-					</a>
-				</li>
-				<li class="productList_Product">
-					<a href="#">
-						<img src="{item.img_main }">
-						<div class="productList_Product_Text">
-							<p class="productList_Text_Brand">{item.brand }</p>
-							<p class="productList_Text_Name">{item.product_name }</p>
-							<p class="producteList_Text_Price">{item.product_price } 원</p>	
-						</div>
-					</a>
-				</li>
-				<li class="productList_Product">
-					<a href="#">
-						<img src="{item.img_main }">
-						<div class="productList_Product_Text">
-							<p class="productList_Text_Brand">{item.brand }</p>
-							<p class="productList_Text_Name">{item.product_name }</p>
-							<p class="producteList_Text_Price">{item.product_price } 원</p>	
-						</div>
-					</a>
-				</li>
-				<li class="productList_Product">
-					<a href="#">
-						<img src="{item.img_main }">
-						<div class="productList_Product_Text">
-							<p class="productList_Text_Brand">{item.brand }</p>
-							<p class="productList_Text_Name">{item.product_name }</p>
-							<p class="producteList_Text_Price">{item.product_price } 원</p>	
-						</div>
-					</a>
-				</li>
-				<div class="productList_UnderLine"></div>
-			</ul>	
-			
+			<c:forEach var="row" items="${requestScope.productList}">
+				<ul class="productList_Product_Row">
+					<c:forEach var="item" items="${row}">
+						<li class="productList_Product">
+							<a href="ProductDetailAction.pro?product_num=${item.product_num}">
+								<img src="${item.img_main}">
+								<div class="productList_Product_Text">
+									<p class="productList_Text_Brand">${item.brand}</p>
+									<p class="productList_Text_Name">${item.product_name}</p>
+									<p class="producteList_Text_Price">
+									
+									<!-- 0이 아닐때만 세일 표시 -->
+									<c:if test="${item.product_sale_price ne 0 }">
+										<span>${item.product_price} 원</span>
+									</c:if>
+									${item.product_price-item.product_sale_price} 원</p>	
+								</div>
+								
+								<!-- 품절표시 -->
+								<c:if test="${item.product_count eq 0}">
+                       				<div class="SoldOut_Box"> <p>품절</p></div>
+                       			</c:if>
+							</a>
+						</li>
+					</c:forEach>
+					<div class="productList_UnderLine"></div>
+				</ul>	
+			</c:forEach>
 		</div>
 		
+		<!-- 페이징 -->
 		<div id="pageIndex_Btn_Wrap">
-			<button class="pageIndex_Btn" onclick="" value="">《</button>
-			<button class="pageIndex_Btn on" onclick="" value="1">1</button>
-			<button class="pageIndex_Btn" onclick="" value="2">2</button>
-			<button class="pageIndex_Btn" onclick="" value="3">3</button>
-			<button class="pageIndex_Btn" onclick="" value="4">4</button>
-			<button class="pageIndex_Btn" onclick="" value="5">5</button>
-			<button class="pageIndex_Btn" onclick="" value="6">6</button>
-			<button class="pageIndex_Btn" onclick="" value="7">7</button>
-			<button class="pageIndex_Btn" onclick="" value="8">8</button>
-			<button class="pageIndex_Btn" onclick="" value="9">9</button>
-			<button class="pageIndex_Btn" onclick="" value="10">10</button>
-			<button class="pageIndex_Btn" onclick="" value="">》</button>	
+		
+		<!-- 페이지 객체 불러오기 -->
+		<c:set var="page" value="${requestScope.page}"/>
+		
+		<!-- 뒤로가기  -->
+		<c:if test="${page.startPage ne 1}">
+			<button class="pageIndex_Btn" onclick="" value="${page.startPage-1}">《</button>
+		</c:if>	
+
+		<!-- 번호 순서대로(10개씩) -->
+		<c:forEach begin="${page.startPage}" end="${page.endPage}" varStatus="status">
+			<button class="pageIndex_Btn" onclick="" value="${status.current}">${status.current}</button>	
+		</c:forEach>
+		
+		<!-- 앞으로가기 -->	
+		<c:if test="${page.endPage ne page.maxPage }">
+			<button class="pageIndex_Btn" onclick="" value="${page.startPage+1}">》</button>	
+		</c:if>
+		
 		</div>
 	</div>
 </body>

@@ -31,45 +31,45 @@ public class ProductFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		//°¡»ó¿äÃ» ÁÖ¼Ò °¡Á®¿À±â
+		//ê°€ìƒìš”ì²­ ì£¼ì†Œ ê°€ì ¸ì˜¤ê¸°
 		//  /CarProject/MemberJoin.do
 		String RequestURI=request.getRequestURI();
 		System.out.println(RequestURI);
 		
-		//  /CarProject ¾ò±â
+		//  /CarProject ì–»ê¸°
 		String contextPath=request.getContextPath();
 		
-		//	±æÀÌ 11
+		//	ê¸¸ì´ 11
 		System.out.println(contextPath.length());
 		
-		//  /MemberJoin.do ¾ò±â
+		//  /MemberJoin.do ì–»ê¸°
 		// /MemberJoinAction.do
-		//  /MemberLogin.do ¾ò±â 
+		//  /MemberLogin.do ì–»ê¸° 
 		String command=RequestURI.substring(contextPath.length());
 		System.out.println(command);
 					
-		/*ÁÖ¼Ò ºñ±³*/	
-		//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼¸¦ ÀúÀåÇÒ ÂüÁ¶º¯¼ö ¼±¾ğ 
+		/*ì£¼ì†Œ ë¹„êµ*/	
+		//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’,ì´ë™í˜ì´ì§€ ê²½ë¡œ ê°’ ì €ì¥ í•˜ì—¬ ë¦¬í„´ í•´ì£¼ëŠ” ê°ì²´ë¥¼ ì €ì¥í•  ì°¸ì¡°ë³€ìˆ˜ ì„ ì–¸ 
 		ActionForward forward=null;
 	
-		//ÀÚ½Ä Action °´Ã¼µéÀ» ´ãÀ» ÀÎÅÍÆäÀÌ½º Å¸ÀÔÀÇ ÂüÁ¶º¯¼ö ¼±¾ğ
+		//ìì‹ Action ê°ì²´ë“¤ì„ ë‹´ì„ ì¸í„°í˜ì´ìŠ¤ íƒ€ì…ì˜ ì°¸ì¡°ë³€ìˆ˜ ì„ ì–¸
 		Action action=null;
 			
-		//¸ğµç ±¸¸ÅÇÏ±â µ¿ÀÛÀÌ ¿Ï·áµÈ ÈÄ ±¸¸Å¿Ï·á ÆäÀÌÁö·Î ÀÌµ¿ÇÏ´Â ºÎºĞ
+		//ëª¨ë“  êµ¬ë§¤í•˜ê¸° ë™ì‘ì´ ì™„ë£Œëœ í›„ êµ¬ë§¤ì™„ë£Œ í˜ì´ì§€ë¡œ ì´ë™í•˜ëŠ” ë¶€ë¶„
 		if(command.equals("/Product.pro")){
 		
-			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼ »ı¼º 
+			//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’,ì´ë™í˜ì´ì§€ ê²½ë¡œ ê°’ ì €ì¥ í•˜ì—¬ ë¦¬í„´ í•´ì£¼ëŠ” ê°ì²´ ìƒì„± 
 			forward=new ActionForward();
-			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª false·Î ÀúÀå-> RequestDispatcher  forward() ¹æ½Ä
+			//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’ falseë¡œ ì €ì¥-> RequestDispatcher  forward() ë°©ì‹
 			forward.setRedirect(false);
-			//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î(È¸¿ø°¡ÀÔ ÆäÀÌÁö) ÁÖ¼Ò°ª ÀúÀå
+			//ì´ë™í•  í˜ì´ì§€ ê²½ë¡œ(íšŒì›ê°€ì… í˜ì´ì§€) ì£¼ì†Œê°’ ì €ì¥
 			forward.setPath("./product/product.jsp");
 			
-		//±¸¸ÅÇÏ±â ÆäÀÌÁö¿¡¼­ °áÁ¦ÇÏ±â ¹öÆ°À» ´­·¶À»‹š µ¿ÀÛÇÏ´Â ºÎºĞ
+		//êµ¬ë§¤í•˜ê¸° í˜ì´ì§€ì—ì„œ ê²°ì œí•˜ê¸° ë²„íŠ¼ì„ ëˆŒë €ì„Â‹Âš ë™ì‘í•˜ëŠ” ë¶€ë¶„
 		}else if(command.equals("/ProductDetailAction.pro")){
 	
 			
-			//È¸¿ø°¡ÀÔ Ã³¸®¸¦ À§ÇÑ Action°´Ã¼ »ı¼º
+			//íšŒì›ê°€ì… ì²˜ë¦¬ë¥¼ ìœ„í•œ Actionê°ì²´ ìƒì„±
 			action=new ProductDetailAction();
 			
 			try {
@@ -78,11 +78,11 @@ public class ProductFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		//°áÁ¦ÇÏ±â ¹öÆ°À» ´­·¯¼­ ±¸¸Å¸ñ·ÏÀÌ insertµÇ°í ³­ ÈÄ MemberÀÇ Á¤º¸¸¦ ¾÷µ¥ÀÌÆ® ÇÏ´Â ºÎºĞ
+		//ê²°ì œí•˜ê¸° ë²„íŠ¼ì„ ëˆŒëŸ¬ì„œ êµ¬ë§¤ëª©ë¡ì´ insertë˜ê³  ë‚œ í›„ Memberì˜ ì •ë³´ë¥¼ ì—…ë°ì´íŠ¸ í•˜ëŠ” ë¶€ë¶„
 		}else if(command.equals("/ProductSelectAction.pro")){
 	
 			
-			//È¸¿ø°¡ÀÔ Ã³¸®¸¦ À§ÇÑ Action°´Ã¼ »ı¼º
+			//íšŒì›ê°€ì… ì²˜ë¦¬ë¥¼ ìœ„í•œ Actionê°ì²´ ìƒì„±
 			action=new ProductSelectAction();
 			
 			try {
@@ -91,15 +91,16 @@ public class ProductFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		//°áÁ¦ÇÏ±â ¹öÆ°À» ´­·¯¼­ ±¸¸Å¸ñ·ÏÀÌ insertµÇ°í ³­ ÈÄ MemberÀÇ Á¤º¸¸¦ ¾÷µ¥ÀÌÆ® ÇÏ´Â ºÎºĞ
+		//ê²°ì œí•˜ê¸° ë²„íŠ¼ì„ ëˆŒëŸ¬ì„œ êµ¬ë§¤ëª©ë¡ì´ insertë˜ê³  ë‚œ í›„ Memberì˜ ì •ë³´ë¥¼ ì—…ë°ì´íŠ¸ í•˜ëŠ” ë¶€ë¶„
 		}else if(command.equals("/ProductSelect.pro")){
 	
-			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª,ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀå ÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼ »ı¼º 
+			//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’,ì´ë™í˜ì´ì§€ ê²½ë¡œ ê°’ ì €ì¥ í•˜ì—¬ ë¦¬í„´ í•´ì£¼ëŠ” ê°ì²´ ìƒì„± 
 			forward=new ActionForward();
-			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª false·Î ÀúÀå-> RequestDispatcher  forward() ¹æ½Ä
+			//í˜ì´ì§€ ì´ë™ ë°©ì‹ ì—¬ë¶€ ê°’ falseë¡œ ì €ì¥-> RequestDispatcher  forward() ë°©ì‹
 			forward.setRedirect(false);
-			//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î(È¸¿ø°¡ÀÔ ÆäÀÌÁö) ÁÖ¼Ò°ª ÀúÀå
+			//ì´ë™í•  í˜ì´ì§€ ê²½ë¡œ(íšŒì›ê°€ì… í˜ì´ì§€) ì£¼ì†Œê°’ ì €ì¥
 			forward.setPath("./ProductSelect.jsp");
+	
 		}else if(command.equals("/ProductList.pro")){
 			action = new ProductListAction();
 			
@@ -113,25 +114,22 @@ public class ProductFrontController extends HttpServlet{
 		
 		
 		
-		//ÁÖ¼Ò ÀÌµ¿
-		if(forward!=null){ //new ActionForward()°´Ã¼°¡ Á¸Àç ÇÏ°í..
-			if(forward.isRedirect()){//true -> sendRedirect() ¹æ½ÄÀÏ‹š..
-				//¸®´ÙÀÌ·ºÆ® ¹æ½ÄÀ¸·Î ÆäÀÌÁö ÀÌµ¿!  ÆäÀÌÁö ÁÖ¼Ò °æ·Î ³ëÃâ ÇÔ 
-				//join.jspÈ­¸é ÀÌµ¿
-				//login.jspÈ­¸é ÀÌµ¿
-				//CarMain.jspÈ­¸é ÀÌµ¿½Ã session¿µ¿ª Àü´Ş
+		//ì£¼ì†Œ ì´ë™
+		if(forward!=null){ //new ActionForward()ê°ì²´ê°€ ì¡´ì¬ í•˜ê³ ..
+			if(forward.isRedirect()){//true -> sendRedirect() ë°©ì‹ì¼Â‹Âš..
+				//ë¦¬ë‹¤ì´ë ‰íŠ¸ ë°©ì‹ìœ¼ë¡œ í˜ì´ì§€ ì´ë™!  í˜ì´ì§€ ì£¼ì†Œ ê²½ë¡œ ë…¸ì¶œ í•¨ 
+				//join.jspí™”ë©´ ì´ë™
+				//login.jspí™”ë©´ ì´ë™
+				//CarMain.jspí™”ë©´ ì´ë™ì‹œ sessionì˜ì—­ ì „ë‹¬
 				response.sendRedirect(forward.getPath());
 				
-			}else{//false -> forward() ¹æ½ÄÀÏ¶§...
+			}else{//false -> forward() ë°©ì‹ì¼ë•Œ...
 				
 				RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 		}//if 
 		
-	}//	doProcess ¸Ş¼Òµå ³¡
+	}//	doProcess ë©”ì†Œë“œ ë
 	
-}//¼­ºí¸´ ³¡
-
-
-
+}//ì„œë¸”ë¦¿ ë
