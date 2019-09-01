@@ -669,9 +669,47 @@ public class MemberDAO {
    
 
 
-   public static MemberDAO getInstance() {
-      // TODO Auto-generated method stub
-      return null;
+   public MemberDTO getUser(String id) {
+	   con=null;
+	   sql="";
+	   pstmt=null;
+	   rs=null;
+	   
+	   MemberDTO dto = new MemberDTO();
+	   
+	   try {
+	         //1단계 드라이버로더
+	         //2단계 디비연결
+	         con=getConnection();
+	         
+	         //3단계 sql : email에 해당하는 id 가져오기
+	         sql= "select * from member where id =?";
+	         pstmt=con.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         
+	         //4단계 rs = 실행
+	         rs=pstmt.executeQuery();
+	        
+	         if(rs.next()){
+	        	 dto.setEmail(rs.getString("email"));
+	        	 dto.setPassword(rs.getString("password"));
+	        	 dto.setAddress_detail(rs.getString("address_detail"));
+	        	 dto.setAddress_main(rs.getString("address_main"));
+	        	 dto.setName(rs.getString("name"));
+	        	 dto.setBirth_date(rs.getString("birth_date"));
+	        	 dto.setPhone(rs.getString("phone"));
+	         }
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally{
+	         //마무리
+	         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+	      }
+    return dto;
+	  
    }
 
 

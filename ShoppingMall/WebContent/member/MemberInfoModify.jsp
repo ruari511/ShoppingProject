@@ -6,20 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<%
-	// MemberInfoAction에서 넘긴 회원정보를 추출한다.
-	MemberDTO member=(MemberDTO)request.getAttribute("join");
 
-	request.setCharacterEncoding("utf-8");
-	String id = (String)session.getAttribute("id");
-	MemberDAO dao = new MemberDAO();
-	MemberDTO dto = dao.getId(id);
-	
-	String email = dto.getEmail();
-	String address_main = dto.getaddress_main();
-	String address_detail = dto.getaddress_detail();
-	String mtel = dto.getMtel();
-%>
 
 <html>
 <head>
@@ -63,7 +50,11 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 <script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
 <body>
+<%
+	//MemberInfoAction에서 넘긴 회원정보를 추출한다.
+	MemberDTO member=(MemberDTO)request.getAttribute("id");
 
+%>
 	<div id="Wrapper">
 
 		<div id="Container">
@@ -79,42 +70,87 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 							mypage.header.init();
 						});
 					</script>
-
+ 
 
 <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 		<!-- 값(파라미터) 전송은 POST 방식 -->
-		<form method="post" action="MemberModifyAction.do" 
-				 name="form" onsubmit="return checkValue()">
+		<form method="post" action="MemberModifyAction.do" name="form" onsubmit="return checkValue()">
 				
-		<fieldset>
-				<legend>회원 정보 수정</legend>
-				<label>ID</label>
-					<input type="text" name="id" value="<%=id %>" maxlength="20" required readonly><br>
-				<label>비밀번호</label>
-					<input type="password" value="<% %>" name="password" id="pass" required><br>
-				<label>비밀번호 확인</label>
-					<input type="password" value="${password}" name="password2" id="pass2" onblur="join_check('pass2')" required>
+		<div>
+				<h3 class="join_title">
+				<label for="id">아이디</label>
+				</h3>
+					<input type="text" name="id" class="join" id="id" value="${memberInfo.id}" onblur="join_check('check')" placeholder="아이디" readonly/>
+					<div class="check_font" id="idMessage"></div>
+				</div>
+
+				<div>
+				<h3 class="join_title">
+				<label for="pass">비밀번호</label>
+				</h3>
+					<input type="password" name="password" class="join" id="pass" required><br>
+				</div>
+				
+				
+				<div>
+				<h3 class="join_title">
+				<label for="pass2">비밀번호 확인</label>
+				</h3>
+					<input type="password" name="password2" class="join" id="pass2" onblur="join_check('pass2')" required>
 					<div class="check_font" id="passMessage"></div>
-				<label>이메일</label>
-					<input type="text" name="email" value="${email}" id="email" onblur="join_check('email')" required><br>
+				</div>
+
+				
+				<div>
+				<h3 class="join_title">
+				<label for="name">이름</label>
+				</h3>
+					<input type="text" name="name" class="join" id="name" value="${memberInfo.name}" onblur="join_check('name')" required readonly>
+					<div class="check_font" id="nameMessage"></div>
+				</div>
+				
+				<div>
+				<h3 class="join_title">
+				<label for="birth">생년월일</label>
+				</h3>
+					<input type="text" name="birth_date" class="join" id="birth" value="${memberInfo.birth_date}" onblur="join_check('birth')" required readonly>
+					<div class="check_font" id="birthMessage"></div>
+				</div>
+				
+				<div>
+				<h3 class="join_title">
+				<label for="email">이메일</label>
+				</h3>
+					<input type="email" name="email" class="join" id="email" value="${memberInfo.email}" onblur="join_check('email')" required><br>
 					<div class="check_font" id="emailMessage"></div>
-				<label>주소</label>
-					<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
-            	<div id="list"></div>
+				</div>
+				
+				<div>
+				<h3 class="join_title">
+				<label onClick="goPopup();">주소</label>
+				</h3>
             	<div id="callBackDiv">
-            		<input type="text"  style="width:250px;" id="roadAddrPart1" value="${address_main}" name="address_main" class="form-control" style="width:500px;" placeholder="Enter Addr" required="true" readonly="true" /><br>
-            		<input type="text"  style="width:250px;" id="addrDetail"  value="${address_detail}" name="address_detail" />
+            		<div class="ad"><input type="text" class="join" id="roadAddrPart1" name="address_main" value="${memberInfo.address_main}" class="form-control" placeholder="Enter Addr" required="true" readonly="true" />
+            		<input type="button" onClick="goPopup();" value="주소 찾기" class="adbtn"/></div><br>
+            		<input type="text" class="join" id="addrDetail" name="address_detail" value="${memberInfo.address_detail}" /><br>
             	</div>
-				<label>휴대전화 번호 *</label>
-					<select name = "phone1" id="phone1">
+            	</div>
+            	
+				<div>
+				<h3 class="join_title">
+				<label for="phone2">휴대전화 번호 *</label>
+				</h3>
+				<span class="sp" >
+					<select name = "phone1" id="phone1"  class="join" >
 		              <option value="010">010</option>
 		              <option value="011">011</option>
 		              <option value="019">019</option>
 		         	</select> - 
-		         	<input type = "text" name ="phone2" id="phone2" maxlength="4" size = "5" required/> - 
-		          	<input type = "text" name ="phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
+		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" required/> - 
+		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
+		        </span>
 		          	<div class="check_font" id="phoneMessage"></div>
-				</fieldset>
+				</div>
 			<br><br>
 			<input type="button" value="취소" onclick="javascript:window.location='Main.do'">
 			<input type="submit" value="수정"/>  
