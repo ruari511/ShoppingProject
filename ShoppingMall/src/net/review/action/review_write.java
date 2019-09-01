@@ -10,49 +10,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.review.db.*;
 
-/**
- * Servlet implementation class review_write
- */
 @WebServlet("/review_write")
 public class review_write extends HttpServlet {
-	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public review_write() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	
 		System.out.println("review_write 서블릿 요청");
 		
-		//파라미터 추출
+		request.setCharacterEncoding("utf-8");
 		
-		String id = request.getParameter("id");
+		//파라미터 추출
+		HttpSession session = request.getSession();
+		
+		String id = (String) session.getAttribute("id");
 		String review_title = request.getParameter("review_title");
-		int product_num =  Integer.parseInt(request.getParameter("product_num"));
+		String product_num = request.getParameter("product_num");
 		String review_content = request.getParameter("review_content");
 		
 		int review_star = Integer.parseInt(request.getParameter("review_star"));
 		
 		
+		
 		// 값 출력 test
-		System.out.println(id);
-		System.out.println(review_title);
-		System.out.println(product_num);
-		System.out.println(review_content);
-		System.out.println(review_star);
+		System.out.println("id: " + id);
+		System.out.println("review_title: " + review_title);
+		System.out.println("product_num: " + product_num);
+		System.out.println("review_content: " + review_content);
+		System.out.println("review_star: " + review_star);
 		
 		
 		// 빈 객체에 데이터 set
@@ -60,7 +52,7 @@ public class review_write extends HttpServlet {
 		
 		dto.setId(id);
 		dto.setReview_title(review_title);
-		dto.setProduct_num(product_num);
+		dto.setProduct_num(Integer.parseInt(product_num));
 		dto.setReview_content(review_content);
 		dto.setReview_star(review_star);
 		
@@ -70,9 +62,12 @@ public class review_write extends HttpServlet {
 		dao.review_write(dto);
 		
 		//페이지 이동
-		String site = "review.credu";
-		response.sendRedirect(site);
+		RequestDispatcher dis = 
+				request.getRequestDispatcher("ProductDetailAction.do");
 		
+		//실제 재요청
+		dis.forward(request, response);	
+		System.out.println("review_star2: " + review_star);
 	
 	}
 

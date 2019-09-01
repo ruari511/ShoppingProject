@@ -18,22 +18,12 @@ import net.review.db.*;
  */
 @WebServlet("/review_read")
 public class review_read extends HttpServlet {
-	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public review_read() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		System.out.println("review_read.credu 요청");
 	
@@ -41,14 +31,20 @@ public class review_read extends HttpServlet {
 		//파라미터 한글처리
 		request.setCharacterEncoding("utf-8");
 		
+		review_DAO dao = new review_DAO();
+		
 		//파라미터값 추출
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
+		
+		System.out.println("리뷰 리드 - review_num" + review_num);
+		
+		//조회수1증가 시키시 위한 메소드 호출
+		dao.updateReview_cnt(review_num); 
 		
 		
 		// 해당 리뷰글 정보 불러오기.
 		try {
 			
-			review_DAO dao = new review_DAO();
 			
 			ReviewDTO dto = dao.review_read(review_num);
 		

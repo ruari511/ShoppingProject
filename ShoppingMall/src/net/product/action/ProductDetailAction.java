@@ -2,6 +2,7 @@ package net.product.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,9 +33,15 @@ public class ProductDetailAction extends HttpServlet{
 	}
 
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		
+		
 		HttpSession session = request.getSession();
+		
 		String id = (String) session.getAttribute("id");
-		String product_num=request.getParameter("product_num");
+		String product_num = request.getParameter("product_num");
+		
 		
 		ProductDAO pdao = new ProductDAO();
 		ProductDTO pdto = pdao.getProduct(Integer.parseInt(product_num));
@@ -42,12 +49,9 @@ public class ProductDetailAction extends HttpServlet{
 		request.setAttribute("pdto", pdto);
 		request.setAttribute("id", id);
 		
-		
+
 		review_DAO dao = new review_DAO();
 		
-		
-		System.out.println("상품 액션");
-
 		int pagenum = 1; // 페이지 번호
 		if (request.getParameter("Page_num") != null) {
 			pagenum = Integer.parseInt(request.getParameter("Page_num"));
@@ -81,7 +85,7 @@ public class ProductDetailAction extends HttpServlet{
 		// 3page 31 ~ 45 15개
 		
 		int end = pagenum * size;
-		int start = end - size + 1;
+		int start = end - size;
 		
 		System.out.println(start);
 		System.out.println(end);
@@ -95,62 +99,6 @@ public class ProductDetailAction extends HttpServlet{
 		// request 객체에 총 페이지수를 담아준다.
 		request.setAttribute("tot", tot);
 	
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-//		review_DAO dao = new review_DAO();
-//		ArrayList<ReviewDTO> dto = dao.getReview(Integer.parseInt(product_num));
-//		
-//		System.out.println("review.credu");
-//
-//		int pagenum = 1; // 페이지 번호
-//		if (request.getParameter("Page_num") != null) {
-//			pagenum = Integer.parseInt(request.getParameter("Page_num"));
-//		}
-//
-//		// size 보여줄 페이지당 게시글 개수. 15개당 1page
-//		int size = 15;
-//
-//		int tot = 0;
-//		int cnt = 0;
-//
-//		try {
-//
-//			// 총 게시글 개수.
-//			cnt = dao.review_getPageCount();
-//			//페이지 번호
-//			tot = cnt / size;
-//			if (cnt % size != 0) {
-//				tot++;
-//			}
-//
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		// 1page 1 ~ 15 15개
-//		// 2page 16 ~ 30 15개
-//		// 3page 31 ~ 45 15개
-//		
-//		int end = pagenum * size;
-//		int start = end - size + 1;
-//		
-//		System.out.println(start);
-//		System.out.println(end);
-//		System.out.println("상품번호: " + product_num);
-//		
-//		// 리뷰게시판 불러오기.
-//		ArrayList<ReviewDTO> list = dao.review_get(start, end, Integer.parseInt(product_num));
-////		ArrayList<ReviewDTO> list = dao.getReview(Integer.parseInt(product_num));
-//		// request 객체에 list를 담아준다.
-//		request.setAttribute("list", list);
-//		
-//		// request 객체에 총 페이지수를 담아준다.
-//		request.setAttribute("tot", tot);
-		
-		
 		
 		RequestDispatcher dis = 
 				request.getRequestDispatcher("product/product.jsp");

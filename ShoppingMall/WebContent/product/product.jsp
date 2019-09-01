@@ -1,7 +1,9 @@
+<%@page import="net.review.db.ReviewDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
-<%@ page trimDirectiveWhitespaces="true"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@page import="net.review.db.review_DAO"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,21 +13,21 @@
 <link rel="stylesheet" href="./asset/css/global.css"/> 
 <link rel="stylesheet" href="./asset/css/product.css"/>
 
-<!-- BootStrap CDN -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- BootStrap CDN -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 
 <% 
 	String id = (String)session.getAttribute("id");
 	
 	//파라미터 한글처리
 	request.setCharacterEncoding("utf-8"); 
-
-		
-		 
+	
 	 int tot = 0;
 	 // Null값일때 형변환 하면 에러가나니.. 체크
 	 if(request.getAttribute("tot") != null){
@@ -33,6 +35,11 @@
 		 tot = (Integer)request.getAttribute("tot");
 		 
 	 }
+	 
+	 review_DAO dao = new review_DAO();
+	 
+	 int cnt = dao.review_getPageCount();
+ 
 %>
 
 <script type="text/javascript">
@@ -325,13 +332,13 @@ function goBuy() {
 		<ul class="prd_detail_tab" id="tabList">
 			<li class="on" id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo">상세정보</a></li>
 			<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo">구매정보</a></li>
-			<li id="reviewInfo"><a onclick="review_detailOn();" class="goods_reputation">상품평<span>(0)</span></a></li>
+			<li id="reviewInfo"><a onclick="review_detailOn();" class="goods_reputation">상품평<span>(<%=cnt %>)</span></a></li>
 			<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
 		</ul>
 		
 		
 		<!-- 상세정보 탭이 on일경우 -->
-		<div class="tabConts prd_detail_cont show" id="product_detail" style="display:block;">
+		<div class="tabConts prd_detail_cont" id="product_detail" style="display:block;">
 			<div class="detail_area">
 				<div class="contEditor">
 					<img alt="" src="./asset/image/${product.img_contents}">
@@ -428,7 +435,7 @@ function goBuy() {
 		<c:url var="review_delete" value="review_delete.credu"></c:url>
 		
 		<%
-			String product_num=request.getParameter("product_num");
+			String product_num = request.getParameter("product_num");
 		 %>
 		 
 		<!-- 리뷰정보 탭이 on일경우 -->
@@ -440,8 +447,8 @@ function goBuy() {
 				<p>* 별점 및 리뷰 작성 후 작성하기 버튼을 클릭해 주세요.</p>
 			</div>
 
-		<table class="table">
-			<thead>
+		<table class="table table-hover" id="review">
+			<thead class="thead-dark">
 				<tr>
 					<th>#</th>
 					<th>ID</th>
@@ -449,20 +456,19 @@ function goBuy() {
 					<th>상품명</th>
 					<th>별점</th>
 					<th>작성일</th>
-					<th><%=product_num %></th>
+					<th>조회 수</th>
+					<th>추천 수</th> 
 				</tr>
 			</thead>
 
 			<tbody>
-				
 				<c:forEach var="ReviewDTO" items="${requestScope.list}">
 				
 				<tr class="info">
 					<td>${ReviewDTO.review_num}</td>
 					<td>${ReviewDTO.id}</td>
 					<td><a data-toggle="modal" data-target="#myModal2" onclick="review_read(${ReviewDTO.review_num})">${ReviewDTO.review_title}</a></td>
-					<td>${ReviewDTO.product_num}</td>
-					
+					<td>${ReviewDTO.product_num}</td>	
 					
 					<%-- 별점 --%>
 					<c:choose>
@@ -492,6 +498,8 @@ function goBuy() {
 					</c:choose>
 					
 					<td>${ReviewDTO.review_regdate}</td>
+					<td>${ReviewDTO.review_cnt}</td>
+					<td>${ReviewDTO.like_count}</td>
 				</tr>
 				
 				</c:forEach>
@@ -509,8 +517,7 @@ function goBuy() {
 						
 						 <% for(int i = 1 ; i<=tot ; i++){ %>
    						 
-   						 <a href="review.credu?Page_num=<%=i%>"><%=i%></a>
-<%--    						 <a href="ProductDetailAction.do?product_num=1?Page_num=<%=i%>"><%=i%></a> --%>
+   						 	<a href="ProductDetailAction.do?product_num=<%=product_num %>&Page_num=<%=i%>"><%=i%></a>
   						 
   						 <% } %>
 										
@@ -522,7 +529,7 @@ function goBuy() {
 			</div>
 			<div class="col-sm-2"></div>
 			<div class="col-sm-4 text-success" style="text-align: right;"> 
-			<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Write</button>
+			<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">작성하기</button>
 			</div>
 		</div>
 		 
@@ -548,7 +555,7 @@ function goBuy() {
 						<div class="form-group">
 							<label class="control-label col-sm-2">작성자(ID):</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="user_id" name="user_id" value="<%=id %>" placeholder="ID">
+								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
 							</div>
 						</div>
 						<div class="form-group">
@@ -561,8 +568,7 @@ function goBuy() {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="product_num"
-									name="review_goods_name" placeholder="상품번호">
+								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
 							</div>
 						</div>
 						<div class="form-group">
@@ -609,14 +615,17 @@ function goBuy() {
   
   
   <!-- Modal2 _ read review -->
+  <c:forEach var="ReviewDTO" items="${requestScope.list}">
+    <%
+  	String review_num = request.getParameter("review_num");
+  %>
   <div class="modal fade" id="myModal2" role="dialog">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Review Detail</h4>
+          <h4 class="modal-title">Review Detail // ${ReviewDTO.review_num}</h4>
         </div>
         <div class="modal-body">
                    	
@@ -624,7 +633,8 @@ function goBuy() {
                     
         </div>
         <div class="modal-footer">
-        						
+<!--           <button type="button" class="btn btn-success" onclick="return confirm('추천하시겠습니까?')" onclick="location.href='./NewFile.jsp'">추천 </button> -->
+          <a onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=<%=review_num %>">추천</a>	
           <button type="button" class="btn btn-danger" onclick="review_delete()">Delete</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         	
@@ -633,10 +643,13 @@ function goBuy() {
       
     </div>
   </div>
-		
+</c:forEach>
 	</div>
 </div>
+	
 	<!-- 상세정보 탭이 on일경우 -->
+		
+		
 		
 	</div>
 </div>
@@ -649,5 +662,6 @@ function goBuy() {
 	<!-- #Footer -->
 	<jsp:include page="../include/Footer.jsp"/>
 	<!-- //#Footer -->
+	
 </body>
 </html>

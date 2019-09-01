@@ -10,6 +10,7 @@ public class ReviewDTO {
 	private String review_title; // 리뷰 제목
 	private String review_content; // 리뷰 내용
 	private int review_cnt; // 조회수
+	private int like_count; // 좋아요
 	private int review_star; // 별점
 	private Date review_regdate; // 리뷰 작성일
 
@@ -61,6 +62,14 @@ public class ReviewDTO {
 	public void setReview_cnt(int review_cnt) {
 		this.review_cnt = review_cnt;
 	}
+	
+	public int getLike_count() {
+		return like_count;
+	}
+	
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
 
 	public int getReview_star() {
 		return review_star;
@@ -78,5 +87,6 @@ public class ReviewDTO {
 	public void setReview_regdate(Date review_regdate) {
 		this.review_regdate = review_regdate;
 	}
+
 	
 }
