@@ -17,40 +17,66 @@
 <script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 <title>상품 리스트</title>
 <script type="text/javascript">
-
+	
+	var brand = new Array();
+	var sort = "${param.sort}";
+	
 	$(function(){
 		
 		//서브카테고리 셋팅
-		$("[data-category-sub=<c:out value='${param.sub}'/>]").addClass("on");		
+		$("[data-category-sub='${param.sub}']").addClass("on");		
 		//페이지 번호 셋팅
-		$(".pageIndex_Btn[value=<c:out value='${param.pageNum}'/>]").addClass("on");
+		$(".pageIndex_Btn[value='${param.pageNum}']").addClass("on");
 		//브랜드 셋팅
-		
-		
+		<c:forEach items="${paramValues.brand}" var="item">
+			brand.push(${item}.value);
+			$("input:checkbox[id='"+${item}.value+"']").prop("checked", true);
+		</c:forEach>
 		//정렬방법 셋팅
-		$("#productList_Align_Wrap li[data-sort=<c:out value='${param.sort}'/>] a").addClass("on");
+		$("#productList_Align_Wrap li[data-sort='${param.sort}'] a").addClass("on");
+		
+		$("input:checkbox[name=brand]").on('click', function(){
+			selectBrand();
+			var brandUrl="";
+			for(var i = 0; i<brand.length; i++){
+				brandUrl +="&brand="+brand[i];
+			}
+			location.href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=${param.sort}&pageNum=1"+brandUrl;
+		});
+		
 	});
+	
 	//브랜드 전체보여주기/일부만 보여주기 함수
 	function BrandToggle(){
 		var toggle = $("#productList_Brand_List").data("toggle");
-		console.log(toggle);
+
 		if(toggle=="up"){
 			$("#productList_Brand_List ul").css("max-height", "1000px");
 			$("#productList_Brand_List").data("toggle", "down");
+			$("#brandToggleBtn").html("닫기");
 		}else{
 			$("#productList_Brand_List ul").css("max-height", "140px");
 			$("#productList_Brand_List").data("toggle", "up");
+			$("#brandToggleBtn").html("더보기");
 		}
 		
 	}
 
 	function selectBrand(){
-		
+		brand = new Array();
+		$.each($("input:checkbox[name='brand']:checked"),function(){
+			brand.push($(this).val());
+		} );	
 	}
 	
-	function selectPage(){
-		
+	function selectPage(n){
+		var brandUrl="";
+		for(var i = 0; i<brand.length; i++){
+			brandUrl +="&brand="+brand[i];
+		}
+		location.href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=${param.sort}&pageNum="+n+brandUrl;
 	}
+	
 
 </script>
 
@@ -89,17 +115,22 @@
 			</div>
 			
 			<div id="productList_Brand_List" data-toggle="up">
+				<c:set var="brandList" value="${requestScope.brandList}"/>
 				<ul>
-					<c:forEach var="brand" items="${requestScope.brandList }">
+					<c:forEach var="brand" items="${brandList}">
 						<li>
-							<input id="${brand}" name="${brand}" type="checkbox" value="${brand}"><label for="${brand}">${brand}</label>
+							<input id="${brand}" name="brand" type="checkbox" value="${brand}"><label for="${brand}">${brand}</label>
 						</li>
 					</c:forEach>
 				</ul>
 			</div>
 			<div id="productList_Brand_Btn">
-				<button class="List_moreBtn" onclick="BrandToggle();">더보기</button>
-				<div class="Check_resetBtn"><button>선택초기화</button></div>
+				<c:if test="${fn:length(brandList) > 15}">
+					<button id="brandToggleBtn" class="List_moreBtn" onclick="BrandToggle();">더보기</button>
+				</c:if>
+				<div class="Check_resetBtn">
+				<button onclick="location.href='ProductList.pro?main=${param.main}&sub=${param.sub}&sort=${param.sort}&pageNum=1'")>
+				선택초기화</button></div>
 			</div>
 		</div>
 		
@@ -116,15 +147,31 @@
 		<!--상품 정렬-->
 		<div id="productList_Align_Wrap">
 			<ul>
-				<li data-sort="pop"><a href="#">인기순</a></li>
+				<!-- 브랜드 주소 만들기 -->
+				<c:set var="brand" value=""/>
+				<c:forEach var="item" items='${paramValues.brand}'>
+					<c:set var="brands" value="${brands}&brand=${item}"/>
+				</c:forEach>
+				
+				<li data-sort="pop">
+				<a href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=pop&pageNum=1${brands}">인기순</a>
+				</li>
 				<li>|</li>
-				<li data-sort="recent"><a href="#">최근등록순</a></li>
+				<li data-sort="recent">
+				<a href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=recent&pageNum=1${brands}">최근등록순</a>
+				</li>
 				<li>|</li>
-				<li data-sort="price_count"><a href="#">판매수량순</a></li>
+				<li data-sort="price_count">
+				<a href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=price_count&pageNum=1${brands}">판매수량순</a>
+				</li>
 				<li>|</li>
-				<li data-sort="low_price"><a href="#">낮은가격순</a></li>
+				<li data-sort="low_price">
+				<a href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=low_price&pageNum=1${brands}">낮은가격순</a>
+				</li>
 				<li>|</li>
-				<li data-sort="high_price"><a href="#">높은가격순</a></li>
+				<li data-sort="high_price">
+				<a href="ProductList.pro?main=${param.main}&sub=${param.sub}&sort=high_price&pageNum=1${brands}">높은가격순</a>
+				</li>
 			</ul>
 		</div>
 		
@@ -168,17 +215,17 @@
 		
 		<!-- 뒤로가기  -->
 		<c:if test="${page.startPage ne 1}">
-			<button class="pageIndex_Btn" onclick="" value="${page.startPage-1}">《</button>
+			<button class="pageIndex_Btn" onclick="selectPage(${page.startPage-1})" value="${page.startPage-1}">《</button>
 		</c:if>	
 
 		<!-- 번호 순서대로(10개씩) -->
 		<c:forEach begin="${page.startPage}" end="${page.endPage}" varStatus="status">
-			<button class="pageIndex_Btn" onclick="" value="${status.current}">${status.current}</button>	
+			<button class="pageIndex_Btn" onclick="selectPage(${status.current})" value="${status.current}">${status.current}</button>	
 		</c:forEach>
 		
 		<!-- 앞으로가기 -->	
 		<c:if test="${page.endPage ne page.maxPage }">
-			<button class="pageIndex_Btn" onclick="" value="${page.startPage+1}">》</button>	
+			<button class="pageIndex_Btn" onclick="selectPage(${page.endPage+1})" value="${page.endPage+1}">》</button>	
 		</c:if>
 		
 		</div>

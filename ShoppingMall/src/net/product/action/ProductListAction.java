@@ -31,6 +31,7 @@ public class ProductListAction implements Action {
 		String sort_query="";
 		
 		switch(sort){
+			case "price_count":
 			case "pop":
 				sort_query=" order by price_count desc, product_num";
 				break;
@@ -38,10 +39,10 @@ public class ProductListAction implements Action {
 				sort_query=" order by product_num desc";
 				break;
 			case "low_price":
-				sort_query=" order by product_price, product_num";
+				sort_query=" order by product_price-product_sale_price, product_num";
 				break;
 			case "high_price":
-				sort_query=" order by product_price desc, product_num";
+				sort_query=" order by product_price-product_sale_price desc, product_num";
 				break;
 		}
 		
@@ -84,7 +85,6 @@ public class ProductListAction implements Action {
 		PageDTO page = new PageDTO();
 		//페이지 최대 인덱스
 			page.setMaxPage(productCount/maxNum +(productCount%maxNum>0?1:0));
-			System.out.println(page.getMaxPage());
 		//시작 인덱스	
 			page.setStartPage(pageNum/10*10+(pageNum%10>0?1:-9));
 		//마지막 인덱스	
