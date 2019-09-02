@@ -112,6 +112,9 @@
 		});	
 		}
 	} //mainBannerUpdate끝
+	
+	
+	
 
 	
 </script>
@@ -223,6 +226,8 @@
 				</div>
 			
 			</div>
+			
+			<jsp:include page="mainCategory.jsp"/>
 		
 		</section>
 		
