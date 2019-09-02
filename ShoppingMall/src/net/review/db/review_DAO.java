@@ -344,6 +344,43 @@ public class review_DAO {
 	    return null; // 존재하지 않을때
 	}
 	
+	// 좋아요 테이블에서 리뷰 번호 가져오기
+	public ReviewLikeDTO getReview_num(int review_num){
+			
+			con=null;
+		    sql="";
+		    pstmt=null;
+		    rs=null;
+		    
+		    ReviewLikeDTO dto = null;
+		    
+		    try {
+		    	
+		    	con = getConnection();
+		    	
+		    	sql = "SELECT id FROM review_like WHERE review_num = ?";
+		    	
+		    	pstmt = con.prepareStatement(sql);
+		    	
+		    	pstmt.setInt(1, review_num);
+		    	
+		    	rs = pstmt.executeQuery();
+		    	
+		    	if(rs.next()){
+		    		dto = new ReviewLikeDTO();
+		    		dto.setReview_num(review_num);
+		    	}
+		    	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				 if(rs!=null)try{rs.close();}catch(SQLException ex){}
+		         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+		         if(con!=null)try{con.close();}catch(SQLException ex){}
+			}
+		    return dto; // 데이터베이스 오류
+		}
+		
 	
 	
 

@@ -2,7 +2,6 @@ package net.product.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import net.product.db.ProductDAO;
 import net.product.db.ProductDTO;
 import net.review.db.ReviewDTO;
+import net.review.db.ReviewLikeDTO;
 import net.review.db.review_DAO;
 
 @WebServlet("/ProductDetailAction.do")
@@ -41,6 +41,7 @@ public class ProductDetailAction extends HttpServlet{
 		
 		String id = (String) session.getAttribute("id");
 		String product_num = request.getParameter("product_num");
+		String review_num = request.getParameter("review_num");
 		
 		
 		ProductDAO pdao = new ProductDAO();
@@ -49,8 +50,11 @@ public class ProductDetailAction extends HttpServlet{
 		request.setAttribute("pdto", pdto);
 		request.setAttribute("id", id);
 		
-
+		System.out.println("11" + review_num);
 		review_DAO dao = new review_DAO();
+		ReviewLikeDTO dto = dao.getReview_num(Integer.parseInt(review_num));
+		System.out.println("aa" + review_num);
+		request.setAttribute("dto", dto);
 		
 		int pagenum = 1; // 페이지 번호
 		if (request.getParameter("Page_num") != null) {
