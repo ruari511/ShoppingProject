@@ -4,9 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="../asset/css/productList.css"/>
 <link rel="stylesheet" href="./asset/css/productList.css"/> 
-<link rel="stylesheet" href="../asset/css/global.css"/> 
 <link rel="stylesheet" href="./asset/css/global.css"/> 
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -190,9 +188,9 @@
 									
 									<!-- 0이 아닐때만 세일 표시 -->
 									<c:if test="${item.product_sale_price ne 0 }">
-										<span>${item.product_price} 원</span>
+										<span><fmt:formatNumber value="${item.product_price}" pattern="#,###" /> 원</span>
 									</c:if>
-									${item.product_price-item.product_sale_price} 원</p>	
+									<fmt:formatNumber value="${item.product_price-item.product_sale_price}" pattern="#,###" /> 원</p>	
 								</div>
 								
 								<!-- 품절표시 -->
