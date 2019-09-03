@@ -1157,6 +1157,79 @@ public class ProductDAO {
 		return sql_temp;
 	}
 
+	public Vector<String> getMainList() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		Vector<String> v = new Vector<String>();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select distinct category_main from product";
+			
+			pstmt = con.prepareStatement(sql);
+
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				v.add(rs.getString(1));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getMainList()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+
+		return v;
+	}
+
+	public ProductDTO getAd(String category_main) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ProductDTO pdto = new ProductDTO();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select * from product where category_main = ? and product_count > 0 order by price_count desc limit 0, 1";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, category_main);
+
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+
+				pdto.setProduct_num(rs.getInt("product_num"));
+				pdto.setProduct_name(rs.getString("product_name"));
+				pdto.setProduct_price(rs.getInt("product_price"));
+				pdto.setImg_main(rs.getString("img_main"));
+				pdto.setBrand(rs.getString("brand"));
+				pdto.setProduct_count(rs.getInt("product_count"));
+				pdto.setProduct_sale_price(rs.getInt("product_sale_price"));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getAd()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+
+		return pdto;
+	}
+
 	
 	
 }

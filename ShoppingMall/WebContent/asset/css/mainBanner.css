@@ -243,7 +243,7 @@ position: relative;
 	line-height: 1.4;
 }
 
-.Category_Ad span:nth-child(4){
+.Ad_product_price{
 	color: darkgray;
 	font-size: 17px;
 	text-decoration: line-through;
@@ -251,7 +251,7 @@ position: relative;
 	margin-top: 15px;
 }
 
-.Category_Ad span:nth-child(5){
+.Ad_discount_price{
 	color: orange;
 	font-size: 24px;
 	font-weight: 700;

@@ -15,6 +15,13 @@
 		}).mouseout(function(){
 			$(this).children(".subCategory_Wrap").css("display", "none");
 		});
+		
+		$(".subCategory_Wrap").mouseover(function(){
+			$(this).children(".Category_Ad").css("display", "block");
+		}).mouseout(function(){
+			$(this).children(".Category_Ad").css("display", "none");
+		});
+	
 	});
 
 </script>
@@ -23,120 +30,42 @@
 	<!-- 메인 카테고리  -->
 			<div id="mainCategory_Wrap">
 				<ul id="mainCategory_List">
-					<li class="mainCategory_name"><a href="#">스킨케어</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-								<li><a href="#">안녕</a></li>
-								<li><a href="#">안녕</a></li>
-								<li><a href="#">안녕</a></li>
-								<li><a href="#">안녕</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="mainCategory_name"><a href="#">메이크업</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-								<li><a href="#">안녕2</a></li>
-								<li><a href="#">안녕2</a></li>
-								<li><a href="#">안녕2</a></li>
-								<li><a href="#">안녕2</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="mainCategory_name"><a href="#">바디케어</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-								<li><a href="#">안녕3</a></li>
-								<li><a href="#">안녕3</a></li>
-								<li><a href="#">안녕3</a></li>
-								<li><a href="#">안녕3</a></li>
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">헤어케어</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">향수/디퓨져</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">미용용품</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">남성</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">건강/위생용품</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">건강식품</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">일반식품</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">반려동물</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					
-					<li><a href="#">베이비</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-				
-							</ul>
-						</div>
-					</li>
-					<li><a href="#">잡화</a>
-						<div class="subCategory_Wrap">
-							<ul class="subCategory_List">
-								<li><a href="#">안녕</a></li>
-								<li><a href="#">안녕</a></li>
-								<li><a href="#">안녕</a></li>
-								<li><a href="#">안녕</a></li>
-							</ul>
-							<div class="Category_Ad">
-								<p>
-									<span>MD's Pick</span>
-									<span>{product_name}</span>
-									<span>{discript}<br>
-									{discript}</span>
-									<span>{product_price}</span>
-									<span>{price}원</span><img src="img/diary.jpg">
-								</p>
+					<c:forEach var="main" items="${requestScope.mainCategory}">
+						<li class="mainCategory_name"><a href="ProductList.pro?main=${main}&sub=all&sort=pop&pageNum=1">${main}</a>
+							<div class="subCategory_Wrap">
+								<ul class="subCategory_List">
+								
+								<!-- 서브카테고리 -->
+								<c:forEach var="sub" items="${requestScope.subCategory[main]}">
+									<li><a href="ProductList.pro?main=${main}&sub=${sub}&sort=pop&pageNum=1">${sub}</a></li>						
+								</c:forEach>
+								
+								
+								
+								</ul>
+								
+								<!-- 광고 -->
+								<div class="Category_Ad">
+									<p>
+										<c:set var="item" value="${requestScope.Ad[main]}"/>
+										<a href="ProductDetailAction.pro?product_num=${item.product_num }">										
+											<span>MD's Pick</span>
+											<span>${item.brand}</span>
+											<span>${item.product_name}</span>
+											<c:if test="${item.product_sale_price ne 0 }">
+												<span class="Ad_product_price"><fmt:formatNumber value="${item.product_price}" pattern="#,###" /> 원</span>
+											</c:if>
+											<span class="Ad_discount_price">
+											<fmt:formatNumber value="${item.product_price-item.product_sale_price}" pattern="#,###" /> 원</span>
+											<img src="${item.img_main}">
+										</a>
+									</p>
+								</div>
 							</div>
-						</div>
-					</li>
+						</li>
+					</c:forEach>
+				
+
 					<li><a href="#">프리미엄관</a></li>
 					
 

@@ -121,7 +121,13 @@
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
 								<p class="productSlide_Text_Name">${item.product_name }</p>
-								<p class="productSlide_Text_Price">${item.product_price } 원</p>
+								<p class="productSlide_Text_Price">
+									<!-- 0이 아닐때만 세일 표시 -->
+									<c:if test="${item.product_sale_price ne 0 }">
+										<span><fmt:formatNumber value="${item.product_price}" pattern="#,###" /> 원</span>
+									</c:if>
+									<fmt:formatNumber value="${item.product_price-item.product_sale_price}" pattern="#,###" /> 원
+								</p>
 
 								</div>
 							</a>
@@ -140,7 +146,13 @@
 									<div class="productSlide_Text">
 									<p class="productSlide_Text_Brand">${item.brand }</p>
 									<p class="productSlide_Text_Name">${item.product_name }</p>
-									<p class="productSlide_Text_Price">${item.product_price } 원</p>
+									<p class="productSlide_Text_Price">
+										<!-- 0이 아닐때만 세일 표시 -->
+										<c:if test="${item.product_sale_price ne 0 }">
+											<span><fmt:formatNumber value="${item.product_price}" pattern="#,###" /> 원</span>
+										</c:if>
+										<fmt:formatNumber value="${item.product_price-item.product_sale_price}" pattern="#,###" /> 원
+									</p>
 
 								</div>
 							</a>
@@ -159,7 +171,13 @@
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
 								<p class="productSlide_Text_Name">${item.product_name }</p>
-								<p class="productSlide_Text_Price">${item.product_price } 원</p>
+								<p class="productSlide_Text_Price">
+									<!-- 0이 아닐때만 세일 표시 -->
+									<c:if test="${item.product_sale_price ne 0 }">
+										<span><fmt:formatNumber value="${item.product_price}" pattern="#,###" /> 원</span>
+									</c:if>
+									<fmt:formatNumber value="${item.product_price-item.product_sale_price}" pattern="#,###" /> 원
+								</p>
 
 								</div>
 							</a>

@@ -134,6 +134,13 @@ html, body {
 
 }
 
+.productSlide_Text span{
+    font-size: 14px;
+    margin-right: 10px;
+    color: gray;
+    text-decoration: line-through;
+}
+
 
 
 

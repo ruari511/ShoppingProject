@@ -80,62 +80,113 @@
 			<div class="layer_all_menu" id="gnbAllMenu">  <!--active-->
 				<ul class="all_menu_wrap">
 					<li>
-						<h2>일</h2>
+						<h2>뷰티</h2>
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">1</a></p>
+							<p class="sub_depth"><a href="#">스킨케어</a></p>
 							<ul>
-								<li><a href="#">1-1</a></li>
-								<li><a href="#">1-2</a></li>
+								<li><a href="#">페이셜케어</a></li>
+								<li><a href="#">마스크팩</a></li>
+								<li><a href="#">클렌징</a></li>
+								<li><a href="#">선케어</a></li>
+								<li><a href="#">더모 코스메틱</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">2</a></p>
+							
+							<p class="sub_depth"><a href="#">메이크업</a></p>
 							<ul>
-								<li><a href="#">2-1</a></li>
-								<li><a href="#">2-2</a></li>
+								<li><a href="#">클렌징</a></li>
+								<li><a href="#">선케어</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">3</a></p>
+							
+							<p class="sub_depth"><a href="#">바디케어</a></p>
 							<ul>
 								<li><a href="#">3-1</a></li>
 								<li><a href="#">3-2</a></li>
 							</ul>
 						</div>
-					</li>
-					<li>
-						<h2>이</h2>
+							
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">1</a></p>
-							<ul>
-								<li><a href="#">1-1</a></li>
-								<li><a href="#">1-2</a></li>
-							</ul>
-							<p class="sub_depth"><a href="#">2</a></p>
-							<ul>
-								<li><a href="#">2-1</a></li>
-								<li><a href="#">2-2</a></li>
-							</ul>
-							<p class="sub_depth"><a href="#">3</a></p>
+							<p class="sub_depth"><a href="#">헤어케어</a></p>
 							<ul>
 								<li><a href="#">3-1</a></li>
 								<li><a href="#">3-2</a></li>
+							</ul>
+							<p class="sub_depth"><a href="#">향수/디퓨저</a></p>
+							<ul>
+								<li><a href="#">3-1</a></li>
+								<li><a href="#">3-2</a></li>
+							</ul>
+							<p class="sub_depth"><a href="#">미용소품</a></p>
+							<ul>
+								<li><a href="#">3-1</a></li>
+								<li><a href="#">3-2</a></li>
+							</ul>							
+						</div>
+							
+						<div class="sub_menu_box">
+							<p class="sub_depth"><a href="#">남성</a></p>
+							<ul>
+								<li><a href="#">3-1</a></li>
+								<li><a href="#">3-2</a></li>
+							</ul>
+						</div>							
+					</li>
+					
+					<li>
+						<h2>헬스&푸드</h2>
+						<div class="sub_menu_box">
+							<p class="sub_depth"><a href="#">건강/위생용품</a></p>
+							<ul>
+								<li><a href="#">덴탈케어</a></li>
+								<li><a href="#">아이케어</a></li>
+								<li><a href="#">여성/위생용품</a></li>
+								<li><a href="#">마사지/교정/헬스용품</a></li>
+								<li><a href="#">스팟패치/의료용품</a></li>
+							</ul>
+							<p class="sub_depth"><a href="#">건강식품</a></p>
+							<ul>
+								<li><a href="#">영양보충제</a></li>
+								<li><a href="#">다이어트/헬스</a></li>
+								<li><a href="#">건강음료/기타</a></li>
+								<li><a href="#">일반건강식품</a></li>
+							</ul>
+							<p class="sub_depth"><a href="#">일반식품</a></p>
+							<ul>
+								<li><a href="#">과자/초콜릿/캔디</a></li>
+								<li><a href="#">간편편의식/냉장/냉동</a></li>
+								<li><a href="#">라면/통조림/소스류</a></li>
+								<li><a href="#">생수/음료</a></li>
+								<li><a href="#">차/커피</a></li>
+								<li><a href="#">유제품/두유/우유</a></li>
+								<li><a href="#">선물세트</a></li>	
 							</ul>
 						</div>
 					</li>
 					<li>
-						<h2>삼</h2>
+						<h2>라이프</h2>
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">1</a></p>
+							<p class="sub_depth"><a href="#">반려동물</a></p>
 							<ul>
-								<li><a href="#">1-1</a></li>
-								<li><a href="#">1-2</a></li>
+								<li><a href="#">강아지 식품</a></li>
+								<li><a href="#">강아지 용품</a></li>
+								<li><a href="#">고양이 식품</a></li>
+								<li><a href="#">고양이 용품</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">2</a></p>
+							<p class="sub_depth"><a href="#">베이비</a></p>
 							<ul>
-								<li><a href="#">2-1</a></li>
-								<li><a href="#">2-2</a></li>
+								<li><a href="#">스킨/바디케어</a></li>
+								<li><a href="#">기저귀/물티슈</a></li>
+								<li><a href="#">유아용품</a></li>
+								<li><a href="#">분유/이유식/간식</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">3</a></p>
+							<p class="sub_depth"><a href="#">잡화</a></p>
 							<ul>
-								<li><a href="#">3-1</a></li>
-								<li><a href="#">3-2</a></li>
+								<li><a href="#">방향/탈취</a></li>
+								<li><a href="#">세제/물티슈/휴지</a></li>
+								<li><a href="#">패션용품</a></li>
+								<li><a href="#">문구/사무용품</a></li>
+								<li><a href="#">음향/통신기기</a></li>
+								<li><a href="#">가전/디저털</a></li>
+								
 							</ul>
 						</div>
 					</li>
