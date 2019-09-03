@@ -67,7 +67,6 @@ public class review_write extends HttpServlet {
 		
 		//실제 재요청
 		dis.forward(request, response);	
-		System.out.println("review_star2: " + review_star);
 	
 	}
 

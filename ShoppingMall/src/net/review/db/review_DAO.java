@@ -58,7 +58,7 @@ public class review_DAO {
 			pstmt.setInt(5, dto.getReview_star());
 
 			// SQL 실행
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();

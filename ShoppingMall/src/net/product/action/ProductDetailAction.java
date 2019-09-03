@@ -66,24 +66,24 @@ public class ProductDetailAction extends HttpServlet{
 		System.out.println("상품번호: " + product_num);
 
 		
-		if(request.getParameter("order") != null && request.getParameter("order").length() != 0){
-			System.out.println("order 들어감");
-			if(request.getParameter("order").equals("insert_product")){
-				order = " order by review_regdate desc ";
-			} else if(request.getParameter("order").equals("high_like")){
-				order = " order by like_count desc ";
-			} else if(request.getParameter("order").equals("high_star")){
-				order = " order by review_star desc ";
-			} else if(request.getParameter("order").equals("low_star")){
-				order = " order by review_star ";
-			}
-		}
+//		if(request.getParameter("order") != null && request.getParameter("order").length() != 0){
+//			System.out.println("order 들어감");
+//			if(request.getParameter("order").equals("insert_product")){
+//				order = " order by review_regdate desc ";
+//			} else if(request.getParameter("order").equals("high_like")){
+//				order = " order by like_count desc ";
+//			} else if(request.getParameter("order").equals("high_star")){
+//				order = " order by review_star desc ";
+//			} else if(request.getParameter("order").equals("low_star")){
+//				order = " order by review_star ";
+//			}
+//		}
 		
 		
 		// 리뷰게시판 불러오기.
 		ArrayList<ReviewDTO> reviewlist = rdao.review_get(start, size, Integer.parseInt(product_num));
 		ArrayList<ReviewDTO> reviewAlllist = rdao.review_Allget(Integer.parseInt(product_num));
-		ArrayList<ReviewDTO> orderlist = rdao.review_order(order);
+//		ArrayList<ReviewDTO> orderlist = rdao.review_order(order);
 		
 		// request 객체에 list를 담아준다.
 		request.setAttribute("reviewlist", reviewlist);
@@ -91,10 +91,10 @@ public class ProductDetailAction extends HttpServlet{
 		request.setAttribute("startRow", start);
 		request.setAttribute("product_num", product_num);
 		request.setAttribute("review_cnt", cnt);
-		request.setAttribute("orderlist", orderlist);
-		request.setAttribute("order", request.getParameter("order"));
+//		request.setAttribute("orderlist", orderlist);
+//		request.setAttribute("order", request.getParameter("order"));
 		
-		System.out.println("ProductDetailAction: " + request.getParameter("order"));
+//		System.out.println("ProductDetailAction: " + request.getParameter("order"));
 		
 		RequestDispatcher dis = 
 				request.getRequestDispatcher("product/product.jsp");
