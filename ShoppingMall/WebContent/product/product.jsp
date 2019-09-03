@@ -117,76 +117,13 @@ function goBuy() {
 	}
 }
 
-<%-- JavaScript review_read 이벤트 처리 --%>
-	//글 번호를 가지고 있을 전역변수
-	var G_review_num;
 
-	function review_read(num) {
-		
-		<%-- review_read 서블릿 호출 --%>
-		
-			G_review_num = num;
-		
-			//파라미터
-			var param = {
-					
-					review_num : num
-			}
-			
-			
-			//요청
-			$.ajax({
-				
-				url : "review_read.credu",
-				dataType : "text",
-				data : param,
-				type : "post",
-				success : function(data) {
-															
-					$("#content").text(data);
-										
-				}
-						
-			});
-			
-			
-	}
-	
-	
-	function review_delete() {
-		
-		<%-- review_delete 서블릿 호출 --%>
-		
-			//파라미터
-			var param = {
-					
-					review_num : G_review_num
-			}
-			
-			
-			//요청
-			$.ajax({
-				
-				url : "review_delete.credu",
-				dataType : "text",
-				data : param,
-				type : "post",
-				success : function(data) {
-									
-					alert("삭제 되었습니다.");
-					G_review_num = 0; //전역변수 초기화
-					location.href = "review.credu";
-						
-				}
-						
-			});
-			
-	}
+function ordersubmit(a) {
+	document.getElementById("order").value = a;
+	var frm2 = document.getElementById("frm2");
+	frm2.submit();
+}
 
-	function modal_open(a){
-		$('#myModal2').modal('show');
-	}
-	
 </script>
 </head>
 <body>
@@ -434,8 +371,6 @@ function goBuy() {
 		<c:url var="review_list" value="review_list.credu"></c:url>
 		<%-- review 작성 서블릿 호출 --%>
 		<c:url var="review_write" value="review_write.credu"></c:url>
-		<%-- review 삭제 서블릿 호출 --%>
-		<c:url var="review_delete" value="review_delete.credu"></c:url>
 		
 		<%
 			String product_num = request.getParameter("product_num");
@@ -616,7 +551,6 @@ function goBuy() {
 			<div class="recom_area">    
 					<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 // ${ReviewDTO.review_num} // <span class="num">${ReviewDTO.like_count}</span></a>
 			</div>
-			<button type="button" class="btn_dec" onclick="review_delete()">삭제</button> 
 		</div> 
 		</li>
 	</c:forEach>
@@ -830,8 +764,6 @@ function goBuy() {
 		<c:url var="review_list" value="review_list.credu"></c:url>
 		<%-- review 작성 서블릿 호출 --%>
 		<c:url var="review_write" value="review_write.credu"></c:url>
-		<%-- review 삭제 서블릿 호출 --%>
-		<c:url var="review_delete" value="review_delete.credu"></c:url>
 		
 		<%
 			String product_num = request.getParameter("product_num");
@@ -931,18 +863,50 @@ function goBuy() {
 <!-- 사진탭 end-->
 
 
+<!-- 상품 정렬 조건 영역 -->
 <div class="cate_align_box">
-   <div class="align_sort">
-      <ul id="gdasSort">
-         <li class="on"><a href="">최신순</a></li>
-         <li class=""><a href="">도움순</a></li>
-         <li class=""><a href="">높은 별점순</a></li>
-         <li class=""><a href="">낮은 별점순</a></li>
-      </ul>
-   </div>
-   
+	<div class="align_sort"> 
+		<form action="./ProductDetailAction.pro" id="frm2" method="get">
+			<c:set var="order" value="${requestScope.order}"/>
+				<ul>
+					<c:choose>
+						<c:when test="${order == null}">
+							<li class="on"><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'insert_product'}">
+							<li class="on"><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'high_like'}">
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li class="on"><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'high_star'}">
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li class="on"><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'low_star'}">
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li class="on"><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+				</c:choose>
+			</ul>
+		</form>
+	</div>
 </div>
-<!-- 필터end -->
+<!--// 상품 정렬 조건 영역 -->  
+
 
 <!-- 상품평 리스트 start -->
 <div class="review_list_wrap">

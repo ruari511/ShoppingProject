@@ -110,7 +110,6 @@ public class review_DAO {
 
 				int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
 				String id = rs.getString("ID"); // 작성자 ID
-//				int product_num = rs.getInt("PRODUCT_NUM"); // 상품명
 				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
 				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
@@ -144,6 +143,76 @@ public class review_DAO {
 	      }
 
 		return list;
+
+	}
+	
+	// 리뷰를 최신순, 도움순, 높은 별점순, 낮은 별점순으로 보기 위한 메소드
+	public ArrayList<ReviewDTO> review_order(String order) {
+
+		con=null;
+	    sql="";
+	    pstmt=null;
+	    rs=null;
+	    
+		// Arraylist 생성
+		// 빈객체를 담을 arraylist
+		ArrayList<ReviewDTO> orderlist = new ArrayList<ReviewDTO>();
+
+		try {
+
+		
+			// DB연결
+			con=getConnection();
+
+			// SQL
+			// 리뷰게시판에 모든 데이터를 불러온다.
+			sql = "select * from reviewboard";
+			sql += order;
+			
+			pstmt=con.prepareStatement(sql);
+			
+			// SQL 실행
+			rs=pstmt.executeQuery();
+			
+			// rs.next() 값이 있으면 투루를 반환.
+			while (rs.next()) {
+
+				int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
+				int product_num = rs.getInt("product_num"); // 상품 번호
+				String id = rs.getString("ID"); // 작성자 ID
+				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
+				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
+				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
+				int review_star = rs.getInt("REVIEW_STAR"); // 별점
+				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
+
+				// 빈객체 생성
+				ReviewDTO dto = new ReviewDTO();
+
+				dto.setReview_num(review_num);
+				dto.setId(id);
+				dto.setProduct_num(product_num);
+				dto.setReview_title(review_title);
+				dto.setReview_content(review_content);
+				dto.setReview_cnt(review_cnt);
+				dto.setLike_count(rs.getInt("like_count"));
+				dto.setReview_star(review_star);
+				dto.setReview_regdate(review_regdate);
+
+				orderlist.add(dto);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}finally{
+	         //마무리
+	         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+	      }
+
+		return orderlist;
 
 	}
 	
@@ -329,37 +398,6 @@ public class review_DAO {
 		
 	}
 	
-	// 리뷰 글 조회수
-	public void updateReview_cnt(int num){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = "";
-		
-		try {
-			//DB접속
-			con = getConnection();
-			
-			//SQL구문 만들기
-			sql = "update reviewboard set review_cnt=review_cnt+1 where REVIEW_NUM = ?";
-			
-			//UPDATE구문 실행할 객체 얻기
-			pstmt = con.prepareStatement(sql);
-			
-			//?값 셋팅
-			pstmt.setInt(1, num);
-			
-			//UPDATE구문 실행
-			pstmt.executeUpdate();
-	
-		} catch (Exception e) {
-			System.out.println("updateReview_cnt메소드 에서 오류 : " + e);
-		} finally {
-			//자원해제
-			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
-			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}															
-		}
-	}
-
 	// 리뷰글 추천
 	public int rlike(String review_num){
 		
