@@ -192,7 +192,6 @@ function goBuy() {
 <!-- header -->
 	<jsp:include page="../include/Header.jsp"/>
 <!-- header// -->
-	
 <div id="Container">
 	<div id="Contents">
 	<c:set var="product" value="${requestScope.pdto}" />
@@ -247,7 +246,7 @@ function goBuy() {
 					<img src="./asset/image/${product.img_main}" alt="상품명 이미지">
 				</div>
 				<ul class="prd_thumb_list">
-					<li class="sel"><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지""></a></li>
+					<li class="sel"><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
 					<li class=""><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
 				</ul>
 			</div>
@@ -339,7 +338,9 @@ function goBuy() {
 			<li id="reviewInfo"><a onclick="review_detailOn();" class="goods_reputation">상품평<span>(<%=cnt %>)</span></a></li>
 			<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
 		</ul>
-		
+
+
+
 		<!-- 상세정보 탭이 on일경우 -->
 		<div class="tabConts prd_detail_cont" id="product_detail" style="display:block;">
 			<div class="detail_area">
@@ -352,7 +353,6 @@ function goBuy() {
 			</div>
 		</div>
 		<!-- 상세정보 탭이 on일경우 -->
-		
 		
 		
 		
@@ -426,8 +426,7 @@ function goBuy() {
 				</dd>
 			</dl>
 		</div>
-		<!-- 구매정보 탭이 on일경우 -->
-
+		<!-- 구매정보 탭이 on일경우 -->		
 
 
 		<%-- review 리스트 서블릿 호출 --%>
@@ -439,11 +438,11 @@ function goBuy() {
 		
 		<%
 			String product_num = request.getParameter("product_num");
-		 %>
-		 
-		<!-- 리뷰정보 탭이 on일경우 -->
-		<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:none;">
+		%>
 
+<c:if test="${requestScope.startRow == null || requestScope.startRow.length() == 0}">		 
+<!-- 리뷰정보 탭 -->
+<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:none;">
 <!--평균별점집계 start-->
 <div class="product_rating_area">
    <div class="inner clrfix">
@@ -496,7 +495,7 @@ function goBuy() {
                <dt>상품평을 써보세요.</dt>
                <dd>고객님의 소중한 상품평을 공유하고 <br>최대 CJ ONE 160P도 받아가세요.</dd>
             </dl>
-            <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-rel="layer" data-target="layWrite">상품평 쓰기</button></p>
+            <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
          </div>
    </div>
 </div>
@@ -555,7 +554,37 @@ function goBuy() {
 	<c:forEach var="ReviewDTO" items="${requestScope.reviewlist}">
 		<li>
 		<div class="info">
-			<span class="review_point"><span class="point" style="font-size: 25px; color: orange;">★☆☆☆☆</span></span>
+			<span class="review_point">
+				<span class="point" style="font-size: 25px; color: orange;">
+					
+					<%-- 별점 --%>
+					<c:choose>
+						
+						<%-- if(a == 1){ --%>
+						<c:when test="${ReviewDTO.review_star == 1}">
+							<td>★☆☆☆☆</td>
+						</c:when>
+						<%-- if(a == 2){ --%>
+						<c:when test="${ReviewDTO.review_star == 2}">
+							<td>★★☆☆☆</td>
+						</c:when>
+						<%-- if(a == 3){ --%>
+						<c:when test="${ReviewDTO.review_star == 3}">
+							<td>★★★☆☆</td>
+						</c:when>
+						<%-- if(a == 4){ --%>
+						<c:when test="${ReviewDTO.review_star == 4}">
+							<td>★★★★☆</td>
+						</c:when>
+						<%-- if(a == 5){ --%>
+						<c:when test="${ReviewDTO.review_star == 5}">
+							<td>★★★★★</td>
+						</c:when>
+						
+						
+					</c:choose>
+				</span>
+			</span>
 			<div class="review_date">         
 				<span class="mbrId">${ReviewDTO.id}</span>        
 				<span>${ReviewDTO.review_regdate}</span>        
@@ -575,75 +604,129 @@ function goBuy() {
 	</ul>
 </div>
 
-<!-- pageing start -->
-	
-   <div class="pageing">
-      <strong title="현재 페이지">1</strong>
-      <a href="productDetail.pro?product_num=${product.product_num}&startRow=">2</a>
-      <a href="productDetail.pro?product_num">3</a>
-      <a href="productDetail.pro?product_num">4</a>
-      <a href="productDetail.pro?product_num">5</a>
-      <a href="productDetail.pro?product_num">6</a>
-      <a href="productDetail.pro?product_num">7</a>
-      <a href="productDetail.pro?product_num">8</a>
-      <a href="productDetail.pro?product_num">9</a>
-      <a href="productDetail.pro?product_num">10</a>
-      <a class="next" href="">다음 페이지</a>
-   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
+<div class="pageing">
+	<c:set var="i" value="1" />
+	<c:set var="j" value="0" />
+	<c:set var="startRow" value="${requestScope.startRow}"/>
+	<c:set var="product" value="${requestScope.product_num}" />
+	<c:forEach begin="0" end="<%=cnt %>" varStatus="idx">
+		<c:if test="${idx.index % 15 == 0}">
+			<c:choose>
+				<c:when test="${startRow==j}"><a href="./ProductDetailAction.pro?product_num=${product}&startRow=${(i-1)*15}" title="Paging" class="on"> ${idx.index % 15 + i} </a></c:when>
+				<c:otherwise><a href="./ProductDetailAction.pro?product_num=${product}&startRow=${(i-1)*15}" title="Paging"> ${idx.index % 15 + i} </a></c:otherwise>
+			</c:choose>
+			<c:set var="i" value="${i+1}"/>
+		</c:if>
+			<c:set var="j" value="${j+1}"/>
+	</c:forEach>
 </div>
+
+
+
+
+
+<!-- Modal -->
+  	<div class="modal fade" id="myModal" role="dialog">
+    	<div class="modal-dialog modal-lg">
+    
+      	<!-- Modal content-->
+      	<div class="modal-content">
+	        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+        
+        <div class="modal-body">
+          
+			<div class="panel-group">
+			<div class="panel panel-success" style="margin-top: 10px;">
+				<div class="panel-heading">Goods Review</div>
+				<div class="panel-body">
+					<%-- form --%>
+					<form class="form-horizontal" role="form" action="${review_write}" method="post">
+						<div class="form-group">
+							<label class="control-label col-sm-2">작성자(ID):</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">제목:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="review_title"
+									name="review_title" placeholder="Title">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">내용:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5"	placeholder="review_content" name="review_content" id="review_content"></textarea>
+							</div>
+						</div>
 	
-	<!-- 상세정보 탭이 on일경우 -->
-		
-		
-		
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+								
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="1" checked="checked">★☆☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="2">★★☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="3">★★★☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="4">★★★★☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="5">★★★★★</label>
+									
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-success">작 성</button>
+								<button type="reset" class="btn btn-danger">초기화</button>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+
+			</div>
+		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+</c:if>
+<!-- 리뷰정보 탭이 on이면서 startRow 없을때 -->		
 	</div>
 </div>
+
+
+<!-- 리뷰정보 탭이 on이면서 startRow 있을때 -->
+<c:if test="${requestScope.startRow != null}">
+
+
+</c:if>
+<!-- 리뷰정보 탭이 on이면서 startRow 있을때 -->
+
+
+
+
+
+
+
+
+
 	<!-- 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
 	<div id="directTop" style="display: block;">
 		<button><span></span>TOP</button>

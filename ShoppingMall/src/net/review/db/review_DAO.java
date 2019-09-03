@@ -166,8 +166,10 @@ public class review_DAO {
 
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
-			sql = "select * from (select review_num as rnum, a1.* from (select review_num, id, product_num, review_title, review_content, review_cnt, review_star, review_regdate, img FROM reviewboard where img is not null && img != '') a1) a2 where product_num = ? ORDER BY review_num DESC";
-			System.out.println("allget sql = " + sql);
+			sql = "select * from (select review_num as rnum, a1.* "
+					+ "from (select review_num, id, product_num, review_title, review_content, review_cnt, review_star, review_regdate, img FROM reviewboard where img is not null && img != '') a1) a2 "
+					+ "where product_num = ? ORDER BY review_num DESC";
+			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, product_num);
 
@@ -184,7 +186,7 @@ public class review_DAO {
 				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
 				int review_star = rs.getInt("REVIEW_STAR"); // 별점
 				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
-				System.out.println("img = "+rs.getString("img"));
+				
 				// 빈객체 생성
 				ReviewDTO dto = new ReviewDTO();
 

@@ -14,10 +14,9 @@ import javax.servlet.http.HttpSession;
 import net.product.db.ProductDAO;
 import net.product.db.ProductDTO;
 import net.review.db.ReviewDTO;
-import net.review.db.ReviewLikeDTO;
 import net.review.db.review_DAO;
 
-@WebServlet("/ProductDetailAction.do")
+@WebServlet("/ProductDetailAction.pro")
 public class ProductDetailAction extends HttpServlet{
 	
 	public ProductDetailAction() {
@@ -41,8 +40,6 @@ public class ProductDetailAction extends HttpServlet{
 		
 		String id = (String) session.getAttribute("id");
 		String product_num = request.getParameter("product_num");
-//		String review_num = request.getParameter("review_num");
-		
 		
 		ProductDAO pdao = new ProductDAO();
 		ProductDTO pdto = pdao.getProduct(Integer.parseInt(product_num));
@@ -60,6 +57,7 @@ public class ProductDetailAction extends HttpServlet{
 		int start = 0;
 		
 		if(request.getParameter("startRow") != null){
+			System.out.println("스타트로우 들어왔음");
 			start = Integer.parseInt(request.getParameter("startRow"));
 		}
 		
@@ -69,9 +67,13 @@ public class ProductDetailAction extends HttpServlet{
 		// 리뷰게시판 불러오기.
 		ArrayList<ReviewDTO> reviewlist = rdao.review_get(start, size, Integer.parseInt(product_num));
 		ArrayList<ReviewDTO> reviewAlllist = rdao.review_Allget(Integer.parseInt(product_num));
+		
+		
 		// request 객체에 list를 담아준다.
 		request.setAttribute("reviewlist", reviewlist);
 		request.setAttribute("reviewAlllist", reviewAlllist);
+		request.setAttribute("startRow", start);
+		request.setAttribute("product_num", product_num);
 		request.setAttribute("review_cnt", cnt);
 		
 		RequestDispatcher dis = 

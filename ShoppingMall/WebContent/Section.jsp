@@ -15,7 +15,7 @@
 	<div id="Container">
 
 		12345
-		<h1><a href="ProductDetailAction.do?product_num=1">상품테스트</a></h1>
+		<h1><a href="ProductDetailAction.pro?product_num=1">상품테스트</a></h1>
 		
 	</div>
 	
