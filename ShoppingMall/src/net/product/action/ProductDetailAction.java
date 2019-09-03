@@ -41,7 +41,7 @@ public class ProductDetailAction extends HttpServlet{
 		
 		String id = (String) session.getAttribute("id");
 		String product_num = request.getParameter("product_num");
-		String review_num = request.getParameter("review_num");
+//		String review_num = request.getParameter("review_num");
 		
 		
 		ProductDAO pdao = new ProductDAO();
@@ -50,59 +50,29 @@ public class ProductDetailAction extends HttpServlet{
 		request.setAttribute("pdto", pdto);
 		request.setAttribute("id", id);
 		
-		System.out.println("11" + review_num);
-		review_DAO dao = new review_DAO();
-		ReviewLikeDTO dto = dao.getReview_num(Integer.parseInt(review_num));
-		System.out.println("aa" + review_num);
-		request.setAttribute("dto", dto);
 		
-		int pagenum = 1; // 페이지 번호
-		if (request.getParameter("Page_num") != null) {
-			pagenum = Integer.parseInt(request.getParameter("Page_num"));
-		}
-
-		// size 보여줄 페이지당 게시글 개수. 15개당 1page
+		review_DAO rdao = new review_DAO();
+		
 		int size = 15;
 
-		int tot = 0;
-		int cnt = 0;
-
-		try {
-
-			// 총 게시글 개수.
-			cnt = dao.review_getPageCount();
-			//페이지 번호
-			tot = cnt / size;
-			if (cnt % size != 0) {
-				tot++;
-			}
-
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int cnt = rdao.review_getPageCount();
+		
+		int start = 0;
+		
+		if(request.getParameter("startRow") != null){
+			start = Integer.parseInt(request.getParameter("startRow"));
 		}
 		
-		
-		// 1page 1 ~ 15 15개
-		// 2page 16 ~ 30 15개
-		// 3page 31 ~ 45 15개
-		
-		int end = pagenum * size;
-		int start = end - size;
-		
-		System.out.println(start);
-		System.out.println(end);
+		System.out.println("startRow = " + start);
 		System.out.println("상품번호: " + product_num);
 
 		// 리뷰게시판 불러오기.
-		ArrayList<ReviewDTO> list = dao.review_get(start, end, Integer.parseInt(product_num));
+		ArrayList<ReviewDTO> reviewlist = rdao.review_get(start, size, Integer.parseInt(product_num));
+		ArrayList<ReviewDTO> reviewAlllist = rdao.review_Allget(Integer.parseInt(product_num));
 		// request 객체에 list를 담아준다.
-		request.setAttribute("list", list);
-		
-		// request 객체에 총 페이지수를 담아준다.
-		request.setAttribute("tot", tot);
-	
+		request.setAttribute("reviewlist", reviewlist);
+		request.setAttribute("reviewAlllist", reviewAlllist);
+		request.setAttribute("review_cnt", cnt);
 		
 		RequestDispatcher dis = 
 				request.getRequestDispatcher("product/product.jsp");

@@ -36,7 +36,7 @@ public class review_read extends HttpServlet {
 		//파라미터값 추출
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		
-		System.out.println("리뷰 리드 - review_num" + review_num);
+		System.out.println("리뷰 리드 = review_num" + review_num);
 		
 		//조회수1증가 시키시 위한 메소드 호출
 		dao.updateReview_cnt(review_num); 

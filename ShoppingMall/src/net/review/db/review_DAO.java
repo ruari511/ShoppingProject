@@ -14,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import net.product.db.ProductDTO;
-import net.review.db.*;
 
 public class review_DAO {
 
@@ -74,7 +73,7 @@ public class review_DAO {
 
 	
 	// 모든 리뷰글들을 불러온다.
-	public ArrayList<ReviewDTO> review_get(int start, int end, int product_num) {
+	public ArrayList<ReviewDTO> review_get(int start, int size, int product_num) {
 
 		con=null;
 	    sql="";
@@ -93,14 +92,13 @@ public class review_DAO {
 
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
-//			sql =  "select * from (select review_num as rnum, a1.* from (select review_num, id, product_num, review_title, review_content, review_cnt, review_star, review_regdate FROM reviewboard ORDER BY review_num DESC) a1) a2 where  limit a2.rnum >= ? and a2.rnum <= ? and product_num = ?";
 			sql = "select * from (select review_num as rnum, a1.* from (select review_num, id, product_num, review_title, review_content, review_cnt, review_star, review_regdate FROM reviewboard) a1) a2 where product_num = ? ORDER BY review_num DESC limit ? , ? ";
 			System.out.println("리스트 연결");
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, product_num);
 			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			pstmt.setInt(3, size);
 
 			// SQL 실행
 			rs=pstmt.executeQuery();
@@ -146,31 +144,108 @@ public class review_DAO {
 
 	}
 	
-
-
-	// 페이지 수를 구하는 메서드
-	public int review_getPageCount() throws Exception {
+	
+	
+	
+	public ArrayList<ReviewDTO> review_Allget(int product_num) {
 
 		con=null;
 	    sql="";
 	    pstmt=null;
 	    rs=null;
 	    
-	    con=getConnection();
-	    
-		// 쿼리문
-		sql = "SELECT COUNT(*) FROM " + "reviewboard";
+		// Arraylist 생성
+		// 빈객체를 담을 arraylist
+		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
+		System.out.println("Allget실행됨");
+		try {
 
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		rs.next();
-
-		// 전체 글의 개수를 가져온다.
-		int cnt = rs.getInt(1);
 		
+			// DB연결
+			con=getConnection();
 
-		if(rs!=null)try{rs.close();}catch(SQLException ex){}
-		if(con!=null)try{con.close();}catch(SQLException ex){}
+			// SQL
+			// 리뷰게시판에 모든 데이터를 불러온다.
+			sql = "select * from (select review_num as rnum, a1.* from (select review_num, id, product_num, review_title, review_content, review_cnt, review_star, review_regdate, img FROM reviewboard where img is not null && img != '') a1) a2 where product_num = ? ORDER BY review_num DESC";
+			System.out.println("allget sql = " + sql);
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, product_num);
+
+			// SQL 실행
+			rs=pstmt.executeQuery();
+
+			// rs.next() 값이 있으면 투루를 반환.
+			while (rs.next()) {
+
+				int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
+				String id = rs.getString("ID"); // 작성자 ID
+				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
+				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
+				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
+				int review_star = rs.getInt("REVIEW_STAR"); // 별점
+				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
+				System.out.println("img = "+rs.getString("img"));
+				// 빈객체 생성
+				ReviewDTO dto = new ReviewDTO();
+
+				dto.setReview_num(review_num);
+				dto.setId(id);
+				dto.setProduct_num(product_num);
+				dto.setReview_title(review_title);
+				dto.setReview_content(review_content);
+				dto.setReview_cnt(review_cnt);
+				dto.setReview_star(review_star);
+				dto.setReview_regdate(review_regdate);
+				dto.setReview_img(rs.getString("img"));
+				
+				list.add(dto);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}finally{
+	         //마무리
+	         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+	      }
+
+		return list;
+
+	}
+	
+	
+	
+
+
+	// 페이지 수를 구하는 메서드
+	public int review_getPageCount(){
+
+		con=null;
+	    sql="";
+	    pstmt=null;
+	    rs=null;
+	    int cnt = 0;
+	    try {
+	    	con=getConnection();
+		    
+			// 쿼리문
+			sql = "SELECT COUNT(*) FROM " + "reviewboard";
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				// 전체 글의 개수를 가져온다.
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("review_getPageCount() 메소드 내부의 오류 : " +  e);
+		} finally {
+			if(rs!=null)try{rs.close();}catch(SQLException ex){}
+			if(con!=null)try{con.close();}catch(SQLException ex){}
+		}
 
 		// 총 페이지 개수 리턴
 		return cnt;
@@ -345,20 +420,20 @@ public class review_DAO {
 	}
 	
 	// 좋아요 테이블에서 리뷰 번호 가져오기
-	public ReviewLikeDTO getReview_num(int review_num){
+	public ReviewDTO getReview_num(int review_num){
 			
 			con=null;
 		    sql="";
 		    pstmt=null;
 		    rs=null;
 		    
-		    ReviewLikeDTO dto = null;
+		    ReviewDTO rdto = null;
 		    
 		    try {
 		    	
 		    	con = getConnection();
 		    	
-		    	sql = "SELECT id FROM review_like WHERE review_num = ?";
+		    	sql = "SELECT id FROM reviewboard WHERE review_num = ?";
 		    	
 		    	pstmt = con.prepareStatement(sql);
 		    	
@@ -367,8 +442,8 @@ public class review_DAO {
 		    	rs = pstmt.executeQuery();
 		    	
 		    	if(rs.next()){
-		    		dto = new ReviewLikeDTO();
-		    		dto.setReview_num(review_num);
+		    		rdto = new ReviewDTO();
+		    		rdto.setReview_num(review_num);
 		    	}
 		    	
 			} catch (Exception e) {
@@ -378,7 +453,7 @@ public class review_DAO {
 		         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 		         if(con!=null)try{con.close();}catch(SQLException ex){}
 			}
-		    return dto; // 데이터베이스 오류
+		    return rdto; // 데이터베이스 오류
 		}
 		
 	

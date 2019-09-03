@@ -16,7 +16,7 @@
 	
 	if(session.getAttribute("id") != null) {
 
-		id = (String) session.getAttribute("userID");
+		id = (String) session.getAttribute("id");
 
 	}
 	
@@ -44,13 +44,13 @@
 		review_num = (String) request.getParameter("review_num");
 
 	}
-
+	System.out.println("bb= " + request.getParameter("review_num"));
 	review_DAO reviewdao = new review_DAO();
 	ReviewLikeDAO likeyDAO = new ReviewLikeDAO();
 
 
 
-	// userID와 userWriteTtilte을 PK, NN 설정이기때매 중복이 불가
+	// id와 을 review_num이 PK, NN 설정이기때매 중복이 불가
 
 	int result = likeyDAO.like(review_num, id);
 
@@ -70,7 +70,7 @@
 
 			script.println("alert('추천이 완료되었습니다.');");
 
-			script.println("location.href='index.jsp'");
+// 			script.println("location.href='index.jsp'");
 
 			script.println("</script>");
 

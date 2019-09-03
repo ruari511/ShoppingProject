@@ -182,6 +182,10 @@ function goBuy() {
 			
 	}
 
+	function modal_open(a){
+		$('#myModal2').modal('show');
+	}
+	
 </script>
 </head>
 <body>
@@ -336,7 +340,6 @@ function goBuy() {
 			<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
 		</ul>
 		
-		
 		<!-- 상세정보 탭이 on일경우 -->
 		<div class="tabConts prd_detail_cont" id="product_detail" style="display:block;">
 			<div class="detail_area">
@@ -441,210 +444,198 @@ function goBuy() {
 		<!-- 리뷰정보 탭이 on일경우 -->
 		<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:none;">
 
-		<div class="container">
-			<div class="jumbotron">
-				<h2>상품 Review</h2>
-				<p>* 별점 및 리뷰 작성 후 작성하기 버튼을 클릭해 주세요.</p>
-			</div>
+<!--평균별점집계 start-->
+<div class="product_rating_area">
+   <div class="inner clrfix">
+      
+         <div class="grade_img">
+            <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
+         </div>
+         <div class="star_area">
+            <p class="total">총 <em>${requestScope.review_cnt}</em>건의 고객상품평</p>
+            <p class="num"><strong>4.6</strong><span>점</span></p>
+            <ul class="star_list">
+				<li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating" style="width:60%;"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+            </ul>
+         </div> 
+		<div class="graph_area">
+			<ul class="graph_list">
+				<li>
+					<span class="per">70%</span>
+					<div class="graph"><span style="height:70%;"></span></div>
+					<span class="txt">5점</span>
+				</li>
+				<li>
+					<span class="per">16%</span>
+					<div class="graph"><span style="height:16%;"></span></div>
+					<span class="txt">4점</span>
+				</li>
+				<li>
+					<span class="per">4%</span>
+					<div class="graph"><span style="height:4%;"></span></div>
+					<span class="txt">3점</span>
+				</li>
+				<li>
+					<span class="per">3%</span>
+					<div class="graph"><span style="height:3%;"></span></div>
+					<span class="txt">2점</span>
+				</li>
+				<li>
+					<span class="per">7%</span>
+					<div class="graph"><span style="height:7%;"></span></div>
+					<span class="txt">1점</span>
+				</li>
+			</ul>
+		</div>                    
+         <div class="write_info">
+            <dl>
+               <dt>상품평을 써보세요.</dt>
+               <dd>고객님의 소중한 상품평을 공유하고 <br>최대 CJ ONE 160P도 받아가세요.</dd>
+            </dl>
+            <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-rel="layer" data-target="layWrite">상품평 쓰기</button></p>
+         </div>
+   </div>
+</div>
 
-		<table class="table table-hover" id="review">
-			<thead class="thead-dark">
-				<tr>
-					<th>#</th>
-					<th>ID</th>
-					<th>Title</th>
-					<th>상품명</th>
-					<th>별점</th>
-					<th>작성일</th>
-					<th>조회 수</th>
-					<th>추천 수</th> 
-				</tr>
-			</thead>
+<!--평균별점집계 end-->
 
-			<tbody>
-				<c:forEach var="ReviewDTO" items="${requestScope.list}">
-				
-				<tr class="info">
-					<td>${ReviewDTO.review_num}</td>
-					<td>${ReviewDTO.id}</td>
-					<td><a data-toggle="modal" data-target="#myModal2" onclick="review_read(${ReviewDTO.review_num})">${ReviewDTO.review_title}</a></td>
-					<td>${ReviewDTO.product_num}</td>	
-					
-					<%-- 별점 --%>
-					<c:choose>
-						
-						<%-- if(a == 1){ --%>
-						<c:when test="${ReviewDTO.review_star == 1}">
-							<td>★☆☆☆☆</td>
-						</c:when>
-						<%-- if(a == 2){ --%>
-						<c:when test="${ReviewDTO.review_star == 2}">
-							<td>★★☆☆☆</td>
-						</c:when>
-						<%-- if(a == 3){ --%>
-						<c:when test="${ReviewDTO.review_star == 3}">
-							<td>★★★☆☆</td>
-						</c:when>
-						<%-- if(a == 4){ --%>
-						<c:when test="${ReviewDTO.review_star == 4}">
-							<td>★★★★☆</td>
-						</c:when>
-						<%-- if(a == 5){ --%>
-						<c:when test="${ReviewDTO.review_star == 5}">
-							<td>★★★★★</td>
-						</c:when>
-						
-						
-					</c:choose>
-					
-					<td>${ReviewDTO.review_regdate}</td>
-					<td>${ReviewDTO.review_cnt}</td>
-					<td>${ReviewDTO.like_count}</td>
-				</tr>
-				
-				</c:forEach>
-			
-			</tbody>
-		</table>
+<!-- 사진탭 start-->
 
-		<div class="row">
-			<div class="col-sm-6">
-			
-				<div style="text-align:left">
-					<ul class="pagination" id="page_num">
-						<li>
-									
-						
-						 <% for(int i = 1 ; i<=tot ; i++){ %>
-   						 
-   						 	<a href="ProductDetailAction.do?product_num=<%=product_num %>&Page_num=<%=i%>"><%=i%></a>
-  						 
-  						 <% } %>
-										
-						</li>
-					</ul>
-				</div>
-			
-			
-			</div>
-			<div class="col-sm-2"></div>
-			<div class="col-sm-4 text-success" style="text-align: right;"> 
-			<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">작성하기</button>
-			</div>
-		</div>
-		 
+<h3 class="tit_type thum_tit">상품평 이미지</h3>
+<div class="review_thum">
+	<ul class="inner clrfix">
+	<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="11" varStatus="idx">
+		<c:if test="${idx.index != 11}">
+		<li>
+			<a href="">               
+				<span>
+					<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+				</span>
+			</a>
+		</li>
+		</c:if>
+		<c:if test="${idx.index == 11}">
+		<li>
+			<a href="" class="more">
+				<span>
+					<span><em>더보기</em></span>
+					<img src="./asset/image/product_sum.jpg" class="thum">
+				</span>
+			</a>
+		</li>
+		</c:if>
+	</c:forEach>
 		
-		 <!-- Modal -->
-  	<div class="modal fade" id="myModal" role="dialog">
-    	<div class="modal-dialog modal-lg">
-    
-      	<!-- Modal content-->
-      	<div class="modal-content">
-	        <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-        
-        <div class="modal-body">
-          
-			<div class="panel-group">
-			<div class="panel panel-success" style="margin-top: 10px;">
-				<div class="panel-heading">Goods Review</div>
-				<div class="panel-body">
-					<%-- form --%>
-					<form class="form-horizontal" role="form" action="${review_write}" method="post">
-						<div class="form-group">
-							<label class="control-label col-sm-2">작성자(ID):</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">제목:</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="review_title"
-									name="review_title" placeholder="Title">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">내용:</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" rows="5"	placeholder="review_content" name="review_content" id="review_content"></textarea>
-							</div>
-						</div>
-	
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<div class="radio">
-								
-									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="1" checked="checked">★☆☆☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="2">★★☆☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="3">★★★☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="4">★★★★☆</label>
-									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="5">★★★★★</label>
-									
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-success">작 성</button>
-								<button type="reset" class="btn btn-danger">초기화</button>
-							</div>
-						</div>
-					</form>
+	</ul>
+</div>
+
+<!-- 사진탭 end-->
 
 
-				</div>
+<div class="cate_align_box">
+   <div class="align_sort">
+      <ul id="gdasSort">
+         <li class="on"><a href="">최신순</a></li>
+         <li class=""><a href="">도움순</a></li>
+         <li class=""><a href="">높은 별점순</a></li>
+         <li class=""><a href="">낮은 별점순</a></li>
+      </ul>
+   </div>
+   
+</div>
+<!-- 필터end -->
 
+<!-- 상품평 리스트 start -->
+<div class="review_list_wrap">
+	<ul class="inner_list" id="gdasList">
+	<c:forEach var="ReviewDTO" items="${requestScope.reviewlist}">
+		<li>
+		<div class="info">
+			<span class="review_point"><span class="point" style="font-size: 25px; color: orange;">★☆☆☆☆</span></span>
+			<div class="review_date">         
+				<span class="mbrId">${ReviewDTO.id}</span>        
+				<span>${ReviewDTO.review_regdate}</span>        
+			</div>     
+		</div>         
+		<div class="review_cont">                         
+			<p class="txt_oneline">${ReviewDTO.review_title}</p>             
+			<div class="txt_inner">
+				${ReviewDTO.review_content}
 			</div>
-		</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-  
-  <!-- Modal2 _ read review -->
-  <c:forEach var="ReviewDTO" items="${requestScope.list}">
-    <%
-  	String review_num = request.getParameter("review_num");
-  %>
-  <div class="modal fade" id="myModal2" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Review Detail // ${ReviewDTO.review_num} // <%=review_num %></h4>
-        </div>
-        <div class="modal-body">
-                   	
-          <textarea rows="10" class="form-control" readonly="readonly" id="content"></textarea>	
-                    
-        </div>
-        <div class="modal-footer">
-<!--           <button type="button" class="btn btn-success" onclick="return confirm('추천하시겠습니까?')" onclick="location.href='./NewFile.jsp'">추천 </button> -->
-          <a onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=<%=review_num %>">추천</a>	
-          <button type="button" class="btn btn-danger" onclick="review_delete()">Delete</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        	
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</c:forEach>
-	</div>
+			<div class="recom_area">    
+				<button type="button" class="btn_recom "onclick="">도움이 돼요<span class="num">${ReviewDTO.like_count}</span></button>
+			</div>   
+		</div> 
+		</li>
+	</c:forEach>
+	</ul>
+</div>
+
+<!-- pageing start -->
+	
+   <div class="pageing">
+      <strong title="현재 페이지">1</strong>
+      <a href="productDetail.pro?product_num=${product.product_num}&startRow=">2</a>
+      <a href="productDetail.pro?product_num">3</a>
+      <a href="productDetail.pro?product_num">4</a>
+      <a href="productDetail.pro?product_num">5</a>
+      <a href="productDetail.pro?product_num">6</a>
+      <a href="productDetail.pro?product_num">7</a>
+      <a href="productDetail.pro?product_num">8</a>
+      <a href="productDetail.pro?product_num">9</a>
+      <a href="productDetail.pro?product_num">10</a>
+      <a class="next" href="">다음 페이지</a>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 </div>
 	
 	<!-- 상세정보 탭이 on일경우 -->

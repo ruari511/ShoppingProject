@@ -13,8 +13,19 @@ public class ReviewDTO {
 	private int like_count; // 좋아요
 	private int review_star; // 별점
 	private Date review_regdate; // 리뷰 작성일
+	private String review_img; //리뷰 이미지
+	
+	
 
 	
+	public String getReview_img() {
+		return review_img;
+	}
+
+	public void setReview_img(String review_img) {
+		this.review_img = review_img;
+	}
+
 	public int getReview_num() {
 		return review_num;
 	}
