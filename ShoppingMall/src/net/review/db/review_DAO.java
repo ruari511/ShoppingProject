@@ -58,7 +58,7 @@ public class review_DAO {
 			pstmt.setInt(5, dto.getReview_star());
 
 			// SQL 실행
-			pstmt.execute();
+			pstmt.executeQuery();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -373,59 +373,49 @@ public class review_DAO {
 
 	}
 	
-	// 리뷰 글 삭제
-	public void review_delete(int num) throws Exception{
-		
-		con=null;
-	    sql="";
-	    pstmt=null;
-	    rs=null;
-		
-		con=getConnection();
+	// 리뷰글 별점 평균 구하는 메소드
+		public ReviewDTO review_avg(int product_num){
+			con = null;
+	        sql = "";
+	        pstmt = null;
+	        rs=null;
+	        
+	        // 빈객체 생성
+	        ReviewDTO rdto = new ReviewDTO();
 
-		// SQL										
-		sql = "DELETE FROM reviewboard WHERE REVIEW_NUM=?";
-		pstmt = con.prepareStatement(sql);
-		
-		//?에 값을 대입
-		pstmt.setInt(1, num);
-		
-		//쿼리를 실행하시오.
-		pstmt.executeUpdate();
-		
-		if(con!=null)try{con.close();}catch(SQLException ex){}
-	
-		
-	}
-	
-	// 리뷰글 추천
-	public int rlike(String review_num){
-		
-		con=null;
-	    sql="";
-	    pstmt=null;
-	    rs=null;
-	    
-	    try {
-	    	
-	    	con = getConnection();
-	    	
-	    	sql = "UPDATE reviewboard SET like_count = like_count + 1 WHERE review_num = ?";
-	    	
-	    	pstmt = con.prepareStatement(sql);
-	    	pstmt.setString(1, review_num);
-	    	
-	    	return pstmt.executeUpdate();
-	    	
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			 if(rs!=null)try{rs.close();}catch(SQLException ex){}
-	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
-	         if(con!=null)try{con.close();}catch(SQLException ex){}
+			try {
+
+				con = getConnection();
+				
+				// SQL 문
+				sql = "select avg(review_star) from reviewboard WHERE product_num = ?";
+
+				pstmt=con.prepareStatement(sql);
+
+				pstmt.setInt(1, rdto.getProduct_num());
+
+				// SQL 실행
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					
+					rdto.setProduct_num(product_num);
+					
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}finally{
+		         // 자원해제
+		         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+		         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+		         if(con!=null)try{con.close();}catch(SQLException ex){}
+		      }
+			
+			return rdto;
+			
 		}
-	    return -1; // 데이터베이스 오류
-	}
 	
 
 }
