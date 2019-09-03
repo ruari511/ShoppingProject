@@ -45,6 +45,7 @@
 
 	}
 	System.out.println("bb= " + request.getParameter("review_num"));
+	
 	review_DAO reviewdao = new review_DAO();
 	ReviewLikeDAO likeyDAO = new ReviewLikeDAO();
 
@@ -52,15 +53,16 @@
 
 	// id와 을 review_num이 PK, NN 설정이기때매 중복이 불가
 
-	int result = likeyDAO.like(review_num, id);
+	int result = likeyDAO.relike(review_num, id);
 
-
+	System.out.println("CC= " + result);
 
 	// 정상적으로 1번 데이터가 들어가면 1이 출력되고
 
 	if (result == 1) {
 
-		result = reviewdao.like(id);
+		result = reviewdao.rlike(review_num);
+		System.out.println("dd= " + result);
 
 		if (result == 1) { // 1인경우 디비에서 해당 게시물 추천 완료
 
@@ -71,12 +73,13 @@
 			script.println("alert('추천이 완료되었습니다.');");
 
 // 			script.println("location.href='index.jsp'");
+			script.println("history.back();");
 
 			script.println("</script>");
 
 			script.close();
 
-			
+			System.out.println("ff= " + result);
 
 			return;
 

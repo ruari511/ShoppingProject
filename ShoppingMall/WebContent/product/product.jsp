@@ -65,6 +65,7 @@ function pluscount(num){
 	document.getElementById("totalPriceTxt").innerHTML = product_price*count;
 }
 
+
 function product_detailOn(){
 	document.getElementById("productInfo").setAttribute("class", "on");
 	document.getElementById("buyInfo").removeAttribute("class");
@@ -340,7 +341,7 @@ function goBuy() {
 		</ul>
 
 
-
+<c:if test="${requestScope.startRow == 0 || requestScope.startRow == null}">
 		<!-- 상세정보 탭이 on일경우 -->
 		<div class="tabConts prd_detail_cont" id="product_detail" style="display:block;">
 			<div class="detail_area">
@@ -439,8 +440,7 @@ function goBuy() {
 		<%
 			String product_num = request.getParameter("product_num");
 		%>
-
-<c:if test="${requestScope.startRow == null || requestScope.startRow.length() == 0}">		 
+		 
 <!-- 리뷰정보 탭 -->
 <div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:none;">
 <!--평균별점집계 start-->
@@ -585,9 +585,405 @@ function goBuy() {
 					</c:choose>
 				</span>
 			</span>
+			
 			<div class="review_date">         
 				<span class="mbrId">${ReviewDTO.id}</span>        
 				<span>${ReviewDTO.review_regdate}</span>        
+			</div>     
+		</div>    
+		     
+		<div class="review_cont"> 
+		
+		<div class="review_thum">
+			<ul class="inner clrfix">
+			<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="0" varStatus="last">
+				<li>
+					<a href="">
+						<span>
+							<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+						</span>
+					</a>
+				</li>
+			</c:forEach>
+			</ul>
+		</div>
+		                        
+			<p class="txt_oneline">${ReviewDTO.review_title}</p>             
+			<div class="txt_inner">
+				${ReviewDTO.review_content}
+			</div>
+			
+			<div class="recom_area">    
+					<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 // ${ReviewDTO.review_num} // <span class="num">${ReviewDTO.like_count}</span></a>
+			</div>
+			<button type="button" class="btn_dec" onclick="review_delete()">삭제</button> 
+		</div> 
+		</li>
+	</c:forEach>
+	</ul>
+</div>
+
+
+<div class="pageing">
+	<c:set var="i" value="1" />
+	<c:set var="j" value="0" />
+	<c:set var="startRow" value="${requestScope.startRow}"/>
+	<c:set var="product" value="${requestScope.product_num}" />
+	<c:forEach begin="0" end="<%=cnt %>" varStatus="idx">
+		<c:if test="${idx.index % 15 == 0}">
+			<c:choose>
+				<c:when test="${startRow==j}"><a href="./ProductDetailAction.pro?product_num=${product}&startRow=${(i-1)*15}" title="Paging" class="on"> ${idx.index % 15 + i} </a></c:when>
+				<c:otherwise><a href="./ProductDetailAction.pro?product_num=${product}&startRow=${(i-1)*15}" title="Paging"> ${idx.index % 15 + i} </a></c:otherwise>
+			</c:choose>
+			<c:set var="i" value="${i+1}"/>
+		</c:if>
+			<c:set var="j" value="${j+1}"/>
+	</c:forEach>
+</div>
+
+
+
+
+
+<!-- Modal -->
+  	<div class="modal fade" id="myModal" role="dialog">
+    	<div class="modal-dialog modal-lg">
+    
+      	<!-- Modal content-->
+      	<div class="modal-content">
+	        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+        
+        <div class="modal-body">
+          
+			<div class="panel-group">
+			<div class="panel panel-success" style="margin-top: 10px;">
+				<div class="panel-heading">Goods Review</div>
+				<div class="panel-body">
+					<%-- form --%>
+					<form class="form-horizontal" role="form" action="${review_write}" method="post">
+						<div class="form-group">
+							<label class="control-label col-sm-2">작성자(ID):</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">제목:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="review_title"
+									name="review_title" placeholder="Title">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">내용:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5"	placeholder="review_content" name="review_content" id="review_content"></textarea>
+							</div>
+						</div>
+	
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+								
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="1" checked="checked">★☆☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="2">★★☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="3">★★★☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="4">★★★★☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="5">★★★★★</label>
+									
+								</div>
+							</div>
+						</div>
+						
+<!-- 						<div class="col-sm-10"> -->
+<!-- 							<label class="control-label col-sm-2">파일 선택: </label> <input type="file" name="upFile"/><br> -->
+<!-- 						</div> -->
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-success">작 성</button>
+								<button type="reset" class="btn btn-danger">초기화</button>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+
+			</div>
+		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+</c:if>
+<!-- 리뷰정보 탭이 on이면서 startRow 없을때 -->		
+	</div>
+</div>
+
+
+<!-- 리뷰정보 탭이 on이면서 startRow 있을때 -->
+<c:if test="${requestScope.startRow ne 0}">
+		<!-- 상세정보 탭이 on일경우 -->
+		<div class="tabConts prd_detail_cont" id="product_detail" style="display:none;">
+			<div class="detail_area">
+				<div class="contEditor">
+					<img alt="" src="./asset/image/${product.img_contents}">
+				</div>
+				<div style="text-align:center;padding:20px 0px 0px 0px;">
+					<p style="display:inline-block;font-size:14px;border:1px solid #ddd;padding:10px 40px 10px 40px;text-align:center;">본 상품 정보(상품 상세, 상품 설명 등)의 내용은 협력사가 직접 등록한 것 입니다.</p>
+				</div>
+			</div>
+		</div>
+		<!-- 상세정보 탭이 on일경우 -->
+		
+		
+		
+		<!-- 구매정보 탭이 on일경우 -->
+		<div class="tabConts prd_detail_cont" id="buy_detail" style="display:none;">
+			<h3 class="detail_tit">상품정보 제공고시</h3>
+			<div id="artcInfo">		
+				<dl class="detail_info_list">
+					<dt>품명 및 모델명</dt>
+					<dd>루치펠로 치약3종 (온)</dd>
+				</dl>
+				<dl class="detail_info_list">
+					<dt>인증·허가</dt>
+					<dd>의약외품</dd>
+				</dl>
+				<dl class="detail_info_list">
+					<dt>제조국</dt>
+					<dd>대한민국</dd>
+				</dl>
+				<dl class="detail_info_list">
+					<dt>제조자</dt>
+					<dd>금호덴탈제약(주)</dd>
+				</dl>
+				<dl class="detail_info_list">
+					<dt>A/S 책임자 / 전화번호</dt>
+					<dd>주식회사 루치펠로코리아 / 070-7750-7970</dd>
+				</dl>
+			</div>
+			<h3 class="detail_tit mgT40">배송안내</h3>
+			<dl class="detail_info_list" id="dlexAjaxInfo">
+				<dt>배송비/배송가능일</dt>
+				<dd>
+					<p><strong>배송지역 : </strong>전국</p>
+					<p><strong>배송비 : </strong>
+			<!-- 그외 표기 -->
+						<span>2,500원</span>
+					</p>
+					<p>올리브영 배송 상품의 총 결제금액 <span>20,000</span>원 이상일 경우 <span>무료배송</span> 됩니다.</p>
+					<p>도서, 산간, 오지 일부 지역은 배송비가 추가될 수 있습니다.</p>
+					<p><strong>배송가능일 : </strong><span>3</span>일</p>
+					배송가능일이란 본 상품을 주문하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. 단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.<br>
+					예약 상품의 경우 예약된 날짜에 출고되며, 상품의 입고가 빠르게 진행된 경우 예약일 보다 일찍 배송될 수 있습니다.
+				</dd>
+			</dl>
+			<h3 class="detail_tit mgT40">교환/반품/환불 안내</h3>
+			<dl class="detail_info_list">
+				<dt>교환/반품 신청 기간</dt>
+				<dd>
+					교환, 반품 신청은 배송이 완료된 후 15일 이내 가능합니다.<br>
+					고객님이 배송 받으신 상품의 내용이 표시∙광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는  배송 받으신 날로부터 3개월 이내, 혹은 그 사실을 알 수 있었던 날로 부터 30일 이내에 가능합니다.
+				</dd>
+			</dl>
+			<dl class="detail_info_list">
+				<dt>교환/반품/회수 비용</dt>
+				<dd>
+					고객님의 사유에 의한 교환 및 반품은 회수 및 배송에 필요한 비용을 부담해주셔야 합니다.<br>
+					기본 비용은 교환 5,000원(회수비+배송비), 반품 2,500원(회수비)입니다.<br>
+					제주도 및 도서산간 지방에는 추가 운임이 발생합니다.<br>
+					당사의 사유(상품의 하자, 배송의 오류 등)로 인한 경우 교환 및 반품에 필요한 비용은 당사에서 부담합니다.
+				</dd>
+			</dl>
+			<dl class="detail_info_list">
+				<dt>교환/반품 불가안내</dt>
+				<dd>
+					고객님의 사유에 의한 교환 및 반품이 불가한 경우<br>
+					1. 배송이 완료된 후 7일이 경과한 경우<br>
+					2. 포장 훼손 및 사용 또는 일부 소비, 구성품 누락 및 상품의 결함 발생으로 인해 상품의 가치가 훼손된 경우<br><br>
+					당사의 사유에 의한 교환 및 반품이 불가한 경우<br>
+					1. 배송 받으신 날로부터 3개월, 혹은 그 사실을 알 수 있었던 날로 부터 30일이 경과한 경우<br>
+					2. 당사의 귀책(상품의 불량, 생산 및 제조 및 배송 간의 파손 등)으로 인한 현상이 아닌 해당 상품의 고유한 특성, 혹은 상품 수령 후 고객님의 과실로 인한 문제임이 규명된 경우
+				</dd>
+			</dl>
+		</div>
+		<!-- 구매정보 탭이 on일경우 -->		
+
+
+		<%-- review 리스트 서블릿 호출 --%>
+		<c:url var="review_list" value="review_list.credu"></c:url>
+		<%-- review 작성 서블릿 호출 --%>
+		<c:url var="review_write" value="review_write.credu"></c:url>
+		<%-- review 삭제 서블릿 호출 --%>
+		<c:url var="review_delete" value="review_delete.credu"></c:url>
+		
+		<%
+			String product_num = request.getParameter("product_num");
+		%>
+		 
+<!-- 리뷰정보 탭 -->
+<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:block;">
+<!--평균별점집계 start-->
+<div class="product_rating_area">
+   <div class="inner clrfix">
+      
+         <div class="grade_img">
+            <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
+         </div>
+         <div class="star_area">
+            <p class="total">총 <em>${requestScope.review_cnt}</em>건의 고객상품평</p>
+            <p class="num"><strong>4.6</strong><span>점</span></p>
+            <ul class="star_list">
+				<li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+                <li><span class="rating" style="width:60%;"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
+            </ul>
+         </div> 
+		<div class="graph_area">
+			<ul class="graph_list">
+				<li>
+					<span class="per">70%</span>
+					<div class="graph"><span style="height:70%;"></span></div>
+					<span class="txt">5점</span>
+				</li>
+				<li>
+					<span class="per">16%</span>
+					<div class="graph"><span style="height:16%;"></span></div>
+					<span class="txt">4점</span>
+				</li>
+				<li>
+					<span class="per">4%</span>
+					<div class="graph"><span style="height:4%;"></span></div>
+					<span class="txt">3점</span>
+				</li>
+				<li>
+					<span class="per">3%</span>
+					<div class="graph"><span style="height:3%;"></span></div>
+					<span class="txt">2점</span>
+				</li>
+				<li>
+					<span class="per">7%</span>
+					<div class="graph"><span style="height:7%;"></span></div>
+					<span class="txt">1점</span>
+				</li>
+			</ul>
+		</div>                    
+         <div class="write_info">
+            <dl>
+               <dt>상품평을 써보세요.</dt>
+               <dd>고객님의 소중한 상품평을 공유하고 <br>최대 CJ ONE 160P도 받아가세요.</dd>
+            </dl>
+            <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
+         </div>
+   </div>
+</div>
+
+<!--평균별점집계 end-->
+
+<!-- 사진탭 start-->
+
+<h3 class="tit_type thum_tit">상품평 이미지</h3>
+<div class="review_thum">
+	<ul class="inner clrfix">
+	<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="11" varStatus="idx">
+		<c:if test="${idx.index != 11}">
+		<li>
+			<a href="">               
+				<span>
+					<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+				</span>
+			</a>
+		</li>
+		</c:if>
+		<c:if test="${idx.index == 11}">
+		<li>
+			<a href="" class="more">
+				<span>
+					<span><em>더보기</em></span>
+					<img src="./asset/image/product_sum.jpg" class="thum">
+				</span>
+			</a>
+		</li>
+		</c:if>
+	</c:forEach>
+		
+	</ul>
+</div>
+
+<!-- 사진탭 end-->
+
+
+<div class="cate_align_box">
+   <div class="align_sort">
+      <ul id="gdasSort">
+         <li class="on"><a href="">최신순</a></li>
+         <li class=""><a href="">도움순</a></li>
+         <li class=""><a href="">높은 별점순</a></li>
+         <li class=""><a href="">낮은 별점순</a></li>
+      </ul>
+   </div>
+   
+</div>
+<!-- 필터end -->
+
+<!-- 상품평 리스트 start -->
+<div class="review_list_wrap">
+	<ul class="inner_list" id="gdasList">
+	<c:forEach var="ReviewDTO" items="${requestScope.reviewlist}">
+		<li>
+		<div class="info">
+			<span class="review_point">
+				<span class="point" style="font-size: 25px; color: orange;">
+					
+					<%-- 별점 --%>
+					<c:choose>
+						
+						<%-- if(a == 1){ --%>
+						<c:when test="${ReviewDTO.review_star == 1}">
+							<td>★☆☆☆☆</td>
+						</c:when>
+						<%-- if(a == 2){ --%>
+						<c:when test="${ReviewDTO.review_star == 2}">
+							<td>★★☆☆☆</td>
+						</c:when>
+						<%-- if(a == 3){ --%>
+						<c:when test="${ReviewDTO.review_star == 3}">
+							<td>★★★☆☆</td>
+						</c:when>
+						<%-- if(a == 4){ --%>
+						<c:when test="${ReviewDTO.review_star == 4}">
+							<td>★★★★☆</td>
+						</c:when>
+						<%-- if(a == 5){ --%>
+						<c:when test="${ReviewDTO.review_star == 5}">
+							<td>★★★★★</td>
+						</c:when>
+						
+						
+					</c:choose>
+				</span>
+			</span>
+			<div class="review_date">         
+				<span class="mbrId">${ReviewDTO.id}</span>        
+				<span>${ReviewDTO.review_regdate}</span>   
 			</div>     
 		</div>         
 		<div class="review_cont">                         
@@ -595,9 +991,10 @@ function goBuy() {
 			<div class="txt_inner">
 				${ReviewDTO.review_content}
 			</div>
-			<div class="recom_area">    
-				<button type="button" class="btn_recom "onclick="">도움이 돼요<span class="num">${ReviewDTO.like_count}</span></button>
-			</div>   
+			<div class="recom_area">
+				<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 // ${ReviewDTO.review_num} // <span class="num">${ReviewDTO.like_count}</span></a>
+			</div>
+<!-- 			<button type="button" class="btn_dec" onclick="" style="">신고</button> -->
 		</div> 
 		</li>
 	</c:forEach>
@@ -706,16 +1103,6 @@ function goBuy() {
   </div>
 
 </div>
-</c:if>
-<!-- 리뷰정보 탭이 on이면서 startRow 없을때 -->		
-	</div>
-</div>
-
-
-<!-- 리뷰정보 탭이 on이면서 startRow 있을때 -->
-<c:if test="${requestScope.startRow != null}">
-
-
 </c:if>
 <!-- 리뷰정보 탭이 on이면서 startRow 있을때 -->
 

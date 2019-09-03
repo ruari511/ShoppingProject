@@ -63,7 +63,7 @@ public class review_write extends HttpServlet {
 		
 		//페이지 이동
 		RequestDispatcher dis = 
-				request.getRequestDispatcher("ProductDetailAction.do");
+				request.getRequestDispatcher("ProductDetailAction.pro");
 		
 		//실제 재요청
 		dis.forward(request, response);	

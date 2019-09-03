@@ -28,15 +28,16 @@ public class ReviewLikeDAO {
 	}
 	
 	 
-	public int like(String review_num, String id){
+	public int relike(String review_num, String id){
 
 		con=null;
 	    sql="";
 	    pstmt=null;
 	    rs=null;
 		
+	    int result = 0;
+	    
 	    try {
-	    	
 	    	con = getConnection();
 	    	
 	    	sql = "INSERT INTO review_like VALUES(?,?)";
@@ -45,9 +46,9 @@ public class ReviewLikeDAO {
 	    	
 	    	pstmt.setString(1, review_num);
 	    	pstmt.setString(2, id);
+	    	pstmt.executeUpdate();
 	    	
-	    	return pstmt.executeUpdate();
-	    	
+	    	result = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -55,7 +56,9 @@ public class ReviewLikeDAO {
 	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 	         if(con!=null)try{con.close();}catch(SQLException ex){}
 		}
-	    return -1; // 데이터베이스 오류
+	    return result; // 데이터베이스 오류
 	}
 	
 }
+
+
