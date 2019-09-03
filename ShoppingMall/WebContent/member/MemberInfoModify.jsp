@@ -80,7 +80,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 				<h3 class="join_title">
 				<label for="id">아이디</label>
 				</h3>
-					<input type="text" name="id" class="join" id="id" value="${memberInfo.id}" onblur="join_check('check')" placeholder="아이디" readonly/>
+					<input type="text" name="id" class="join" id="id" value="${id}" onblur="join_check('check')" readonly/>
 					<div class="check_font" id="idMessage"></div>
 				</div>
 
@@ -178,4 +178,77 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		
 	</div>
 </body>	
+<script type="text/javascript">
+	function join_check(aa){
+		var _id = $("#id").val();
+		
+		var _pass = $("#pass").val();
+		var _pass2 = $("#pass2").val();
+		
+		var _name = $("#name").val();
+		var chkName= /^[가-힣]{2,4}$/;
+		
+		var _email = $("#email").val();
+		var chkEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		
+		var _phone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
+		
+		var now = new Date();
+		var yearNow = now.getFullYear();
+		var _birth = $("#birth").val();
+		
+		if(aa == 'check'){
+			// ajax 아이디 중복 체크
+			$.ajax(
+					{
+						url:"http://localhost:8090/ShoppingMall/Check",
+						type:"post",
+						async:false,
+						data:{id:_id, phone:_phone},
+						dataType:"text",
+						success:function(data,textStatus){
+							// 아이디 체크
+							if(data == 23 ){ // 폰번호 중복 x
+								$("#phoneMessage").text("이미 가입된 번호입니다.");
+								$("#phoneMessage").css("color","red");
+								$(".submit").attr("disabled",true);
+							}else if(data == 24 ){ // 아이디 중복 x, 폰번호 중복 x
+								$("#phoneMessage").text("");
+								$(".submit").attr("disabled",false);
+							}	
+						},
+						error:function(request,status,error){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
+							alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+
+					 }
+				}); // ajax 메소드 끝
+		}else if(aa == 'pass2'){
+			// 비밀번호 체크
+			alert(_pass + "///" + _pass2);
+			if(_pass != _pass2 ){
+				$("#passMessage").text("비밀번호가 일치하지 않습니다.");
+				$("#passMessage").css("color","red");
+				$(".submit").attr("disabled",true);
+			}else if(_pass.length < 4 || _pass2.length < 4){
+				$("#passMessage").text("비밀번호 4자리 이상 입력해주세요");
+				$("#passMessage").css("color","red");
+				$(".submit").attr("disabled",true);
+			}else{ 
+				$("#passMessage").text("비밀번호가 일치합니다.");
+				$("#passMessage").css("color","blue");
+				$(".submit").attr("disabled",false);
+			}
+		}else if(aa == "email"){
+			if(!chkEmail.test(_email)){
+				$("#emailMessage").text("메일을 정확히 입력해주세요");
+				$("#emailMessage").css("color","red");
+				$(".submit").attr("disabled",true);
+			}else{
+				$("#emailMessage").text("");
+				$(".submit").attr("disabled",false);
+			}
+		
+		}
+	}
+</script>
 </html>

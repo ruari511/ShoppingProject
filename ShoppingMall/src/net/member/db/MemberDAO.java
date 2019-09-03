@@ -698,6 +698,7 @@ public class MemberDAO {
 	        	 dto.setName(rs.getString("name"));
 	        	 dto.setBirth_date(rs.getString("birth_date"));
 	        	 dto.setPhone(rs.getString("phone"));
+	        	 dto.setId(rs.getString("id"));
 	         }
 	         
 	      } catch (Exception e) {

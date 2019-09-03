@@ -26,14 +26,14 @@ public class MemberModifyFormAction implements Action
 		String id = session.getAttribute("sessionID").toString();
 		
 		// 수정할 회원정보를 가져온다.
-		MemberDAO dao = MemberDAO.getInstance();
-		MemberDTO member = dao.getUserInfo(id);
+		MemberDAO dao = new MemberDAO();
+		MemberDTO member = dao.getUser(id);
 		
 		// ModifyFrom.jsp에 회원정보를 전달하기 위해 request에 MemberBean을 세팅한다.
 		request.setAttribute("memberInfo", member);
 		
 		forward.setRedirect(false);
-		forward.setPath("memberInfoModify.do");
+		forward.setPath("./Main.jsp?section=./member/MemberInfoModify.jsp");
 			
 			return forward;
 		}

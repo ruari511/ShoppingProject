@@ -12,7 +12,7 @@
 	<!-- 마이페이지 탑 -->
 	<div class="mypage-head iconGrade4">
 		<h1 class="tit"><a href="https://www.oliveyoung.co.kr/store/mypage/myPageMain.do">마이페이지</a>PAGE</h1>
-		<p class="text">(이름)님의 멤버십 등급은 <span>(등급)</span>입니다.</p>
+		<p class="text">${memberInfo.name}님의 멤버십 등급은 <span>(등급)</span>입니다.</p>
 		<ul class="infor execu">
 			<li>
 				<ul>

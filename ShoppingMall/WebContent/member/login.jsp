@@ -122,21 +122,21 @@
       
       <div class="qqq">
 	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-	<div id="naverIdLogin"></div>
+	<div id="naverIdLogin" ></div>
 
 	<br>
 	<br>
 	
 	<div>
 	<a id="kakao-login-btn"></a>
-	<a href="http://developers.kakao.com/logout"></a>
+	<a href="http://developers.kakao.com/logout" ></a>
 	</div>
 	<br>
 	<br>
 
 	<!-- 구글 로그인 추가 -->
 	<div>
-	<a class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></a>
+	<a class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" ></a>
 	</div>
 	
 	
