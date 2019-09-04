@@ -26,7 +26,6 @@ public class ProductListAction implements Action{
 		// 페이지의 회원정보 값 넘기
 		request.setAttribute("productList", productList);
 		
-		System.out.println();
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 		ActionForward forward = new ActionForward();
 		//페이지 이동 방식 여부 값 true로 저장  

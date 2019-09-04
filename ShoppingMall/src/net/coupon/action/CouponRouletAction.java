@@ -1,6 +1,7 @@
 package net.coupon.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +22,7 @@ import net.coupon.db.CouponDAO;
 import net.coupon.db.UserCouponDTO;
 
 /*CarReservation.jsp페이지에서.. 전체검색 버튼 클릭했을떄.. DB에 저장되어 있는 전체 차량 검색요청을 받는 서블릿*/
-public class CouponMypageAction implements Action{
+public class CouponRouletAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
@@ -32,34 +33,36 @@ public class CouponMypageAction implements Action{
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
+		CouponDAO cdao = new CouponDAO();
 		
-		MemberDAO mdao = new MemberDAO();
+		int check = cdao.rouletCheck(id);
 		
-		MemberDTO m = mdao.selectMember(id);
+		if(check != 0){
+			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
+			ActionForward forward = new ActionForward();
+			//페이지 이동 방식 여부 값 true로 저장  
+			//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
+			forward.setRedirect(false);
+			// ./member/login.jsp 이동할 페이지 주소 저장
+			forward.setPath("./Main.jsp?section=./Coupon.jsp");
+			
+			//페이지 이동 방식 여부 값 true와...
+			//new ActionForward()객체를 MemberFrontController로 리턴  
+			return forward;
+		}else{
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.println("<script>");
+			out.println("alert('쿠폰 이벤트에 이미 모두 참여하셨습니다.');");
+			out.println("location.href='./mypage_coupon.mp';");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
 		
-		CouponDAO coudao = new CouponDAO();
-		
-		Vector<UserCouponDTO> cou = coudao.getAllCouponList_MP(id);
-		
-		System.out.println(cou.size());
-		
-		//구매하기 페이지의 주문자정보 값 넘기
-		request.setAttribute("m", m);
-		
-		request.setAttribute("cou", cou);
 		
 		
-		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
-		ActionForward forward = new ActionForward();
-		//페이지 이동 방식 여부 값 true로 저장  
-		//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
-		forward.setRedirect(false);
-		// ./member/login.jsp 이동할 페이지 주소 저장
-		forward.setPath("./Main.jsp?section=./myPage/mypage_coupon.jsp");
 		
-		//페이지 이동 방식 여부 값 true와...
-		//new ActionForward()객체를 MemberFrontController로 리턴  
-		return forward;
 		
 	}
 }

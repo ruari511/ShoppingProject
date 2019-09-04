@@ -32,8 +32,6 @@ public class CouponInsertAction implements Action{
 		int cpNum = Integer.parseInt(couponNum);
 				//Integer.parseInt(cpName.substring(0, 2));
 		
-		System.out.println("cpNum = " + cpNum);
-		
 		// 유저쿠폰 테이블 삽입을 위한 DTO객체 생성
 		UserCouponDTO dto = new UserCouponDTO();
 		
@@ -51,13 +49,9 @@ public class CouponInsertAction implements Action{
 		dto.setLast_date(last_date);
 		dto.setUsecheck(0);
 		
-//		boolean result = cdao.insertCoupon(dto);
-//		
-//		if(result == false){
-//			System.out.println("쿠폰 삽입 실패");
-//			return null;
-//		}
 		cdao.insertCoupon(dto);
+		
+		cdao.rouletComplete(id);
 		
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 		ActionForward forward=new ActionForward();

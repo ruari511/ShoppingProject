@@ -32,6 +32,88 @@ public class ProductDAO {
       return con;
       
    }
+   
+   public void modifyProduct(ProductDTO pdto){
+	   con = null;
+       pstmt = null;
+       sql = "";
+       
+		try {
+			sql = "update product set product_name=?, product_subname=?, brand=?, product_price=?,"
+				+" img_main=?, img_contents=?, category_main=?, category_sub=?, product_sale_price=?,"
+				+" price_count=?, product_count=?"
+				+" where product_num=?";
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pdto.getProduct_name());
+			pstmt.setString(2, pdto.getProduct_subname());
+			pstmt.setString(3, pdto.getBrand());
+			pstmt.setInt(4, pdto.getProduct_price());
+			pstmt.setString(5, pdto.getImg_main());
+			pstmt.setString(6, pdto.getImg_contents());
+			pstmt.setString(7, pdto.getCategory_main());
+			pstmt.setString(8, pdto.getCategory_sub());
+			pstmt.setInt(9, pdto.getProduct_sale_price());
+			pstmt.setInt(10, pdto.getPrice_count());
+			pstmt.setInt(11, pdto.getProduct_count());
+			pstmt.setInt(12, pdto.getProduct_num());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("modifyProduct메소드 내부에서 오류 : " + e);
+		} finally {
+			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
+			if(con != null){try{con.close();}catch (Exception err){err.printStackTrace();}}
+		}
+		
+	}
+   
+   public ProductDTO getProductInfo(int num){
+	   con = null;
+       pstmt = null;
+       rs = null;
+       sql = "";
+       ProductDTO pdto = null;
+       
+    try {
+		con = getConnection();
+		
+		sql = "select * from product where product_num = ?";
+		
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, num);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()){
+		  pdto = new ProductDTO();
+  		  
+		  pdto.setProduct_num(rs.getInt("product_num"));
+  		  pdto.setProduct_name(rs.getString("product_name"));
+  		  pdto.setProduct_subname(rs.getString("product_subname"));
+  		  pdto.setProduct_price(rs.getInt("product_price"));
+  		  pdto.setBrand(rs.getString("brand"));
+  		  pdto.setImg_main(rs.getString("img_main"));
+  		  pdto.setImg_contents(rs.getString("img_contents"));
+  		  pdto.setCategory_main(rs.getString("category_main"));
+  		  pdto.setCategory_sub(rs.getString("category_sub"));
+  		  pdto.setProduct_sale_price(rs.getInt("product_sale_price"));
+  		  
+		}
+		
+	  return pdto;
+
+	} catch (Exception e) {
+        System.out.println("getProductInfo()메소드 내부에서의 오류 : " + e);
+	} finally{
+        if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+        if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+        if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+    }
+	   
+	   return pdto;
+   }
+   
    public ArrayList<ProductDTO> getProductList(){
 	   
 	   ArrayList<ProductDTO> productList = new ArrayList<ProductDTO>();
@@ -66,7 +148,8 @@ public class ProductDAO {
     		  pdto.setCategory_main(rs.getString("category_main"));
     		  pdto.setCategory_sub(rs.getString("category_sub"));
     		  pdto.setPrice_count(rs.getInt("price_count"));
-    		  pdto.setDiscount(rs.getInt("discount"));
+    		  pdto.setProduct_sale_price(rs.getInt("product_sale_price"));
+    		  pdto.setProduct_count(rs.getInt("product_count"));
     		  
     		  productList.add(pdto);
     	  }
@@ -124,7 +207,7 @@ public class ProductDAO {
 	         // 3단계 sql 객체 생성
 	         // Statement PreparedStatement CallableStatement
 	         // sql="insert into 테이블이름(열이름,...) values(값,값)";
-	         sql = "insert into product(product_name,product_subname,product_price,brand,img_main,img_contents,category_main,category_sub,price_count,discount) values(?,?,?,?,?,?,?,?,?,?)";
+	         sql = "insert into product(product_name,product_subname,product_price,brand,img_main,img_contents,category_main,category_sub,price_count,product_sale_price,product_count) values(?,?,?,?,?,?,?,?,?,?,?)";
 	         pstmt = con.prepareStatement(sql);
 
 	         pstmt.setString(1,pdto.getProduct_name()); //1 물음표 위치
@@ -136,7 +219,8 @@ public class ProductDAO {
 	         pstmt.setString(7, pdto.getCategory_main());
 	         pstmt.setString(8, pdto.getCategory_sub());
 	         pstmt.setInt(9, pdto.getPrice_count());
-	         pstmt.setInt(10, pdto.getDiscount());
+	         pstmt.setInt(10, pdto.getProduct_sale_price());
+	         pstmt.setInt(11, pdto.getProduct_count());
 	         
 	         // 4단계 실행
 	         result = pstmt.executeUpdate(); // 회원가입 성공하면 1리턴, 실패시0리턴

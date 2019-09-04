@@ -64,14 +64,40 @@ public class CouponFrontController extends HttpServlet{
 		//Top.jsp에서.. join링크를 누르면 회원가입페이지로 이동하는 요청이 들어 왔을때..
 		if(command.equals("/Coupon.cp")){
 		
-			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
-			forward=new ActionForward();
-			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
-			forward.setRedirect(false);
-			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
-			forward.setPath("./Main.jsp?section=./Coupon.jsp");
+//			//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+//			forward=new ActionForward();
+//			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+//			forward.setRedirect(false);
+//			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
+//			forward.setPath("./Main.jsp?section=./Coupon.jsp");
+			
+			//쿠폰 삽입 처리를 위한 Action객체 생성
+			action=new CouponRouletAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		//join.jsp에서...회원가입 처리요청이 들어 왔을떄...	
+		}else if(command.equals("/CouponRouletAction.cp")){
+	
+			
+			//쿠폰 삽입 처리를 위한 Action객체 생성
+			action=new CouponRouletAction();
+			
+			try {
+				forward=action.execute(request, response);
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		//top.jsp에서 ..login링크를 클릭하여 로그인화면으로 이동하라 라는 요청이 들어 왔을때...	
+		//또는 회원가입후!.. 그인화면으로 이동하라 라는 요청이 들어 왔을떄로...
 		}else if(command.equals("/CouponInsertAction.cp")){
 	
 			
@@ -100,6 +126,7 @@ public class CouponFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		
 		
 		//주소 이동
 		if(forward!=null){ //new ActionForward()객체가 존재 하고..

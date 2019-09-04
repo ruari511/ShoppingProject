@@ -10,15 +10,77 @@
 <!-- 제이쿼리 최선버전의 js파일을 불러와 jquery를 사용하기 위해 반드시 설정해야함 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
-        table{
-            margin-left:auto; 
-            margin-right:auto;
-            border:1px solid black;
-        }
-        
-        td{
-            border:1px solid black;
-        }
+    .table {
+      margin-left:auto; 
+      margin-right:auto;
+      border-collapse: collapse;
+      border-top: 3px solid #168;
+    }  
+    .table th {
+      color: #168;
+      background: #f0f6f9;
+      text-align: center;
+    }
+    .table th, .table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    .table th:first-child, .table td:first-child {
+      border-left: 0;
+    }
+    .table th:last-child, .table td:last-child {
+      border-right: 0;
+    }
+    .table tr td:first-child{
+      text-align: center;
+    }
+    .table caption{caption-side: bottom; display: none;}
+    
+    /* 버튼 */
+    div.button_div{text-align: center;}
+    
+    .button {
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: #168;
+	  border: none;
+	  color: #FFFFFF;
+	  text-align: center;
+	  font-size: 20px;
+	  padding: 10px;
+	  width: 150px;
+	  transition: all 0.5s;
+	  cursor: pointer;
+	  margin-top: 10px;
+	}
+	
+	.button span {
+	  cursor: pointer;
+	  display: inline-block;
+	  position: relative;
+	  transition: 0.5s;
+	}
+	
+	.button span:after {
+	  content: '\00bb';
+	  position: absolute;
+	  opacity: 0;
+	  top: 0;
+	  right: -20px;
+	  transition: 0.5s;
+	}
+
+	.button:hover span {
+	  padding-right: 25px;
+	}
+	
+	.button:hover span:after {
+	  opacity: 1;
+	  right: 0;
+	}
+	 h2{text-align: center; margin: 10px;}
+
+    
 </style>
 
 </head>
@@ -26,21 +88,23 @@
 <body>
 	<section>
 		<div id="Container">
-			<div id="Contents">
-				상품리스트
-				<table>
+				<h2>상품리스트</h2>
+				<table class="table">
 					<tr align="center">
-						<td>번호</td>
-						<td>상품이름</td>
-						<td>상품세부이름</td>
-						<td>브랜드</td>
-						<td>가격</td>
-						<td>상품이미지</td>
-						<td>내용이미지</td>
-						<td>메인카테고리</td>
-						<td>서브카테고리</td>
-						<td>구매갯수</td>
-						<td>할인</td>
+						<th>번호</th>
+						<th>상품이름</th>
+						<th>상품세부이름</th>
+						<th>브랜드</th>
+						<th>가격</th>
+						<th>할인(%)</th>
+						<th>상품재고량</th>
+						<th>상품구매량</th>
+						<th>상품이미지</th>
+						<th>내용이미지</th>
+						<th>메인카테고리</th>
+						<th>서브카테고리</th>
+						<th>수정</th>
+						<th>삭제</th>
 					</tr>
 					<c:forEach items="${productList}" var="product">
 					<tr align="center">
@@ -49,23 +113,29 @@
 						<td>${product.product_subname}</td>
 						<td>${product.brand}</td>
 						<td>${product.product_price}</td>
+						<td>${product.product_sale_price}</td>
+						<td>${product.product_count}</td>
+						<td>${product.price_count}</td>
 						<td>${product.img_main}</td>
 						<td>${product.img_contents}</td>
 						<td>${product.category_main}</td>
 						<td>${product.category_sub}</td>
-						<td>${product.price_count}</td>
-						<td>${product.discount}</td>
-						<td><button onclick="deleteProduct(${product.product_num})">삭제</button></td>
+						<td onclick="modifyProduct(${product.product_num})" style="cursor: pointer; font-weight: bold;">수정</td>
+						<td onclick="deleteProduct(${product.product_num})" style="cursor: pointer; font-weight: bold;">삭제</td>
 					</tr>
 					</c:forEach>
 				</table>
-				
-				<input type="button" onclick="productAdd()" value="상품추가"/>		
-			</div>
+				<div class="button_div">
+					<button class="button" style="vertical-align:middle" onclick="productAdd()"><span>상품추가</span></button>
+				</div>
 		</div>
 	</section>
 </body>
 <script type="text/javascript">
+	function modifyProduct(num) {
+		location.href="productModify.ad?product_num=" + num;
+	}
+	
 	function deleteProduct(num){
 		
 		if (confirm("정말 삭제하시겠습니까?") == true){    //확인

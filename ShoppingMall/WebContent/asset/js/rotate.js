@@ -123,16 +123,24 @@
           var rad = deg * Math.PI / 180;
           return wrapW / (1 / Math.tan(rad));
         }
-
+        
+        var count = 0;
 
         $btnStart.on("click", function() {
-          rotation();
+          if(count==0){
+        	  rotation();
+          }else{
+        	  alert("이미 쿠폰 룰렛 1회 참여하셨습니다.");
+          }
         });
-
+        
+        
         function rotation() {
-
+        	
           var completeA = 360 * 5 + r(0, 360);
-
+          
+          count++;
+          
           $roulette.rotate({
             angle: angle,
             animateTo: completeA,
@@ -153,22 +161,16 @@
     		var cpName = data[(10-part)].text;
     		var cpNum = data[(10-part)].data;
     		
-    		if(part < 1){
-    			alert("꽝입니다 ㅠㅠ");
-    			return;
-    		}
-
-//    		if(part >= 10){
-//    			$('#result_id3').html("<p>당첨내역:" + data[data.length-1].text + "</p>");
-//    			return;
-//    		}
-
+    		console.log(count);
+    		
     		if(cpNum != 'null'){
    			
     			alert("축하합니다! "+ cpName + " 당첨되셨습니다.");
 				location.href="CouponInsertAction.cp?coupon_num=" + cpNum;
-    		}else{
+    		}else{	
     			alert("꽝입니다 ㅠㅠ"); 
+    			location.href='./Coupon.cp';
+
     		}
     		
     	}

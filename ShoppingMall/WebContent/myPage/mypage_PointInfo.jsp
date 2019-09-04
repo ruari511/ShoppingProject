@@ -36,8 +36,6 @@
 	
 	request.setAttribute("memberInfo", member);
 	
-	
-	
 %>
 <body>
 	<div id="Wrapper">

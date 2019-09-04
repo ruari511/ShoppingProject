@@ -10,8 +10,9 @@ public class ProductDTO {
 	private String category_main; // 메인카테고리
 	private String category_sub; // 서브카테고리
 	private int price_count; // 구매갯수
-	private int discount; // 할인
+	private int product_sale_price; // 할인
 	private String brand; // 브랜드
+	private int product_count;
 	
 	
 	
@@ -63,12 +64,6 @@ public class ProductDTO {
 	public void setPrice_count(int price_count) {
 		this.price_count = price_count;
 	}
-	public int getDiscount() {
-		return discount;
-	}
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
 	public String getImg_main() {
 		return img_main;
 	}
@@ -80,6 +75,18 @@ public class ProductDTO {
 	}
 	public void setImg_contents(String img_contents) {
 		this.img_contents = img_contents;
+	}
+	public int getProduct_sale_price() {
+		return product_sale_price;
+	}
+	public void setProduct_sale_price(int product_sale_price) {
+		this.product_sale_price = product_sale_price;
+	}
+	public int getProduct_count() {
+		return product_count;
+	}
+	public void setProduct_count(int product_count) {
+		this.product_count = product_count;
 	}
 	
 	

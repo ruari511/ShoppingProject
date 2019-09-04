@@ -22,7 +22,58 @@ public class CouponDAO {
 		ds = (DataSource)ctx.lookup("java:comp/env/jdbc/shoppingmall");
 		return ds.getConnection();
 	}
-
+	
+	public int rouletCheck(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int result = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql = "select count from coupon_roulet where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("rouletCheck()메소드 내부에서의 오류 : " + e);
+		}
+		
+		return result;
+		
+	}
+	
+	public void rouletComplete(String id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int result = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql = "update coupon_roulet set count = 0 where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("rouletComplete()메소드 내부에서의 오류 : " + e);
+		}
+		
+	}
+	
 	public Vector<UserCouponDTO> getAllCouponList(String id){
 		
 		Connection con = null;
@@ -94,7 +145,7 @@ public class CouponDAO {
 			pstmt.setString(2, dto.getId());
 			pstmt.setTimestamp(3, dto.getStart_date());
 			pstmt.setTimestamp(4, dto.getLast_date());
-			pstmt.setInt(5, dto.getUsecheck());
+			pstmt.setInt(5, 1);
 			
 			//result = pstmt.executeUpdate();
 			pstmt.executeUpdate();

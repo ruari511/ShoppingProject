@@ -13,7 +13,7 @@
 </head>
 <body>
 <section>
-	<p class="title">90% 쿠폰 당첨에 도전하세요!</p>
+	<p class="title">무조건 당첨가능한 쿠폰 룰렛!<br>90% 쿠폰 당첨에 도전하세요!</p>
 	
 	<div class="box-roulette">
 		<div class="markers"></div>
