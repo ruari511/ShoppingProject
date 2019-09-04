@@ -19,7 +19,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+	
+	
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="path/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resource/js/jquery-1.12.1.js"/>"></script>
 
 
 <% 
@@ -126,8 +130,23 @@ function ordersubmit(a) {
 
 function starChange(a) {
 	document.getElementById("review_star").value = a.value;
-	alert("들어갔나 ? " + document.getElementById("review_star").value)
+	alert("들어갔나 ? " + document.getElementById("review_star").value);
 }
+
+
+// 별점
+$.fn.generateStars = function() {
+    return this.each(function(i,e){$(e).html($('#star-prototype').width($(e).text()*16));});
+};
+
+// 숫자 평점을 별로 변환하도록 호출하는 함수
+$(function() {
+	$('#star-prototype').generateStars();
+ 
+});
+
+
+
 
 </script>
 </head>
@@ -406,21 +425,17 @@ function starChange(a) {
 <!--평균별점집계 start-->
 <div class="product_rating_area">
    <div class="inner clrfix">
-      
+      <c:forEach var="ReviewDTO" items="${requestScope.reviewlist}" end="0">
          <div class="grade_img">
             <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
          </div>
          <div class="star_area">
             <p class="total">총 <em>${requestScope.review_cnt}</em>건의 고객상품평</p>
-            <p class="num"><strong>4.6</strong><span>점</span></p>
+            <p class="num"><strong>${requestScope.staravg}</strong><span>점 / 5점</span></p>
             <ul class="star_list">
-				<li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
-                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
-                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
-                <li><span class="rating"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
-                <li><span class="rating" style="width:60%;"></span><img src="./아임프롬 머그워트 에센스 160ml _ 올리브영_files/bg_rating_star.png"></li>
-            </ul>
-         </div> 
+				 <span id="star-prototype">${requestScope.staravg}</span>
+          </ul>
+       </div> 
 		<div class="graph_area">
 			<ul class="graph_list">
 				<li>
@@ -457,6 +472,7 @@ function starChange(a) {
             </dl>
             <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
          </div>
+       </c:forEach>
    </div>
 </div>
 
@@ -655,7 +671,7 @@ function starChange(a) {
 				<div class="panel-heading">Goods Review</div>
 				<div class="panel-body">
 					<%-- form --%>
-					<form class="form-horizontal" role="form" action="${review_write}" method="post">
+					<form class="form-horizontal" role="form" action="${review_write}" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="control-label col-sm-2">작성자(ID):</label>
 							<div class="col-sm-10">
@@ -665,8 +681,7 @@ function starChange(a) {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">제목:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="review_title"
-									name="review_title" placeholder="Title">
+								<input type="text" class="form-control" id="review_title" name="review_title" placeholder="Title">
 							</div>
 						</div>
 						<div class="form-group">
@@ -684,18 +699,23 @@ function starChange(a) {
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="radio">
-									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="1" checked="checked">★☆☆☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="2">★★☆☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="3">★★★☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="4">★★★★☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="5">★★★★★</label>
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="1" checked="checked">★☆☆☆☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="2">★★☆☆☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="3">★★★☆☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="4">★★★★☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="5">★★★★★</label> -->
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="1" checked="checked">★☆☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" value="2">★★☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="3">★★★☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="4">★★★★☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="5">★★★★★</label>
 									<input type="hidden" name="review_star" id="review_star" value="1">
 								</div>
 							</div>
 						</div>
-<!-- 						<div class="col-sm-10"> -->
-<!-- 							<label class="control-label col-sm-2">파일 선택: </label> <input type="file" name="upFile"/><br> -->
-<!-- 						</div> -->
+						<div class="col-sm-10">
+							<label class="control-label col-sm-2">파일 선택: </label> <input type="file" name="review_img" id="review_img"/><br>
+						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<button type="submit" class="btn btn-success">작 성</button>

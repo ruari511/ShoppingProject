@@ -29,6 +29,7 @@ public class review_write extends HttpServlet {
 		String id = (String) session.getAttribute("id");
 		
 		int review_star = 0;
+		
 		if(request.getParameter("review_star") != null && request.getParameter("review_star").length() != 0){
 			String review_title = request.getParameter("review_title");
 			String product_num = request.getParameter("product_num");

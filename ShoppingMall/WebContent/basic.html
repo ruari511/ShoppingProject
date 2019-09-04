@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>간단한 파일 업로드 예제</title>
+</head>
+<body>
+<!-- 파일 업로드시 <form>태그에 enctype속성의 값으로  multipart/form-data 작성 필요!-->
+	<h1>간단한 파일 업로드 예제</h1>
+	<form action="basic.jsp" method="post" enctype="multipart/form-data">
+		사용자: <input type="text" name="user"><br>
+		제목: <input type="text" name="title"><br>
+		파일 선택: <input type="file" name="upFile"/><br>
+		<input type="submit" value="업로드 요청"/>
+	</form>
+
+</body>
+</html>

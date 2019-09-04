@@ -59,6 +59,8 @@ public class ProductDetailAction extends HttpServlet{
 
 		int cnt = rdao.review_getPageCount(Integer.parseInt(product_num));
 		
+		int staravg = rdao.review_getStarAvg(Integer.parseInt(product_num));
+		
 		int start = 0;
 		
 		//상품평 전체 뿌려주는 부분
@@ -120,6 +122,7 @@ public class ProductDetailAction extends HttpServlet{
 		request.setAttribute("order", request.getParameter("order"));
 		request.setAttribute("returnOrder", returnOrder);
 		request.setAttribute("review_select", review_select);
+		request.setAttribute("staravg", staravg);
 		
 		
 		RequestDispatcher dis = 

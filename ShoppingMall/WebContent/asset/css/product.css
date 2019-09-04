@@ -399,10 +399,18 @@
 
 .pageing span {display:inline-block;width:30px;height:30px;border:1px solid #e5e5e5;text-indent:-9999px}
 
-
-
-
-
+/*---------------------------------------------------*/
+#star-prototype{
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+#star-prototype{
+    background-position: 0 0;
+    max-width:80px; 
+}
 
 
 

@@ -340,10 +340,11 @@ public class review_DAO {
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery(sql);
-			
+		
 			if(rs.next()){
 				// 전체 글의 개수를 가져온다.
 				cnt = rs.getInt(1);
+				System.out.println("review_getPageCount: " + cnt);
 			}
 			
 		} catch (Exception e) {
@@ -403,6 +404,48 @@ public class review_DAO {
 		return dto;
 
 	}
+	
+	// 별점 평균 구하는 메서드
+	public int review_getStarAvg(int product_num){
+
+			con=null;
+		    sql="";
+		    pstmt=null;
+		    rs=null;
+		    
+		    int staravg = 0;
+		    
+		    try {
+		    	con=getConnection();
+			    
+				// 쿼리문
+				sql = "select truncate(sum(review_star) / count(product_num = " + product_num + "),1) "
+						+ "from reviewboard where product_num = " + product_num;
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery(sql);
+				
+				if(rs.next()){
+
+					staravg = rs.getInt(1);
+					System.out.println("review_getStarAvg: " + staravg);
+				}
+				
+			} catch (Exception e) {
+				
+				System.out.println("review_getPageCount() 메소드 내부의 오류 : " +  e);
+				
+			} finally {
+				if(rs!=null)try{rs.close();}catch(SQLException ex){}
+				if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+				if(con!=null)try{con.close();}catch(SQLException ex){}
+			}
+
+			// 총 페이지 개수 리턴
+			return staravg;
+
+		}
 
 	
 
