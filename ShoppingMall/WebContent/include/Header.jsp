@@ -7,6 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
+<script type="text/javascript">
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 500) {
+        $('#top_btn').fadeIn();
+    } else {
+        $('#top_btn').fadeOut();
+    }
+});
+
+</script>
 </head>
 
 <body>
@@ -93,40 +103,57 @@
 							
 							<p class="sub_depth"><a href="#">메이크업</a></p>
 							<ul>
-								<li><a href="#">클렌징</a></li>
-								<li><a href="#">선케어</a></li>
+								<li><a href="#">베이스</a></li>
+								<li><a href="#">네일케어</a></li>
+								<li><a href="#">립메이크업</a></li>
+								<li><a href="#">아이메이크업</a></li>
 							</ul>
 							
 							<p class="sub_depth"><a href="#">바디케어</a></p>
 							<ul>
-								<li><a href="#">3-1</a></li>
-								<li><a href="#">3-2</a></li>
+								<li><a href="#">로션/크림</a></li>
+								<li><a href="#">워시/스크럽</a></li>
+								<li><a href="#">미스트/오일</a></li>
+								<li><a href="#">핸드/풋</a></li>
+								<li><a href="#">립케어</a></li>
+								<li><a href="#">데오/제모</a></li>
 							</ul>
 						</div>
 							
 						<div class="sub_menu_box">
 							<p class="sub_depth"><a href="#">헤어케어</a></p>
 							<ul>
-								<li><a href="#">3-1</a></li>
-								<li><a href="#">3-2</a></li>
+								<li><a href="#">샴푸/린스</a></li>
+								<li><a href="#">트리트먼트/팩</a></li>
+								<li><a href="#">스타일링/에센스</a></li>
+								<li><a href="#">염모/펌/코팅</a></li>
+								<li><a href="#">헤어기기</a></li>
 							</ul>
 							<p class="sub_depth"><a href="#">향수/디퓨저</a></p>
 							<ul>
-								<li><a href="#">3-1</a></li>
-								<li><a href="#">3-2</a></li>
+								<li><a href="#">여성향수</a></li>
+								<li><a href="#">남성향수</a></li>
+								<li><a href="#">캔들/디퓨저</a></li>
 							</ul>
 							<p class="sub_depth"><a href="#">미용소품</a></p>
 							<ul>
-								<li><a href="#">3-1</a></li>
-								<li><a href="#">3-2</a></li>
+								<li><a href="#">얼굴소품</a></li>
+								<li><a href="#">헤어소품</a></li>
+								<li><a href="#">네일소품</a></li>
+								<li><a href="#">미용가전</a></li>
+								<li><a href="#">기타소품</a></li>
 							</ul>							
 						</div>
 							
 						<div class="sub_menu_box">
 							<p class="sub_depth"><a href="#">남성</a></p>
 							<ul>
-								<li><a href="#">3-1</a></li>
-								<li><a href="#">3-2</a></li>
+								<li><a href="#">스킨케어</a></li>
+								<li><a href="#">바디케어</a></li>
+								<li><a href="#">헤어케어</a></li>
+								<li><a href="#">메이크업</a></li>
+								<li><a href="#">향수/탈취</a></li>
+								<li><a href="#">쉐이빙/잡화</a></li>
 							</ul>
 						</div>							
 					</li>
@@ -208,6 +235,9 @@
 			</ul>
 		</div>
 	</div>
+	
+	
+	<a id="top_btn" href="#">TOP</a>
 	
 </body>
 </html>
