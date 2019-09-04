@@ -77,7 +77,7 @@
 						<td>${member.totalprice}</td>
 						<td>${member.point}</td>
 						<td>${member.phone}</td>
-						<td onclick="deleteMember(${member.num})" style="cursor: pointer; font-weight: bold;">삭제</td>
+						<td onclick="deleteMember(${member.num})" style="cursor: pointer; font-weight: bold;">강퇴</td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -87,7 +87,7 @@
 <script type="text/javascript">
 	function deleteMember(num){
 		
-		if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+		if (confirm("정말 강퇴하시겠습니까?") == true){    //확인
 		    //document.form.submit();
 			location.href="MemberDeleteAction.ad?num=" + num;
 		}else{   //취소
