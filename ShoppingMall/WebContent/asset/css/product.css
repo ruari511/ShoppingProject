@@ -343,11 +343,11 @@
 .cate_align_box > div+div {border-left:1px solid #ddd}
 /* 정렬순 */
 .cate_align_box .align_sort {width:774px;padding:15px 0 0}
-.cate_align_box .align_sort > ul {overflow:hidden}
-.cate_align_box .align_sort > ul > li {float:left}
-.cate_align_box .align_sort > ul > li+li {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x14.png") no-repeat 0 50%;padding-left:1px}
-.cate_align_box .align_sort > ul > li > a {display:block;margin:0 20px;color:#888}
-.cate_align_box .align_sort > ul > li.on > a {color:#222;font-weight:700}
+.cate_align_box .align_sort > form > ul {overflow:hidden}
+.cate_align_box .align_sort > form > ul > li {float:left}
+.cate_align_box .align_sort > form > ul > li+li {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x14.png") no-repeat 0 50%;padding-left:1px}
+.cate_align_box .align_sort > form > ul > li > a {display:block;margin:0 20px;color:#888}
+.cate_align_box .align_sort > form > ul > li.on > a {color:#222;font-weight:700}
 /* 상품갯수 */
 .cate_align_box .count_sort {width:158px;padding:15px 20px 0}
 .cate_align_box .count_sort .tx_view {float:left;width:40px;color:#222;text-align:center}

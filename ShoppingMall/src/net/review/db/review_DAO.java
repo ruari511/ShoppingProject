@@ -46,7 +46,7 @@ public class review_DAO {
 			con = getConnection();
 			
 			// SQL 문
-			String sql = "INSERT INTO reviewboard(id, product_num, review_title, review_content, review_cnt, review_star, review_regdate)"
+			String sql = "INSERT INTO reviewboard(id, product_num, review_title, review_content, like_count, review_star, review_regdate)"
 					+ " VALUES(?, ?, ?, ?, 0, ?, now())";
 
 			pstmt=con.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class review_DAO {
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			sql = "select * from (select review_num as rnum, a1.* "
-					+ "from (select review_num, id, product_num, review_title, review_content, review_cnt, like_count, review_star, review_regdate FROM reviewboard) a1) a2 "
+					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate FROM reviewboard) a1) a2 "
 					+ "where product_num = ? ORDER BY review_num DESC limit ? , ? ";
 			
 			pstmt=con.prepareStatement(sql);
@@ -112,7 +112,6 @@ public class review_DAO {
 				String id = rs.getString("ID"); // 작성자 ID
 				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
-				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
 				int review_star = rs.getInt("REVIEW_STAR"); // 별점
 				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
 
@@ -124,7 +123,6 @@ public class review_DAO {
 				dto.setProduct_num(product_num);
 				dto.setReview_title(review_title);
 				dto.setReview_content(review_content);
-				dto.setReview_cnt(review_cnt);
 				dto.setLike_count(rs.getInt("like_count"));
 				dto.setReview_star(review_star);
 				dto.setReview_regdate(review_regdate);
@@ -146,8 +144,9 @@ public class review_DAO {
 
 	}
 	
-	// 리뷰를 최신순, 도움순, 높은 별점순, 낮은 별점순으로 보기 위한 메소드
-	public ArrayList<ReviewDTO> review_order(String order) {
+	
+	
+	public ArrayList<ReviewDTO> review_get(int start, int size, int product_num, String order) {
 
 		con=null;
 	    sql="";
@@ -156,7 +155,7 @@ public class review_DAO {
 	    
 		// Arraylist 생성
 		// 빈객체를 담을 arraylist
-		ArrayList<ReviewDTO> orderlist = new ArrayList<ReviewDTO>();
+		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
 
 		try {
 
@@ -166,23 +165,27 @@ public class review_DAO {
 
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
-			sql = "select * from reviewboard";
-			sql += order;
+			sql = "select * from (select review_num as rnum, a1.* "
+					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate FROM reviewboard) a1) a2 "
+					+ "where product_num = ?"
+					+ order + " limit ? , ? ";
+					
 			
 			pstmt=con.prepareStatement(sql);
-			
+			pstmt.setInt(1, product_num);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, size);
+
 			// SQL 실행
 			rs=pstmt.executeQuery();
-			
+
 			// rs.next() 값이 있으면 투루를 반환.
 			while (rs.next()) {
 
 				int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
-				int product_num = rs.getInt("product_num"); // 상품 번호
 				String id = rs.getString("ID"); // 작성자 ID
 				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
-				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
 				int review_star = rs.getInt("REVIEW_STAR"); // 별점
 				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
 
@@ -194,12 +197,11 @@ public class review_DAO {
 				dto.setProduct_num(product_num);
 				dto.setReview_title(review_title);
 				dto.setReview_content(review_content);
-				dto.setReview_cnt(review_cnt);
 				dto.setLike_count(rs.getInt("like_count"));
 				dto.setReview_star(review_star);
 				dto.setReview_regdate(review_regdate);
 
-				orderlist.add(dto);
+				list.add(dto);
 			}
 
 		} catch (Exception e) {
@@ -212,11 +214,42 @@ public class review_DAO {
 	         if(con!=null)try{con.close();}catch(SQLException ex){}
 	      }
 
-		return orderlist;
+		return list;
 
 	}
 	
 	
+	
+	
+	public int rlike(String review_num){
+
+		con=null;
+	    sql="";
+	    pstmt=null;
+	    rs=null;
+	    
+	    try {
+	    	
+	    	con = getConnection();
+	    	
+	    	sql = "UPDATE reviewboard SET like_count = like_count + 1 WHERE review_num = ?";
+
+	    	pstmt = con.prepareStatement(sql);
+
+	    	pstmt.setString(1, review_num);
+
+	    	return pstmt.executeUpdate();
+	    	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			 if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+		}
+	    return -1; // 데이터베이스 오류
+	}
+
 	
 	
 	public ArrayList<ReviewDTO> review_Allget(int product_num) {
@@ -238,7 +271,7 @@ public class review_DAO {
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			sql = "select * from (select review_num as rnum, a1.* "
-					+ "from (select review_num, id, product_num, review_title, review_content, review_cnt, like_count, review_star, review_regdate, img FROM reviewboard where img is not null && img != '') a1) a2 "
+					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate, img FROM reviewboard where img is not null && img != '') a1) a2 "
 					+ "where product_num = ? ORDER BY review_num DESC";
 			
 			pstmt=con.prepareStatement(sql);
@@ -254,7 +287,6 @@ public class review_DAO {
 				String id = rs.getString("ID"); // 작성자 ID
 				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
-				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
 				int review_star = rs.getInt("REVIEW_STAR"); // 별점
 				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
 				
@@ -266,7 +298,6 @@ public class review_DAO {
 				dto.setProduct_num(product_num);
 				dto.setReview_title(review_title);
 				dto.setReview_content(review_content);
-				dto.setReview_cnt(review_cnt);
 				dto.setLike_count(rs.getInt("like_count"));
 				dto.setReview_star(review_star);
 				dto.setReview_regdate(review_regdate);
@@ -294,7 +325,7 @@ public class review_DAO {
 
 
 	// 페이지 수를 구하는 메서드
-	public int review_getPageCount(){
+	public int review_getPageCount(int product_num){
 
 		con=null;
 	    sql="";
@@ -305,10 +336,11 @@ public class review_DAO {
 	    	con=getConnection();
 		    
 			// 쿼리문
-			sql = "SELECT COUNT(*) FROM " + "reviewboard";
-
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			sql = "select count(*) from reviewboard where product_num="+product_num;
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery(sql);
+			
 			if(rs.next()){
 				// 전체 글의 개수를 가져온다.
 				cnt = rs.getInt(1);
@@ -318,6 +350,7 @@ public class review_DAO {
 			System.out.println("review_getPageCount() 메소드 내부의 오류 : " +  e);
 		} finally {
 			if(rs!=null)try{rs.close();}catch(SQLException ex){}
+			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 			if(con!=null)try{con.close();}catch(SQLException ex){}
 		}
 
@@ -351,7 +384,6 @@ public class review_DAO {
 			int product_num = rs.getInt("PRODUCT_NUM"); // 상품명
 			String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 			String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
-			int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
 			int review_star = rs.getInt("REVIEW_STAR"); // 별점
 																// 구매
 			Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
@@ -361,7 +393,6 @@ public class review_DAO {
 			dto.setProduct_num(product_num);
 			dto.setReview_title(review_title);
 			dto.setReview_content(review_content);
-			dto.setReview_cnt(review_cnt);
 			dto.setReview_star(review_star);
 			dto.setReview_regdate(review_regdate);
 
@@ -372,50 +403,7 @@ public class review_DAO {
 		return dto;
 
 	}
-	
-	// 리뷰글 별점 평균 구하는 메소드
-		public ReviewDTO review_avg(int product_num){
-			con = null;
-	        sql = "";
-	        pstmt = null;
-	        rs=null;
-	        
-	        // 빈객체 생성
-	        ReviewDTO rdto = new ReviewDTO();
 
-			try {
-
-				con = getConnection();
-				
-				// SQL 문
-				sql = "select avg(review_star) from reviewboard WHERE product_num = ?";
-
-				pstmt=con.prepareStatement(sql);
-
-				pstmt.setInt(1, rdto.getProduct_num());
-
-				// SQL 실행
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()){
-					
-					rdto.setProduct_num(product_num);
-					
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				
-			}finally{
-		         // 자원해제
-		         if(rs!=null)try{rs.close();}catch(SQLException ex){}
-		         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
-		         if(con!=null)try{con.close();}catch(SQLException ex){}
-		      }
-			
-			return rdto;
-			
-		}
 	
 
 }
