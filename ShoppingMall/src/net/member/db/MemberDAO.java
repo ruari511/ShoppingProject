@@ -165,7 +165,7 @@ public class MemberDAO {
           pstmt.setString(10, dto.getPhone());
           pstmt.setString(11, "bronze");
           pstmt.setInt(12,0);
-          pstmt.setInt(13,0);
+         pstmt.setInt(13,3000); // 회원가입 축하 포인트 3000
 
          // 4단계 실행
          result = pstmt.executeUpdate(); // 회원가입 성공하면 1리턴, 실패시0리턴
@@ -498,6 +498,87 @@ public class MemberDAO {
    }
  
    
+
+   public ArrayList<MemberDTO> getMemberList(){
+	   
+	   ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
+	   con = null;
+       pstmt = null;
+       rs = null;
+       sql = "";
+       MemberDTO mdto = null;
+       
+       try {
+    	  con = getConnection();
+    	  
+    	  con.setAutoCommit(false);
+    	  
+    	  sql = "select * from member";
+    	  pstmt = con.prepareStatement(sql);
+    	  rs = pstmt.executeQuery();
+    	  
+    	  
+    	   
+    	  while(rs.next()){
+    		  
+    		  mdto = new MemberDTO();
+    		  
+    		  mdto.setNum(rs.getInt("num"));
+    		  mdto.setId(rs.getString("id"));
+    		  mdto.setPassword(rs.getString("password"));
+    		  mdto.setName(rs.getString("name"));
+    		  mdto.setBirth_date((rs.getDate("birth_date").toString()));
+    		  mdto.setGender(rs.getString("gender"));
+    		  mdto.setEmail(rs.getString("email"));
+    		  mdto.setReg_date(rs.getTimestamp("reg_date"));
+    		  mdto.setAddress_main(rs.getString("address_main"));
+    		  mdto.setAddress_detail(rs.getString("address_detail"));
+    		  mdto.setGrade(rs.getString("grade"));
+    		  mdto.setTotalprice(rs.getInt("totalprice"));
+    		  mdto.setPoint(rs.getInt("point"));
+    		  mdto.setPhone(rs.getString("phone"));
+    		  
+    		  memberList.add(mdto);
+    	  }
+    	   
+       } catch (Exception e) {
+           System.out.println("getMemberList()메소드 내부에서의 오류 : " + e);
+       } finally{
+           if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+           if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+           if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+        }
+       
+	return memberList;
+	   
+   }
+   
+   public int deleteMember(int num){
+	   
+	   con = null;
+       pstmt = null;
+       rs = null;
+       sql = "";
+       
+       int check = 0;
+       
+       try {
+		con = getConnection();
+		
+		sql = "delete from member where num = ?";
+		
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, num);
+		check = pstmt.executeUpdate();
+		
+		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	   
+       return check;
+   }
    
    
    

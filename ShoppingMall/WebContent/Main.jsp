@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-<meta charset="UTF-8">
+	<meta charset="utf-8">
+<!-- 	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta property="og:title" content="공식 온라인몰">
+	<meta property="og:url" content="Main.html">
+	<meta property="og:image" content="">
+	<meta property="og:description" content=""> -->
 	<title> # </title>
 
 	<link rel="stylesheet" href="./asset/css/board.css"/>
@@ -30,6 +38,7 @@
 	
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
+	
 	<!-- header -->
 	<jsp:include page="./include/Header.jsp"/>
 	<!-- header// -->

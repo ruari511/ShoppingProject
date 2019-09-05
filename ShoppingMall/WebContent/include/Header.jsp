@@ -34,20 +34,32 @@ $(window).scroll(function() {
 				//세션값 없음  -> MemberFrontController서블릿에.. 로그인 | 회원가입 처리 요청  
 				if(id==null){
 					%>                  
-					<li class="login"><a href="./login.do">로그인</a></li>
-					<li class="join"><a href="./join.do">회원가입</a></li>	
+						<li class="login"><a href="./login.do">로그인</a></li>
+						<li class="join"><a href="./join.do">회원가입</a></li>	
 					<%
 				}else{//세션값이 있으면 -> MemberFrontController서블릿에.. 로그아웃 | 회원가입 처리 요청
 					CartDAO cdao = new CartDAO();
 					int cartCount = cdao.CartCount(id);
 					%>
 					<li class="logout"><%=id %>님 <a href="./logout.do">로그아웃</a></li>
-					<li class="cart"><a href="./CartListAction.buy">장바구니(<%=cartCount%>)<span id="cartToCnt"></span></a></li>
-					<li class="mypage"><a href="./mypage.mypage">마이페이지</a></li>
+					<%
+					if(id.equals("admin")){
+					%>
+						<li><a href="./adminMenu.ad">관리자 메뉴</a></li>
+					<%		
+					}else{
+					%>
+						<li class="cart"><a href="./CartListAction.buy">장바구니<span id="cartToCnt"></span></a></li>
+						<li class="mypage"><a href="./mypage.mp">마이페이지</a></li>
+						<li class="order"><a href="#">주문배송</a></li>
+					<%
+					}
+					%>
 				<%
 				}
 				%>
 				<li class="customer"><a href="#">고객센터</a></li>
+				
 				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
 			</ul>
 			</form>
@@ -231,7 +243,7 @@ $(window).scroll(function() {
 					<li><a href="#"><span>7</span></a></li>
 					<li><a href="#"><span>8</span></a></li>
 					<li><a href="#"><span>9</span></a></li>
-					<li><a href="#"><span>0</span></a></li>
+					<li><a href="./Coupon.cp"><span>쿠폰존</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -240,4 +252,9 @@ $(window).scroll(function() {
 	<a id="top_btn" href="#">TOP</a>
 	
 </body>
+<!-- <script type="text/javascript">
+	function adminMenu() {
+		location.href="./adminMenu.ad";
+	}
+</script> -->
 </html>

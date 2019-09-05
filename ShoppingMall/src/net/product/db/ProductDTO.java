@@ -1,18 +1,18 @@
 package net.product.db;
 
 public class ProductDTO {
-	private int product_num;
-	private String category_main;
-	private String category_sub;
-	private String product_name;
+	private int product_num; // 상품번호
+	private String product_name; // 상품이름
+	private String product_subname; // 상품세부이름
+	private int product_price; // 가격
+	private String img_main; // 이미지메인
+	private String img_contents; // 이미지
+	private String category_main; // 메인카테고리
+	private String category_sub; // 서브카테고리
+	private int price_count; // 구매갯수
+	private int product_sale_price; // 할인
+	private String brand; // 브랜드
 	private int product_count;
-	private int product_price;
-	private int product_sale_price;
-	private String img_main;
-	private String img_contents;
-	private String brand;
-	private int price_count;
-	private String product_subname;
 	
 	
 	public String getProduct_subname() {
@@ -87,6 +87,7 @@ public class ProductDTO {
 	public void setProduct_sale_price(int product_sale_price) {
 		this.product_sale_price = product_sale_price;
 	}
+	
 	
 	
 }

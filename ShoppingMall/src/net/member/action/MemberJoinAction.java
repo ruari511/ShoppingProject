@@ -41,13 +41,6 @@ public class MemberJoinAction implements Action{
 		
 		result = mdao.insertMember(dto);
 		
-		
-		
-		if(result == false){
-			System.out.println("회원가입 실패");
-			return null;
-		}
-		
 		/*회원 가입 성공시.... 로그인 페이지로 이동 시킨다.*/
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
 		ActionForward forward=new ActionForward();
@@ -55,11 +48,13 @@ public class MemberJoinAction implements Action{
 		//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
 		forward.setRedirect(true);
 		// ./member/login.jsp 이동할 페이지 주소 저장
-		forward.setPath("./login.do");
+		forward.setPath("./member/alert.jsp");
 		
-		//페이지 이동 방식 여부 값 true와...
-		// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..
-		//new ActionForward()객체를 MemberFrontController로 리턴  
+		if(result == false){
+			System.out.println("회원가입 실패");
+			return null;
+		}
+		
 		return forward;
 	}
 }

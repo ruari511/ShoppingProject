@@ -36,7 +36,25 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>MypageFrontController</servlet-name>
-  	<url-pattern>*.mypage</url-pattern>
+  	<url-pattern>*.mp</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>CouponFrontController</servlet-name>
+  	<servlet-class>net.coupon.action.CouponFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CouponFrontController</servlet-name>
+  	<url-pattern>*.cp</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>AdminFrontController</servlet-name>
+  	<servlet-class>net.admin.action.AdminFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminFrontController</servlet-name>
+  	<url-pattern>*.ad</url-pattern>
   </servlet-mapping>
   
   
