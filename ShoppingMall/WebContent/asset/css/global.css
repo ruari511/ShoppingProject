@@ -327,3 +327,21 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 	background-color: gray;
 	color: white;
 }
+
+#directTop {display:none;position:fixed;bottom:80px;right:40px}
+#directTop button {width:55px;height:55px;background:#fff;border:1px solid #ddd;color:#666;font-size:12px}
+#directTop button > span {display:block;width:14px;height:8px;margin:0 auto 7px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_top_arrow.png") no-repeat 0 -8px}
+#directTop button:hover {background:#555;color:#fff}
+#directTop button:hover > span {background-position:0 0}
+
+
+
+
+#directTop {display:none;position:fixed;bottom:80px;right:40px}
+#directTop button {width:55px;height:55px;background:#fff;border:1px solid #ddd;color:#666;font-size:12px}
+#directTop button > span {display:block;width:14px;height:8px;margin:0 auto 7px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_top_arrow.png") no-repeat 0 -8px}
+#directTop button:hover {background:#555;color:#fff}
+#directTop button:hover > span {background-position:0 0}
+
+
+
