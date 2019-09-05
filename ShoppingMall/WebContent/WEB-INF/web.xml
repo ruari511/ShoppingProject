@@ -57,6 +57,16 @@
   	<url-pattern>*.ad</url-pattern>
   </servlet-mapping>
   
+ <servlet>
+  	<servlet-name>BoardFrontController</servlet-name>
+  	<servlet-class>net.board.action.BoardFrontController</servlet-class>
+ </servlet>
+ 
+  <servlet-mapping>
+  	<servlet-name>BoardFrontController</servlet-name>
+  	<url-pattern>*.bd</url-pattern>
+  </servlet-mapping>
+  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

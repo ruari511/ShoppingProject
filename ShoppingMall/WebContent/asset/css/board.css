@@ -28,7 +28,7 @@
 .board-list-1s tr.notice_fix td:first-child {font-weight:700}
 .board-list-1s tr.notice_fix + tr td{border-top:1px solid #e6e6e6}
 .board-list-1s tr.notice_fix + tr.notice_fix td{border-top:none !important}
-
+.board-list-1s tr td.subject strong {color:#333;font-size:14px;line-height:30px;}
 /* 매장안내 수정 2017-01-05 */
 .list-burial {border-top:2px solid #888;}
 .list-burial li {overflow:hidden;display:table;width:100%;border-bottom:1px solid #e6e6e6;min-height:88px;}
@@ -151,7 +151,7 @@
 .board-list-2s tbody.history tr td {border-left:1px solid #e6e6e6;}
 .board-list-2s tbody.history tr td label {display:inline-block;}
 .board-list-2s tbody.history tr td select {height:28px;font-size:12px;}
-.board-list-2s tbody.history tr td:first-child {border-left:0;}
+.board-list-2s tbody.history .gubun{border-left:0;}
 .board-list-2s tbody.history tr:first-child td:first-child {border-left:0;}
 .board-list-2s tbody.history tr.lineLeft td, .board-list-2s tbody.history tr td.lineLeft {border-left:1px solid #e6e6e6;}
 .board-list-2s tbody.history tr td.lineBtm{vertical-align:top;padding-top:62px;}
@@ -645,6 +645,18 @@
 .board-list-2s.new tr td a.link.del + span.txts{font-weight:bold;}
 .btn_review_all{margin-top:30px;text-align:center;}
 
+.board-list-2s .history2 td{border-left:1px solid #e6e6e6}
+.board-list-2s .history2 tr td:last-of-type{border-right:0;}
+.board-list-2s .history2 td{border-left:1px solid #e6e6e6}
+.board-list-2s .history3 tr td {border-bottom:0;border-left:1px solid #e6e6e6}
+.board-list-2s .history3 tr:first-child td {border-top:1px solid #e6e6e6;} 
+.board-list-2s .history3 tr td:first-child {border-top:1px solid #e6e6e6;border-left:0px solid #e6e6e6} 
+.board-list-2s .merge01.first td {border-top:1px solid #e6e6e6 !important;}
+.board-list-2s tr td .size1s.colorRed {font-weight:700}
+.board-list-2s tr td:last-child strong+.BtnDelete {margin-top:7px !important} 
+.board-list-2s tr td:last-child strong+.color1sSize {margin-top:7px !important}
+.board-list-2s tr td:last-child .color1sSize+.BtnDelete {margin-top:7px !important}
+
 /* 속성검색 */
 .relatedSearch.new{background-color:#fff;border-bottom:1px solid #999;}
 .relatedSearch.new .tit{text-align:left;padding:0 0 0 20px;}
@@ -702,3 +714,14 @@
 .detailSearch.new .tooltip .txt{padding:0 19px 0 6px;font-size:12px;font-weight:bold;font-family:'montserrat';color:#fff;line-height:18px;background:#fc923e;}
 .detailSearch.new .tooltip .txt:after{content:'';display:block;width:0;height:0;position:absolute;bottom:-7px;left:0;border-right:7px solid #fc923e;border-bottom:7px solid transparent;}
 .detailSearch.new .tooltip .toolClose{position:absolute;top:5px;right:5px;width:9px;height:9px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/btn_close_9.png") no-repeat 0 0;}
+
+.title-subconts {width:100%;height:100px;background:url(//image.oliveyoung.co.kr/pc-static-root/image/comm/bg_subconts.gif) repeat-x 0 0;}
+.title-subconts h2 {width:1020px;margin:0 auto;padding:24px 0 0;color:#fff;font-size:40px;line-height:50px;}
+.title-area .tit {float:left;color:#333;font-size:20px;line-height:30px;}
+
+
+#Wrapper .FG01, #Wrapper .FG02, #Wrapper .FG03, #Wrapper .FG04 {display:inline-block;width:70px;height:20px;border-radius:10px;color:#fff;font-size:12px;text-align:center;line-height:20px;}
+#Wrapper .FG01 {background:#969937;}
+#Wrapper .FG02 {background:#a68fcd;}
+#Wrapper .FG03 {background:#ed95b7;}
+#Wrapper .FG04 {background:#f5a031;}

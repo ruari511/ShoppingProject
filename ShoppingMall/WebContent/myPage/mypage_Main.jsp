@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -21,52 +22,74 @@
 	<link rel="stylesheet" href="../asset/css/global.css"/>
 	<link rel="stylesheet" href="../asset/css/contents.css"/>
 	<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
-
 	<script type="text/javascript" src="../asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="../asset/js/common.js"></script>
+	<script type="text/javascript">
+	$(window).ready(function(){
+			$('.select-month > li ').eq(0).addClass('on');
+			
+			
+			$('.search-period').find('.select-month > li ').on('click', function(){
+				check_idx = $(this).index();
+  				$('.serarch-period').find('.select-month > li').removeClass('on').eq(idx).addClass('on');
+    		});
+		});
+	
+	</script>
 </head>
 <body>
 <div id="Wrapper">
 	
 	<div id="Container">
 		<div id="Contents">	
-			
 			<jsp:include page="mypage_topMenu.jsp"/>	
 				<div class="mypage-conts">
 					<script src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
 					<script>
-					$(window).ready(function(){
-					    mypage.header.init();
-					});
-				</script>
-
+						$(window).ready(function(){
+						    mypage.header.init();
+					</script>
+					
 					<!-- 마이페이지 Inner -->
 					<div class="title-area">
 						<h2 class="tit">주문/배송 조회</h2>
 					</div>
-					<ul class="mypage-step">
-						<li><em>0</em> <span>주문접수</span></li>
-						<li><em>0</em> <span>결제완료</span></li>
-						<li><em>0</em> <span>상품준비중</span></li>
-						<li><em>0</em> <span>배송중</span></li>
-						<li><em>0</em> <span>배송완료</span></li>
-					</ul>
+					<!-- <ul class="mypage-step">
+						<li>
+							<em></em>
+							<span>주문접수</span>
+						</li>
+						<li>
+							<em>0</em>
+							<span>결제완료</span>
+						</li>
+						<li>
+							<em>0</em>
+							<span>상품준비중</span>
+						</li>
+						<li>
+							<em>0</em>
+							<span>배송중</span>
+						</li>
+						<li>
+							<em>0</em>
+							<span>배송완료</span>
+						</li>
+					</ul> -->
 
 					<fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
-							<li class="on"><button type="button" data-month="-1">1개월</button></li>
-							<li><button type="button" data-month="-3">3개월</button></li>
-							<li><button type="button" data-month="-6">6개월</button></li>
-							<li><button type="button" data-month="-12">12개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
 						</ul>
-						<div class="select-range">
+						<!-- <div class="select-range">
 							<select id="cal-start-year" title="년도를 선택하세요"
 								style="width: 76px;">
-
 								<option value="2012">2012</option>
 								<option value="2013">2013</option>
-
 								<option value="2014">2014</option>
 								<option value="2015">2015</option>
 								<option value="2016">2016</option>
@@ -92,10 +115,8 @@
 								id="cal-start-day" title="날일을 선택하세요" style="width: 60px;">
 							</select> <label for="cal-start-day">일</label> <span class="des">~</span>
 							<select id="cal-end-year" title="년도를 선택하세요" style="width: 76px;">
-
 								<option value="2012">2012</option>
 								<option value="2013">2013</option>
-
 								<option value="2014">2014</option>
 								<option value="2015">2015</option>
 								<option value="2016">2016</option>
@@ -120,19 +141,11 @@
 							</select> <label for="cal-end-month">월</label> <select id="cal-end-day"
 								title="날일을 선택하세요" style="width: 60px;">
 							</select> <label for="cal-end-day">일</label>
-						</div>
-						<button type="button" class="btnLookup" id="do-search-period">조회</button>
+						</div> -->
+					<!--<button type="button" class="btnLookup" id="do-search-period">조회</button> -->
 					</fieldset>
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/common/searchPeriod.js?dumm=2019080133412"></script>
-					<script>
-						START_DATE   = '';
-						END_DATE     = '';
-						
-						$(document).ready(function(){
-						    SearchPeriod.init();
-						});
-					</script>
+					<br>
+					
 					<table class="board-list-2s mgT20">
 						<caption>주문&amp;배송&amp;내역 목록</caption>
 						<colgroup>
@@ -143,7 +156,7 @@
 							<col style="width: 110px;">
 						</colgroup>
 						<thead>
-							<tr>
+							<tr>	
 								<th scope="col">주문일자</th>
 								<th scope="col">상품</th>
 								<th scope="col">수량</th>
@@ -152,23 +165,64 @@
 							</tr>
 						</thead>
 						<tbody class="history">
-							<tr>
-								<td colspan="5" class="nodata">기간 내 주문내역이 없습니다</td>
-							</tr>
+							<c:if test="${empty buylist }">
+								<tr>
+									<td colspan="5" class="nodata">기간 내 주문내역이 없습니다</td>
+								</tr>
+							</c:if>
+							<c:if test="${!empty buylist}">
+								<c:forEach var="buylist" items="${buylist}">
+										<tr>
+											<td class="gubun">
+											    <span style="display: inline-block; font-weight: bold;">
+											    	<fmt:formatDate pattern="yyyy-MM-dd" value="${buylist.buydate }" />
+											    </span><!-- 주문일  -->
+												<span class="color1s">${buylist.buynum }</span><!-- 주문번호  -->
+											    <a class="btnDetail" href="mypage_BuyListDetail.mp?buynum=${buylist.buynum }">주문상세보기</a> 
+											</td>
+											<td class="subject">
+												<div class="area">
+													<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
+														<img src="./asset/image/${buylist.img_main }"> <!-- 제품이미지 정보 -->
+													</a>
+													<div class="textus">
+														<a class="" href="ProductDetailAction.do?product_num=${buylist.product_num }">
+															<span class="tit">${buylist.product_name }</span> <!-- 제품 제목  -->
+															<%-- <span class="txt">${product.product_sub_name }</span> --%> <!-- 제품 부제목  -->
+														</a>
+													</div>
+												</div>
+											</td>
+											<td class="">${buylist.buy_count }</td> <!-- 제품 구매 수량 -->
+											<td class="colorOrange">${(buylist.product_price - buylist.product_sale_price) * buylist.buy_count }원</td> <!-- 총 구매가  -->
+											<td>
+												<strong>${buylist.delivery_result }</strong>
+												<!-- c:if test="{buylist.delivery_result == 1" 배송완료 -->
+												<!-- <button type="button" class="BtnDelete mgT5">...</button>
+												<button type="button" class="BtnDelete mgT5">상품평쓰기</button>
+												<button type="button" class="BtnDelete mgT5" id="btnDelete">교환신청</button>
+												<button type="button" class="BtnDelete mgT5" id="btnDelete">반품신청</button> -->
+											</td>
+									</tr>	
+								</c:forEach>
+							</c:if>
 						</tbody>
 					</table>
 
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/myorder.js?dumm=2019080133412"></script>
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/gdas.js?dumm=2019080133412"></script>
-					<script>
-		HDC_PATH = $.parseJSON('{"00":"http://nexs.cjgls.com/web/service02_01.jsp?slipno=","10":"http://www.hanjinexpress.hanjin.net/customer/plsql/hddcw07.result?wbl_num=","20":"http://www.lotteglogis.com/personalService/tracking/06/tracking_goods_result.jsp?InvNo=","30":"http://nexs.cjgls.com/web/detail.jsp?slipno=","50":"http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","70":"http://www.ilogen.com/d2d/delivery/invoice_search_popup.jsp?viewType=type2&invoiceNum=","91":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","92":"http://www.kglogis.co.kr/delivery/delivery_result.jsp?item_no=","93":"http://kdexp.com/basicNewDelivery.kd?barcode=","94":null,"200":"http://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE=","210":"http://www.dhl.co.kr/content/kr/ko/express/tracking.shtml?brand=DHL&AWB="}');
 		
-		$(document).ready(function(){
-		    mypage.orderList.init();
-		});
-		</script>
+		
+			<script>
+			$(window).load(function () {
+				/* 주문번호 병합 */
+				$(".gubun").each(function () {
+				    var rows = $(".gubun:contains('" + $(this).text() + "')");
+				    if (rows.length > 1) {
+				        rows.eq(0).attr("rowspan", rows.length);
+				        rows.not(":eq(0)").remove(); 
+				    } 
+				});
+	        });
+			</script>
 
 				</div>
 			</div>
@@ -177,11 +231,11 @@
 			
 		
 			<script>
-				$(document).ready(function() {
+				$(document).ready(function(){
 				    common.gnb.initMypageMenu(); 
-				});
+				};
 			</script>	
+			</div>
 	
-	</div>
 </body>
 </html>
