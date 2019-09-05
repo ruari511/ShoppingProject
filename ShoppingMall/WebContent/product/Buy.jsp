@@ -297,6 +297,7 @@
 		var delivery_address = document.getElementById("sample6_postcode").value;
 		var paytype = document.getElementById("paytype").value;
 		var cardNum = document.getElementById("cardNum").value;
+		var acqrCd = document.getElementById("acqrCd").value;
 		
 		if(delevery_title == ""){
 			alert("배송지명을 입력해주세요.");
@@ -321,6 +322,10 @@
 		} else if(delivery_address == ""){
 			alert("주소를 입력해주세요.");
 			document.getElementById("sample6_postcode").focus();
+			return false;
+		} else if(paytype == "card" && acqrCd == 0){
+			alert("카드를 선택해주세요.");
+			document.getElementById("acqrCd").focus();
 			return false;
 		} else if(paytype == "card" && cardNum == ""){
 			
