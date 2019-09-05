@@ -52,9 +52,11 @@ function goCart() {
 	var product_count = document.getElementById("product_count").value;
 	var pro_count = document.getElementById("pro_count").value;
 	
-	if(id==null){
+	alert("id = " + id + "길이  = " + id.length);
+	
+	if(id == "null" || id.length==0 || id == null){
 		location.href="./login.do";
-	} else{
+	}else{
 		if(pro_count>=product_count){
 		location.href="CartInsertAction.buy?product_num="+product_num+"&product_count="+product_count;
 		}else{
@@ -70,7 +72,7 @@ function goBuy() {
 	var product_count = document.getElementById("product_count").value;
 	var pro_count = document.getElementById("pro_count").value;
 	
-	if(id==null){
+	if(id == "null" || id.length==0 || id == null){
 		location.href="./login.do";
 	} else{
 		if(pro_count>=product_count){
