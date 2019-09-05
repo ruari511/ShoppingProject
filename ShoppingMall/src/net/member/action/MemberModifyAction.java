@@ -45,9 +45,11 @@ public class MemberModifyAction implements Action
 		member.setId(id);
 		member.setPassword(request.getParameter("password"));
 		member.setEmail(request.getParameter("email"));
-		member.setPhone(phone);
+		member.setPhone(request.getParameter("phone"));
+		
 		member.setAddress_main(request.getParameter("address_main"));
 		member.setAddress_detail(request.getParameter("address_detail"));
+		
 		
 		dao.updateMember(member);
 

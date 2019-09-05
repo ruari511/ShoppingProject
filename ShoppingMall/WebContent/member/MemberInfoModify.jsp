@@ -77,6 +77,10 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		<form method="post" action="MemberModifyAction.do" name="form" onsubmit="return checkValue()">
 				
 		<div>
+		<%-- <c:set var="token" value="${memberInfo.phone}" />
+		<c:forTokens var="list" items="${token}" delims="-">
+		${list }<br>
+		</c:forTokens> --%>
 				<h3 class="join_title">
 				<label for="id">아이디</label>
 				</h3>
@@ -136,11 +140,11 @@ function jusoCallBack(roadAddrPart1,addrDetail){
             	</div>
             	</div>
             	
-				<div>
+				<div>	
 				<h3 class="join_title">
 				<label for="phone2">휴대전화 번호 *</label>
 				</h3>
-				<span class="sp" >
+				<!-- <span class="sp" >
 					<select name = "phone1" id="phone1"  class="join" >
 		              <option value="010">010</option>
 		              <option value="011">011</option>
@@ -148,7 +152,8 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		         	</select> - 
 		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" required/> - 
 		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
-		        </span>
+		        </span> -->
+		        <input type ="text" name = "phone" value="${memberInfo.phone}" id="phone" size = "15" required/> - 
 		          	<div class="check_font" id="phoneMessage"></div>
 				</div>
 			<br><br>
