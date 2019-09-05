@@ -109,7 +109,7 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 .header_inner h1 img {display:block;width:248px;height:42px;}
 
 /* 헤더 검색 영역 */
-.header_inner .search_box {float:left;position:relative;width:340px;height:40px;margin:22px 0 0 90px;padding:0 45px 0 20px;border:2px solid #2E2EFE;background:#fff;border-radius:20px}
+.header_inner .search_box {float:left;position:relative;width:340px;height:40px;margin:22px 0 0 90px;padding:0 45px 0 20px;border:2px solid coral;background:#fff;border-radius:20px}
 .header_inner .search_box input[type="text"] {height:36px;border:0;padding:8px 10px 8px 0;font-family:'dotum', '돋움';font-size:12px;outline:0}
 .header_inner .search_box #searchSubmit {position:absolute;top:7px;right:18px;width:21px;height:21px;background:url(../image/ico_search.png) no-repeat 50% 50%;text-indent:-9999px}
 
@@ -167,16 +167,16 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 #Gnb .gnb_menu_list > li.on a span,
 #Gnb .gnb_menu_list > li:hover a span,
 #Gnb .gnb_menu_list > li a:focus span,
-#Gnb .gnb_menu_list > li:active a span {padding-bottom:2px;border-bottom:2px solid #2E2EFE;color:#2E2EFE;}
+#Gnb .gnb_menu_list > li:active a span {padding-bottom:2px;border-bottom:2px solid coral;color:coral;}
 #Gnb .gnb_menu_list > li > a {display:inline-block;height:44px;line-height:44px;color:#000;font-size:15px;font-weight:700;letter-spacing:-0.04em;}
 *+html body #Gnb .gnb_menu_list > li > a{letter-spacing:-2px;}/* ie7 hack */
 #Gnb .gnb_menu_list > li > a.on,
 #Gnb .gnb_menu_list > li > a:hover,
-#Gnb .gnb_menu_list > li > a:focus {color:#2E2EFE}
+#Gnb .gnb_menu_list > li > a:focus {color:coral}
 #Gnb .gnb_menu_list > li > a.new {position:relative}
 #Gnb .gnb_menu_list > li > a.new:after {content:'';position:absolute;top:5px;right:-16px;width:14px;height:14px;background:url(../image/ico_new01.png) no-repeat 0 0;}
 #Gnb .layer_all_menu {position:absolute;top:44px;width:1020px;border:2px solid #2f3030;background:#fff;z-index:20;display:none}
-#Gnb .layer_all_menu .tit_area {height:49px;padding:15px 49px 0;background:#2E2EFE;color:#fff;font-size:16px;}
+#Gnb .layer_all_menu .tit_area {height:49px;padding:15px 49px 0;background:coral;color:#fff;font-size:16px;}
 #Gnb .layer_all_menu.active {display:block}
 #Gnb .all_menu_wrap {display:table;width:100%;background:#fff}  
 #Gnb .all_menu_wrap:after {content:'';display:block;clear:both}
@@ -321,6 +321,7 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
     line-height: 50px;
     text-align: center;
     font-weight: 700;
+    background-color: white;
 }
 
 #top_btn:HOVER {

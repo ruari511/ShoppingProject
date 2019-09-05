@@ -15,12 +15,7 @@
 <body>
 	<div id="Container">
 		<jsp:include page="main/mainBanner.jsp"/>
-		<br>
-		<br>
-		<jsp:include page="main/mainProductSlide.jsp"/>
-		
-		<h1><a href="ProductDetailAction.do?product_num=1">상품테스트</a></h1>
-		
+		<jsp:include page="main/mainProductSlide.jsp"/>				
 	</div>
 </body>
 </html>
