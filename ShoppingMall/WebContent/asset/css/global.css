@@ -320,4 +320,10 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
     width: 50px;
     line-height: 50px;
     text-align: center;
+    font-weight: 700;
+}
+
+#top_btn:HOVER {
+	background-color: gray;
+	color: white;
 }
