@@ -47,8 +47,6 @@ public class MypageBuyListAction implements Action {
 		/*	System.out.println(data_month);*/
 			startdate = getDate(data_month);
 		}
-/*		System.out.println(startdate);
-		System.out.println(enddate);*/
 		
 		//페이지 번호
 		/*int num=Integer.parseInt(request.getParameter("num"));

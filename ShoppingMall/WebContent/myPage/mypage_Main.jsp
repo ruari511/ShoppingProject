@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -175,7 +175,8 @@
 										<tr>
 											<td class="gubun">
 											    <span style="display: inline-block; font-weight: bold;">
-											    	<fmt:formatDate pattern="yyyy-MM-dd" value="${buylist.buydate }" />
+											    	<%-- <fmt:formatDate pattern="yyyy-MM-dd" value="${buylist.buydate }" /> --%>
+											    	${buylist.buydate }
 											    </span><!-- 주문일  -->
 												<span class="color1s">${buylist.buynum }</span><!-- 주문번호  -->
 											    <a class="btnDetail" href="mypage_BuyListDetail.mp?buynum=${buylist.buynum }">주문상세보기</a> 

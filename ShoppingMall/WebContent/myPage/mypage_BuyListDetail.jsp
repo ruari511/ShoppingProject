@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -50,7 +50,7 @@
 				<ul class="infor-data">
 					<li>
 						<span>주문일자&nbsp;&nbsp;:</span>
-						<strong><fmt:formatDate pattern="yyyy-MM-dd" value="${buylist[0].buydate }" /></strong>
+						<strong><%-- <fmt:formatDate pattern="yyyy-MM-dd" value="${buylist[0].buydate }" /> --%>${buylist[0].buydate }</strong>
 					</li>
 					<li>
 						<span>주문번호&nbsp;&nbsp;:</span>
