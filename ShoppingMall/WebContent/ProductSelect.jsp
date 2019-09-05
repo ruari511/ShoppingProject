@@ -142,6 +142,21 @@
 					<input type="submit" value="검색" title="검색" onclick="return reSearch()">
 				</div>
 			</div>
+			
+			<c:if test="${count == 0}">
+			<div class="search_no_data">		<!--realQuery-->
+				<p>검색하신 <strong> ${query}</strong>에 대한 <strong>검색</strong> 결과가 없습니다.</p>
+				<div class="usage-guide">
+					<p>다시 검색해 보세요</p>
+					<ul>
+						<li>검색어의 철자가 정확한지 확인해보세요.</li>
+						<li>한글을 영어로 혹은 영어를 한글로 입력했는지 확인해보세요.</li>
+						<li>검색어의 띄어쓰기를 다르게 해보세요.</li>
+					</ul>
+				</div>
+			</div>
+			</c:if>
+			<c:if test="${count > 0}">
 			<!-- 상품 속성 정보 검색 서비스 개선 -->
 			<div class="detailSearch new">
 			<!-- 카테고리 -->
@@ -787,6 +802,7 @@
 					<c:set var="j" value="${j+1}"/>
 				</c:forEach>
 			</div>
+			</c:if>
 			<!-- //pageing end -->			
 		<!-- </div> -->
 		
