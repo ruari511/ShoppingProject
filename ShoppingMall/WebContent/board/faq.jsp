@@ -44,7 +44,9 @@
 	</script>
 </head>
 <body>
-
+<%
+String id=(String)session.getAttribute("id");
+%>
 <div id="Wrapper">
 	<div id="Container">
 		<div id="Contents">	
@@ -142,10 +144,14 @@
 											<p>${faqList.content}<!-- qna 내용  --></p>
 											<p></p>
 											<!-- admin일때  -->
+											<% 
+											if(id.equals("admin")){
+											%>
 											<div align="right">
 												<a href="./faqUpdate.bd?num=${faqList.num }"> 수정 </a>
 												<a href="./faqDelete.bd?num=${faqList.num }"> 삭제 </a>
 											</div>
+											<% } %>
 											<!-- admin일때//  -->
 										</li>
 									</ul>
@@ -186,6 +192,11 @@
 			</c:if>
 		</div>
 				<!-- 페이지번호  -->
+		<% 
+			if(id.equals("admin")){
+		%>
+			<a href="./faqwrite.bd"> 글쓰기 </a>
+		<%} %>
 		</div>
 	</div>
 	

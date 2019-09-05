@@ -34,9 +34,9 @@
 				<h1>고객센터 <span>무엇을 도와드릴까요?</span></h1>
 			</div>
 			<ul class="comm1sTabs threeSet customer">
-				<li id="tabFaq" class="on"><a href="http://www.oliveyoung.co.kr/store/counsel/getFaqList.do">FAQ</a></li>
+				<li id="tabFaq" class="on"><a href="./faq.bd">FAQ</a></li>
 				<li id="tab1on1"><a href="javascript:common.link.moveQnaList();">1:1문의</a></li>
-				<li id="tabNotice"><a href="http://www.oliveyoung.co.kr/store/counsel/getNoticeList.do">공지사항</a></li>
+				<li id="tabNotice"><a href="./notice.bd">공지사항</a></li>
 			</ul>
 			
 			<table class="board-write-1s mgT40">
