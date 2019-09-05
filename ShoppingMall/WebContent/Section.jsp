@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
+	
 </head>
 <body>
 	<div id="Container">
@@ -22,5 +23,6 @@
 		<h1><a href="ProductDetailAction.do?product_num=1">상품테스트</a></h1>
 		
 	</div>
+	
 </body>
 </html>

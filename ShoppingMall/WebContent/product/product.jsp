@@ -1,14 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="net.review.db.ReviewDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@page import="net.review.db.review_DAO"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
-<link rel="stylesheet" href="./asset/css/product.css"/> 
-<% String id = (String)session.getAttribute("id"); %>
+<link rel="stylesheet" href="./asset/css/product.css"/>
+
+	<!-- BootStrap CDN -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="path/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resource/js/jquery-1.12.1.js"/>"></script>
+
+
+<% 
+	String id = (String)session.getAttribute("id");
+	
+	//파라미터 한글처리
+	request.setCharacterEncoding("utf-8"); 
+	
+	 int tot = 0;
+	 // Null값일때 형변환 하면 에러가나니.. 체크
+	 if(request.getAttribute("tot") != null){
+				 
+		 tot = (Integer)request.getAttribute("tot");
+		 
+	 }
+	 
+	 review_DAO dao = new review_DAO();
+	 
+%>
+
 <script type="text/javascript">
 function minuscount(num){
 	var product_price = document.getElementById("product_price").value;
@@ -32,18 +67,32 @@ function pluscount(num){
 	document.getElementById("totalPriceTxt").innerHTML = product_price*count;
 }
 
+
 function product_detailOn(){
 	document.getElementById("productInfo").setAttribute("class", "on");
 	document.getElementById("buyInfo").removeAttribute("class");
+	document.getElementById("reviewInfo").removeAttribute("class");
 	document.getElementById("product_detail").style.display="block";
 	document.getElementById("buy_detail").style.display="none";
+	document.getElementById("reviewInfo_detail").style.display="none";
 }
 
 function buy_detailOn(){
 	document.getElementById("buyInfo").setAttribute("class", "on");
 	document.getElementById("productInfo").removeAttribute("class");
-	document.getElementById("product_detail").style.display="none";
+	document.getElementById("reviewInfo").removeAttribute("class");
 	document.getElementById("buy_detail").style.display="block";
+	document.getElementById("product_detail").style.display="none";
+	document.getElementById("reviewInfo_detail").style.display="none";
+}
+
+function review_detailOn(){
+	document.getElementById("reviewInfo").setAttribute("class", "on");
+	document.getElementById("buyInfo").removeAttribute("class");
+	document.getElementById("productInfo").removeAttribute("class");
+	document.getElementById("reviewInfo_detail").style.display="block";
+	document.getElementById("product_detail").style.display="none";
+	document.getElementById("buy_detail").style.display="none";
 }
 
 function goCart() {
@@ -84,13 +133,42 @@ function goBuy() {
 		
 	}
 }
+
+
+function ordersubmit(a) {
+	document.getElementById("order").value = a;
+	document.getElementById("review_select").value = "review_In";
+	var frm2 = document.getElementById("frm2");
+	frm2.submit();
+	
+}
+
+function starChange(a) {
+	document.getElementById("review_star").value = a.value;
+
+}
+
+
+// 별점
+$.fn.generateStars = function() {
+    return this.each(function(i,e){$(e).html($('#star-prototype').width($(e).text()*16));});
+};
+
+// 숫자 평점을 별로 변환하도록 호출하는 함수
+$(function() {
+	$('#star-prototype').generateStars();
+ 
+});
+
+
+
+
 </script>
 </head>
 <body>
 <!-- header -->
 	<jsp:include page="../include/Header.jsp"/>
 <!-- header// -->
-	
 <div id="Container">
 	<div id="Contents">
 	<c:set var="product" value="${requestScope.pdto}" />
@@ -145,7 +223,7 @@ function goBuy() {
 					<img src="./asset/image/${product.img_main}" alt="상품명 이미지">
 				</div>
 				<ul class="prd_thumb_list">
-					<li class="sel"><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지""></a></li>
+					<li class="sel"><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
 					<li class=""><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
 				</ul>
 			</div>
@@ -233,15 +311,27 @@ function goBuy() {
 		<div class="curation_area_a003_lead"></div>
 		<!-- 큐레이션 2차 E -->
 		<ul class="prd_detail_tab" id="tabList">
-			<li class="on" id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo" style="cursor: pointer;">상세정보</a></li>
-			<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo" style="cursor: pointer;">구매정보</a></li>
-			<li id="reviewInfo"><a href="javascript:;" class="goods_reputation" style="cursor: pointer;">상품평<span>(0)</span></a></li>
-			<li id="qnaInfo"><a href="javascript:;" class="goods_qna" style="cursor: pointer;">Q&amp;A<span>(1)</span></a></li>
+			<c:if test="${review_select == null}">
+				<li class="on" id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo">상세정보</a></li>
+				<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo">구매정보</a></li>
+				<li id="reviewInfo"><a onclick="review_detailOn();" class="goods_reputation">상품평<span>(${requestScope.review_cnt})</span></a></li>
+				<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
+			</c:if>
+			<c:if test="${review_select != null}">
+				<li id="productInfo"><a onclick="product_detailOn();" class="goods_detailinfo">상세정보</a></li>
+				<li id="buyInfo"><a onclick="buy_detailOn();" class="goods_buyinfo">구매정보</a></li>
+				<li class="on" id="reviewInfo"><a onclick="review_detailOn();" class="goods_reputation">상품평<span>(${requestScope.review_cnt})</span></a></li>
+				<li id="qnaInfo"><a href="javascript:;" class="goods_qna">Q&amp;A<span>(1)</span></a></li>
+			</c:if>
 		</ul>
-		
-		
+
 		<!-- 상세정보 탭이 on일경우 -->
-		<div class="tabConts prd_detail_cont show" id="product_detail" style="display:block;">
+		<c:if test="${review_select == null}">
+			<div class="tabConts prd_detail_cont" id="product_detail" style="display:block;">
+		</c:if>
+		<c:if test="${review_select != null}">
+			<div class="tabConts prd_detail_cont" id="product_detail" style="display:none;">
+		</c:if>
 			<div class="detail_area">
 				<div class="contEditor">
 					<img alt="" src="./asset/image/${product.img_contents}">
@@ -252,7 +342,6 @@ function goBuy() {
 			</div>
 		</div>
 		<!-- 상세정보 탭이 on일경우 -->
-		
 		
 		
 		
@@ -326,9 +415,358 @@ function goBuy() {
 				</dd>
 			</dl>
 		</div>
-		<!-- 구매정보 탭이 on일경우 -->
+		<!-- 구매정보 탭이 on일경우 -->		
+
+
+		<%-- review 리스트 서블릿 호출 --%>
+		<c:url var="review_list" value="review_list.credu"></c:url>
+		<%-- review 작성 서블릿 호출 --%>
+		<c:url var="review_write" value="review_write.credu"></c:url>
+		
+		<%
+			String product_num = request.getParameter("product_num");
+		%>
+		
+		
+<c:set var="review_select" value="${requestScope.review_select}"/>
+<!-- 리뷰정보 탭 -->
+<c:if test="${review_select == null}">
+	<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:none;">
+</c:if>
+
+<c:if test="${review_select != null}">
+	<div class="tabConts prd_detail_cont reviewInfo" id="reviewInfo_detail" style="display:block;">
+</c:if>
+
+<!--평균별점집계 start-->
+<div class="product_rating_area">
+   <div class="inner clrfix">
+      <c:forEach var="ReviewDTO" items="${requestScope.reviewlist}" end="0">
+         <div class="grade_img">
+            <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
+         </div>
+         <div class="star_area">
+            <p class="total">총 <em>${requestScope.review_cnt}</em>건의 고객상품평</p>
+            <p class="num"><strong>${requestScope.staravg}</strong><span>점 / 5점</span></p>
+            <ul class="star_list">
+				 <span id="star-prototype">${requestScope.staravg}</span>
+          </ul>
+       </div> 
+		<div class="graph_area">
+			<ul class="graph_list">
+				<li>
+					<span class="per">70%</span>
+					<div class="graph"><span style="height:70%;"></span></div>
+					<span class="txt">5점</span>
+				</li>
+				<li>
+					<span class="per">16%</span>
+					<div class="graph"><span style="height:16%;"></span></div>
+					<span class="txt">4점</span>
+				</li>
+				<li>
+					<span class="per">4%</span>
+					<div class="graph"><span style="height:4%;"></span></div>
+					<span class="txt">3점</span>
+				</li>
+				<li>
+					<span class="per">3%</span>
+					<div class="graph"><span style="height:3%;"></span></div>
+					<span class="txt">2점</span>
+				</li>
+				<li>
+					<span class="per">7%</span>
+					<div class="graph"><span style="height:7%;"></span></div>
+					<span class="txt">1점</span>
+				</li>
+			</ul>
+		</div>                    
+         <div class="write_info">
+            <dl>
+               <dt>상품평을 써보세요.</dt>
+               <dd>고객님의 소중한 상품평을 공유하고 <br>최대 CJ ONE 160P도 받아가세요.</dd>
+            </dl>
+            <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
+         </div>
+       </c:forEach>
+   </div>
+</div>
+
+<!--평균별점집계 end-->
+
+<!-- 사진탭 start-->
+
+<h3 class="tit_type thum_tit">상품평 이미지</h3>
+<div class="review_thum">
+	<ul class="inner clrfix">
+	<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="11" varStatus="idx">
+		<c:if test="${idx.index != 11}">
+		<li>
+			<a href="">               
+				<span>
+					<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+				</span>
+			</a>
+		</li>
+		</c:if>
+		<c:if test="${idx.index == 11}">
+		<li>
+			<a href="" class="more">
+				<span>
+					<span><em>더보기</em></span>
+					<img src="./asset/image/product_sum.jpg" class="thum">
+				</span>
+			</a>
+		</li>
+		</c:if>
+	</c:forEach>
+		
+	</ul>
+</div>
+
+<!-- 사진탭 end-->
+
+
+<!-- 상품 정렬 조건 영역 -->
+<div class="cate_align_box">
+<c:set var="product" value="${requestScope.product_num}" />
+	<div class="align_sort"> 
+		<form action="./ProductDetailAction.pro" id="frm2" method="get">
+			<c:set var="order" value="${requestScope.order}"/>
+				<ul>
+					<c:choose>
+						<c:when test="${order == null}">
+							<li class="on"><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'insert_product'}">
+							<li class="on"><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'high_like'}">
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li class="on"><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'high_star'}">
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li class="on"><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+						<c:when test="${order eq 'low_star'}">
+							<li><a onclick="ordersubmit('insert_product');" style="cursor: pointer;">최신순</a></li>
+							<li><a onclick="ordersubmit('high_like');" style="cursor: pointer;">도움순</a></li>
+							<li><a onclick="ordersubmit('high_star');" style="cursor: pointer;">높은 별점순</a></li>
+							<li class="on"><a onclick="ordersubmit('low_star');" style="cursor: pointer;">낮은 별점순</a></li>
+						</c:when>
+				</c:choose>
+			</ul>
+			<input type="hidden" name="order" id="order" value="insert_product">
+			<input type="hidden" name="product_num" value="${product_num}">
+			<input type="hidden" name="review_select" id="review_select">
+		</form>
 	</div>
 </div>
+<!--// 상품 정렬 조건 영역 -->
+
+<!-- 상품평 리스트 start -->
+<div class="review_list_wrap">
+	<ul class="inner_list" id="gdasList">
+	<c:forEach var="ReviewDTO" items="${requestScope.reviewlist}">
+		<li>
+		<div class="info">
+			<span class="review_point">
+				<span class="point" style="font-size: 25px; color: orange;">
+					
+					<%-- 별점 --%>
+					<c:choose>
+						
+						<%-- if(a == 1){ --%>
+						<c:when test="${ReviewDTO.review_star == 1}">
+							<td>★☆☆☆☆</td>
+						</c:when>
+						<%-- if(a == 2){ --%>
+						<c:when test="${ReviewDTO.review_star == 2}">
+							<td>★★☆☆☆</td>
+						</c:when>
+						<%-- if(a == 3){ --%>
+						<c:when test="${ReviewDTO.review_star == 3}">
+							<td>★★★☆☆</td>
+						</c:when>
+						<%-- if(a == 4){ --%>
+						<c:when test="${ReviewDTO.review_star == 4}">
+							<td>★★★★☆</td>
+						</c:when>
+						<%-- if(a == 5){ --%>
+						<c:when test="${ReviewDTO.review_star == 5}">
+							<td>★★★★★</td>
+						</c:when>
+						
+						
+					</c:choose>
+				</span>
+			</span>
+			
+			<div class="review_date">         
+				<span class="mbrId">${ReviewDTO.id}</span>        
+				<span>${ReviewDTO.review_regdate}</span>        
+			</div>     
+		</div>    
+		     
+		<div class="review_cont"> 
+		
+		<div class="review_thum">
+			<ul class="inner clrfix">
+			<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="0" varStatus="last">
+				<li>
+					<a href="">
+						<span>
+							<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+						</span>
+					</a>
+				</li>
+			</c:forEach>
+			</ul>
+		</div>
+		                        
+			<p class="txt_oneline">${ReviewDTO.review_title}</p>             
+			<div class="txt_inner">
+				${ReviewDTO.review_content}
+			</div>
+			
+			<div class="recom_area">    
+					<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+			</div>
+		</div> 
+		</li>
+	</c:forEach>
+	</ul>
+</div>
+
+
+<div class="pageing">
+	<c:set var="i" value="1" />
+	<c:set var="j" value="0" />
+	<c:set var="startRow" value="${requestScope.startRow}"/>
+	<c:set var="product" value="${requestScope.product_num}" />
+	<c:set var="cnt" value="${requestScope.review_cnt}" />
+	<c:set var="returnOrder" value="${requestScope.returnOrder}" />
+	<c:forEach begin="0" end="${cnt}" varStatus="idx">
+		<c:if test="${idx.index % 15 == 0}">
+			<c:choose>
+				<c:when test="${startRow==j}"><a href="./ProductDetailAction.pro?product_num=${product}&startRow=${(i-1)*15}&order=${returnOrder}&review_select=review_In" title="Paging" class="on"> ${idx.index % 15 + i} </a></c:when>
+				<c:otherwise><a href="./ProductDetailAction.pro?product_num=${product}&startRow=${(i-1)*15}&order=${returnOrder}&review_select=review_In" title="Paging"> ${idx.index % 15 + i} </a></c:otherwise>
+			</c:choose>
+			<c:set var="i" value="${i+1}"/>
+		</c:if>
+			<c:set var="j" value="${j+1}"/>
+	</c:forEach>
+</div>
+
+
+
+
+
+<!-- Modal -->
+  	<div class="modal fade" id="myModal" role="dialog">
+    	<div class="modal-dialog modal-lg">
+      	<!-- Modal content-->
+      	<div class="modal-content">
+	        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+        <div class="modal-body">
+			<div class="panel-group">
+			<div class="panel panel-success" style="margin-top: 10px;">
+				<div class="panel-heading">Goods Review</div>
+				<div class="panel-body">
+					<%-- form --%>
+					<form class="form-horizontal" role="form" action="${review_write}" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label class="control-label col-sm-2">작성자(ID):</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">제목:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="review_title" name="review_title" placeholder="Title">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">내용:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5"	placeholder="review_content" name="review_content" id="review_content"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="1" checked="checked">★☆☆☆☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="2">★★☆☆☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="3">★★★☆☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="4">★★★★☆</label> -->
+<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="5">★★★★★</label> -->
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="1" checked="checked">★☆☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" value="2">★★☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="3">★★★☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="4">★★★★☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio"  value="5">★★★★★</label>
+									<input type="hidden" name="review_star" id="review_star" value="1">
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-success">작 성</button>
+								<button type="reset" class="btn btn-danger">초기화</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal끝 -->
+
+		</div> <!-- review 정보탭 끝부분 -->
+<!-- 리뷰정보 탭이 on이면서 startRow 없을때 -->		
+	</div> <!-- div id=contonts -->
+</div> <!-- div id=container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
 	<div id="directTop" style="display: block;">
 		<button><span></span>TOP</button>
@@ -338,5 +776,6 @@ function goBuy() {
 	<!-- #Footer -->
 	<jsp:include page="../include/Footer.jsp"/>
 	<!-- //#Footer -->
+	
 </body>
 </html>

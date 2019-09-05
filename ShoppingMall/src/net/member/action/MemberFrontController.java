@@ -163,6 +163,9 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+		
+		//find_ID.jsp에서... "찾기"버튼을 눌렀을때.. 처리 요청받기!
+		//사용자가 입력한 email을 request영역에 담아오기
 		}
 		
 		//주소 이동
