@@ -451,42 +451,21 @@ $(function() {
             <ul class="star_list">
 				 <span id="star-prototype">${requestScope.staravg}</span>
           </ul>
-       </div> 
-		<div class="graph_area">
-			<ul class="graph_list">
-				<li>
-					<span class="per">70%</span>
-					<div class="graph"><span style="height:70%;"></span></div>
-					<span class="txt">5점</span>
-				</li>
-				<li>
-					<span class="per">16%</span>
-					<div class="graph"><span style="height:16%;"></span></div>
-					<span class="txt">4점</span>
-				</li>
-				<li>
-					<span class="per">4%</span>
-					<div class="graph"><span style="height:4%;"></span></div>
-					<span class="txt">3점</span>
-				</li>
-				<li>
-					<span class="per">3%</span>
-					<div class="graph"><span style="height:3%;"></span></div>
-					<span class="txt">2점</span>
-				</li>
-				<li>
-					<span class="per">7%</span>
-					<div class="graph"><span style="height:7%;"></span></div>
-					<span class="txt">1점</span>
-				</li>
-			</ul>
-		</div>                    
+       </div>               
          <div class="write_info">
             <dl>
                <dt>상품평을 써보세요.</dt>
                <dd>고객님의 소중한 상품평을 공유하고 <br>최대 CJ ONE 160P도 받아가세요.</dd>
             </dl>
-            <p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
+           
+            <c:if test="<%=id != null %>">
+            	<p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
+            </c:if>
+            
+            <c:if test="<%=id == null %>">
+            	<p class="alignCenter"><button class="btnInquiry" onclick="location.href='./login.do'">로그인 해주세요</button></p>
+            </c:if>
+            
          </div>
        </c:forEach>
    </div>
@@ -504,7 +483,7 @@ $(function() {
 		<li>
 			<a href="">               
 				<span>
-					<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" alt="">
 				</span>
 			</a>
 		</li>
@@ -622,26 +601,33 @@ $(function() {
 		<div class="review_cont"> 
 		
 		<div class="review_thum">
+		${ReviewDTO.review_img}
+			<c:if test="${ReviewDTO.review_img != null}">
 			<ul class="inner clrfix">
-			<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="0" varStatus="last">
 				<li>
 					<a href="">
 						<span>
-							<img src="./asset/image/${ReviewAll.review_img}" class="thum" alt="">
+							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" alt="">
 						</span>
 					</a>
 				</li>
-			</c:forEach>
 			</ul>
+			</c:if>
 		</div>
-		                        
 			<p class="txt_oneline">${ReviewDTO.review_title}</p>             
 			<div class="txt_inner">
 				${ReviewDTO.review_content}
 			</div>
 			
 			<div class="recom_area">    
+			<c:if test="<%=id != null %>">
 					<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+			</c:if>
+			
+			<c:if test="<%=id == null %>">
+					<a type="button" class="btn_recom" onclick="location.href='./login.do'">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+			</c:if>
+			
 			</div>
 		</div> 
 		</li>
@@ -715,19 +701,18 @@ $(function() {
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="radio">
-<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="1" checked="checked">★☆☆☆☆</label> -->
-<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="2">★★☆☆☆</label> -->
-<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="3">★★★☆☆</label> -->
-<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="4">★★★★☆</label> -->
-<!-- 									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="5">★★★★★</label> -->
-									<label class="radio-inline"> <input type="radio" name="star_radio"  value="1" checked="checked">★☆☆☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio" value="2">★★☆☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio"  value="3">★★★☆☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio"  value="4">★★★★☆</label>
-									<label class="radio-inline"> <input type="radio" name="star_radio"  value="5">★★★★★</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="1" checked="checked">★☆☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="2">★★☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="3">★★★☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="4">★★★★☆</label>
+									<label class="radio-inline"> <input type="radio" name="star_radio" onclick="starChange(this);" value="5">★★★★★</label>
 									<input type="hidden" name="review_star" id="review_star" value="1">
 								</div>
 							</div>
+						</div>
+						
+						<div class="col-sm-10">
+							<label class="control-label col-sm-2">파일 선택: </label> <input type="file" name="review_img" id="review_img"/><br>
 						</div>
 						
 						<div class="form-group">
@@ -749,21 +734,9 @@ $(function() {
     </div>
   </div>
 <!-- Modal끝 -->
-
-		</div> <!-- review 정보탭 끝부분 -->
-<!-- 리뷰정보 탭이 on이면서 startRow 없을때 -->		
+		</div> <!-- review 정보탭 끝부분 -->	
 	</div> <!-- div id=contonts -->
 </div> <!-- div id=container -->
-
-
-
-
-
-
-
-
-
-
 
 
 

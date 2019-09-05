@@ -46,8 +46,8 @@ public class review_DAO {
 			con = getConnection();
 			
 			// SQL 문
-			String sql = "INSERT INTO reviewboard(id, product_num, review_title, review_content, like_count, review_star, review_regdate)"
-					+ " VALUES(?, ?, ?, ?, 0, ?, now())";
+			String sql = "INSERT INTO reviewboard(id, product_num, review_title, review_content, like_count, review_star, review_regdate, review_img)"
+					+ " VALUES(?, ?, ?, ?, 0, ?, now(),?)";
 
 			pstmt=con.prepareStatement(sql);
 
@@ -56,6 +56,7 @@ public class review_DAO {
 			pstmt.setString(3, dto.getReview_title());
 			pstmt.setString(4, dto.getReview_content());
 			pstmt.setInt(5, dto.getReview_star());
+			pstmt.setString(6, dto.getReview_img());
 
 			// SQL 실행
 			pstmt.executeUpdate();
@@ -94,7 +95,7 @@ public class review_DAO {
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			sql = "select * from (select review_num as rnum, a1.* "
-					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate FROM reviewboard) a1) a2 "
+					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate, review_img FROM reviewboard) a1) a2 "
 					+ "where product_num = ? ORDER BY review_num DESC limit ? , ? ";
 			
 			pstmt=con.prepareStatement(sql);
@@ -126,7 +127,8 @@ public class review_DAO {
 				dto.setLike_count(rs.getInt("like_count"));
 				dto.setReview_star(review_star);
 				dto.setReview_regdate(review_regdate);
-
+				dto.setReview_img(rs.getString("review_img"));
+				
 				list.add(dto);
 			}
 
@@ -166,7 +168,7 @@ public class review_DAO {
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			sql = "select * from (select review_num as rnum, a1.* "
-					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate FROM reviewboard) a1) a2 "
+					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate, review_img FROM reviewboard) a1) a2 "
 					+ "where product_num = ?"
 					+ order + " limit ? , ? ";
 					
@@ -188,7 +190,7 @@ public class review_DAO {
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
 				int review_star = rs.getInt("REVIEW_STAR"); // 별점
 				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
-
+				System.out.println("img = " + rs.getString("review_img"));
 				// 빈객체 생성
 				ReviewDTO dto = new ReviewDTO();
 
@@ -200,6 +202,7 @@ public class review_DAO {
 				dto.setLike_count(rs.getInt("like_count"));
 				dto.setReview_star(review_star);
 				dto.setReview_regdate(review_regdate);
+				dto.setReview_img(rs.getString("review_img"));
 
 				list.add(dto);
 			}
@@ -271,7 +274,7 @@ public class review_DAO {
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			sql = "select * from (select review_num as rnum, a1.* "
-					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate, img FROM reviewboard where img is not null && img != '') a1) a2 "
+					+ "from (select review_num, id, product_num, review_title, review_content, like_count, review_star, review_regdate, review_img FROM reviewboard where review_img is not null && review_img != '') a1) a2 "
 					+ "where product_num = ? ORDER BY review_num DESC";
 			
 			pstmt=con.prepareStatement(sql);
@@ -301,7 +304,7 @@ public class review_DAO {
 				dto.setLike_count(rs.getInt("like_count"));
 				dto.setReview_star(review_star);
 				dto.setReview_regdate(review_regdate);
-				dto.setReview_img(rs.getString("img"));
+				dto.setReview_img(rs.getString("review_img"));
 				
 				list.add(dto);
 			}

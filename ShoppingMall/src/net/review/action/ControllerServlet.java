@@ -55,11 +55,11 @@ public class ControllerServlet extends HttpServlet {
 			site = "review_write";
 			
 		}
-		else if(url.equals("ProductDetailAction.pro")){
-			// review.credu 요청
-			site = "ProductDetailAction";
-			
-		}
+//		else if(url.equals("ProductDetailAction.pro")){
+//			// review.credu 요청
+//			site = "ProductDetailAction";
+//			
+//		}
 		else if(url.equals("review_delete.credu")){
 			// review_delete.credu 요청
 			site = "review_delete";

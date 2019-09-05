@@ -271,7 +271,7 @@
 
 .product_rating_area{margin-top:20px;border-top:2px solid #333;}
 .product_rating_area .inner{height:231px;border-bottom:1px solid #ddd;}
-.product_rating_area .grade_img{float:left;width:170px;height:231px;border-right:1px solid #ddd;}
+.product_rating_area .grade_img{float:left;width:240px;height:231px;border-right:1px solid #ddd;}
 .product_rating_area .grade_img .img_face{margin:54px 0 0 0;font-size:16px;color:#000;font-weight:bold;text-align:center;}
 .product_rating_area .grade_img .img_face > span.grade{display:block;width:100px;height:100px;margin:0 auto;margin-bottom:8px;}
 .product_rating_area .grade_img .img_face > em{display:block;text-align:center;font-style:normal;}
@@ -281,7 +281,7 @@
 .product_rating_area .grade_img .img_face > span.grade.grade3{background-position:-200px 0;}
 .product_rating_area .grade_img .img_face > span.grade.grade4{background-position:-100px 0;}
 .product_rating_area .grade_img .img_face > span.grade.grade5{background-position:0 0;}
-.product_rating_area .star_area{float:left;width:254px;padding:43px 0 0 0;}
+.product_rating_area .star_area{float: left;height: 231px;width: 441px;padding: 43px 0 0 0;border-right: 1px solid #ddd;;}
 .product_rating_area .star_area .total{margin-bottom:30px;text-align:center;font-size:16px;color:#000;font-weight:bold;}
 .product_rating_area .star_area .total em{font-style:normal;font-family:'montserrat'}
 .product_rating_area .star_area .num{margin-bottom:24px;line-height:40px;color:#000;font-weight:bold;text-align:center;}
