@@ -37,8 +37,17 @@ form#join {
 .joinin{
 	margin: 50px 0 0 160px;
 }
-input#roadAddrPart1 {
+.address_main {
     width: 400px;
+    list-style: none;
+	padding: 0 20px;
+    height: 50px;
+    line-height: 60px;
+    vertical-align: middle;
+  	border-radius: 1px 1px 5px 5px;
+    font-family: 'montserrat', 'noto';
+	border: solid 1px #dadada;
+	font-size: 15px;
 }
 .adbtn {
     height: 50px;
@@ -62,7 +71,7 @@ h1.tit {
 input#m, #g {
     margin: 4px 0 0 5px;
 }
-.submit, .cancel{
+.submit, .cancel {
 	text-align: center;
     color: #fff;
     width: 30%;
@@ -83,6 +92,23 @@ input#m, #g {
 }
 .join_SR{
 	margin: 60px 0 0 0;
+}
+.fontphone{
+	    font-size: 36px;
+}
+
+.phone1{
+    width: 50px;
+    height: 50px;
+    margin: 0 -11px 0 0;
+}
+.phone2{
+    width: 50px;
+    height: 50px;
+}
+.phone3{
+    width: 50px;
+    height: 50px;
 }
 /* 회원가입 */
 
@@ -161,3 +187,57 @@ input.form-control{
 	margin: 0 0 0 0;
 }
 /* 로그인 */
+
+/* 회원정보 수정 */
+.update {
+    border: solid 1px #dadada;
+    border-radius: 5px;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 150px;
+}
+.upfull{
+	font-size: 14px;
+	margin: 30px;
+	vertical-align: middle;
+}
+#email_sel {
+    height: 30px;
+}
+.update_a {
+    border: solid 1px #dadada;
+    border-radius: 5px;
+    height: 30px;
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+    width: 250px;
+}
+.adbtn_up{
+	height: 30px;
+	margin: 0 0 0 8px;
+    border-radius: 1px 1px 5px 5px;
+    width: 90px;
+    background-color: #969937;
+    color: #fff;
+    font-size: 15px;
+}
+
+.upphone{
+	border: solid 1px #dadada;
+    border-radius: 5px;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 100px;
+
+}
+.upbtn{
+	margin: 15px 0 0 0;
+	 height: 30px;
+	 width: 100px;
+	 background-color: #969937;
+	 color: #fff;
+}
+
+/* 회원정보 수정 */

@@ -26,7 +26,7 @@ public class MemberJoinAction implements Action{
 		dto.setName(request.getParameter("name")); //회원 이름 저장
 		dto.setBirth_date(request.getParameter("birth_date"));
 		dto.setGender(request.getParameter("gender"));
-		dto.setEmail(request.getParameter("email"));//회원 이메일 저장
+		dto.setEmail(request.getParameter("email_1")+"@"+request.getParameter("email_2"));//회원 이메일 저장
 		dto.setReg_date(new Timestamp(System.currentTimeMillis()));//회원가입 시간 저장
 		dto.setAddress_main(request.getParameter("address_main")); //회원 주소 저장
 		dto.setAddress_detail(request.getParameter("address_detail"));

@@ -44,6 +44,11 @@
                   });
                </script>
 <script type="text/javascript">
+function memberDrop() {
+	window.open("member_Drop.jsp", "회원 탈퇴", "width=500, height=300");
+}
+
+
 		// 비밀번호 미입력시 경고창
 		function checkValue(){
 			if(!document.deleteform.password.value){
@@ -77,6 +82,7 @@
       <li>아이티영 이용약관 동의 철회 시에도 IT ONE 멤버십 서비스 및 타 제휴 브랜드의 이용을 위해 회원님의 개인정보 및 거래정보는 IT ONE 회원 탈퇴 시까지 보존됩니다.</li>
       <li>아이티영 이용약관 동의를 철회한 후에라도 해당 약관에 다시 동의하시면 서비스를 이용할 수 있습니다.</li>
       <li>진행 중인 전자상거래 이용내역(결제/배송/교환/반품 중인 상태)이 있거나 고객상담 및 이용하신 서비스가 완료되지 않은 경우 서비스 철회 하실 수 없습니다.</li>
+      <li>아이티영 탈퇴를 방지하여 탈퇴버튼을 작게 만들었습니다.</li>
    </ul>
 	
 	
@@ -84,17 +90,26 @@
 	<form name="deleteform" method="post" action="./MemberDeleteAction.do"
 			onsubmit="return checkValue()">
 		
-			<table align="center">
+			<table width="100%">
+			<br>
 				<tr>
-					<td>회원 탈퇴를 하실려면 아래에 비밀번호를 입력해주세요</td>
+					<td align="center">회원 탈퇴를 하실려면 아래에 비밀번호를 입력해주세요</td>
 				</tr>
 				<tr>
-					<td><input type="password" name="password" maxlength="50" border="2"></td>
+					<td></td>
 				</tr>
-			</table>
+				<tr>
+					<td align="center" ><input type="password" name="password" maxlength="50" border="2" border="1" style="font-size:17px; height:30px; background-color: #f2f3a1;"></td>
+				</tr>
+				<tr>
+					<td align="center">
 			<br> 
-			<input type="button" value="취소" onclick="javascript:window.location='Main.do'">
-			<input type="submit" value="탈퇴" /> 
+			<input type="button" value="취소" onclick="javascript:window.location='Main.do'" align="center" >
+					
+			<input type="submit" value="탈퇴" />
+					</td>
+				</tr>
+			</table> 
 	</form>
 	
 	

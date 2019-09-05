@@ -29,6 +29,18 @@ function jusoCallBack(roadAddrPart1,addrDetail){
    
 }
 
+function email_change() { //이메일 자동으러 뒤에받아오는것 ex)naver.com
+	var obj = document.getElementById("email_sel");
+	
+	if(obj.value==1){
+		document.getElementById("email_2").value = "";
+		document.getElementById("email_2").readOnly = false;
+	} else{
+		document.getElementById("email_2").value = obj.value;
+		document.getElementById("email_2").readOnly = true;
+	}
+}
+
 <%
 
 String email = request.getParameter("email");
@@ -77,9 +89,7 @@ String name = request.getParameter("name");
 					<div class="check_font" id="passMessage"></div>
 				</div>
 
-				<% 
-					if(name == "" || name==null){
-				%>
+				
 				<div>
 				<h3 class="join_title">
 				<label for="name">이름</label>
@@ -87,19 +97,23 @@ String name = request.getParameter("name");
 					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" required>
 					<div class="check_font" id="nameMessage"></div>
 				</div>
-				<%
-					}else{
-				%>
-				<div>
+				
+				<div class="fontphone">
 				<h3 class="join_title">
-				<label for="name">이름</label>
+				<label for="phone2">휴대전화 번호</label>
 				</h3>
-					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" value="<%=name %>" required>
-					<div class="check_font" id="nameMessage"></div>
+				<span class="sp" >
+					<select name = "phone1" id="phone1" class="join" style="height:50px; font-size: 14px; text-align: center;">
+		              <option value="010">010</option>
+		              <option value="011">011</option>
+		              <option value="019">019</option>
+		         	</select> - 
+		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" style="height:50px; font-size: 14px; text-align: center;" required/>  - 
+		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" style="height:50px; font-size: 14px; text-align: center;"  onblur="join_check('check')" required/><br>
+		        </span>
+		          	<div class="check_font" id="phoneMessage" style="font-size: 14px;"></div>
 				</div>
-				<%
-					}
-				%>
+				
 				<div>
 				<h3 class="join_title">
 				<label for="birth">생년월일</label>
@@ -112,61 +126,52 @@ String name = request.getParameter("name");
 				<h3 class="join_title">
 				<label>성별</label>
 				</h3>
-					<label for="m">남자</label><input type="radio" name="gender" id="m" value="남자" checked> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          
-					<label for="g">여자</label><input type="radio" name="gender" id="g" value="여자" ><br>
+					<label for="m" style="height: 50px; font-size: 14px;">남자</label><input type="radio" name="gender" id="m" value="남자" checked > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          
+					<label for="g" style="height: 50px; font-size: 14px;">여자</label><input type="radio" name="gender" id="g" value="여자" ><br>
 				</div>
-				<% 
-					if(email == "" || email==null){
-				%>
+				
 				<div>
 				<h3 class="join_title">
 				<label for="email">이메일</label>
 				</h3>
-					<input type="email" name="email" class="join" id="email" onblur="join_check('email')" required><br>
-					<div class="check_font" id="emailMessage"></div>
+				<input type="text" id="email_1" name="email_1" value="" class="join" style="width: 150px; font-size: 14px;">
+				@ <input type="text" id="email_2" name="email_2" value="" class="join" style="width: 150px; font-size: 14px;">
+				<select id="email_sel" onchange="email_change();" style="height: 50px; font-size: 14px;">
+					<option value="1">직접입력</option>
+					<option value="hanmir.com">hanmir.com</option>
+					<option value="naver.com">naver.com</option>
+					<option value="hanmail.net">hanmail.net</option>
+					<option value="nate.com">nate.com</option>
+					<option value="yahoo.co.kr">yahoo.co.kr</option>
+					<option value="gmail.com">gmail.com</option>
+					<option value="hotmail.com">hotmail.com</option>
+					<option value="empal.com">empal.com</option>
+					<option value="paran.com">paran.com</option>
+					<option value="lycos.co.kr">lycos.co.kr</option>
+					<option value="freechal.com">freechal.com</option>
+					<option value="hanafos.com">hanafos.com</option>
+					<option value="korea.com">korea.com</option>
+					<option value="dreamwiz.com">dreamwiz.com</option>
+				</select>
+					<%-- <input type="email" name="email" class="join" id="email" onblur="join_check('email')" value="<%=email %>" required><br>--%>
+					<div class="check_font" id="emailMessage"></div> 
 				</div>
-				<%
-					}else{
-				%>
-				<div>
-				<h3 class="join_title">
-				<label for="email">이메일</label>
-				</h3>
-					<input type="email" name="email" class="join" id="email" onblur="join_check('email')" value="<%=email %>" required><br>
-					<div class="check_font" id="emailMessage"></div>
-				</div>
-				<%
-					}
-				%>
+				
 				<div>
 				<h3 class="join_title">
 				<label onClick="goPopup();">주소</label>
 				</h3>
             	<div id="callBackDiv">
-            		<div class="ad"><input type="text" class="join" id="roadAddrPart1" name="address_main" class="form-control" placeholder="Enter Addr" required="true" readonly="true" />
+            		<div class="ad"><input type="text" class="address_main" id="roadAddrPart1" name="address_main" class="form-control" placeholder="Enter Addr" required="true" readonly="true" />
             		<input type="button" onClick="goPopup();" value="주소 찾기" class="adbtn"/></div><br>
             		<input type="text" class="join" id="addrDetail" name="address_detail" /><br>
             	</div>
             	</div>
             	
-				<div>
-				<h3 class="join_title">
-				<label for="phone2">휴대전화 번호 *</label>
-				</h3>
-				<span class="sp">
-					<select name = "phone1" id="phone1"  class="join">
-		              <option value="010">010</option>
-		              <option value="011">011</option>
-		              <option value="019">019</option>
-		         	</select> - 
-		         	<input type = "text" name = "phone2" id="phone2" maxlength="4" size = "5" required/> - 
-		          	<input type = "text" name = "phone3" id="phone3" maxlength="4" size = "5" onblur="join_check('check')" required/><br>
-		        </span>
-		          	<div class="check_font" id="phoneMessage"></div>
-				</div>
+				
 
 
-				<div class="login_SR">
+				<div class="join_SR">
 						<input type="submit" value="회원가입" class="submit">
 						<input type="reset" value="다시쓰기" class="cancel">
 				</div>
@@ -190,7 +195,7 @@ String name = request.getParameter("name");
 		var _email = $("#email").val();
 		var chkEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		
-		var _phone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
+		var _phone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
 		
 		var now = new Date();
 		var yearNow = now.getFullYear();
@@ -210,28 +215,28 @@ String name = request.getParameter("name");
 							if(data == 14){  //  아이디 중복 o
 								$("#idMessage").text("사용중인 아이디입니다.");
 								$("#idMessage").css("color","red");
-								$(".submit").attr("disabled",true);
+								$(".submit").attr("disabled","disabled");
 							}else if(data == 24 ){//  아이디 중복 x
 								if(_id.length < 4 ||_id.length > 12){// 아이디가 4~12자가 아닐 시
 									$("#idMessage").text("아이디 4~12자를 입력해주세요 :)");
 									$("#idMmessage").css("color","red");
-									$(".submit").attr("disabled",true);
+									$(".submit").attr("disabled","disabled");
 								}else if(_id == ""){// 아이디가 공백일때
 									$("#idMessage").text("아이디를 입력해주세요 :)");
 									$("#idMessage").css("color","red");
-									$(".submit").attr("disabled",true);
+									$(".submit").attr("disabled","disabled");
 								}else{
 									$("#idMessage").text("사용할 수 있는  아이디입니다:)");
 									$("#idMessage").css("color","blue");
-									$(".submit").attr("disabled",false);
+									$(".submit").removeAttr("disabled");
 								}
 							}else if(data == 23 ){ // 폰번호 중복 x
 								$("#phoneMessage").text("이미 가입된 번호입니다.");
 								$("#phoneMessage").css("color","red");
-								$(".submit").attr("disabled",true);
+								$(".submit").attr("disabled","disabled");
 							}else if(data == 24 ){ // 아이디 중복 x, 폰번호 중복 x
 								$("#phoneMessage").text("");
-								$(".submit").attr("disabled",false);
+								$(".submit").removeAttr("disabled");
 							}		
 						},
 						error:function(request,status,error){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
@@ -245,44 +250,44 @@ String name = request.getParameter("name");
 			if(_pass != _pass2 ){
 				$("#passMessage").text("비밀번호가 일치하지 않습니다.");
 				$("#passMessage").css("color","red");
-				$(".submit").attr("disabled",true);
+				$(".submit").attr("disabled","disabled");
 			}else if(_pass.length < 4 || _pass2.length < 4){
 				$("#passMessage").text("비밀번호 4자리 이상 입력해주세요");
 				$("#passMessage").css("color","red");
-				$(".submit").attr("disabled",true);
+				$(".submit").attr("disabled","disabled");
 			}else{ 
 				$("#passMessage").text("비밀번호가 일치합니다.");
 				$("#passMessage").css("color","blue");
-				$(".submit").attr("disabled",false);
+				$(".submit").removeAttr("disabled");
 			}
 		}else if(aa == 'name'){
 			// 이름 유효성
 			if(!chkName.test(_name)){
 				$("#nameMessage").text("이름을 정확히 입력해주세요");
 				$("#nameMessage").css("color","red");
-				$(".submit").attr("disabled",true);
+				$(".submit").attr("disabled","disabled");
 			}else{
 				$("#nameMessage").text("");
-				$(".submit").attr("disabled",false);
+				$(".submit").removeAttr("disabled");
 			}
 		}else if(aa == "email"){
 			if(!chkEmail.test(_email)){
 				$("#emailMessage").text("메일을 정확히 입력해주세요");
 				$("#emailMessage").css("color","red");
-				$(".submit").attr("disabled",true);
+				$(".submit").attr("disabled","disabled");
 			}else{
 				$("#emailMessage").text("");
-				$(".submit").attr("disabled",false);
+				$(".submit").removeAttr("disabled");
 			}
 		
 		}else if(aa == "birth"){// 14세미만 회원가입 불가능
 			if(yearNow - (_birth.substr(0,4)) < 14){
 				$("#birthMessage").text("14세미만은 회원가입을 할 수 없습니다.");
 				$("#birthMessage").css("color","red");
-				$(".submit").attr("disabled",true);
+				$(".submit").attr("disabled","disabled");
 			}else{
 				$("#birthMessage").text("");
-				$(".submit").attr("disabled",false);
+				$(".submit").removeAttr("disabled");
 			}
 		}
 	}

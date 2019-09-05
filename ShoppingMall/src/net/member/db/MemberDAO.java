@@ -78,6 +78,7 @@ public class MemberDAO {
          rs = pstmt.executeQuery();
          rs.next();
          result = rs.getInt("result");   
+         System.out.println("result = "+result);
          pstmt.close();
          rs.close();
          con.close();
@@ -699,6 +700,7 @@ public class MemberDAO {
 	        	 dto.setBirth_date(rs.getString("birth_date"));
 	        	 dto.setPhone(rs.getString("phone"));
 	        	 dto.setId(rs.getString("id"));
+	        	 dto.setEmail(rs.getString("email"));
 	         }
 	         
 	      } catch (Exception e) {

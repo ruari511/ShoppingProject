@@ -32,10 +32,11 @@ public class MemberModifyAction implements Action
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		String phone = request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3");
+		String email = request.getParameter("email_1")+"@"+request.getParameter("email_2");
 		
 		System.out.println("id = " + request.getParameter("id"));
 		System.out.println("password = " + request.getParameter("password"));
-		System.out.println("email = " + request.getParameter("email"));
+		System.out.println("email = " +	email);
 		System.out.println("phone = " + phone);
 		System.out.println("address_main = " + request.getParameter("address_main"));
 		System.out.println("address_detail = " + request.getParameter("address_detail"));
@@ -44,9 +45,8 @@ public class MemberModifyAction implements Action
 		MemberDTO member = new MemberDTO();
 		member.setId(id);
 		member.setPassword(request.getParameter("password"));
-		member.setEmail(request.getParameter("email"));
-		member.setPhone(request.getParameter("phone"));
-		
+		member.setEmail(email);
+		member.setPhone(phone);
 		member.setAddress_main(request.getParameter("address_main"));
 		member.setAddress_detail(request.getParameter("address_detail"));
 		
