@@ -65,7 +65,7 @@ public class ProductFrontController extends HttpServlet{
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
 			forward.setPath("./product/product.jsp");
 			
-		//구매하기 페이지에서 결제하기 버튼을 눌렀을떄 동작하는 부분
+		//구매하기 페이지에서 결제하기 버튼을 눌렀을 동작하는 부분
 		}else if(command.equals("/ProductDetailAction.pro")){
 	
 			
@@ -100,15 +100,23 @@ public class ProductFrontController extends HttpServlet{
 			forward.setRedirect(false);
 			//이동할 페이지 경로(회원가입 페이지) 주소값 저장
 			forward.setPath("./ProductSelect.jsp");
+	
+		}else if(command.equals("/ProductList.pro")){
+			action = new ProductListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 		}
-		
-		
 		
 		
 		
 		//주소 이동
 		if(forward!=null){ //new ActionForward()객체가 존재 하고..
-			if(forward.isRedirect()){//true -> sendRedirect() 방식일떄..
+			if(forward.isRedirect()){//true -> sendRedirect() 방식일..
 				//리다이렉트 방식으로 페이지 이동!  페이지 주소 경로 노출 함 
 				//join.jsp화면 이동
 				//login.jsp화면 이동
@@ -125,6 +133,3 @@ public class ProductFrontController extends HttpServlet{
 	}//	doProcess 메소드 끝
 	
 }//서블릿 끝
-
-
-

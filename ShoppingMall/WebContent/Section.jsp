@@ -6,14 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
+<link rel="stylesheet" href="./asset/css/mainProductSlide.css"/> 
+<link rel="stylesheet" href="./asset/css/mainBanner.css"/> 
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
 <body>
 	<div id="Container">
-		12345
-		<h1><a href="ProductDetailAction.pro?product_num=1">상품테스트</a></h1>
+		<jsp:include page="main/mainBanner.jsp"/>
+		<br>
+		<br>
+		<jsp:include page="main/mainProductSlide.jsp"/>
+		
+		<h1><a href="ProductDetailAction.do?product_num=1">상품테스트</a></h1>
 		
 	</div>
 </body>

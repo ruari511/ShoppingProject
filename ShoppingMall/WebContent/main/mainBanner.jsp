@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <head>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../asset/css/mainBanner.css"/> 
 <link rel="stylesheet" href="../asset/css/global.css"/> 
@@ -77,6 +80,7 @@
 	
 	//배너 바꾸기 반복 함수	
 	function mainBannerUpdate(n){
+		if(!$(".mainBanner_Img_Wrap").is(':animated')){
 		//현재 배너 값 저장
 		var currentIndex = index;
 		//새 인덱스
@@ -106,7 +110,11 @@
 			//새배너 오퍼시티 1이 되면 현재배너 오퍼시티 0
 			$(".mainBanner_Img_Wrap").eq(currentIndex).css("opacity", 0);				
 		});	
+		}
 	} //mainBannerUpdate끝
+	
+	
+	
 
 	
 </script>
@@ -143,8 +151,8 @@
  -->					
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.naver.com">
-							<img src="../asset/image/bannertest1.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest1.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -158,8 +166,8 @@
 					</div>
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.daum.net">
-							<img src="../asset/image/bannertest2.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest2.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -173,8 +181,8 @@
 					</div>
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.daum.net">
-							<img src="../asset/image/bannertest2.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest3.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -188,8 +196,8 @@
 					</div>
 					
 					<div class="mainBanner_Img_Wrap">
-						<a href="http://www.daum.net">
-							<img src="../asset/image/bannertest2.jpg">
+						<a href="#">
+							<img src="./asset/image/bannertest4.jpg">
 							<p class="mainBanner_Img_Text">
 							<span>{Title}</span>
 							<strong>
@@ -218,6 +226,8 @@
 				</div>
 			
 			</div>
+			
+			<jsp:include page="mainCategory.jsp"/>
 		
 		</section>
 		

@@ -305,3 +305,25 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 
 /* OCB헤더대응 */
 .cmHeader .cmTop2 {box-sizing:content-box !important;line-height:100% !important}
+
+
+/*top버튼*/
+
+#top_btn{
+	position: fixed;
+    z-index: 999;
+    right: 3%;
+    bottom: 50px;
+    display: none;
+    border: 1px solid darkgray;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: 700;
+}
+
+#top_btn:HOVER {
+	background-color: gray;
+	color: white;
+}

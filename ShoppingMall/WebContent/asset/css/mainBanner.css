@@ -7,7 +7,6 @@ html, body {
     margin: 0;
     padding: 0;
     font-size: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
 }
 
 #content{
@@ -32,11 +31,10 @@ html, body {
 }
 
 #mainBanner_Btn{
-	z-index: 10;
+	z-index: 7;
     position: absolute;
     top: 0;
     width: 1020px;
-    height: 100%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -132,4 +130,137 @@ position: relative;
     line-height: 2;
 }
 
+/*메인카테고리*/
+#mainCategory_Wrap{
+	position: absolute;
+	background: rgba(0, 0, 0, 0.5);
+	width: 170px;
+	height: 450px;
+	z-index: 8;
+}
 
+
+
+#mainCategory_List>li>a{
+	display: block;
+	height: 30px;
+    line-height: 30px;
+	font-size: 14px;
+	padding: 0 23px 0;
+	color: white;
+	font-weight: 700;
+	font-family: 
+}
+
+#mainCategory_List>li>a:last-child{
+	height: 35px;
+    line-height: 35px;
+	font-size: 14px;
+	padding: 0 23px 0;
+	color: white;
+	font-weight: 700;
+	background: rgba(1,1,1, 0.5)
+}
+
+#mainCategory_List, .subCategory_List{
+	margin-top: 25px;
+}
+
+#mainCategory_List>li>a:hover, .subCategory_List>li>a:hover{
+	background-color: #222222;
+	color: white;
+}
+
+.subCategory_Wrap{
+	position: absolute;
+	top:0;
+	left:170px;
+	background-color: white;
+	width: 170px;
+	height: 450px;
+	z-index: 8;
+	border: 1px solid black;
+	border-top: none;
+	display:none;
+}
+
+.subCategory_List>li{
+	display: block;
+	height: 30px;
+    line-height: 30px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.subCategory_List a{
+	display: block;
+	border-left: 23px solid white;
+}
+
+.Category_Ad{
+	position: absolute;
+	top:0;
+	left:168px;
+	background-color: white;
+	width: 200px;
+	height: 450px;
+	z-index: 8;
+	border: 1px solid black;
+	border-top: none;
+	display: none;
+}
+
+.Category_Ad *{
+	display: block;
+}
+
+
+.Category_Ad span{
+	padding: 0 15px;
+}
+.Category_Ad span:nth-child(1){
+	margin-top: 30px;
+	font-size: 14px;
+}
+
+.Category_Ad span:nth-child(1)::after{
+	content: '';
+	display: block;
+	width: 58px;
+	height: 1px;
+	background-color: gray;
+	margin-bottom: 20px;
+}
+
+.Category_Ad span:nth-child(2){
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.Category_Ad span:nth-child(3){
+	font-size: 18px;
+	margin-top: 15px;
+	line-height: 1.4;
+}
+
+.Ad_product_price{
+	color: darkgray;
+	font-size: 17px;
+	text-decoration: line-through;
+	font-weight: 300;
+	margin-top: 15px;
+}
+
+.Ad_discount_price{
+	color: orange;
+	font-size: 24px;
+	font-weight: 700;
+	margin-top: 4px;
+}
+
+.Category_Ad img{
+	margin-top: 30px;
+	width: 100%;
+	height: 198px;
+	max-height: 198px;
+}
