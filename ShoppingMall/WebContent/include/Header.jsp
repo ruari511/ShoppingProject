@@ -51,7 +51,7 @@ $(window).scroll(function() {
 					%>
 						<li class="cart"><a href="./CartListAction.buy">장바구니<span id="cartToCnt"></span></a></li>
 						<li class="mypage"><a href="./mypage.mp">마이페이지</a></li>
-						<li class="order"><a href="./mypage.mp]">주문배송</a></li>
+						<li class="order"><a href="./mypage.mp">주문배송</a></li>
 					<%
 					}
 					%>

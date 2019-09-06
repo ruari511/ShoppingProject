@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.action.Action;
 import net.action.ActionForward;
+import net.board.action.BoardQnaListAction;
 import net.member.action.MemberLogoutAction;
 import net.mypage.action.MypageAllBuyListAction;
 import net.mypage.action.MypageBuyListUpdateAction;
@@ -204,8 +205,14 @@ public class AdminFrontController extends HttpServlet{
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+		}else if(command.equals("/qnalistcheck.ad")){
+			action = new BoardQnaListAction();
+			try{
+				forward=action.execute(request, response);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
 		//주소 이동
 		if(forward!=null){ //new ActionForward()객체가 존재 하고..
 			if(forward.isRedirect()){//true -> sendRedirect() 방식일떄..

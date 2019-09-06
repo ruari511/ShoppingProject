@@ -133,6 +133,24 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/qna.bd")) {
+			action = new BoardQnaListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/qnaWrite.bd")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("./Main.jsp?section=board/qnaWrite.jsp");
+		} else if (command.equals("/BoardQnaWriteAction.bd")) {
+			action = new BoardQnaWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} 
 		
 		if (forward != null) { 

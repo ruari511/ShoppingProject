@@ -3,16 +3,65 @@ package net.board.db;
 import java.sql.Timestamp;
 
 public class BoardDTO {
-	private int num; 
-	private String category;
-	private int category_num;
-	private String subject;
-	private String content;
-	private String file;
-	private Timestamp reg_date;
+	private int num;  //글 번호
+	private String id; //작성자 아이디
+	private String category; //카테고리
+	private int category_num; //카테고리번호
+	private int product_num; //제품번호
+	private String product_name; //제품명
+	private String subject; //제목
+	private String content; //내용
+	private String file; //첨부파일
+	private String re_result; //0:미답변, 1:답변
+	private Timestamp reg_date; //글등록일
+	private String reply_id;  //답변자 id
+	private String reply; //답변 내용
+	private Timestamp re_reg_date;  //답변 등록일
 	
 	
 	
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public String getReply_id() {
+		return reply_id;
+	}
+	public void setReply_id(String reply_id) {
+		this.reply_id = reply_id;
+	}
+	public int getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(int product_num) {
+		this.product_num = product_num;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getRe_result() {
+		return re_result;
+	}
+	public void setRe_result(String re_result) {
+		this.re_result = re_result;
+	}
+	public Timestamp getRe_reg_date() {
+		return re_reg_date;
+	}
+	public void setRe_reg_date(Timestamp re_reg_date) {
+		this.re_reg_date = re_reg_date;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
 	public String getFile() {
 		return file;
 	}

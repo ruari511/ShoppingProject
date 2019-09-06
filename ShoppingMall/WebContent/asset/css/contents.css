@@ -428,7 +428,7 @@
 .list-customer ul li.open .conts {display:block;}
 .list-customer ul li.open {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow21x12_on.png") no-repeat 98% 24px;}
 .list-customer ul li.open .tit, .list-customer ul li.open .stit {color:#9ea000;font-weight:700}
-.list-customer ul li.open .stit strong {background:#979900;}
+/* .list-customer ul li.open .stit strong {background:#979900;} */
 .list-customer ul li.open .stit .data {}
 
 .list-customer ul li .tit > span.tx_same {color:#969937;font-weight:700}

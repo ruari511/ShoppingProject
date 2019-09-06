@@ -98,7 +98,8 @@
 							<td>${buylist.buy_count}</td>
 							<td class="colorOrange"><strong>${(buylist.product_price - buylist.product_sale_price - buylist.point)* buylist.buy_count }</strong> 원</td>
 							<!-- 총 주문 금액 -->
-							<c:set var="total_price" value="${total_price + (buylist.product_price - buylist.product_sale_price) * buylist.buy_count }"/>
+							
+
 							<td class="bgnone">
 							${buylist.delivery_result }
 							<!-- 총 배송료 -->

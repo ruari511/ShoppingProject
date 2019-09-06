@@ -38,7 +38,7 @@ String id=(String)session.getAttribute("id");
 			</div>
 			<ul class="comm1sTabs threeSet customer">
 					<li id="tabFaq"><a href="./faq.bd">FAQ</a></li>
-				<li id="tab1on1"><a href="javascript:common.link.moveQnaList();">1:1문의</a></li>
+				<li id="tab1on1"><a href="./qna.bd">1:1문의</a></li>
 				<li id="tabNotice" class="on"><a href="./notice.bd">공지사항</a></li>
 			</ul>
 			<!-- 
@@ -175,11 +175,12 @@ String id=(String)session.getAttribute("id");
 		
 		</div>
 		</div>
-		<% 
+		<%  
+			if(id != null){
 			if(id.equals("admin")){
 		%>
 			<a href="./noticeWrite.bd"> 글쓰기 </a>
-		<%} %>
+		<%} }%>
 	</div>
 </body>
 </html>

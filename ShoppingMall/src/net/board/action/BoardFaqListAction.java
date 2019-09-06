@@ -30,18 +30,18 @@ public class BoardFaqListAction implements Action {
 		String id=(String)session.getAttribute("id");
 		String category = request.getParameter("category");
 		String search = request.getParameter("search");
-		int count = 0; //0À¸·Î ÃÊ±âÈ­
+		int count = 0; //0ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		
-		if(category == null && search == null){ //ÀüÃ¼ °Ô½Ã±Û ¼ö Á¶È¸
+		if(category == null && search == null){ //ï¿½ï¿½Ã¼ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½È¸
 			count = faqdao.getFaqCount();
 		}else if(category == null && search != null){
 		    count = faqdao.getFaqSearchCount(search);
 		}else if(category != null && search != null){
 			count = faqdao.getFaqSearchCount(category, search);
-		}else{ //Ä«Å×°í¸®º° °Ô½Ã±Û ¼ö Á¶È¸
+		}else{ //Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½È¸
 			count = faqdao.getFaqCount(category);
 		}
-		//ÆäÀÌÁö Å©±â ¼³Á¤
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){

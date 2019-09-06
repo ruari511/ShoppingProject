@@ -45,45 +45,62 @@
 				<h2>주문목록</h2>
 				<table class="table">
 					<tr align="center">
-						<th>주문일자 / 주문번호</th>
-						<th>주문자 아이디</th>
-						<th>받는분</th>
-						<th>배송지</th>
-						<th>구입 제품명</th>
-						<th>수량</th>
-						<th>주문금액</th>
-						<th>배송상태</th>
-						<th>수정</th>
+						<th>글번호</th>
+						<th>작성일</th>
+						<th>작성자</th>
+						<th>카테고리</th>
+						<th>상품번호</th>
+						<th>상품명</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>답변여부</th>
+						<th>답글달기</th>
 					</tr>
-					<c:forEach items="${buylist}" var="buylist">
-					<form action="./buylistUpdate.ad" method="post">
+					<form action="./qnaReply.ad" method="post">
+					<c:forEach items="${qnaList}" var="qnaList">
 					<tr align="center">
-						<td class="gubun">
-							<a href="mypage_BuyListDetail.mp?buynum=${buylist.buynum }">${buylist.buydate} <br> / ${buylist.buynum }</a>
-						</td>
-						<td><a href="./buylistCheck.ad?search_id=${buylist.id }">${buylist.id}</a></td>
-						<td>${buylist.delivery_name}</td>
-						<td>${buylist.delivery_address}</td>
-						<td><a class="thum" href="ProductDetailAction.pro?product_num=${buylist.product_num }">${buylist.product_name}</a></td>
-						<td>${buylist.buy_count}</td>
-						<td>${(buylist.product_price - buylist.product_sale_price) * buylist.buy_count }원</td>
-						<td><select name="delivery_result" title="배송 상태 선택" style="width:80px;">
-												<option>선택해주세요</option>
-												<option value="주문접수" <c:if test="${buylist.delivery_result eq '주문접수'}"> selected </c:if>>주문접수</option>
-												<option value="결제완료" <c:if test="${buylist.delivery_result eq '결제완료' }"> selected </c:if>>결제완료</option>
-												<option value="상품준비중" <c:if test="${buylist.delivery_result eq '상품준비중' }"> selected </c:if>>상품준비중</option>
-												<option value="배송중" <c:if test="${buylist.delivery_result eq '배송중' }"> selected </c:if>>배송중</option>
-												<option value="배송완료" <c:if test="${buylist.delivery_result eq '배송완료' }"> selected </c:if>>배송완료</option>
-							</select>
+						<td>${qnaList.num}</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.reg_date }" /></td>
+						<td>
+							<a href="./buylistCheck.ad?id=${qnaList.id }">${qnaList.id}</a>
 						</td>
 						<td>
-							<input type="hidden" name="buynum" value="${buylist.buynum }">
-							<input type="hidden" name="product_num" value="${buylist.product_num }">
-							<input type="submit" value="수정" style="background-color: white;">
+							<c:if test="${qnaList.category eq '10' }">
+								일반
+							</c:if>
+							<c:if test="${qnaList.category eq '20' }">
+								매장
+							</c:if>
+							<c:if test="${qnaList.category eq '30' }">
+								이벤트
+							</c:if>
+							<c:if test="${qnaList.category eq '40' }">
+								뷰티테스터
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${qnaList.product_num eq '0'}">
+							없음
+							</c:if>
+							<c:if test="${qnaList.product_num != '0' }">
+							${qnaList.product_num }
+							</c:if>
+						 </td>
+						 <td>
+						 	${qnaList.product_name }
+						 </td>
+						<td>${qnaList.subject }</td>
+						<td>${qnaList.content}</td>
+						<td>
+							<c:if test="${qnaList.re_result eq '0'}"> 답변대기 </c:if>
+							<c:if test="${qnaList.re_result eq '1'}"> 답변완료 </c:if>	
+						</td>
+						<td>
+							<input type="submit" value="답변" style="background-color: white;">
 						</td>
 					</tr>
-					</form>
 					</c:forEach>
+					</form>
 				</table>
 		</div>
 	</section>
