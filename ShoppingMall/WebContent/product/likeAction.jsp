@@ -8,34 +8,19 @@
 <%
 	
 	request.setCharacterEncoding("UTF-8");
-	
+
     // 로그인한 유저의 아이디를 가져오기(세션 확인)
 
 	String review_num = null;
 	String id = null;
+	String product_num = null;
 	
 	if(session.getAttribute("id") != null) {
 
 		id = (String) session.getAttribute("id");
 
 	}
-	
-// 	if(id == null) {
 
-// 		PrintWriter script = response.getWriter();
-
-// 		script.println("<script>");
-
-// 		script.println("alert('로그인을 해주세요.');");
-
-// 		script.println("location.href = '../login.do'");
-
-// 		script.println("</script>");
-
-// 		script.close();
-
-// 		return;
-// 	}
 	
     // 이전의 파라매터로 보낸 리뷰 글번호 가져오기
 
@@ -44,7 +29,13 @@
 		review_num = (String) request.getParameter("review_num");
 
 	}
-	System.out.println("bb= " + request.getParameter("review_num"));
+	
+	if(request.getParameter("product_num") != null) {
+
+		product_num = (String) request.getParameter("product_num");
+
+	}
+    
 	
 	review_DAO reviewdao = new review_DAO();
 	ReviewLikeDAO likeyDAO = new ReviewLikeDAO();
@@ -55,15 +46,13 @@
 
 	int result = likeyDAO.relike(review_num, id);
 
-	System.out.println("CC= " + result);
 
 	// 정상적으로 1번 데이터가 들어가면 1이 출력되고
 
 	if (result == 1) {
 
 		result = reviewdao.rlike(review_num);
-		System.out.println("dd= " + result);
-
+		System.out.println("라이크 액션2: " + product_num);
 		if (result == 1) { // 1인경우 디비에서 해당 게시물 추천 완료
 
 			PrintWriter script = response.getWriter();
@@ -72,15 +61,12 @@
 
 			script.println("alert('추천이 완료되었습니다.');");
 
-// 			script.println("location.href='index.jsp'");
-			script.println("history.back();");
+			script.println("location.href='../ProductDetailAction.pro?product_num="+ product_num + "&review_select=review_In';");
 
 			script.println("</script>");
 
 			script.close();
-
-			System.out.println("ff= " + result);
-
+			
 			return;
 
 		} else {
@@ -96,8 +82,6 @@
 			script.println("</script>");
 
 			script.close();
-
-			
 
 			return;
 
@@ -118,7 +102,6 @@
 		script.println("</script>");
 
 		script.close();
-
 
 
 		return;

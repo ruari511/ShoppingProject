@@ -383,15 +383,22 @@
 .review_list_wrap .inner_list>li>.review_cont .item_option{margin-bottom:7px;color:#777;font-family:'noto';font-weight:bold;}
 .review_list_wrap .inner_list>li>.review_cont .item_option+.poll_sample{margin-top:19px;}
 .review_list_wrap .inner_list>li.no_data {height:230px;padding:166px 0 0;color:#999;font-size:16px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_nodata104x104.png") no-repeat 50% 46px;text-align:center}
+/* .recom_area .btn_recom{height:32px;padding-left:39px;font-size:14px;color:#333;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/product/icon_recom.png") no-repeat 0 0;} */
+/* .recom_area .btn_recom .num{margin-left:3px;font-family:'montserrat';} */
+/* .recom_area .btn_recom.on{background-position:0 100%;} */
 .recom_area .btn_recom{height:32px;padding-left:39px;font-size:14px;color:#333;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/product/icon_recom.png") no-repeat 0 0;}
+.recom_area .recom{color:#333;}
 .recom_area .btn_recom .num{margin-left:3px;font-family:'montserrat';}
 .recom_area .btn_recom.on{background-position:0 100%;}
+
 
 
 /* PAGEING */
 .pageing {padding:30px 0 0;font-size:0;text-align:center;line-height:0;}
 .pageing a, .pageing strong {display:inline-block;width:30px;height:30px;margin:0 2px;border:1px solid #e5e5e5;color:#888;font-size:14px;line-height:28px;vertical-align:top;box-sizing:border-box;font-weight:700}
 .pageing a {text-decoration:none;}
+.pageing a.on{border: 1px solid #666; color: #333; font-weight: 700;}
+.pageing a.off{border: 1px solid #e5e5e5; color: #888;}
 .pageing .prev, .pageing .next {height:30px;padding:0;font-size:0;text-indent:-99999px;line-height:0;}
 .pageing .prev {margin-right:8px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_prev7x11.png") no-repeat center center;}
 .pageing .next {margin-left:8px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_next7x11.png") no-repeat center center;}

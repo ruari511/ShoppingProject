@@ -549,7 +549,7 @@ function imgmodal_GI(a){
 		</c:if>
 		<c:if test="${idx.index == 11}">
 		<li>
-			<a onclick="imgmodal_G('${ReviewAll.review_img}');" class="more">
+			<a onclick="imgmodal_G('${ReviewAll.review_img}');" class="more" style="cursor: pointer;">
 				<span>
 					<span><em>더보기</em></span>
 					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum">
@@ -666,7 +666,7 @@ function imgmodal_GI(a){
 				<li>
 					<span>
 						<a onclick="imgmodal('${ReviewDTO.review_img}');">
-							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum">
+							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" style="cursor: pointer;">
 						</a>
 					</span>
 				</li>
@@ -679,12 +679,12 @@ function imgmodal_GI(a){
 			</div>
 			
 			<div class="recom_area">    
-			<c:if test="<%=id != null %>">
-					<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+			<c:if test="<%=id != null %>">																																								
+				<button class="btn_recom" onclick="return confirm('추천하시겠습니까?')"><a type="button" class="recom" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}&product_num=${product}" style="cursor: pointer;">도움이 돼요<span class="num">${ReviewDTO.like_count}</span></a></button>
 			</c:if>
 			
 			<c:if test="<%=id == null %>">
-					<a type="button" class="btn_recom" onclick="location.href='./login.do'">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+				<button class="btn_recom"><a type="button" class="recom" onclick="location.href='./login.do'" style="cursor: pointer;">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a></button>
 			</c:if>
 			
 			</div>
@@ -719,7 +719,7 @@ function imgmodal_GI(a){
 				<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" varStatus="idx">             
 					<span>
 						<a onclick="imgmodal_GI('${ReviewAll.review_img}');">
-							<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px;">
+							<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px; cursor: pointer;">
 						</a>
 					</span>
 				</c:forEach>
