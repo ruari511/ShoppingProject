@@ -31,21 +31,15 @@ public class MemberDeleteAction implements Action {
 		//: check = 1 -> 아이디, 비밀번호 맞음
 		//: check = 0 -> 아이디, 비밀번호 틀림
 		//: check = -1 -> 아이디 틀림
-		int check=mdao.deleteMember(id, password);
+		boolean check=mdao.deleteMember(id, password);
 		
-		if(check==1){
+		if(check==true){
 			session.invalidate();//회원정보 담긴 세션 삭제
+			
 			forward.setRedirect(true);
 			forward.setPath("./Main.do"); 
-			
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("alert('회원탈퇴 성공');");
-			out.println("</script>");
-			out.close();
-			
 			return forward;
+		
 		}else{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();

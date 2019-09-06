@@ -84,6 +84,10 @@
     <res-auth>Container</res-auth>
   </resource-ref>
   
+  <!-- 50분동안 세션을 조작하지 않으면 세션 초기화 -->
+  <session-config>
+  	<session-timeout>50</session-timeout>
+  </session-config>
 </web-app>
 
   

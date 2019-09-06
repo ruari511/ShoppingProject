@@ -26,16 +26,58 @@
 	String pw = finddto.getPassword();
 	
 	int check = dao.find_pw(id, phone);
+	%>
+	
+	<table width="600" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	<td bgcolor="#969937" style="padding: 5px 10px; color: #fff;" class="white12bold">아이티영 아이디 찾기</td>
+	</tr>
+	</table>
+	<table width="550" border="0" cellspacing="0" cellpadding="0" class="grey12">
+	<tr>
+	<td style="padding: 20px 0 0 0"> 
+	<table width="500" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr>
+	<td style="padding: 15px; border-top: 2px #cccccc solid; border-right: 2px #cccccc solid; border-bottom: 2px #cccccc solid; border-left: 2px #cccccc solid;">
+	<%
 	
 	if(check == 1){
 		out.println("아이디 확인 완료: " + id);
 		out.println("<br>");
 		out.println("비밀번호 : " + pw);
 	}else{
-		out.println("아이디 / 전화번호 확인부탁드립니다.");
+		out.println("아이디와  휴대폰번호를 다시 작성해 주세요.");
 	}
 
 %>
+
+<table width="400" border="0" cellspacing="1" class="regtable">
+	<tr>
+	<td>
+	</td>
+	</tr>
+	
+	</table>
+	</td>
+	</tr>
+	</table>
+	<table border="0" align="right" cellpadding="0" cellspacing="0">
+	<tr>
+	<td height="40" style="padding: 0 13px 0 0">
+	<div class="bts">
+	<span><input type="button" class="passwd_UpdateBtn" style="border-radius: 5px;" value="취소" onclick="wc()"></span>
+	</div>
+	</td>
+	<td height="40" style="padding: 0 13px 0 0">
+	<div class="bts">
+	<span><input type="button" class="passwd_UpdateBtn" style="border-radius: 5px;" value="돌아가기" onclick="history.back();"></span>
+	</div>
+	</td>
+	</tr>
+	</table>
+	</td>
+	</tr>
+	</table>
 
 </body>
 </html>

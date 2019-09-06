@@ -78,6 +78,7 @@ public class MemberDAO {
          rs = pstmt.executeQuery();
          rs.next();
          result = rs.getInt("result");   
+         System.out.println("result = "+result);
          pstmt.close();
          rs.close();
          con.close();
@@ -229,7 +230,7 @@ public class MemberDAO {
 
    
    // 회원 삭제 메서드
-   public int deleteMember(String id, String pw) {
+   public boolean deleteMember(String id, String pw) {
          
          con = null;
          pstmt = null;
@@ -238,17 +239,15 @@ public class MemberDAO {
          MemberDTO member = new MemberDTO();
          
          String dbpw = ""; // DB상의 비밀번호를 담아둘 변수
-         int x = -1;
+         boolean value = false;
 
          try {
             // 회원 삭제
-            sql = "DELETE FROM MEMBER WHERE ID=?";
+            sql = "select password from member where id=?";
             
             con = getConnection();
-
-            // 자동 커밋을 false로 한다.
-            con.setAutoCommit(false);
             
+            pstmt = con.prepareStatement(sql);
             // 1. 아이디에 해당하는 비밀번호를 조회한다.
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -257,17 +256,17 @@ public class MemberDAO {
                dbpw = rs.getString("password");
                if (dbpw.equals(pw)){ // 입력된 비밀번호와 DB비번 비교
                   // 같을경우 회원삭제 진행
+            	  sql="delete from member where id=?";
                   pstmt = con.prepareStatement(sql);
+                  
                   pstmt.setString(1, id);
                   pstmt.executeUpdate();
-                  con.commit(); 
-                  x = 1; // 삭제 성공
+                  value = true; // 삭제 성공
                } else {
-                  x = 0; // 비밀번호 비교결과 - 다름
+            	  value = false; // 비밀번호 비교결과 - 다름
                }
             }
 
-            return x;
 
          } catch (Exception e) {
                e.printStackTrace();
@@ -275,11 +274,12 @@ public class MemberDAO {
             try{
                if ( pstmt != null ){ pstmt.close(); pstmt=null; }
                if ( con != null ){ con.close(); con=null;   }
+               if ( rs != null ){ rs.close(); rs=null;   }
             }catch(Exception e){
                e.printStackTrace();
             }
          }
-         return x;
+         return value;
       }// 회원탈퇴 메소드
    
 
@@ -782,17 +782,88 @@ public class MemberDAO {
    
 
 
-   public static MemberDAO getInstance() {
-      // TODO Auto-generated method stub
-      return null;
+   public MemberDTO getUser(String id) {
+	   con=null;
+	   sql="";
+	   pstmt=null;
+	   rs=null;
+	   
+	   MemberDTO dto = new MemberDTO();
+	   
+	   try {
+	         //1단계 드라이버로더
+	         //2단계 디비연결
+	         con=getConnection();
+	         
+	         //3단계 sql : email에 해당하는 id 가져오기
+	         sql= "select * from member where id =?";
+	         pstmt=con.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         
+	         //4단계 rs = 실행
+	         rs=pstmt.executeQuery();
+	        
+	         if(rs.next()){
+	        	 dto.setEmail(rs.getString("email"));
+	        	 dto.setPassword(rs.getString("password"));
+	        	 dto.setAddress_detail(rs.getString("address_detail"));
+	        	 dto.setAddress_main(rs.getString("address_main"));
+	        	 dto.setName(rs.getString("name"));
+	        	 dto.setBirth_date(rs.getString("birth_date"));
+	        	 dto.setPhone(rs.getString("phone"));
+	        	 dto.setId(rs.getString("id"));
+	        	 dto.setEmail(rs.getString("email"));
+	         }
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally{
+	         //마무리
+	         if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+	      }
+    return dto;
+	  
    }
 
 
 
 
    public void updateMember(MemberDTO member) {
-      // TODO Auto-generated method stub
-      
+	   con = null;
+	   pstmt = null;
+	   rs = null;
+	   sql = "";
+	      
+	   try {
+		
+		   con=getConnection();	  
+		   
+		   sql="update member set password=?,email=?,address_main=?,address_detail=?,phone=? where id=?";
+		   
+		   pstmt=con.prepareStatement(sql);
+		   
+		   pstmt.setString(1, member.getPassword());
+		   pstmt.setString(2, member.getEmail());
+		   pstmt.setString(3, member.getAddress_main());
+		   pstmt.setString(4, member.getAddress_detail());
+		   pstmt.setString(5, member.getPhone());
+		   pstmt.setString(6, member.getId());
+		   
+		   pstmt.executeUpdate();
+		   
+		
+		
+	} catch (Exception e) {
+		System.out.println("updateMember()메소드 내부의 오류 : " + e);
+		e.printStackTrace();
+	}finally {
+		if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+        if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+        if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+	}
+	   
    }
 
 

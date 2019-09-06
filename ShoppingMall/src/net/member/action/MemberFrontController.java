@@ -38,8 +38,6 @@ public class MemberFrontController extends HttpServlet{
 		System.out.println(RequestURI);
 		
 		//  /CarProject 얻기
-		//  /CarProject 얻기
-		//  /CarProject 얻기
 		String contextPath=request.getContextPath();
 		
 		//	길이 11
@@ -51,6 +49,7 @@ public class MemberFrontController extends HttpServlet{
 		// /MemberJoinAction.do
 		//  /MemberLogin.do 얻기 
 		String command=RequestURI.substring(contextPath.length());
+		System.out.println(command);
 					
 		/*주소 비교*/	
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체를 저장할 참조변수 선언 
@@ -141,7 +140,7 @@ public class MemberFrontController extends HttpServlet{
 				try{
 					//Delet.jsp에서... "회원탈퇴"요청이 들어왔을때...  
 					//세션값 "회원탈퇴성공" 메세지창을 띄어주고...
-					//CarList.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
+					//??.jsp페이지로 이동하는일을 하는 execute()메소드 호출함.
 					forward=action.execute(request, response); //return null;
 		
 					
@@ -151,11 +150,7 @@ public class MemberFrontController extends HttpServlet{
 			
 				//"Main.jsp 메인 페이지 요청"이 들어 왔을떄...
 		}else if(command.equals("/Main.do")){
-			/*//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
-			forward=new ActionForward();
-			forward.setRedirect(false); //주소값 노출 x
-			forward.setPath("./Main.jsp"); //이동할 페이지 저장
-*/			
+		
 			action = new MainAction();
 			try {
 				forward = action.execute(request, response);
@@ -163,6 +158,39 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+	
+		//"MemberInfoModify.jsp 메인 페이지 요청"이 들어 왔을떄...
+		}else if(command.equals("/memberModify.do")){ 
+			
+			
+			action=new MemberInfoAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			/*//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
+			forward=new ActionForward();
+			//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
+			forward.setRedirect(false); //주소값 노출 안됨
+			//이동할 페이지 경로(탈퇴 페이지) 주소값 저장
+			forward.setPath("./Main.jsp?section=./member/MemberInfoModify.jsp"); */
+		
+		//MemberInfoModify.jsp에서... "회원수정"버튼을 눌렀을때.. 요청받기!
+		//사용자가 입력한 id와 패스워드를 request영역에 담아오기
+		}else if(command.equals("/MemberModifyAction.do")){
+			System.out.println("MemberModifyAction.do 접근");
+			//회원수정를 위한 Action객체 생성
+			action=new MemberModifyAction();
+			try{
+				//MemberInfoModift.jsp에서... "회원수정"요청이 들어왔을때...  
+				//세션값 "회원수정성공" 메세지창을 띄어주고...
+				forward=action.execute(request, response); //return null;
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		
 		//find_ID.jsp에서... "찾기"버튼을 눌렀을때.. 처리 요청받기!
 		//사용자가 입력한 email을 request영역에 담아오기
