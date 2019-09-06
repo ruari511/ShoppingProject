@@ -70,9 +70,9 @@ function notReady(){
 				<%
 				}
 				%>
-				<li class="customer"><a href="#">고객센터</a></li>
+				<li class="customer"><a href="javascript:notReady();">고객센터</a></li>
 				
-				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
+				<li class="store"><a href="javascript:notReady();">매장안내</a></li>
 			</ul>
 			</form>
 		</div>
@@ -87,22 +87,7 @@ function notReady(){
 		</form>
 			<!--// 검색영역 -->
 			<ul class="mymenu_area">
-				<li class="store ">
-					<a href="#" class="mymenu_layer" title="관심 매장소식 자세히보기 열기/닫기">관심 매장소식</a>
-					<div class="alim_box">
-						<p class="store_desc"><span>로그인</span>하시면 자주가는 매장을 <br />관심 매장으로 설정 할 수 있습니다.</p>
-						<button class="mymenu_btn" onClick="javascript:common.link.moveLoginPage();">로그인</button>
-					</div>
-				</li>
-				<li class="recent">
-					<a href="javascript:;" class="mymenu_layer" title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
-					<div class="recent_prd_box" style="min-height:510px;">
-						<p class="recent_tit">전체 <span>0</span>개
-						<div class="no_data" style="display:none;">
-							최근 본 상품이 없습니다.
-						</div>
-					</div>
-				</li>
+				
 			</ul>
 		</div>
 		</div>

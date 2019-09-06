@@ -34,17 +34,14 @@
 	
 </head>
 <body>
+
 <%
 	String section = request.getParameter("section");
 	if(section == null){
 		section = "Section.jsp";
 	}
 %>
-<%-- <p>
-	<c:forEach var="category" items="${requestScope.v}" >
-		${category.product_name}<br>
-	</c:forEach>
-</p> --%>
+
 	
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>

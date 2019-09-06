@@ -29,17 +29,17 @@ public class MainAction implements Action {
 		Vector<Vector> category = new Vector<Vector>();
 		
 		//메인카테고리, 서브카테고리, 상품 표시 갯수
-		Vector<ProductDTO> v1 = pdao.getProductLimitList("1", "1", 8);
+		Vector<ProductDTO> v1 = pdao.getProductLimitList("스킨케어", "페이셜케어", 8);
 		Vector<Vector> category1 = ProductListAction.Make2DArray(v1);	
 		category.add(category1);
 		
 		//메인카테고리, 서브카테고리, 상품 표시 갯수
-		Vector<ProductDTO> v2 = pdao.getProductLimitList("1", "2", 8);
+		Vector<ProductDTO> v2 = pdao.getProductLimitList("바디로션", "로션/크림", 8);
 		Vector<Vector> category2 = ProductListAction.Make2DArray(v2);	
 		category.add(category2);
 		
 		//메인카테고리, 서브카테고리, 상품 표시 갯수
-		Vector<ProductDTO> v3 = pdao.getProductLimitList("2", "4", 8);
+		Vector<ProductDTO> v3 = pdao.getProductLimitList("헤어케어", "스타일링/에센스", 8);
 		Vector<Vector> category3 = ProductListAction.Make2DArray(v3);	
 		category.add(category3);
 	
@@ -47,9 +47,9 @@ public class MainAction implements Action {
 		
 		//제목
 		Vector<String> title = new Vector<String>();
-		title.add("title1");
-		title.add("title2");
-		title.add("title3");
+		title.add("페이셜케어");
+		title.add("로션/크림");
+		title.add("스타일링/에센스");
 		
 		request.setAttribute("title", title);
 		

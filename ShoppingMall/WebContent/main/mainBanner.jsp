@@ -154,13 +154,13 @@
 						<a href="#">
 							<img src="./asset/image/bannertest1.jpg">
 							<p class="mainBanner_Img_Text">
-							<span>{Title}</span>
+							<span>9월 신상은 뭘까?</span>
 							<strong>
-							{Text1}<br>
-							{Text2}<br>
-							{Text3}<br>
+							믿고쓰는<br>
+							베스트셀러를<br>
+							대용량으로!!<br>
 							</strong>
-							<span>{Tag}</span>
+							<span>#9월신상</span>
 							</p>
 						</a>
 					</div>
@@ -169,13 +169,13 @@
 						<a href="#">
 							<img src="./asset/image/bannertest2.jpg">
 							<p class="mainBanner_Img_Text">
-							<span>{Title}</span>
+							<span>아이티영 미용소품</span>
 							<strong>
-							{ccc}<br>
-							{ccc}<br>
-							{ccc}<br>
+							BEST와<br>
+							TOP 브랜드만<br>
+							모아모아<br>
 							</strong>
-							<span>{Tag}</span>
+							<span>#베스트of베스트#최대50%</span>
 							</p>
 						</a>
 					</div>
@@ -184,13 +184,13 @@
 						<a href="#">
 							<img src="./asset/image/bannertest3.jpg">
 							<p class="mainBanner_Img_Text">
-							<span>{Title}</span>
+							<span>19F/W</span>
 							<strong>
-							{3333333}<br>
-							{ccc}<br>
-							{ccc}<br>
+							메이크업트렌드<br>
+							뉴트럴무드<br>
+							가을분위기<br>
 							</strong>
-							<span>{Tag}</span>
+							<span>#클리오#라카</span>
 							</p>
 						</a>
 					</div>
@@ -199,13 +199,13 @@
 						<a href="#">
 							<img src="./asset/image/bannertest4.jpg">
 							<p class="mainBanner_Img_Text">
-							<span>{Title}</span>
+							<span>오리진스 온라인혜택</span>
 							<strong>
-							{44444444}<br>
-							{ccc}<br>
-							{ccc}<br>
+							환절기 촉촉케어<br>
+							온라인 단독<br>
+							10% OFF<br>
 							</strong>
-							<span>{Tag}</span>
+							<span>BEST상품 아이티영 단독구성</span>
 							</p>
 						</a>
 					</div>

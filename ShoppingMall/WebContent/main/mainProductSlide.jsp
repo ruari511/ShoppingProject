@@ -86,7 +86,10 @@
 
 </head>
 <body>
+
+	<c:set var="PATH" value="./upload/" />
 	<div id="content"> <!-- content 나중에 제거하고 main에 추가-->
+	<div style="margin: 70px 0;"><a href="#"><img src="./asset/image/main_ad.jpg"></a></div>
 	
 		<section id="productSlide">
 		
@@ -122,7 +125,7 @@
 						<div class="productSlide_Content">
 
 							<a href="ProductDetailAction.pro?product_num=${item.product_num }">
-								<img src="${item.img_main }">
+								<img src="${PATH}${item.img_main }">
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
 								<p class="productSlide_Text_Name">${item.product_name }</p>
@@ -147,7 +150,7 @@
 						<c:forEach var="item" items="${slide}">
 							<div class="productSlide_Content">
 								<a href="ProductDetailAction.pro?product_num=${item.product_num }">
-									<img src="${item.img_main }">
+									<img src="${PATH}${item.img_main }">
 									<div class="productSlide_Text">
 									<p class="productSlide_Text_Brand">${item.brand }</p>
 									<p class="productSlide_Text_Name">${item.product_name }</p>
@@ -172,7 +175,7 @@
 						<div class="productSlide_Content">
 
 							<a href="ProductDetailAction.pro?product_num=${item.product_num }">
-								<img src="${item.img_main }">
+								<img src="${PATH}${item.img_main }">
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
 								<p class="productSlide_Text_Name">${item.product_name }</p>

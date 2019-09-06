@@ -11,6 +11,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
    
+ 
    function login_check(){
       var _id = $("#id").val();
       
@@ -18,7 +19,7 @@
 
       $.ajax(
          {
-            url:"http://localhost:8090/ShoppingMall/member/login.jsp",
+            url:"${pageContext.request.contextPath}/member/login.jsp",
             type:"post",
             async:false,
             data:{id:_id, pass:_pass},

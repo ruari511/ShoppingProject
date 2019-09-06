@@ -98,7 +98,9 @@ position: relative;
 }
 
 .mainBanner_Img_Text *:nth-child(1){
-	font-size: 24px;
+	font-size: 20px;
+    color: black;
+    font-weight: 700;
 }
 .mainBanner_Img_Text *:nth-child(1)::after{
 	content: '';
@@ -112,13 +114,15 @@ position: relative;
 
 .mainBanner_Img_Text *:nth-child(2){
 	margin-top: 20px;
-	font-size: 40px;
-	line-height: 1.5;
+    font-size: 40px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: black;
 }
 .mainBanner_Img_Text *:nth-child(3){
 	margin-top: 20px;
-	font-size: 30px;
-	line-height: 1.5;
+    font-size: 20px;
+    line-height: 1.5;
 }
 
 #mainBannerIndex{
@@ -149,10 +153,9 @@ position: relative;
 	padding: 0 23px 0;
 	color: white;
 	font-weight: 700;
-	font-family: 
 }
 
-#mainCategory_List>li>a:last-child{
+#mainCategory_List .premium_category{
 	height: 35px;
     line-height: 35px;
 	font-size: 14px;
@@ -241,6 +244,8 @@ position: relative;
 	font-size: 18px;
 	margin-top: 15px;
 	line-height: 1.4;
+	max-height: 50px;
+    overflow: hidden;
 }
 
 .Ad_product_price{

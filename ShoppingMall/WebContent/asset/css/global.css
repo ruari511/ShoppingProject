@@ -104,12 +104,12 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 
 .header_inner {width:100%;height:90px;width:1020px}
 /*.header_inner:after {position:absolute;top:119px;content:'';display:block;width:100%;left:50%;margin-left:-50%;clear:both;border-bottom:1px solid #e5e5e5}*/
-.header_inner h1 {float:left;margin-top:21px}
+.header_inner h1 {float:left;margin-top:2px}
 .header_inner h1 a {display:block}
-.header_inner h1 img {display:block;width:248px;height:42px;}
+.header_inner h1 img {display:block;height: 60px;}
 
 /* 헤더 검색 영역 */
-.header_inner .search_box {float:left;position:relative;width:340px;height:40px;margin:22px 0 0 90px;padding:0 45px 0 20px;border:2px solid coral;background:#fff;border-radius:20px}
+.header_inner .search_box {float:left;position:relative;width:400px;height:40px;margin:22px 0 0 90px;padding:0 45px 0 20px;border:2px solid coral;background:#fff;border-radius:20px}
 .header_inner .search_box input[type="text"] {height:36px;border:0;padding:8px 10px 8px 0;font-family:'dotum', '돋움';font-size:12px;outline:0}
 .header_inner .search_box #searchSubmit {position:absolute;top:7px;right:18px;width:21px;height:21px;background:url(../image/ico_search.png) no-repeat 50% 50%;text-indent:-9999px}
 
@@ -267,7 +267,7 @@ button {outline:1 !important;font-family:'montserrat', 'noto', 'Roboto', sans-se
 #Footer .list-area li p {color:#777;font-size:12px;line-height:20px;}
 #Footer .list-area > li:nth-child(1) {position:relative;width:509px;background:none;}
 #Footer .list-area li:nth-child(1) .logo {position:absolute;top:50%;left:0;margin-top:-12px;padding:0;font-size:0;line-height:0;}
-#Footer .list-area li:nth-child(1) .logo img {width:146px;height:24px;}
+#Footer .list-area li:nth-child(1) .logo img {height: 35px;}
 #Footer .list-area li:nth-child(1) h2 {padding:28px 0 3px 170px;color:#000;font-size:12px;line-height:20px;}
 #Footer .list-area li:nth-child(1) p {padding:0 0 0 170px;}
 #Footer .list-area li:nth-child(1) p:nth-child(4) {margin-left:35px;text-indent:-35px}
