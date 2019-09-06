@@ -129,6 +129,7 @@
         </div>
         
         <div class="fond_btn">
+        <br>
         <input type="button" class="btn btn-primary" value="아이디/비밀번호 찾기" onclick="showPopup();" style="float: left;"/>
         <a href="./join.do"><input type="button" class="btn btn-primary2" value="회원가입" ></a>
         </div>
