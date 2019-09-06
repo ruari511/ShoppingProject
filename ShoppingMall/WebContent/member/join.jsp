@@ -144,7 +144,7 @@ String name = request.getParameter("name");
 			// ajax 아이디 중복 체크
 			$.ajax(
 					{
-						url:"http://localhost:8090/ShoppingMall/Check",
+						url:"${pageContext.request.contextPath}/ShoppingMall/Check",
 						type:"post",
 						async:false,
 						data:{id:_id, phone:_phone},

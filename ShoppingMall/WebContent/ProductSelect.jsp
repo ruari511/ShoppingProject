@@ -123,7 +123,7 @@
 <!-- header -->
 <jsp:include page="./include/Header.jsp"/>
 <!-- header// -->
-
+	<c:set var="PATH" value="./upload/" />
 <!-- #Container -->
 	<c:set var="productList" value="${requestScope.productList}" />
 	<c:set var="count" value="${requestScope.count}" />
@@ -681,7 +681,7 @@
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
 						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
-							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
+							<img src="${PATH}${productList.img_main}" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
@@ -706,7 +706,7 @@
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
 						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
-							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
+							<img src="${PATH}${productList.img_main}" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
@@ -731,7 +731,7 @@
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
 						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
-							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
+							<img src="${PATH}${productList.img_main}" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->
@@ -756,7 +756,7 @@
 						<div class="prd_info ">
 						<!-- 이미지 영역 -->
 						<a href="ProductDetailAction.pro?product_num=${productList.product_num}" class="prd_thumb">
-							<img src="./asset/image/product_sum.jpg" alt="이미지 썸네일">
+							<img src="${PATH}${productList.img_main}" alt="이미지 썸네일">
 						</a>
 						<!--// 이미지 영역 -->
 						<!-- 상품명 -->

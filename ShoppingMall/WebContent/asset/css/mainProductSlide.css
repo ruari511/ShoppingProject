@@ -24,8 +24,8 @@ html, body {
 	position:relative;
 	width: 1020px;
 	height: 400px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 /*왼쪽 오른쪽 버튼*/
@@ -143,4 +143,15 @@ html, body {
 
 
 
+.deco_Img{
+	width: 100%;
+    height: 455px;
+    display: block;
+    margin: 70px 0;
+}
 
+.deco_Img img{
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

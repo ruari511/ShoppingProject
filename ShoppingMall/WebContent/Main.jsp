@@ -19,8 +19,18 @@
 	<link rel="stylesheet" href="./asset/css/global.css"/>
 	<link rel="stylesheet" href="./asset/css/contents.css"/> 
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
+	
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
-	<script type="text/javascript" src="./asset/js/common.js"></script>
+	
+	<c:choose>
+		<c:when test="${param.section eq null }">
+		<script type="text/javascript" src="./asset/js/common.js"></script>
+		</c:when>
+		<c:otherwise>
+		<script type="text/javascript" src="../asset/js/common.js"></script>
+		</c:otherwise>
+	</c:choose>
+
 	
 </head>
 <body>
@@ -31,11 +41,7 @@
 		section = "Section.jsp";
 	}
 %>
-<%-- <p>
-	<c:forEach var="category" items="${requestScope.v}" >
-		${category.product_name}<br>
-	</c:forEach>
-</p> --%>
+
 	
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>

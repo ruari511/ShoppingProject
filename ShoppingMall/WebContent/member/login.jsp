@@ -37,7 +37,7 @@
 
       $.ajax(
          {
-            url:"http://localhost:8090/ShoppingMall/member/login.jsp",
+            url:"${pageContext.request.contextPath}/member/login.jsp",
             type:"post",
             async:false,
             data:{id:_id, pass:_pass},

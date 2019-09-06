@@ -27,6 +27,7 @@
 </script>
 </head>
 <body>
+	<c:set var="PATH" value="./upload/" />
 	<!-- 메인 카테고리  -->
 			<div id="mainCategory_Wrap">
 				<ul id="mainCategory_List">
@@ -57,16 +58,19 @@
 											</c:if>
 											<span class="Ad_discount_price">
 											<fmt:formatNumber value="${item.product_price-item.product_sale_price}" pattern="#,###" /> 원</span>
-											<img src="${item.img_main}">
+											<img src="${PATH}${item.img_main}">
 										</a>
 									</p>
 								</div>
 							</div>
 						</li>
 					</c:forEach>
-				
-
-					<li><a href="#">프리미엄관</a></li>
+					<li class="mainCategory_name"><a href="#">건강식품</a></li>
+					<li class="mainCategory_name"><a href="#">일반식품</a></li>
+					<li class="mainCategory_name"><a href="#">반려동물</a></li>
+					<li class="mainCategory_name"><a href="#">베이비</a></li>
+					<li class="mainCategory_name"><a href="#">잡화</a></li>
+					<li class="premium_category"><a href="#">프리미엄관</a></li>
 					
 
 				</ul>

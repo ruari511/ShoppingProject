@@ -86,30 +86,38 @@
 
 </head>
 <body>
+
+	<c:set var="PATH" value="./upload/" />
 	<div id="content"> <!-- content 나중에 제거하고 main에 추가-->
+	<div style="margin: 70px 0;"><a href="#"><img src="./asset/image/main_ad.jpg"></a></div>
+	
 		<section id="productSlide">
 		
-			<!-- 카테고리 배열 가져오기 -->
-			<c:set var="category" value="${requestScope.category}"/>
+		
+		<!-- 카테고리 슬라이드 배열 가져오기 -->
+		<c:set var="category_wrap" value="${requestScope.category}"/>
+		<c:set var="title" value="${requestScope.title}"/>
+		<c:forEach var="category" items="${category_wrap}" varStatus="stat">
+
 			<!-- 카테고리 배열 길이 -->
 			<c:set var="category_length" value="${fn:length(category) }"/>
 			
 			<div class="productSlide_Wrap">
 				<div class="productSlide_Title">
-					<p>{Title}</p>
+					<p>${title[stat.index]}</p>
 				 
 				</div>
 				
 					<div class="productSlide_ArrowBtn_Left">
-						<input type="button" class="slick-arrow slick-prev" onclick="LeftButton(1);" >
+						<input type="button" class="slick-arrow slick-prev" onclick="LeftButton(${stat.index});" >
 					</div>
 				
 					<div class="productSlide_ArrowBtn_Right">
-						<input type="button" class="slick-arrow slick-next" onclick="RightButton(1);">
+						<input type="button" class="slick-arrow slick-next" onclick="RightButton(${stat.index});">
 					</div>
 				
 				<div class="productSlide_Contents_Wrap">
-					<ul class="productSlide_List" data-category="1" data-max-index="${category_length}" data-current-index="1">
+					<ul class="productSlide_List" data-category="${stat.index}" data-max-index="${category_length}" data-current-index="1">
 					
 					<!-- 마지막꺼  -->
 					<li>
@@ -117,7 +125,7 @@
 						<div class="productSlide_Content">
 
 							<a href="ProductDetailAction.pro?product_num=${item.product_num }">
-								<img src="${item.img_main }">
+								<img src="${PATH}${item.img_main }">
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
 								<p class="productSlide_Text_Name">${item.product_name }</p>
@@ -142,7 +150,7 @@
 						<c:forEach var="item" items="${slide}">
 							<div class="productSlide_Content">
 								<a href="ProductDetailAction.pro?product_num=${item.product_num }">
-									<img src="${item.img_main }">
+									<img src="${PATH}${item.img_main }">
 									<div class="productSlide_Text">
 									<p class="productSlide_Text_Brand">${item.brand }</p>
 									<p class="productSlide_Text_Name">${item.product_name }</p>
@@ -167,7 +175,7 @@
 						<div class="productSlide_Content">
 
 							<a href="ProductDetailAction.pro?product_num=${item.product_num }">
-								<img src="${item.img_main }">
+								<img src="${PATH}${item.img_main }">
 								<div class="productSlide_Text">
 								<p class="productSlide_Text_Brand">${item.brand }</p>
 								<p class="productSlide_Text_Name">${item.product_name }</p>
@@ -182,6 +190,9 @@
 								</div>
 							</a>
 						</div>
+						
+						
+						
 						</c:forEach>	
 					</li>		
 							
@@ -190,6 +201,11 @@
 				
 				</div>
 			</div>	
+			
+			<c:if test="${stat.index eq 1 }">
+						<div class="deco_Img"><img src="./asset/image/Main_onlyone_BG.jpg"></div>							
+						</c:if>
+			</c:forEach>
 				
 		</section>
 	</div>

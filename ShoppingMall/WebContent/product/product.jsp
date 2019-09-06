@@ -170,6 +170,7 @@ $(function() {
 	<jsp:include page="../include/Header.jsp"/>
 <!-- header// -->
 <div id="Container">
+	<c:set var="PATH" value="./upload/" />
 	<div id="Contents">
 	<c:set var="product" value="${requestScope.pdto}" />
 	<input type="hidden" id="product_num" name="product_num" value="${product.product_num}">
@@ -220,11 +221,11 @@ $(function() {
 		<div class="prd_detail_box">
 			<div class="left_area">
 				<div class="prd_img">
-					<img src="./asset/image/${product.img_main}" alt="상품명 이미지">
+					<img src="${PATH}${product.img_main}" alt="상품명 이미지">
 				</div>
 				<ul class="prd_thumb_list">
-					<li class="sel"><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
-					<li class=""><a href=""><img src="./asset/image/${product.img_main}" alt="썸네일이미지"></a></li>
+					<li class="sel"><a href=""><img src="${PATH}${product.img_main}" alt="썸네일이미지""></a></li>
+					<li class=""><a href=""><img src="${PATH}${product.img_main}" alt="썸네일이미지"></a></li>
 				</ul>
 			</div>
 			<div class="right_area">
@@ -236,7 +237,7 @@ $(function() {
 						${product.brand}
 						<a href="javascript:;" class="link_brand2 goods_brandall" id="moveBrandShop">브랜드 상품 전체보기</a>
 					</p>
-					<p class="prd_name">[온라인단독] ${product.product_name}</p>
+					<p class="prd_name">${product.product_name}</p>
 					<p class="prd_flag">				
 						<span class="icon_flag sale">세일</span>
 					</p>
@@ -334,10 +335,10 @@ $(function() {
 		</c:if>
 			<div class="detail_area">
 				<div class="contEditor">
-					<img alt="" src="./asset/image/${product.img_contents}">
+					<img alt="" src="${PATH}${product.img_contents}">
 				</div>
 				<div style="text-align:center;padding:20px 0px 0px 0px;">
-					<p style="display:inline-block;font-size:14px;border:1px solid #ddd;padding:10px 40px 10px 40px;text-align:center;">본 상품 정보(상품 상세, 상품 설명 등)의 내용은 협력사가 직접 등록한 것 입니다.</p>
+					<p style="display:inline-block;font-size:14px;border:1px solid #ddd;padding:10px 40px 10px 40px;text-align:center;">본 상품 정보(상품 상세, 상품 설명 등)의 내용은 올리브영에서 퍼온것입니다.</p>
 				</div>
 			</div>
 		</div>
@@ -351,11 +352,11 @@ $(function() {
 			<div id="artcInfo">		
 				<dl class="detail_info_list">
 					<dt>품명 및 모델명</dt>
-					<dd>루치펠로 치약3종 (온)</dd>
+					<dd>${product.product_name }</dd>
 				</dl>
 				<dl class="detail_info_list">
 					<dt>인증·허가</dt>
-					<dd>의약외품</dd>
+					<dd>상품</dd>
 				</dl>
 				<dl class="detail_info_list">
 					<dt>제조국</dt>
@@ -363,11 +364,11 @@ $(function() {
 				</dl>
 				<dl class="detail_info_list">
 					<dt>제조자</dt>
-					<dd>금호덴탈제약(주)</dd>
+					<dd>아이티영</dd>
 				</dl>
 				<dl class="detail_info_list">
 					<dt>A/S 책임자 / 전화번호</dt>
-					<dd>주식회사 루치펠로코리아 / 070-7750-7970</dd>
+					<dd>주식회사 아이티영코리아 / 000-0000-0000</dd>
 				</dl>
 			</div>
 			<h3 class="detail_tit mgT40">배송안내</h3>

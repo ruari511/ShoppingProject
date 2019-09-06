@@ -24,7 +24,7 @@
 			<div class="conts">
 				<ul class="list-area">
 					<li>
-						<p class="logo"><a href="#"><img src="#" alt="###"></a></p>
+						<p class="logo"><a href="./Main.do"><img src="./asset/image/logo.png" alt="###"></a></p>
 						<h2>네트웍스 주식회사</h2>
 						<p>대표이사 : ### | 사업자등록번호 : 123-45-78910</p>
 						<p>주소 : (12345) 서울특별시 ##구 ####로 ##, ##층 <br>(###, ##시티)</p>
@@ -57,20 +57,15 @@
 						<span class="bar">인증범위 : 온라인쇼핑몰운영(올리브영)</span>
 						<span class="bar">유효기간 : 2017.12.27 - 2020.12.26</span>
 					</li>
-					<li class="ncsi">2017~2018 국가고객만족도 NCSI 헬스앤뷰티전문점 부분 2년 연속 1위​</li>
+					<li class="ncsi">2017~2018 국가고객만족도 NCSI 헬스앤뷰티전문점 부분 2년 연속 99위​</li>
 				</ol>
 			</div>
 		</div>
 		<div class="threeConts">
 			<div class="conts">
-				<p class="copyright">Copyright ⓒ 2017 CJ #. All Rights Reserved.</p>
+				<p class="copyright">Copyright ⓒ 2017 ###. All Rights Reserved.</p>
 				<div class="sns">
-					<h2># # #</h2>
-					<a class="facebook" href="#" title="페이지 이동" target="_blank"><img src="#" alt="페이스북"></a>
-					<a class="twitter" href="#" title="페이지 이동" target="_blank"><img src="#" alt="트위터"></a>
-					<a class="kakao" href="#" title="페이지 이동" ><img src="#" alt="카카오톡"></a>
-					<a class="cafe" href="#" title="페이지 이동" target="_blank"><img src="#" alt="올리브영"></a>
-					<a class="insta" href="#" title="페이지 이동" target="_blank"><img src="#" alt="인스타그램"></a>
+					<h2>본 사이트는 올리브영과 일체 관련이 없으며 진짜 쇼핑몰이 아닙니다.</h2>
 				</div>
 			</div>
 		</div>

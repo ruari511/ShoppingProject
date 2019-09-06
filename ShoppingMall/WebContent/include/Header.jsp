@@ -16,6 +16,18 @@ $(window).scroll(function() {
     }
 });
 
+function moveCategory(main, sub){
+	
+	location.href="./ProductList.pro?main="+main+"&sub="+sub+"&sort=pop&pageNum=1";
+}
+
+function notReady(){
+	alert("준비중입니다.");
+	location.reload();
+}
+
+
+
 </script>
 </head>
 
@@ -58,9 +70,9 @@ $(window).scroll(function() {
 				<%
 				}
 				%>
-				<li class="customer"><a href="#">고객센터</a></li>
+				<li class="customer"><a href="javascript:notReady();">고객센터</a></li>
 				
-				<li class="store"><a href="./MemberDelet.me">매장안내</a></li>
+				<li class="store"><a href="javascript:notReady();">매장안내</a></li>
 			</ul>
 			</form>
 		</div>
@@ -75,22 +87,7 @@ $(window).scroll(function() {
 		</form>
 			<!--// 검색영역 -->
 			<ul class="mymenu_area">
-				<li class="store ">
-					<a href="#" class="mymenu_layer" title="관심 매장소식 자세히보기 열기/닫기">관심 매장소식</a>
-					<div class="alim_box">
-						<p class="store_desc"><span>로그인</span>하시면 자주가는 매장을 <br />관심 매장으로 설정 할 수 있습니다.</p>
-						<button class="mymenu_btn" onClick="javascript:common.link.moveLoginPage();">로그인</button>
-					</div>
-				</li>
-				<li class="recent">
-					<a href="javascript:;" class="mymenu_layer" title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
-					<div class="recent_prd_box" style="min-height:510px;">
-						<p class="recent_tit">전체 <span>0</span>개
-						<div class="no_data" style="display:none;">
-							최근 본 상품이 없습니다.
-						</div>
-					</div>
-				</li>
+				
 			</ul>
 		</div>
 		</div>
@@ -104,68 +101,68 @@ $(window).scroll(function() {
 					<li>
 						<h2>뷰티</h2>
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">스킨케어</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('스킨케어', 'all');">스킨케어</a></p>
 							<ul>
-								<li><a href="#">페이셜케어</a></li>
-								<li><a href="#">마스크팩</a></li>
-								<li><a href="#">클렌징</a></li>
-								<li><a href="#">선케어</a></li>
-								<li><a href="#">더모 코스메틱</a></li>
+								<li><a href="javascript:moveCategory('스킨케어', '페이셜케어');">페이셜케어</a></li>
+								<li><a href="javascript:moveCategory('스킨케어', '마스크팩');">마스크팩</a></li>
+								<li><a href="javascript:moveCategory('스킨케어', '클렌징');">클렌징</a></li>
+								<li><a href="javascript:moveCategory('스킨케어', '선케어');">선케어</a></li>
+								<li><a href="javascript:moveCategory('스킨케어', '더모 코스메틱');">더모 코스메틱</a></li>
 							</ul>
 							
-							<p class="sub_depth"><a href="#">메이크업</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('메이크업', 'all');">메이크업</a></p>
 							<ul>
-								<li><a href="#">베이스</a></li>
-								<li><a href="#">네일케어</a></li>
-								<li><a href="#">립메이크업</a></li>
-								<li><a href="#">아이메이크업</a></li>
+								<li><a href="javascript:moveCategory('메이크업', '베이스');">베이스</a></li>
+								<li><a href="javascript:moveCategory('메이크업', '네일케어');">네일케어</a></li>
+								<li><a href="javascript:moveCategory('메이크업', '립메이크업');">립메이크업</a></li>
+								<li><a href="javascript:moveCategory('메이크업', '아이메이크업');">아이메이크업</a></li>
 							</ul>
 							
-							<p class="sub_depth"><a href="#">바디케어</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('바디케어', 'all');">바디케어</a></p>
 							<ul>
-								<li><a href="#">로션/크림</a></li>
-								<li><a href="#">워시/스크럽</a></li>
-								<li><a href="#">미스트/오일</a></li>
-								<li><a href="#">핸드/풋</a></li>
-								<li><a href="#">립케어</a></li>
-								<li><a href="#">데오/제모</a></li>
+								<li><a href="javascript:moveCategory('바디케어', '로션/크림');">로션/크림</a></li>
+								<li><a href="javascript:moveCategory('바디케어', '워시/스크럽');">워시/스크럽</a></li>
+								<li><a href="javascript:moveCategory('바디케어', '미스트/오일');">미스트/오일</a></li>
+								<li><a href="javascript:moveCategory('바디케어', '핸드/풋');">핸드/풋</a></li>
+								<li><a href="javascript:moveCategory('바디케어', '립케어');">립케어</a></li>
+								<li><a href="javascript:moveCategory('바디케어', '데오/제모');">데오/제모</a></li>
 							</ul>
 						</div>
 							
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">헤어케어</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('헤어케어', 'all');">헤어케어</a></p>
 							<ul>
-								<li><a href="#">샴푸/린스</a></li>
-								<li><a href="#">트리트먼트/팩</a></li>
-								<li><a href="#">스타일링/에센스</a></li>
-								<li><a href="#">염모/펌/코팅</a></li>
-								<li><a href="#">헤어기기</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '샴푸/린스');">샴푸/린스</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '트리트먼트/팩');">트리트먼트/팩</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '스타일링/에센스');">스타일링/에센스</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '염모/펌/코팅');">염모/펌/코팅</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '헤어기기');">헤어기기</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">향수/디퓨저</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('헤어케어', 'all');">향수/디퓨저</a></p>
 							<ul>
-								<li><a href="#">여성향수</a></li>
-								<li><a href="#">남성향수</a></li>
-								<li><a href="#">캔들/디퓨저</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '여성향수');">여성향수</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '남성향수');">남성향수</a></li>
+								<li><a href="javascript:moveCategory('헤어케어', '캔들/디퓨저');">캔들/디퓨저</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">미용소품</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('미용소품', 'all');">미용소품</a></p>
 							<ul>
-								<li><a href="#">얼굴소품</a></li>
-								<li><a href="#">헤어소품</a></li>
-								<li><a href="#">네일소품</a></li>
-								<li><a href="#">미용가전</a></li>
-								<li><a href="#">기타소품</a></li>
+								<li><a href="javascript:moveCategory('미용소품', '얼굴소품');">얼굴소품</a></li>
+								<li><a href="javascript:moveCategory('미용소품', '헤어소품');">헤어소품</a></li>
+								<li><a href="javascript:moveCategory('미용소품', '네일소품');">네일소품</a></li>
+								<li><a href="javascript:moveCategory('미용소품', '미용가전');">미용가전</a></li>
+								<li><a href="javascript:moveCategory('미용소품', '기타소품');">기타소품</a></li>
 							</ul>							
 						</div>
 							
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">남성</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('남성', 'all');">남성</a></p>
 							<ul>
-								<li><a href="#">스킨케어</a></li>
-								<li><a href="#">바디케어</a></li>
-								<li><a href="#">헤어케어</a></li>
-								<li><a href="#">메이크업</a></li>
-								<li><a href="#">향수/탈취</a></li>
-								<li><a href="#">쉐이빙/잡화</a></li>
+								<li><a href="javascript:moveCategory('남성', '스킨케어');">스킨케어</a></li>
+								<li><a href="javascript:moveCategory('남성', '바디케어');">바디케어</a></li>
+								<li><a href="javascript:moveCategory('남성', '헤어케어');">헤어케어</a></li>
+								<li><a href="javascript:moveCategory('남성', '메이크업');">메이크업</a></li>
+								<li><a href="javascript:moveCategory('남성', '향수/탈취');">향수/탈취</a></li>
+								<li><a href="javascript:moveCategory('남성', '쉐이빙/잡화');">쉐이빙/잡화</a></li>
 							</ul>
 						</div>							
 					</li>
@@ -173,58 +170,58 @@ $(window).scroll(function() {
 					<li>
 						<h2>헬스&푸드</h2>
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">건강/위생용품</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('건강/위생용품', 'all');">건강/위생용품</a></p>
 							<ul>
-								<li><a href="#">덴탈케어</a></li>
-								<li><a href="#">아이케어</a></li>
-								<li><a href="#">여성/위생용품</a></li>
-								<li><a href="#">마사지/교정/헬스용품</a></li>
-								<li><a href="#">스팟패치/의료용품</a></li>
+								<li><a href="javascript:moveCategory('건강/위생용품', '덴탈케어');">덴탈케어</a></li>
+								<li><a href="javascript:moveCategory('건강/위생용품', '아이케어');">아이케어</a></li>
+								<li><a href="javascript:moveCategory('건강/위생용품', '여성/위생용품');">여성/위생용품</a></li>
+								<li><a href="javascript:moveCategory('건강/위생용품', '마사지/교정/헬스용품');">마사지/교정/헬스용품</a></li>
+								<li><a href="javascript:moveCategory('건강/위생용품', '스팟패치/의료용품');">스팟패치/의료용품</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">건강식품</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('건강식품', 'all');">건강식품</a></p>
 							<ul>
-								<li><a href="#">영양보충제</a></li>
-								<li><a href="#">다이어트/헬스</a></li>
-								<li><a href="#">건강음료/기타</a></li>
-								<li><a href="#">일반건강식품</a></li>
+								<li><a href="javascript:moveCategory('건강식품', '영양보충제');">영양보충제</a></li>
+								<li><a href="javascript:moveCategory('건강식품', '다이어트/헬스');">다이어트/헬스</a></li>
+								<li><a href="javascript:moveCategory('건강식품', '건강음료/기타');">건강음료/기타</a></li>
+								<li><a href="javascript:moveCategory('건강식품', '일반건강식품');">일반건강식품</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">일반식품</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('일반식품', 'all');">일반식품</a></p>
 							<ul>
-								<li><a href="#">과자/초콜릿/캔디</a></li>
-								<li><a href="#">간편편의식/냉장/냉동</a></li>
-								<li><a href="#">라면/통조림/소스류</a></li>
-								<li><a href="#">생수/음료</a></li>
-								<li><a href="#">차/커피</a></li>
-								<li><a href="#">유제품/두유/우유</a></li>
-								<li><a href="#">선물세트</a></li>	
+								<li><a href="javascript:moveCategory('일반식품', '과자/초콜릿/캔디');">과자/초콜릿/캔디</a></li>
+								<li><a href="javascript:moveCategory('일반식품', '간편편의식/냉장/냉동');">간편편의식/냉장/냉동</a></li>
+								<li><a href="javascript:moveCategory('일반식품', '라면/통조림/소스류');">라면/통조림/소스류</a></li>
+								<li><a href="javascript:moveCategory('일반식품', '생수/음료수');">생수/음료</a></li>
+								<li><a href="javascript:moveCategory('일반식품', '차/커피');">차/커피</a></li>
+								<li><a href="javascript:moveCategory('일반식품', '유제품/두유/우유');">유제품/두유/우유</a></li>
+								<li><a href="javascript:moveCategory('일반식품', '선물세트');">선물세트</a></li>	
 							</ul>
 						</div>
 					</li>
 					<li>
 						<h2>라이프</h2>
 						<div class="sub_menu_box">
-							<p class="sub_depth"><a href="#">반려동물</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('반려동물', 'all');">반려동물</a></p>
 							<ul>
-								<li><a href="#">강아지 식품</a></li>
-								<li><a href="#">강아지 용품</a></li>
-								<li><a href="#">고양이 식품</a></li>
-								<li><a href="#">고양이 용품</a></li>
+								<li><a href="javascript:moveCategory('반려동물', '강아지 식품');">강아지 식품</a></li>
+								<li><a href="javascript:moveCategory('반려동물', '강아지 용품');">강아지 용품</a></li>
+								<li><a href="javascript:moveCategory('반려동물', '고양이 식품');">고양이 식품</a></li>
+								<li><a href="javascript:moveCategory('반려동물', '고양이 용품');">고양이 용품</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">베이비</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('베이비', 'all');">베이비</a></p>
 							<ul>
-								<li><a href="#">스킨/바디케어</a></li>
-								<li><a href="#">기저귀/물티슈</a></li>
-								<li><a href="#">유아용품</a></li>
-								<li><a href="#">분유/이유식/간식</a></li>
+								<li><a href="javascript:moveCategory('베이비', '스킨/바디케어');">스킨/바디케어</a></li>
+								<li><a href="javascript:moveCategory('베이비', '기저귀/물티슈');">기저귀/물티슈</a></li>
+								<li><a href="javascript:moveCategory('베이비', '유아용품');">유아용품</a></li>
+								<li><a href="javascript:moveCategory('베이비', '분유/이유식/간식');">분유/이유식/간식</a></li>
 							</ul>
-							<p class="sub_depth"><a href="#">잡화</a></p>
+							<p class="sub_depth"><a href="javascript:moveCategory('잡화', 'all');">잡화</a></p>
 							<ul>
-								<li><a href="#">방향/탈취</a></li>
-								<li><a href="#">세제/물티슈/휴지</a></li>
-								<li><a href="#">패션용품</a></li>
-								<li><a href="#">문구/사무용품</a></li>
-								<li><a href="#">음향/통신기기</a></li>
-								<li><a href="#">가전/디저털</a></li>
+								<li><a href="javascript:moveCategory('잡화', '방향/탈취');">방향/탈취</a></li>
+								<li><a href="javascript:moveCategory('잡화', '세제/물티슈/휴지');">세제/물티슈/휴지</a></li>
+								<li><a href="javascript:moveCategory('잡화', '패션용품');">패션용품</a></li>
+								<li><a href="javascript:moveCategory('잡화', '문구/사무용품');">문구/사무용품</a></li>
+								<li><a href="javascript:moveCategory('잡화', '음향/통신기기');">음향/통신기기</a></li>
+								<li><a href="javascript:moveCategory('잡화', '가전/디지털');">가전/디저털</a></li>
 								
 							</ul>
 						</div>
@@ -234,16 +231,17 @@ $(window).scroll(function() {
 			</div>	
 			<!--// 전체 카테고리 레이어 -->
 			<ul class="gnb_menu_list">
-					<li><a href="#"><span>1</span></a></li>	
-					<li><a href="#"><span>2</span></a></li>
-					<li><a href="#"><span>3</span></a></li>
-					<li><a href="#"><span>4</span></a></li>
-					<li><a href="#"><span>5</span></a></li>
-					<li><a href="#"><span>6</span></a></li>
-					<li><a href="#"><span>7</span></a></li>
-					<li><a href="#"><span>8</span></a></li>
-					<li><a href="#"><span>9</span></a></li>
+					<li><a href="javascript:notReady();"><span>오특</span></a></li>	
+					<li><a href="javascript:notReady();"><span>신상</span></a></li>
+					<li><a href="javascript:notReady();"><span>베스트</span></a></li>
+					<li><a href="javascript:notReady();"><span>프리미엄관</span></a></li>
+					<li><a href="javascript:notReady();"><span>오늘드림</span></a></li>
+					<li><a href="javascript:notReady();"><span>트렌드</span></a></li>
+					<li><a href="javascript:notReady();"><span>기획전</span></a></li>
+					<li><a href="javascript:notReady();"><span>온리원#</span></a></li>
+					<li><a href="javascript:notReady();"><span>세일</span></a></li>
 					<li><a href="./Coupon.cp"><span>쿠폰존</span></a></li>
+					<li><a href="javascript:notReady();"><span>이벤트</span></a></li>
 			</ul>
 		</div>
 	</div>
