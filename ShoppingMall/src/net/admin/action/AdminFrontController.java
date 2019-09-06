@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.action.Action;
 import net.action.ActionForward;
 import net.member.action.MemberLogoutAction;
+import net.mypage.action.MypageAllBuyListAction;
+import net.mypage.action.MypageBuyListUpdateAction;
 
 
 public class AdminFrontController extends HttpServlet{
@@ -188,6 +190,20 @@ public class AdminFrontController extends HttpServlet{
 		
 			//MemberOut.jsp에서 ..회원탈퇴링크를 클릭하여 메인화면으로 이동하라 라는 요청이 들어 왔을때...	
 			//또는 회원탈퇴후!.. 메인화면으로 이동하라 라는 요청이 들어 왔을떄...
+		}else if(command.equals("/buylistCheck.ad")){
+			 action = new MypageAllBuyListAction();
+	    	 	try{
+	    	 		forward=action.execute(request, response);
+	    	 	}catch (Exception e) {
+	    	 		e.printStackTrace();
+	    	 	}
+		}else if(command.equals("/buylistUpdate.ad")){
+			action = new MypageBuyListUpdateAction();
+				try{
+					forward=action.execute(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 		
 		//주소 이동

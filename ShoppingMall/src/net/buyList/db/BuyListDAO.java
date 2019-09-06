@@ -628,4 +628,31 @@ DataSource ds;
 		}//getBuyList()
 	
 	
+	public void updateBuylist(int buynum, int product_num, String delivery_result){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		BuyListDTO buyList = new BuyListDTO();
+		
+		
+		try {
+			con = getConnection();
+			
+			sql  = "update buylist set delivery_result = ? where buynum = ? and product_num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, delivery_result);
+			pstmt.setInt(2, buynum);
+			pstmt.setInt(3, product_num);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("updateBuylist() error :" + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
 }

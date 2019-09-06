@@ -33,11 +33,11 @@ public class BoardFrontController extends HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-
+/*
 		System.out.println("RequestURI:	"+RequestURI);
 		System.out.println("contextPath:	"+contextPath);
 		System.out.println("command:	"+command);
-		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");*/
 		/* FAQ */
 		if (command.equals("/faq.bd")) {
 			action = new BoardFaqListAction();
@@ -46,7 +46,7 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/faqwrite.bd")) {
+		} else if (command.equals("/faqWrite.bd")) {
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./Main.jsp?section=board/faqWrite.jsp");
@@ -134,8 +134,6 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} 
-		System.out.println("---------------------------------------");
-		System.out.println("---------------------------------------");
 		
 		if (forward != null) { 
 			if (forward.isRedirect()) {
