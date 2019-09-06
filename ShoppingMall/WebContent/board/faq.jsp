@@ -195,7 +195,7 @@ String id=(String)session.getAttribute("id");
 		<% 
 			if(id.equals("admin")){
 		%>
-			<a href="./faqwrite.bd"> 글쓰기 </a>
+			<a href="./faqWrite.bd"> 글쓰기 </a>
 		<%} %>
 		</div>
 	</div>

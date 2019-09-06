@@ -27,9 +27,8 @@
 <%
 //세션값 가져오기
 String id=(String)session.getAttribute("id");
-System.out.println(id);
 //세션값이 없으면
-if(id==null){
+if(!id.equals("admin")){
 	response.sendRedirect("./notice.bd");
 }
 %>

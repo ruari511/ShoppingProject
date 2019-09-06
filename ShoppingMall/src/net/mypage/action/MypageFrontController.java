@@ -59,14 +59,7 @@ public class MypageFrontController extends HttpServlet{
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-      }else if(command.equals("/mypage_Order_manager.mp")){
-    	 action = new MypageAllBuyListAction();
-    	 	try{
-    	 		forward=action.execute(request, response);
-    	 	}catch (Exception e) {
-    	 		e.printStackTrace();
-    	 	}
-   	  }else if(command.equals("/mypage_OrderCancelList.mp")){
+      }else if(command.equals("/mypage_OrderCancelList.mp")){
       
          action = new MypageBuyListAction();
 			try{

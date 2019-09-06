@@ -27,6 +27,9 @@
 	<script type="text/javascript" src="./asset/js/common.js"></script>
 </head>
 <body>
+<%
+String id=(String)session.getAttribute("id");
+%>
 <div id="Wrapper">
 	<div id="Container">
 		<div id="Contents">	
@@ -34,7 +37,7 @@
 				<h1>고객센터 <span>무엇을 도와드릴까요?</span></h1>
 			</div>
 			<ul class="comm1sTabs threeSet customer">
-				<li id="tabFaq"><a href="./faq.bd">FAQ</a></li>
+					<li id="tabFaq"><a href="./faq.bd">FAQ</a></li>
 				<li id="tab1on1"><a href="javascript:common.link.moveQnaList();">1:1문의</a></li>
 				<li id="tabNotice" class="on"><a href="./notice.bd">공지사항</a></li>
 			</ul>
@@ -172,6 +175,11 @@
 		
 		</div>
 		</div>
+		<% 
+			if(id.equals("admin")){
+		%>
+			<a href="./noticeWrite.bd"> 글쓰기 </a>
+		<%} %>
 	</div>
 </body>
 </html>
