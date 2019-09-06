@@ -712,7 +712,7 @@
 							<div class="tbl_cell w700">
 								<div class="prd_info">
 									<div class="prd_img">
-										<img src="" alt="장바구니 상품 임시 이미지">
+										<img src="./upload/${cartlist.img_main}" alt="장바구니 상품 임시 이미지">
 									</div>
 									<div class="prd_name">
 										<span>${cartlist.brand}</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->

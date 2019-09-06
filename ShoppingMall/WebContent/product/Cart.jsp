@@ -177,7 +177,7 @@ function selectBuy(cartnum) {
 				</div>	
 				<div class="tbl_cell w390">
 					<div class="prd_info">
-						<a class="prd_img" href="">	<img class="completed-seq-lazyload" src=""></a>
+						<a class="prd_img" href="">	<img class="completed-seq-lazyload" src="./upload/${cartlist.img_main}"></a>
 						<a class="prd_name" href="">
 							<span id="brandNm">${cartlist.brand}</span>
 							<p>${cartlist.product_name}</p>

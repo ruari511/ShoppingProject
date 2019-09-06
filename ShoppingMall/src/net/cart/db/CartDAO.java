@@ -33,8 +33,8 @@ public class CartDAO {
 		try {
 			con = getConnection();
 			
-			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num, c.product_num "
-					+"from product p join cart c "+
+			sql  = "select c.id, p.product_name, p.img_main, p.brand, p.product_price, c.product_count, p.product_sale_price, c.cart_num, c.product_num, "
+					+"p.img_main from product p join cart c "+
 					"on p.product_num=c.product_num "+
 					"where c.id=?";
 			
@@ -106,6 +106,7 @@ public class CartDAO {
 				cartDTO.setProduct_count(rs.getInt("product_count"));
 				cartDTO.setDiscount(rs.getInt("product_sale_price"));
 				cartDTO.setProduct_num(rs.getInt("product_num"));
+				cartDTO.setImg_main(rs.getString("img_main"));
 				
 			}//while문 끝
 			
