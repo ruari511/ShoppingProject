@@ -36,7 +36,7 @@ public class ProductDetailAction implements Action{
 
 		forward.setRedirect(false);
 		
-		forward.setPath("./Product.pro");
+		forward.setPath("./product/product.jsp");
 		
 		return forward;
 	}
