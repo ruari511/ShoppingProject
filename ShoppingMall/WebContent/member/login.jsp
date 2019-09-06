@@ -74,6 +74,21 @@
       
    };   
    
+	// 아이디 / 비밀번호 찾기 팝업창
+   function showPopup() {
+      
+       var _width = 600;
+       var _height = 450;
+    
+       // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+       var _left = Math.ceil(( window.screen.width - _width )/2);
+       var _top = Math.ceil(( window.screen.height - _height )/2); 
+    
+       window.open("./member/find_IDForm.jsp", "ID / PW 찾기", 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
+    
+   }
+   
+   
 </script>
 </head>
 
@@ -122,13 +137,13 @@
       
       <div class="qqq">
 	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-	<div id="naverIdLogin" ></div>
+	<div id="naverIdLogin" style="width: 100px; display: inline-block;"></div>
 
 	<br>
 	<br>
 	
 	<div>
-	<a id="kakao-login-btn"></a>
+	<a id="kakao-login-btn" ></a>
 	<a href="http://developers.kakao.com/logout" ></a>
 	</div>
 	<br>
@@ -339,11 +354,6 @@
 			}
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.disconnect();
-		}
-		
-		// 아이디 / 비밀번호 찾기 팝업창
-		function showPopup() {
-			window.open("./member/find_IDForm.jsp", "ID / PW 찾기", "width=600, height=520, left=1000, top=200");
 		}
 	</script>
 

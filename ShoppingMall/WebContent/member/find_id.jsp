@@ -5,12 +5,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+
+	function moveClose() {
+		opener.location.href = "../login.do";
+		self.close();
+	}
+	function wc() {
+		window.close();
+	}
+	
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>아이디 찾기</title>
 </head>
 <body>
 
-<%
+
+	<%
 	request.setCharacterEncoding("UTF-8");
 
 	//1.join.jsp의 function winopen()함수에 의해서 전달 받은 userid값(입력한 아이디)얻기
@@ -24,17 +36,67 @@
 
 	String id = finddto.getId();
 	
-	int check = dao.find_id(email);
-	
+	int check = dao.find_id(email);%>
+	<table width="600" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	<td bgcolor="#969937" style="padding: 5px 10px; color: #fff;" class="white12bold">아이티영 아이디 찾기</td>
+	</tr>
+	</table>
+	<table width="550" border="0" cellspacing="0" cellpadding="0" class="grey12">
+	<tr>
+	<td style="padding: 20px 0 0 0"> 
+	<table width="500" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr>
+	<td style="padding: 15px; border-top: 2px #cccccc solid; border-right: 2px #cccccc solid; border-bottom: 2px #cccccc solid; border-left: 2px #cccccc solid;">
+
+	<%
 	if(check == 1){
 		out.println("이메일 확인 완료: " + email);
 		out.println("<br>");
 		out.println("아이디 : " + id);
 	}else{
-		out.println("이메일 확인 부탁드립니다.");
+		out.println("존재하지 않는 이메일 입니다 이메일 다시 작성해 주세요.");
 	}
 
 %>
+	<table width="400" border="0" cellspacing="1" class="regtable">
+	<tr>
+	<td>
+	</td>
+	</tr>
+	
+	</table>
+	</td>
+	</tr>
+	</table>
+	<table border="0" align="right" cellpadding="0" cellspacing="0">
+	<tr>
+	<td height="40" style="padding: 0 13px 0 0">
+	<div class="bts">
+	<span><input type="button" class="passwd_UpdateBtn" style="border-radius: 5px;" value="취소" onclick="wc()"></span>
+	</div>
+	</td>
+	<td height="40" style="padding: 0 13px 0 0">
+	<div class="bts">
+	<span><input type="button" class="passwd_UpdateBtn" style="border-radius: 5px;" value="돌아가기" onclick="history.back();"></span>
+	</div>
+	</td>
+	</tr>
+	</table>
+	</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
