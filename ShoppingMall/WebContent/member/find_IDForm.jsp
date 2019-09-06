@@ -14,11 +14,12 @@
 		self.close();
 	}
 	
+
 </script>
 
 <body>
 
-<form action="find_id.jsp" method="get">
+<form action="find_id.jsp" method="get" >
 	<h1>아이디 찾기</h1>
 	<b>이메일을 입력해주세요!</b> : <input type="text" name="find_email"> <br><br>
 	
@@ -37,7 +38,7 @@
 	
 	<br><br>
 	
-	<input type="button" value="닫 기" onclick="self.close();"  />
 	<input type="button" value="로그인 페이지로 이동" onclick="moveClose();" />
+	<input type="button" value="닫 기" onclick="self.close();"  />
 </body>
 </html>

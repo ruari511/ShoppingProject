@@ -158,7 +158,7 @@ $(function() {
 });
 
 
-// 이미지 모달
+// 이미지 모달 닫기
 $( 'a a' ).remove();
 
 document.documentElement.setAttribute("lang", "en");
@@ -168,6 +168,29 @@ axe.run( function(err, results) {
   console.log( results.violations );
 } );
 
+
+// 이미지 모달 띄우면서 src 변경
+function imgmodal(a){
+	
+	var img = './asset/image/review/' + a;
+	$("#modal_img").attr("src",img);
+	$("#modalIMG").modal();
+
+}
+
+function imgmodal_G(){
+	
+	$("#modalIMG_G").modal();
+
+}
+
+function imgmodal_GI(a){
+	
+	var img = './asset/image/review/' + a;
+	$("#modal_img_GI").attr("src",img);
+	$("#modalIMG_GI").modal();
+
+}
 
 </script>
 
@@ -526,10 +549,10 @@ axe.run( function(err, results) {
 		</c:if>
 		<c:if test="${idx.index == 11}">
 		<li>
-			<a data-target="#modalIMG_G" data-toggle="modal" class="more">
+			<a onclick="imgmodal_G('${ReviewAll.review_img}');" class="more">
 				<span>
 					<span><em>더보기</em></span>
-					<img src="./asset/image/product_sum.jpg" class="thum">
+					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum">
 				</span>
 			</a>
 		</li>
@@ -590,6 +613,7 @@ axe.run( function(err, results) {
 </div>
 <!--// 상품 정렬 조건 영역 -->
 
+
 <!-- 상품평 리스트 start -->
 <div class="review_list_wrap">
 	<ul class="inner_list" id="gdasList">
@@ -641,7 +665,7 @@ axe.run( function(err, results) {
 			<ul class="inner clrfix">
 				<li>
 					<span>
-						<a data-target="#modalIMG" data-toggle="modal">
+						<a onclick="imgmodal('${ReviewDTO.review_img}');">
 							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum">
 						</a>
 					</span>
@@ -667,12 +691,14 @@ axe.run( function(err, results) {
 		</div> 
 		</li>
 		
+		
 <!-- Img Modal -->		
-<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG">
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" tabindex="-1">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
+		
 			<div class="modal-body mb-0 p-0">
-				<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" style="width:100%">
+				<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" id="modal_img" style="width:100%">
 			</div>
 				
 			<div class="modal-footer">
@@ -689,27 +715,35 @@ axe.run( function(err, results) {
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-body mb-0 p-0">
+					
+				<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" varStatus="idx">             
+					<span>
+						<a onclick="imgmodal_GI('${ReviewAll.review_img}');">
+							<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px;">
+						</a>
+					</span>
+				</c:forEach>
 			
 			
+			</div>
+				
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
 			
-			
-			
-			
-			
-<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" varStatus="idx">
-			<a>               
-				<span>
-					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px;">
-				</span>
-			</a>
-</c:forEach>
-			
-			
-			
-			
-			
-			
-			
+		</div>
+	</div>
+</div>
+<!-- Img Modal 더보기 -->
+
+
+<!-- Img Modal 더보기 이미지 클릭 시 -->		
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG_GI" tabindex="-1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+		
+			<div class="modal-body mb-0 p-0">
+				<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" id="modal_img_GI" style="width:100%">
 			</div>
 				
 			<div class="modal-footer">
@@ -718,9 +752,9 @@ axe.run( function(err, results) {
 		</div>
 	</div>
 </div>
-<!-- Img Modal 더보기 -->
+<!-- Img Modal 더보기 이미지 클릭 시 -->
 
-	</c:forEach>
+</c:forEach>
 	</ul>
 </div>
 
@@ -764,7 +798,7 @@ axe.run( function(err, results) {
 						<div class="form-group">
 							<label class="control-label col-sm-2">작성자(ID):</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
+								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group">
@@ -776,7 +810,7 @@ axe.run( function(err, results) {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
+								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group">

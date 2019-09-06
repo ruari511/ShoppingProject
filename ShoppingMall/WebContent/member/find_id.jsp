@@ -36,5 +36,9 @@
 
 %>
 
+<br>
+
+<input type="button" value="돌아가기" onclick="history.back();"  />
+
 </body>
 </html>
