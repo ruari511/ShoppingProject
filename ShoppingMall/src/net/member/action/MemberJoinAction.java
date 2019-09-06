@@ -33,8 +33,6 @@ public class MemberJoinAction implements Action{
 		dto.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));//회원 전화번호 저장
 		dto.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));//회원  폰번호 저장
 		
-		
-		
 		boolean result = false;
 		
 		MemberDAO mdao=new MemberDAO();

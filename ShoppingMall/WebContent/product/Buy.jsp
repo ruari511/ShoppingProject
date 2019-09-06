@@ -347,7 +347,7 @@
 		
 		var card = document.getElementById("acqrCd").value;
 		var card_installment = document.getElementById("instMmCnt").value;
-		var buyCard = window.open("./product/buyCard.jsp?card="+card+"&card_installment="+card_installment, "", "width=400, height=200, top=350, left=800");
+		var buyCard = window.open("./product/buyCard.jsp?card="+card+"&card_installment="+card_installment, "", "width=500, height=250, top=350, left=800");
 
 	}
 
