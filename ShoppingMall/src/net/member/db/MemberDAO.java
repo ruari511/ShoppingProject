@@ -194,6 +194,37 @@ public class MemberDAO {
       return false; // 회원가입 실패시! false리턴
 
    }// insertMember()메소드
+   
+   public void coupon_rouletUp(String id){
+	   con = null;
+	   sql = "";
+	   pstmt = null;
+	   
+	   try {
+		   
+		   con = getConnection();
+		   sql = "insert into coupon_roulet(id) values(?)";
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, id);
+		   pstmt.executeUpdate();
+		
+	} catch (Exception e) {
+		System.out.println("coupon_rouletUp()메소드 내부의 오류 : " + e);
+	} finally {
+		// 예외상관없이 마무리 작업
+        if (pstmt != null)
+           try {
+              pstmt.close();
+           } catch (SQLException ex) {
+           }
+        if (con != null)
+           try {
+              con.close();
+           } catch (SQLException ex) {
+           }
+	}
+	   
+   }
 
 
    

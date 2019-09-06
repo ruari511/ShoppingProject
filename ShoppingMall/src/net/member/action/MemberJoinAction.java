@@ -40,6 +40,7 @@ public class MemberJoinAction implements Action{
 		MemberDAO mdao=new MemberDAO();
 		
 		result = mdao.insertMember(dto);
+		mdao.coupon_rouletUp(request.getParameter("id"));
 		
 		/*회원 가입 성공시.... 로그인 페이지로 이동 시킨다.*/
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성
