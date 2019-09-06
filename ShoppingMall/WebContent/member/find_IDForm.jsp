@@ -17,6 +17,7 @@
 		window.close();
 	}
 	
+
 </script>
 
 <body>
@@ -160,7 +161,8 @@
 
 	
 	<br><br>
-	<br><hr>
-	<input type="button" value="닫 기" onclick="wc();"  style="float: right; margin-right: 15px" />
+	
+	<input type="button" value="닫 기" onclick="self.close();"  />
+	<input type="button" value="로그인 페이지로 이동" onclick="moveClose();" />
 </body>
 </html>

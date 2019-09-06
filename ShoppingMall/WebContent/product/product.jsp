@@ -5,7 +5,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@page import="net.review.db.review_DAO"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,9 +21,6 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	
 	
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="path/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="<c:url value="/resource/js/jquery-1.12.1.js"/>"></script>
 
 
 <% 
@@ -159,9 +156,42 @@ $(function() {
 });
 
 
+// 이미지 모달 닫기
+$( 'a a' ).remove();
 
+document.documentElement.setAttribute("lang", "en");
+document.documentElement.removeAttribute("class");
+
+axe.run( function(err, results) {
+  console.log( results.violations );
+} );
+
+
+// 이미지 모달 띄우면서 src 변경
+function imgmodal(a){
+	
+	var img = './asset/image/review/' + a;
+	$("#modal_img").attr("src",img);
+	$("#modalIMG").modal();
+
+}
+
+function imgmodal_G(){
+	
+	$("#modalIMG_G").modal();
+
+}
+
+function imgmodal_GI(a){
+	
+	var img = './asset/image/review/' + a;
+	$("#modal_img_GI").attr("src",img);
+	$("#modalIMG_GI").modal();
+
+}
 
 </script>
+
 </head>
 <body>
 <!-- header -->
@@ -441,6 +471,7 @@ $(function() {
 <div class="product_rating_area">
    <div class="inner clrfix">
       <c:forEach var="ReviewDTO" items="${requestScope.reviewlist}" end="0">
+      <c:if test="${requestScope.review_cnt != 0}">
          <div class="grade_img">
             <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
          </div>
@@ -466,21 +497,49 @@ $(function() {
             </c:if>
             
          </div>
+         </c:if>
+       </c:forEach>
+             
+       
+       <c:forEach var="ReviewDTO" items="${requestScope.reviewlist} > 0" end="0">
+       <c:if test="${requestScope.review_cnt == 0}">
+         <div class="grade_img">
+            <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
+         </div>
+         <div class="star_area">
+            <p class="total">총 <em>0</em>건의 고객상품평</p>
+            <p class="num"><strong>리뷰가 아직 없어요!</strong></p>
+       </div>               
+         <div class="write_info">
+            <dl>
+               <dt>상품평을 써보세요.</dt>
+               <dd>첫 번째 상품 리뷰를 쓴 사람이 되어 주세요!</dd>
+            </dl>
+           
+            <c:if test="<%=id != null %>">
+            	<p class="alignCenter"><button class="btnInquiry" id="gdasWrite" data-toggle="modal" data-target="#myModal">상품평 쓰기</button></p>
+            </c:if>
+            
+            <c:if test="<%=id == null %>">
+            	<p class="alignCenter"><button class="btnInquiry" onclick="location.href='./login.do'">로그인 해주세요</button></p>
+            </c:if>
+            
+         </div>
+         </c:if>
        </c:forEach>
    </div>
 </div>
-
 <!--평균별점집계 end-->
 
-<!-- 사진탭 start-->
 
+<!-- 사진탭 start-->
 <h3 class="tit_type thum_tit">상품평 이미지</h3>
 <div class="review_thum">
 	<ul class="inner clrfix">
 	<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" end="11" varStatus="idx">
 		<c:if test="${idx.index != 11}">
 		<li>
-			<a href="">               
+			<a>               
 				<span>
 					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" alt="">
 				</span>
@@ -489,10 +548,10 @@ $(function() {
 		</c:if>
 		<c:if test="${idx.index == 11}">
 		<li>
-			<a href="" class="more">
+			<a onclick="imgmodal_G('${ReviewAll.review_img}');" class="more" style="cursor: pointer;">
 				<span>
 					<span><em>더보기</em></span>
-					<img src="./asset/image/product_sum.jpg" class="thum">
+					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum">
 				</span>
 			</a>
 		</li>
@@ -553,6 +612,7 @@ $(function() {
 </div>
 <!--// 상품 정렬 조건 영역 -->
 
+
 <!-- 상품평 리스트 start -->
 <div class="review_list_wrap">
 	<ul class="inner_list" id="gdasList">
@@ -600,15 +660,14 @@ $(function() {
 		<div class="review_cont"> 
 		
 		<div class="review_thum">
-		${ReviewDTO.review_img}
 			<c:if test="${ReviewDTO.review_img != null}">
 			<ul class="inner clrfix">
 				<li>
-					<a href="">
-						<span>
-							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" alt="">
-						</span>
-					</a>
+					<span>
+						<a onclick="imgmodal('${ReviewDTO.review_img}');">
+							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" style="cursor: pointer;">
+						</a>
+					</span>
 				</li>
 			</ul>
 			</c:if>
@@ -619,18 +678,82 @@ $(function() {
 			</div>
 			
 			<div class="recom_area">    
-			<c:if test="<%=id != null %>">
-					<a type="button" class="btn_recom" onclick="return confirm('추천하시겠습니까?')" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+			<c:if test="<%=id != null %>">																																								
+				<button class="btn_recom" onclick="return confirm('추천하시겠습니까?')"><a type="button" class="recom" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}&product_num=${product}" style="cursor: pointer;">도움이 돼요<span class="num">${ReviewDTO.like_count}</span></a></button>
 			</c:if>
 			
 			<c:if test="<%=id == null %>">
-					<a type="button" class="btn_recom" onclick="location.href='./login.do'">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a>
+				<button class="btn_recom"><a type="button" class="recom" onclick="location.href='./login.do'" style="cursor: pointer;">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a></button>
 			</c:if>
 			
 			</div>
 		</div> 
 		</li>
-	</c:forEach>
+		
+		
+<!-- Img Modal -->		
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" tabindex="-1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+		
+			<div class="modal-body mb-0 p-0">
+				<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" id="modal_img" style="width:100%">
+			</div>
+				
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Img Modal -->
+
+
+<!-- Img Modal 더보기 -->		
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG_G">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body mb-0 p-0">
+					
+				<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" varStatus="idx">             
+					<span>
+						<a onclick="imgmodal_GI('${ReviewAll.review_img}');">
+							<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px; cursor: pointer;">
+						</a>
+					</span>
+				</c:forEach>
+			
+			
+			</div>
+				
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Img Modal 더보기 -->
+
+
+<!-- Img Modal 더보기 이미지 클릭 시 -->		
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG_GI" tabindex="-1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+		
+			<div class="modal-body mb-0 p-0">
+				<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" id="modal_img_GI" style="width:100%">
+			</div>
+				
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Img Modal 더보기 이미지 클릭 시 -->
+
+</c:forEach>
 	</ul>
 </div>
 
@@ -656,8 +779,6 @@ $(function() {
 
 
 
-
-
 <!-- Modal -->
   	<div class="modal fade" id="myModal" role="dialog">
     	<div class="modal-dialog modal-lg">
@@ -676,7 +797,7 @@ $(function() {
 						<div class="form-group">
 							<label class="control-label col-sm-2">작성자(ID):</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID">
+								<input type="text" class="form-control" id="id" name="id" value="<%=id %>" placeholder="ID" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group">
@@ -688,7 +809,7 @@ $(function() {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호">
+								<input type="text" class="form-control" id="product_num" name="product_num" value="<%=product_num %>" placeholder="상품번호" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group">
@@ -724,9 +845,6 @@ $(function() {
 				</div>
 			</div>
 		</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
         </div>
       </div>
       

@@ -19,9 +19,7 @@
 <!-- 구글 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<!--  Bootstrap CSS 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
- -->
+
 <link rel="stylesheet" href="./asset/css/member.css"/> 
  
 <title>로그인 페이지</title>
