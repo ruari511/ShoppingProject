@@ -101,8 +101,6 @@ function goCart() {
 	var product_count = document.getElementById("product_count").value;
 	var pro_count = document.getElementById("pro_count").value;
 	
-	alert("id = " + id + "길이  = " + id.length);
-	
 	if(id == "null" || id.length==0 || id == null){
 		location.href="./login.do";
 	}else{

@@ -33,13 +33,12 @@ public class MemberJoinAction implements Action{
 		dto.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));//회원 전화번호 저장
 		dto.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));//회원  폰번호 저장
 		
-		
-		
 		boolean result = false;
 		
 		MemberDAO mdao=new MemberDAO();
 		
 		result = mdao.insertMember(dto);
+		mdao.coupon_rouletUp(request.getParameter("id"));
 		
 		/*회원 가입 성공시.... 로그인 페이지로 이동 시킨다.*/
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성

@@ -180,7 +180,7 @@
 				<ul class="productList_Product_Row">
 					<c:forEach var="item" items="${row}">
 						<li class="productList_Product">
-							<a href="ProductDetailAction.pro?product_num=${item.product_num}">
+							<a href="./ProductDetailAction.pro?product_num=${item.product_num}">
 								<img src="${PATH}${item.img_main}">
 								<div class="productList_Product_Text">
 									<p class="productList_Text_Brand">${item.brand}</p>

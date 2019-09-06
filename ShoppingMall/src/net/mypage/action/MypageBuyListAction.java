@@ -21,25 +21,20 @@ public class MypageBuyListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		System.out.println("MypageBuyListAction execute()");
-
+		
 		request.setCharacterEncoding("utf-8");
-		
 		BuyListDAO bdao = new BuyListDAO();
-		
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
-		
-		//ÇöÀç ³â, ¿ù, ÀÏ ±¸ÇÏ±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
 		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
 		String c_month = null;
-		c_month = (String) request.getParameter("data_month");
+		c_month = request.getParameter("data_month");
 		String startdate = null;
 		String enddate = dateFormat.format(date);
-		
-		/* Ã¹ ·Îµù½Ã */
+		/* Ã¹ ï¿½Îµï¿½ï¿½ï¿½ */
 		if(c_month == null && startdate == null){
 			startdate = getDate(-1);
 		}else{
@@ -49,16 +44,14 @@ public class MypageBuyListAction implements Action {
 		}
 /*		System.out.println(startdate);
 		System.out.println(enddate);*/
-		
-		//ÆäÀÌÁö ¹øÈ£
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 		/*int num=Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		bdao.getBuyListCount(id);*/
 		
 		
-		//ÁÖ¹® Á¤º¸ ¹Þ±â
+		//ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 		Vector<BuyListDTO> buylist = bdao.getBuyList(id, startdate, enddate);
-		
 		/*request.setAttribute("pageNum", pageNum);*/
 		request.setAttribute("buylist", buylist);
 		
@@ -81,10 +74,10 @@ public class MypageBuyListAction implements Action {
 	int nMonth = temp.get ( Calendar.MONTH ) + 1;
 	int nDay = temp.get ( Calendar.DAY_OF_MONTH );
 	 
-	sbDate.append ( nYear );
+	sbDate.append ( nYear +"/" );
 	if ( nMonth < 10 )
 	sbDate.append ( "0" );
-	sbDate.append ( nMonth );
+	sbDate.append ( nMonth+"/" );
 	if ( nDay < 10 )
 	sbDate.append ( "0" );
 	sbDate.append ( nDay );

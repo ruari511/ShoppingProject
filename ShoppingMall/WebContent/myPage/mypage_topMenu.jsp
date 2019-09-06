@@ -67,7 +67,7 @@
 					<ul class="first">
 						<li class="subMenu"><a href="mypage.mp" myMenuId="0101">주문/배송 조회</a></li>
 						<li class="subMenu"><a href="mypage_OrderCancelList.mp" myMenuId="0102">취소/반품/교환 내역</a></li>
-						<li class="subMenu"><a href="Cart.jsp" myMenuId="0201">장바구니</a></li>
+						<li class="subMenu"><a href="./CartListAction.buy" myMenuId="0201">장바구니</a></li>
 					</ul>
 					<ul>
 						<li class="subMenu"><a href="mypage_PointInfo.mp" myMenuId="0301">포인트</a></li>
