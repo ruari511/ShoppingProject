@@ -488,16 +488,14 @@ DataSource ds;
 		Vector<BuyListDTO> buyList = new Vector<BuyListDTO>();
 		try {
 			con = getConnection();
-			
-			sql  = "select * from buylist natural join product where id=? and buydate between ? and ? order by buynum asc";
+			sql  = "select * from buylist natural join product where id=? "
+				 + "and buydate between ? and ? order by buynum asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, startdate);
 			pstmt.setString(3, enddate);
-			
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				
 				BuyListDTO buylistDTO = new BuyListDTO();
 				buylistDTO.setId(rs.getString("id"));
 				buylistDTO.setProduct_num(rs.getInt("product_num"));

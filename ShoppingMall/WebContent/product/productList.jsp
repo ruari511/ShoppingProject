@@ -179,8 +179,8 @@
 				<ul class="productList_Product_Row">
 					<c:forEach var="item" items="${row}">
 						<li class="productList_Product">
-							<a href="ProductDetailAction.pro?product_num=${item.product_num}">
-								<img src="${item.img_main}">
+							<a href="./ProductDetailAction.pro?product_num=${item.product_num}">
+								<img src="./asset/image/${item.img_main}">
 								<div class="productList_Product_Text">
 									<p class="productList_Text_Brand">${item.brand}</p>
 									<p class="productList_Text_Name">${item.product_name}</p>

@@ -17,7 +17,7 @@ public class ProductDetailAction implements Action{
 		System.out.println("ProductDetailAction execute()");
 		
 		request.setCharacterEncoding("utf-8");
-		
+		//ftp://itwillbs9@itwillbs9.cafe24.com/tomcat/webapps/ShoppingMall/product/product.jsp
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		String product_num=request.getParameter("product_num");
@@ -29,7 +29,7 @@ public class ProductDetailAction implements Action{
 		ActionForward forward=new ActionForward();
 
 		forward.setRedirect(false);
-
+		
 		forward.setPath("./Product.pro");
 		
 		return forward;
