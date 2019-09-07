@@ -84,7 +84,7 @@
 							<td class="subject">
 								<div class="area">
 									<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }">
-										<img src="./asset/image/${buylist.img_main }">
+										<img src="./upload/${buylist.img_main }">
 									</a>
 									<div class="textus" style="width: 68%;">
 										<a class="" href="ProductDetailAction.do?product_num=${buylist.product_num }">

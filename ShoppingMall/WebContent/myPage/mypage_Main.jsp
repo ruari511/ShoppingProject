@@ -183,7 +183,7 @@
 											<td class="subject">
 												<div class="area">
 													<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
-														<img src="./asset/image/${buylist.img_main }"> <!-- 제품이미지 정보 -->
+														<img src="./upload/${buylist.img_main }"> <!-- 제품이미지 정보 -->
 													</a>
 													<div class="textus">
 														<a class="" href="ProductDetailAction.do?product_num=${buylist.product_num }">
