@@ -752,8 +752,9 @@
 							<th scope="row">쿠폰 할인</th>
 							<td id="dlexCouponList_hd">
 							<c:set var="coupon" value="${requestScope.cou}" />
+							<c:set var="allCheck" value="${requestScope.allCheck}" />
 							<c:choose>
-								<c:when test="${coupon eq null}">
+								<c:when test="${allCheck == 0}">
 									<div style="display:block;">
 										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
 											<option>적용할 수 있는 쿠폰이 없습니다.</option>
@@ -764,13 +765,13 @@
 									<div style="display:block;">
 										<select id="selAllCoupon" name="allcouponnum" class="selH28 mgT5" style="width:300px" onchange="allcoupon_change(this);">
 											<option value="0-0" selected="selected">쿠폰을 선택해주세요.</option>
+											<c:if test="${allCheck != 0}">
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '전체금액'}">
-													<c:if test="${couponlist.usecheck eq '0'}">
    													<option value="${couponlist.coupon_num}-${couponlist.coupon_percent}-${couponlist.coupon_limitmax}">${couponlist.coupon_name}(최대 할인 금액 ${couponlist.coupon_limitmax}원)</option>
-													</c:if>
 												</c:if>
 											</c:forEach>
+											</c:if>
 										</select>
 									</div>
 								</c:otherwise>
@@ -781,8 +782,9 @@
 							<th scope="row">배송비 쿠폰</th>
 							<td id="dlexCouponList_hd">
 							<c:set var="coupon" value="${requestScope.cou}" />
+							<c:set var="delCheck" value="${requestScope.delCheck}" />
 							<c:choose>
-								<c:when test="${coupon eq null}">
+								<c:when test="${delCheck eq 0}">
 									<div id="delmoneycheck" style="display:block;">
 										<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled">
 											<option>적용할 수 있는 쿠폰이 없습니다.</option>
@@ -800,13 +802,13 @@
 									<div style="display:block;">
 										<select id="selDelCoupon" name="delcouponnum" class="selH28 mgT5" style="width:300px" onchange="delivery_coupon_change(this);">
 											<option value="선택안함" selected="selected">쿠폰을 선택해주세요.</option>
+											<c:if test="${delCheck != 0}">
 											<c:forEach var="couponlist"  items="${requestScope.cou}">
 												<c:if test="${couponlist.coupon_type eq '배송비'}">
-													<c:if test="${couponlist.usecheck eq '0'}">
    													<option value="${couponlist.coupon_num}">${couponlist.coupon_name}</option>
-   													</c:if>
 												</c:if>
 											</c:forEach>
+											</c:if>
 										</select>
 									</div>
 								</c:otherwise>

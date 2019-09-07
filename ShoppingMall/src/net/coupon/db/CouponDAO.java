@@ -90,7 +90,7 @@ public class CouponDAO {
 				 + "u.usecheck, u.id "
 				 + "from coupon c join user_coupon u "
 				 + "on c.coupon_num = u.coupon_num "
-				 + "where u.id=?";
+				 + "where u.id=? && u.usecheck=0";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -354,4 +354,82 @@ public class CouponDAO {
 		
 		return cpNum;
 	}
+	
+	
+	public int AllCouponCheck(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		int count = 0;
+		
+		try {
+			
+			con = getConnection();
+
+			sql = "select count(*)"
+				+ " from shoppingmall.coupon c join shoppingmall.user_coupon u"
+				+ " on c.coupon_num = u.coupon_num"
+				+ " where u.id=? && u.usecheck=0 && c.coupon_type='전체금액'";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("AllCouponCheck() 메소드 내부에서의 오류 : " + e);
+		} finally {
+			 if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+		}
+		
+		return count;
+	}
+	
+	public int DeliveryCouponCheck(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		int count = 0;
+		
+		try {
+			
+			con = getConnection();
+
+			sql = "select count(*)"
+				+ " from shoppingmall.coupon c join shoppingmall.user_coupon u"
+				+ " on c.coupon_num = u.coupon_num"
+				+ " where u.id=? && u.usecheck=0 && c.coupon_type='배송비'";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("DeliveryCouponCheck() 메소드 내부에서의 오류 : " + e);
+		} finally {
+			 if(rs!=null)try{rs.close();}catch(SQLException ex){}
+	         if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+	         if(con!=null)try{con.close();}catch(SQLException ex){}
+		}
+		
+		return count;
+	}
+	
 }

@@ -272,7 +272,6 @@ DataSource ds;
 		String sql = "";
 		
 		int totalsaleprice=0;
-		
 		try {
 			
 			con = getConnection();
@@ -297,10 +296,11 @@ DataSource ds;
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
-				if(rs.getInt(1)>limit)
-				totalsaleprice = limit;
-			} else{
-				totalsaleprice = rs.getInt(1);
+				if(rs.getInt(1)>limit){
+					totalsaleprice = limit;
+				} else{
+					totalsaleprice = rs.getInt(1);
+				}
 			}
 			
 		} catch (Exception e) {

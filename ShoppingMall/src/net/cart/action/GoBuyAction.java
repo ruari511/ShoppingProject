@@ -39,8 +39,11 @@ public class GoBuyAction implements Action{
 		
 		CouponDAO coudao = new CouponDAO();
 		
+		int allCouCheck = coudao.AllCouponCheck(id);
+		int delCouCheck = coudao.DeliveryCouponCheck(id);
+		
 		Vector<UserCouponDTO> cou = coudao.getAllCouponList(id);
-
+		
 		Vector<CartDTO> v = new Vector<CartDTO>();
 		
 		v.add(cdao.getGoBuyList(product_num, product_count));
@@ -50,6 +53,9 @@ public class GoBuyAction implements Action{
 		request.setAttribute("m", m);
 		
 		request.setAttribute("cou", cou);
+		
+		request.setAttribute("allCheck", allCouCheck);
+		request.setAttribute("delCheck", delCouCheck);
 		
 		ActionForward forward=new ActionForward();
 

@@ -131,8 +131,6 @@ public class CartDAO {
 		String sql = "";
 		CartDTO cartDTO = new CartDTO();
 		
-		System.out.println("product_num = " + product_num);
-		
 		try {
 			con = getConnection();
 			

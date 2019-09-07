@@ -121,7 +121,6 @@ public class BuyListInsertBankBookAction implements Action{
 		
 		SimpleDateFormat simpl = new SimpleDateFormat("yyyy/MM/dd");
 		String buydate = simpl.format(System.currentTimeMillis());
-		System.out.println("buydate = " + buydate);
 		
 		String thisDayMore = buydate.replaceAll("/","");
         int thisDayMoreInt = Integer.parseInt(thisDayMore);
