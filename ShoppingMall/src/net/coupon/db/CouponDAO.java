@@ -93,13 +93,11 @@ public class CouponDAO {
 				 + "where u.id=?";
 			
 			pstmt = con.prepareStatement(sql);
-			
 			pstmt.setString(1, id);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				
 				UserCouponDTO ucouDTO = new UserCouponDTO();
 				
 				ucouDTO.setCoupon_num(rs.getInt("coupon_num"));
