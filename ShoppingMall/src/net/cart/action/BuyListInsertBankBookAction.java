@@ -16,6 +16,7 @@ import net.buycard.db.CardDAO;
 import net.buycard.db.CardDTO;
 import net.cart.db.CartDAO;
 import net.coupon.db.CouponDAO;
+import net.product.db.ProductDAO;
 
 public class BuyListInsertBankBookAction implements Action{
 	@Override
@@ -35,12 +36,10 @@ public class BuyListInsertBankBookAction implements Action{
 		BuyListDTO bdto = null;
 		CartDAO cdao = new CartDAO();
 		CouponDAO coudao = new CouponDAO();
-			
-			
+		ProductDAO pdao = new ProductDAO();
 			
 			
 		String prototal = request.getParameter("prototal");
-		System.out.println("prototal = " + prototal);
 			
 		int productTotal = 0;
 			
@@ -48,30 +47,20 @@ public class BuyListInsertBankBookAction implements Action{
 			productTotal = Integer.parseInt(prototal);
 		}
 			
-		System.out.println("id = " + id);
 		String ordername = request.getParameter("ordername");
-		System.out.println("ordername = " + ordername);
 		String orderphone = request.getParameter("orderphone");
-		System.out.println("orderphone = " + orderphone);
 		String orderemail = request.getParameter("orderemail");
-		System.out.println("orderemail = " + orderemail);
 		String delivery_title = request.getParameter("delivery_title");
-		System.out.println("delivery_title = " + delivery_title);
 		String delivery_name = request.getParameter("delivery_name");
-		System.out.println("delivery_name = " + delivery_name);
 		String delcost = request.getParameter("deltotal");
-		System.out.println("deltotal = " + delcost);
 		
 		int delivery_cost = 0;
 		if(request.getParameter("deltotal") != null){
 			delivery_cost = Integer.parseInt(delcost);
 		}
 		String delivery_tel = request.getParameter("delivery_tel");
-		System.out.println("delivery_tel = " + delivery_tel);
 		String delivery_tel1 = request.getParameter("delivery_tel1");
-		System.out.println("delivery_tel1 = " + delivery_tel1);
 		String delivery_tel2 = request.getParameter("delivery_tel2");
-		System.out.println("delivery_tel2 = " + delivery_tel2);
 		String delivery_phone = delivery_tel + "-" + delivery_tel1 + "-" + delivery_tel2;
 		
 		String delivery_address = request.getParameter("delivery_address") + " " + request.getParameter("delivery_address2");
@@ -112,7 +101,6 @@ public class BuyListInsertBankBookAction implements Action{
 		} else{
 			delivery_cost=0;
 		}
-		System.out.println("prototal = " + productTotal);
 		if(productTotal>=20000){
 			delivery_cost=0;
 		}
@@ -133,6 +121,7 @@ public class BuyListInsertBankBookAction implements Action{
 		
 		SimpleDateFormat simpl = new SimpleDateFormat("yyyy/MM/dd");
 		String buydate = simpl.format(System.currentTimeMillis());
+		System.out.println("buydate = " + buydate);
 		
 		String thisDayMore = buydate.replaceAll("/","");
         int thisDayMoreInt = Integer.parseInt(thisDayMore);
@@ -176,6 +165,12 @@ public class BuyListInsertBankBookAction implements Action{
 				bdto.setPayments(paytype);
 				
 				cdao.Deletecart(Integer.parseInt(cartnum[i]));
+				
+				int up_product_count = pdao.getProduct_count(Integer.parseInt(product_num[i]))-Integer.parseInt(product_count[i]);
+				pdao.UpdateProduct_count(up_product_count, Integer.parseInt(product_num[i]));
+				
+				int up_price_count = pdao.getPrice_count(Integer.parseInt(product_num[i]))+Integer.parseInt(product_count[i]);
+				pdao.UpdatePrice_count(up_price_count, Integer.parseInt(product_num[i]));
 			
 				bdao.insertBuyList(bdto);
 			}

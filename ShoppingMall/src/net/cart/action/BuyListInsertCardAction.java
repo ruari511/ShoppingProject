@@ -55,7 +55,6 @@ public class BuyListInsertCardAction implements Action{
 		
 		int cardCheck = cardDAO.cardCheck(cardDTO);
 		
-		System.out.println("cardCheck = " + cardCheck);
 		int maxbuynum = bdao.maxBuynum();
 		
 		if(cardCheck == 1){
@@ -71,7 +70,6 @@ public class BuyListInsertCardAction implements Action{
 			session.setAttribute("bcnum", bcnum);
 			
 			String prototal = request.getParameter("prototal");
-			System.out.println("prototal = " + prototal);
 			
 			int productTotal = 0;
 			
@@ -79,30 +77,20 @@ public class BuyListInsertCardAction implements Action{
 				productTotal = Integer.parseInt(prototal);
 			}
 			
-			System.out.println("id = " + id);
 			String ordername = request.getParameter("ordername");
-			System.out.println("ordername = " + ordername);
 			String orderphone = request.getParameter("orderphone");
-			System.out.println("orderphone = " + orderphone);
 			String orderemail = request.getParameter("orderemail");
-			System.out.println("orderemail = " + orderemail);
 			String delivery_title = request.getParameter("delivery_title");
-			System.out.println("delivery_title = " + delivery_title);
 			String delivery_name = request.getParameter("delivery_name");
-			System.out.println("delivery_name = " + delivery_name);
 			String delcost = request.getParameter("deltotal");
-			System.out.println("deltotal = " + delcost);
 			
 			int delivery_cost = 0;
 			if(request.getParameter("deltotal") != null){
 				delivery_cost = Integer.parseInt(delcost);
 			}
 			String delivery_tel = request.getParameter("delivery_tel");
-			System.out.println("delivery_tel = " + delivery_tel);
 			String delivery_tel1 = request.getParameter("delivery_tel1");
-			System.out.println("delivery_tel1 = " + delivery_tel1);
 			String delivery_tel2 = request.getParameter("delivery_tel2");
-			System.out.println("delivery_tel2 = " + delivery_tel2);
 			String delivery_phone = delivery_tel + "-" + delivery_tel1 + "-" + delivery_tel2;
 			
 			String delivery_address = request.getParameter("delivery_address") + " " + request.getParameter("delivery_address2");
@@ -143,7 +131,6 @@ public class BuyListInsertCardAction implements Action{
 			} else{
 				delivery_cost=0;
 			}
-			System.out.println("prototal = " + productTotal);
 			if(productTotal>=20000){
 				delivery_cost=0;
 			}
