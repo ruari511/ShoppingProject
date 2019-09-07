@@ -29,7 +29,7 @@ public class ReviewWriteAction extends HttpServlet {
 			}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("review_write 서블릿 요청");
+		System.out.println("review_write execute()");
 		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8;");
@@ -44,7 +44,7 @@ public class ReviewWriteAction extends HttpServlet {
 					
 		// 2. 파일이 업로드될 실제 서버측의 경로 얻기
 		// -실제 업로드되는 경로
-		String realPath = ctx.getRealPath("./asset/image/review");
+		String realPath = ctx.getRealPath("./review_upload/");
 					
 		
 		
@@ -86,8 +86,6 @@ public class ReviewWriteAction extends HttpServlet {
 				
 				String file = (String)e.nextElement();
 				saveFiles.add(multi.getFilesystemName(file));
-				
-				System.out.println("saveFiles: " + saveFiles);
 				
 			}
 			

@@ -24,7 +24,7 @@ public class ControllerServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		System.out.println("ControllerServlet");
+		System.out.println("ControllerServlet execute()");
 		
 		//파라미터 한글처리.
 		request.setCharacterEncoding("utf-8");
@@ -32,14 +32,9 @@ public class ControllerServlet extends HttpServlet {
 		
 		String url = request.getRequestURI();
 		
-		System.out.println(url);
-		// SHOP/폴더명/요청서블릿.credu
-		
 		String serv[] = url.split("/"); 
 		
 		url = serv[serv.length - 1];
-		
-		System.out.println(url);
 		
 		// ;sessionid 값이 있을수 있으므로 한번더 반복작업.
 		

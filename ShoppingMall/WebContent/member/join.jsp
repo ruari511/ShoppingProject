@@ -94,7 +94,8 @@ String name = request.getParameter("name");
 				<h3 class="join_title">
 				<label for="name">이름</label>
 				</h3>
-					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" required>
+					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" value="<%=name %>" required>
+					<%-- value="<%=name %>"--%>
 					<div class="check_font" id="nameMessage"></div>
 				</div>
 				
