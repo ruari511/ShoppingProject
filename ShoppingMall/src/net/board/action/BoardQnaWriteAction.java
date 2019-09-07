@@ -21,12 +21,14 @@ public class BoardQnaWriteAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
+		int product_num = Integer.parseInt(request.getParameter("product_num"));
+		System.out.println(product_num);
 		
 		
 		BoardDTO boarddto = new BoardDTO();
 		boarddto.setCategory(request.getParameter("category"));
 		boarddto.setId(id);
-	/*	boarddto.setProduct_num(Integer.parseInt(request.getParameter("product_num")));*/
+		boarddto.setProduct_num(product_num);
 		boarddto.setSubject(request.getParameter("subject"));
 		boarddto.setContent(request.getParameter("content"));
 		
@@ -34,7 +36,7 @@ public class BoardQnaWriteAction implements Action {
 		qnadao.insertQna(boarddto);
 		
 		ActionForward forward = new ActionForward();
-		forward.setRedirect(true);
+		forward.setRedirect(false);
 		forward.setPath("./qna.bd");
 		return forward;
 	}

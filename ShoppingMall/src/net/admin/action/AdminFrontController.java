@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.action.Action;
 import net.action.ActionForward;
 import net.board.action.BoardQnaListAction;
+import net.board.action.BoardQnaReplyAction;
 import net.member.action.MemberLogoutAction;
 import net.mypage.action.MypageAllBuyListAction;
 import net.mypage.action.MypageBuyListUpdateAction;
@@ -210,6 +211,13 @@ public class AdminFrontController extends HttpServlet{
 			try{
 				forward=action.execute(request, response);
 			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BoardQnaReplyAction.ad")){
+			action = new BoardQnaReplyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

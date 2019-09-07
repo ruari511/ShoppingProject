@@ -175,12 +175,14 @@ public class QnaDAO {
 		try{
 			con=getConnection();
 			if(id.equals("admin")){
-				sql="select * from qna natural join product order by num asc limit ?,?";
+				sql="select a.*, b.product_name from qna a left join product b "
+						+ "on a.product_num = b.product_num order by re_result asc, num asc limit ?,?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, startRow-1);
 				pstmt.setInt(2, pageSize);
 			}else{
-				sql="select * from qna natural join product where id=? order by num asc limit ?,?";
+				sql="select a.*, b.product_name from qna a left join product b "
+						+ "on a.product_num = b.product_num where id=? order by reg_date asc limit ?,?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, id);
 				pstmt.setInt(2, startRow-1);
@@ -216,5 +218,26 @@ public class QnaDAO {
 		}
 		return qnaList;
 	}
+	
+	public void replyQna(BoardDTO boarddto){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		try {
+			con=getConnection();
+			sql="update qna set re_result = 1,  reply_id = ? , reply = ?, re_reg_date = now() where num =?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, boarddto.getReply_id());
+			pstmt.setString(2, boarddto.getReply());
+			pstmt.setInt(3, boarddto.getNum());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
 
 }

@@ -1,4 +1,4 @@
-package net.mypage.action;
+package net.board.action;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import net.action.ActionForward;
 import net.buyList.db.BuyListDAO;
 import net.buyList.db.BuyListDTO;
 
-public class MypageBuyListAction implements Action {
+public class BoardBuyListAction implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
@@ -60,7 +60,7 @@ public class MypageBuyListAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./Main.jsp?section=myPage/mypage_Main.jsp");
+		forward.setPath("./Main.jsp?section=board/qnaWrite.jsp");
 		return forward;
 
 	}

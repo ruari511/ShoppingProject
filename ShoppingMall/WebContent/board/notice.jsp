@@ -124,20 +124,6 @@ String id=(String)session.getAttribute("id");
 					</table>
 				</div>
 				
-				<!-- 
-				<div class="TabsConts">
-					일반
-				</div>
-				<div class="TabsConts">
-					매장
-				</div>
-				<div class="TabsConts">
-					이벤트
-				</div>
-				<div class="TabsConts">
-					뷰티테스터
-				</div>
-				 -->
 			</div>
 				
 						<!-- 페이지번호 -->

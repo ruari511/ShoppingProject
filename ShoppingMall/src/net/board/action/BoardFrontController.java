@@ -1,5 +1,4 @@
 package net.board.action;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.action.Action;
 import net.action.ActionForward;
+import net.mypage.action.MypageBuyListAction;
 
 public class BoardFrontController extends HttpServlet {
 
@@ -141,9 +141,12 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/qnaWrite.bd")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("./Main.jsp?section=board/qnaWrite.jsp");
+			  action = new BoardBuyListAction();
+				try{
+					forward = action.execute(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 		} else if (command.equals("/BoardQnaWriteAction.bd")) {
 			action = new BoardQnaWriteAction();
 			try {
@@ -151,7 +154,14 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		} else if (command.equals("/BoardQnaReplyAction.bd")) {
+			action = new BoardQnaReplyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		if (forward != null) { 
 			if (forward.isRedirect()) {

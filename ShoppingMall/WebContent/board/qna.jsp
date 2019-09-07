@@ -60,7 +60,7 @@
 				<li id="tabNotice"><a href="./notice.bd">공지사항</a></li>
 			</ul>
 			
-			<fieldset class="search-period">
+			<!-- <fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
 							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
@@ -68,7 +68,7 @@
 							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
 							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
 						</ul>
-			</fieldset>
+			</fieldset> -->
 			
 				<div class="TabsConts on">
 					<div class="list-customer">
@@ -87,21 +87,37 @@
 									${qnaList.subject } 
 									<span class="data"><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.reg_date }" /></span>
 								</p>
-	
-								<ul class="conts">
-									<li class="question">
-										<strong>문의</strong>
-										<p>${qnaList.content }</p>
-									</li>
-								</ul>
-								<c:if test="${qnaList.re_result eq '1' }">
-								<ul class="conts">
-									<li class="question">
-										<strong>답변완료</strong>
-										<p>${qnaList.reply }</p>
-									</li>
-								</ul>
-								</c:if>
+									<ul class="conts">
+										<li class="question">
+											<strong>문의</strong>
+											<p style="white-space:pre;">${qnaList.content }</p>
+										</li>
+									<c:if test="${qnaList.re_result eq '1' }">
+										<li class="answer">
+											<strong style="color:#969937">
+												답변완료
+												<span class="answer_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.re_reg_date }" /></span>
+											</strong>
+											<p  style="white-space:pre;">${qnaList.reply }</p>
+										</li>
+									</c:if>
+									<% 	if(id != null){
+										if(id.equals("admin")){
+									%>
+										<c:if test="${qnaList.re_result eq '0'}">
+											<form action="./BoardQnaReplyAction.bd" method="get">
+											<li class="conts">
+												<strong style="color:#969937">답변</strong>
+												<input type="hidden" name="num" value="${qnaList.num }">
+												<textarea id="reply" name="reply" cols="5" rows="1" placeholder="답변을 입력하세요" style="width:98%;height:280px;"></textarea>
+											</li>
+											<input type="submit" value="답변하기">
+											</form>
+										</c:if>
+									<%} 
+										}
+									%>
+									</ul>
 							</li>
 						</ul>
 							</c:forEach>
@@ -113,29 +129,29 @@
 	<div id="pageing">
 			<c:if test="${pageNo != 0}">
 				<c:if test="${pageNo > pageBlock }">
-					<a href="./faq.bd?pageNum=${firstPage }"> [첫페이지] </a>
+					<a href="./qna.bd?pageNum=${firstPage }"> [첫페이지] </a>
 				</c:if>
 				<c:if test="${startPage != 1 }">
-					<a href="./faq.bd?pageNum=${startPage-pageBlock }"> [이전] </a>
+					<a href="./qna.bd?pageNum=${startPage-pageBlock }"> [이전] </a>
 				</c:if>
 			
 				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
 					<c:choose>
 						<c:when test="${i eq pageNo }">
-							<a href="./faq.bd?pageNum=${i }"><Strong>${i }</Strong></a>
+							<a href="./qna.bd?pageNum=${i }"><Strong>${i }</Strong></a>
 						</c:when>
 						<c:otherwise>
-							<a href="./faq.bd?pageNum=${i }">${i }</a>
+							<a href="./qna.bd?pageNum=${i }">${i }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 			
 				<c:if test="${pageNo != finalPage}">
-					<a href="./faq.bd?pageNum=${startPage+pageBlock}"> [다음] </a>
+					<a href="./qna.bd?pageNum=${startPage+pageBlock}"> [다음] </a>
 				</c:if>
 				
 				<c:if test="${pageNo < finalPage }">
-					<a href="./faq.bd?pageNum=${finalPage }"> [마지막페이지]</a>
+					<a href="./qna.bd?pageNum=${finalPage }"> [마지막페이지]</a>
 				</c:if>
 			</c:if>
 		</div>

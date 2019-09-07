@@ -64,9 +64,11 @@
 						<td class="data">${noticeDetail.reg_date }</td>
 					</tr>
 					<tr>
-						<td class="textus" colspan="2"><div class="contEditor">
-						${noticeDetail.content }
-					</div></td>
+						<td class="textus" colspan="2">
+							<div class="contEditor" style="white-space:pre;">
+								<p>${noticeDetail.content }</p>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>

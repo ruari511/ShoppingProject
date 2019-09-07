@@ -1,4 +1,4 @@
-package net.board.action;
+package net.admin.action;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,16 +18,12 @@ import net.product.db.ProductDAO;
 import net.product.db.ProductDTO;
 import net.board.db.BoardDTO;
 
-public class BoardQnaListAction implements Action {
+public class BoardQnaListAction2 implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		System.out.println("BoardQnaListAction execute()");
-		String RequestURI=request.getRequestURI();
-		String contextPath=request.getContextPath();
-		String command=RequestURI.substring(contextPath.length());
-		
 		request.setCharacterEncoding("utf-8");
 		
 		QnaDAO qnadao = new QnaDAO();
@@ -66,11 +62,7 @@ public class BoardQnaListAction implements Action {
 		request.setAttribute("endPage", endPage);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		if(command.equals("/qnalistcheck.ad")){
-			forward.setPath("./Main.jsp?section=admin/boardQnaList.jsp");
-		}else{
-			forward.setPath("./Main.jsp?section=board/qna.jsp");
-		}
+		forward.setPath("./Main.jsp?section=board/qna.jsp");
 		return forward;
 	}
 }

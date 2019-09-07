@@ -17,21 +17,40 @@ public class BoardQnaReplyAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		System.out.println("BoardQnaWriteAction execute()");
+		System.out.println("BoardQnaReplyAction execute()");
+
+		String RequestURI=request.getRequestURI();
+		String contextPath=request.getContextPath();
+		String command=RequestURI.substring(contextPath.length());
+		
+		
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		String id=(String)session.getAttribute("id");
 		int num = Integer.parseInt(request.getParameter("num"));
+		System.out.println(num);
+		String reply_id=(String)session.getAttribute("id");
+		System.out.println(reply_id);
+		String reply = request.getParameter("reply");
+		System.out.println(reply);
+		
+		
 		
 		BoardDTO boarddto = new BoardDTO();
+		boarddto.setNum(num);
+		boarddto.setReply_id(reply_id);
+		boarddto.setReply(reply);
 		
+		QnaDAO qnadao = new QnaDAO();
 		
-
-		
+		qnadao.replyQna(boarddto);
 		
 		ActionForward forward = new ActionForward();
-		forward.setRedirect(true);
-		forward.setPath("./qnalistcheck.ad");
+		forward.setRedirect(false);
+		if(command.equals("/BoardQnaReplyAction.ad")){
+			forward.setPath("./qnalistcheck.ad");
+		}else{
+			forward.setPath("./qna.bd");
+		}
 		return forward;
 	}
 }

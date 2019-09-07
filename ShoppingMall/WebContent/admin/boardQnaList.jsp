@@ -46,21 +46,22 @@
 				<table class="table">
 					<tr align="center">
 						<th>글번호</th>
-						<th>작성일</th>
 						<th>작성자</th>
 						<th>카테고리</th>
 						<th>상품번호</th>
 						<th>상품명</th>
 						<th>제목</th>
+						<th>작성일</th>
 						<th>내용</th>
 						<th>답변여부</th>
-						<th>답글달기</th>
+						<th>답변작성일</th>
+						<th>답변내용</th>
+						<th>답변</th>
 					</tr>
-					<form action="./qnaReply.ad" method="post">
+					<form action="./BoardQnaReplyAction.ad" method="post">
 					<c:forEach items="${qnaList}" var="qnaList">
 					<tr align="center">
 						<td>${qnaList.num}</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.reg_date }" /></td>
 						<td>
 							<a href="./buylistCheck.ad?id=${qnaList.id }">${qnaList.id}</a>
 						</td>
@@ -80,28 +81,80 @@
 						</td>
 						<td>
 							<c:if test="${qnaList.product_num eq '0'}">
-							없음
+								-
 							</c:if>
 							<c:if test="${qnaList.product_num != '0' }">
-							${qnaList.product_num }
+								${qnaList.product_num }
 							</c:if>
 						 </td>
 						 <td>
-						 	${qnaList.product_name }
+						 	<c:if test="${empty qnaList.product_name }">
+								-
+						 	</c:if>
+						 	<c:if test="${!empty qnaList.product_name }">
+						 		${qnaList.product_name }
+						 	</c:if>
 						 </td>
 						<td>${qnaList.subject }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.reg_date }" /></td>
 						<td>${qnaList.content}</td>
 						<td>
-							<c:if test="${qnaList.re_result eq '0'}"> 답변대기 </c:if>
-							<c:if test="${qnaList.re_result eq '1'}"> 답변완료 </c:if>	
+							<c:if test="${qnaList.re_result eq '0'}"> 
+								답변대기
+							</c:if>
+							<c:if test="${qnaList.re_result eq '1'}">
+								답변완료
+							</c:if>	
+						</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.re_reg_date }" /></td>
+						<td style="width:40% ;height:100px;">
+							<c:if test="${empty qnaList.reply }">
+								<input type="hidden" name="num" value="${qnaList.num }">
+								<textarea id="reply" name="reply" cols="2" rows="1" placeholder="답변을 입력하세요" style="width:100%;height:100px;"></textarea>
+							</c:if>
+							<c:if test="${!empty qnaList.reply }">
+								<p  style="white-space:pre;">${qnaList.reply }</p>
+							</c:if>
 						</td>
 						<td>
-							<input type="submit" value="답변" style="background-color: white;">
+							<input type="submit" value="답변달기">
 						</td>
 					</tr>
 					</c:forEach>
 					</form>
 				</table>
+				
+		
+		<div id="pageing">
+			<c:if test="${pageNo != 0}">
+				<c:if test="${pageNo > pageBlock }">
+					<a href="./qnalistcheck.ad?pageNum=${firstPage }"> [첫페이지] </a>
+				</c:if>
+				<c:if test="${startPage != 1 }">
+					<a href="./qnalistcheck.ad?pageNum=${startPage-pageBlock }"> [이전] </a>
+				</c:if>
+			
+				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+					<c:choose>
+						<c:when test="${i eq pageNo }">
+							<a href="./qnalistcheck.ad?pageNum=${i }"><Strong>${i }</Strong></a>
+						</c:when>
+						<c:otherwise>
+							<a href="./qnalistcheck.ad?pageNum=${i }">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<c:if test="${pageNo != finalPage}">
+					<a href="./qnalistcheck.ad?pageNum=${startPage+pageBlock}"> [다음] </a>
+				</c:if>
+				
+				<c:if test="${pageNo < finalPage }">
+					<a href="./qnalistcheck.ad?pageNum=${finalPage }"> [마지막페이지]</a>
+				</c:if>
+			</c:if>
+		</div>
+		
 		</div>
 	</section>
 </body>

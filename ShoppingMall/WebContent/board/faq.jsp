@@ -140,8 +140,8 @@
 									${faqList.subject}<!-- qna 제목  --></p>
 									<ul class="conts">
 										<li class="question">
-											<p class="pdzero"></p>
-											<p>${faqList.content}<!-- qna 내용  --></p>
+											<p class="pdzero" ></p>
+											<p style="white-space:pre;">${faqList.content}<!-- qna 내용  --></p>
 											<p></p>
 											<!-- admin일때  -->
 											<% 
