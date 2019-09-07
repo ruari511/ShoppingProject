@@ -28,6 +28,7 @@ public class ProductSelectAction implements Action{
 		String order = "";
 		
 		if(request.getParameter("order") != null && request.getParameter("order").length() != 0){
+			System.out.println("order In");
 			if(request.getParameter("order").equals("high_price")){
 				order = " order by product_price-product_sale_price desc, product_num ";
 			} else if(request.getParameter("order").equals("low_price")){
@@ -47,6 +48,7 @@ public class ProductSelectAction implements Action{
 		
 		
 		if(request.getParameter("cate") != null && request.getParameter("cate").length() != 0){
+			System.out.println("cate In");
 			String cate = request.getParameter("cate");
 			String subcate = "";
 			brand = pdao.selectProductbrand(query, cate, subcate);
@@ -57,6 +59,7 @@ public class ProductSelectAction implements Action{
 			request.setAttribute("cate", cate);
 		}
 		if(request.getParameter("subcate") != null && request.getParameter("subcate").length() != 0){
+			System.out.println("subcate In");
 			String cate = request.getParameter("cate");
 			String subcate = request.getParameter("subcate");
 			brand = pdao.selectProductbrand(query, cate, subcate);
@@ -65,7 +68,7 @@ public class ProductSelectAction implements Action{
 			request.setAttribute("subcate", subcate);
 		}
 		if(request.getParameterValues("brand_check") != null && request.getParameterValues("brand_check").length != 0){
-			System.out.println("brand = " + request.getParameterValues("brand_check")[0]);
+			System.out.println("brand_check In");
 			String brandquery = "";
 			String pagebrandquery = "";
 			String cate = request.getParameter("cate");
@@ -89,15 +92,15 @@ public class ProductSelectAction implements Action{
 					brandquery += " || brand= '"+checkbrand[i]+"'";
 				}
 			}
-			System.out.println("brandquery = " + brandquery);
 			count = pdao.selectProductbrandCount(query, cate, subcate, brandquery);
 			productList = pdao.selectProductbrand(query, Integer.parseInt(startrow), 24, cate, subcate, brandquery, order);
 			
 			request.setAttribute("checkbrand", checkbrand);
 			request.setAttribute("pagebrandquery", pagebrandquery);
 		}
-		
+		System.out.println("high_price = " + request.getParameter("high_price")); 
 		if(request.getParameter("high_price") != null && request.getParameter("low_price") != null && request.getParameter("high_price").length() != 0 && request.getParameter("low_price").length() != 0){
+			System.out.println("가격대 적용 들어옴");
 			String brandquery = "";
 			String pagebrandquery = "";
 			String cate = request.getParameter("cate");
@@ -123,8 +126,6 @@ public class ProductSelectAction implements Action{
 						brandquery += " || brand= '"+checkbrand[i]+"'";
 					}
 				}
-				
-				System.out.println("brandquery = " + brandquery);
 			}
 			
 			count = pdao.selectProductPriceCount(query, cate, subcate, brandquery, low, high);

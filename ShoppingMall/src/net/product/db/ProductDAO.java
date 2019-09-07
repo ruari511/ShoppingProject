@@ -493,10 +493,10 @@ public class ProductDAO {
 		try {
 			
 			con = getConnection();
-			sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price between ? and ?";
+			sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price-product_sale_price between ? and ?";
 			if(cate == null || cate.length() == 0){
 				
-				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && product_price between ? and ?";
+				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && product_price-product_sale_price between ? and ?";
 				sql += brandquery;
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -506,7 +506,7 @@ public class ProductDAO {
 				
 			} else if(subcate == null || subcate.length() == 0){
 				
-				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && product_price between ? and ?";
+				sql = "select count(*) from product where (product_name like ? || product_subname like ?) && category_main=? && product_price-product_sale_price between ? and ?";
 				sql += brandquery;
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+query+"%");
@@ -659,7 +659,7 @@ public class ProductDAO {
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
 				}else{
-					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && product_price between ? and ?";
+					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && product_price-product_sale_price between ? and ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
@@ -675,7 +675,7 @@ public class ProductDAO {
 					pstmt.setString(2, "%"+query+"%");
 					pstmt.setString(3, cate);
 				}else{
-					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && product_price between ? and ?";
+					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && product_price-product_sale_price between ? and ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
@@ -694,7 +694,7 @@ public class ProductDAO {
 					pstmt.setString(3, cate);
 					pstmt.setString(4, subcate);
 				}else{
-					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price between ? and ?";
+					sql = "select distinct brand from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price-product_sale_price between ? and ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%"+query+"%");
 					pstmt.setString(2, "%"+query+"%");
@@ -820,10 +820,10 @@ public class ProductDAO {
 		
 		try {
 			con = getConnection();
-			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price between ? and ?";
+			sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && category_sub=? && product_price-product_sale_price between ? and ?";
 			
 			if(cate == null || cate.length() == 0){
-				sql = "select * from product where (product_name like ? || product_subname like ?) && product_price between ? and ?";
+				sql = "select * from product where (product_name like ? || product_subname like ?) && product_price-product_sale_price between ? and ?";
 				sql += brandquery;
 				sql += order;
 				sql += " limit ?,?";
@@ -836,7 +836,7 @@ public class ProductDAO {
 				pstmt.setInt(6, pageSize);
 				
 			} else if(subcate == null || subcate.length() == 0){
-				sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && product_price between ? and ?";
+				sql = "select * from product where (product_name like ? || product_subname like ?) && category_main=? && product_price-product_sale_price between ? and ?";
 				sql += brandquery;
 				sql += order;
 				sql += " limit ?,?";

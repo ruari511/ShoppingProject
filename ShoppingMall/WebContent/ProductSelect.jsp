@@ -582,8 +582,6 @@
 					<input type="hidden" name="cate" value="${cate}">
 					<input type="hidden" name="subcate" value="${subcate}">
 					<input type="hidden" name="startrow" value="0">
-					<input type="hidden" name="low_price" value="${low}">
-					<input type="hidden" name="high_price" value="${high}">
 					
 					<c:forEach var="brand" items="${requestScope.brand}" varStatus="idx">
 					<c:forEach var="checkbrand" items="${requestScope.checkbrand}" varStatus="idx">
@@ -593,8 +591,8 @@
 					</c:forEach>
 					</c:forEach>
 					
-					<input type="text" id="low_price" name="low_price" placeholder="최저가" value="" title=""><span>~</span>
-					<input type="text" id="high_price" name="high_price" placeholder="최고가" value="" title="">
+					<input type="text" id="low_price" name="low_price" placeholder="최저가" value="${low}" title=""><span>~</span>
+					<input type="text" id="high_price" name="high_price" placeholder="최고가" value="${high}" title="">
 					<input type="button" id="price_button" value="가격대 적용" title="가격대 적용" onclick="pricesubmit();">
 				</form>
 				</div>
