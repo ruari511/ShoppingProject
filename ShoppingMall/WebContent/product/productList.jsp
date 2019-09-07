@@ -110,7 +110,7 @@
 		<div id="productList_Brand">
 			<div id="productList_Brand_Title">
 				<p>브랜드</p>
-				<p>Total {brand_num}</p>
+				<p>Total ${brand_num}</p>
 			</div>
 			
 			<div id="productList_Brand_List" data-toggle="up">

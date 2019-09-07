@@ -29,9 +29,9 @@ public class ProductSelectAction implements Action{
 		
 		if(request.getParameter("order") != null && request.getParameter("order").length() != 0){
 			if(request.getParameter("order").equals("high_price")){
-				order = " order by product_price desc, product_num ";
+				order = " order by product_price-product_sale_price desc, product_num ";
 			} else if(request.getParameter("order").equals("low_price")){
-				order = " order by product_price, product_num ";
+				order = " order by product_price-product_sale_price, product_num ";
 			} else if(request.getParameter("order").equals("insert_product")){
 				order = " order by product_num desc ";
 			} else if(request.getParameter("order").equals("price_count")){
