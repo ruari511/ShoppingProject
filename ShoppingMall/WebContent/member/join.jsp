@@ -246,7 +246,6 @@ String name = request.getParameter("name");
          }); // ajax 메소드 끝
    }else if(aa == 'pass2'){
       // 비밀번호 체크
-      alert(_pass + "///" + _pass2);
       if(_pass != _pass2 ){
          $("#passMessage").text("비밀번호가 일치하지 않습니다.");
          $("#passMessage").css("color","red");
