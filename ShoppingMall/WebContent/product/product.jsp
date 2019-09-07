@@ -101,7 +101,7 @@ function goCart() {
 	if(id == "null" || id.length==0 || id == null){
 		location.href="./login.do";
 	}else{
-		if(pro_count>=product_count){
+		if(Number(pro_count) >= Number(product_count)){
 		location.href="CartInsertAction.buy?product_num="+product_num+"&product_count="+product_count;
 		}else{
 			alert("상품의 남은 수량보다 많은 수량을 선택하셨습니다.");
@@ -119,7 +119,7 @@ function goBuy() {
 	if(id == "null" || id.length==0 || id == null){
 		location.href="./login.do";
 	} else{
-		if(pro_count>=product_count){
+		if(Number(pro_count) >= Number(product_count)){
 			location.href="GoBuyAction.buy?product_num="+product_num+"&product_count="+product_count;
 		}else{
 			alert("상품의 남은 수량보다 많은 수량을 선택하셨습니다.");
