@@ -236,7 +236,7 @@ DataSource ds;
 			
 			con = getConnection();
 			
-			sql  = "select sum((p.product_price-p.product_sale_price)*b.product_count) "
+			sql  = "select sum((p.product_price-p.product_sale_price)*b.buy_count) "
 				 + "from product p join buylist b "
 				 + "on p.product_num=b.product_num "
 				 + "where b.buynum=?";
@@ -277,7 +277,7 @@ DataSource ds;
 			
 			con = getConnection();
 			
-			sql  = "select distinct (select sum((p.product_price-p.product_sale_price)*b.product_count) "
+			sql  = "select distinct (select sum((p.product_price-p.product_sale_price)*b.buy_count) "
 				 + "from product p join buylist b "
 				 + "on p.product_num=b.product_num "
 				 + "where b.buynum=?)/100*("
@@ -430,7 +430,7 @@ DataSource ds;
 		try {
 			con = getConnection();
 			
-			sql  = "select * from buylist natural join product where buydate between ? and ? order by buynum asc";
+			sql  = "select * from buylist natural join product where buydate between ? and ? order by buynum desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, startdate);
 			pstmt.setString(2, enddate);
@@ -489,7 +489,7 @@ DataSource ds;
 		try {
 			con = getConnection();
 			sql  = "select * from buylist natural join product where id=? "
-				 + "and buydate between ? and ? order by buynum asc";
+				 + "and buydate between ? and ? order by buynum desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, startdate);
