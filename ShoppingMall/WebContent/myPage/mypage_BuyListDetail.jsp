@@ -50,7 +50,7 @@
 				<ul class="infor-data">
 					<li>
 						<span>주문일자&nbsp;&nbsp;:</span>
-						<strong>${buylist[0].buydate }"</strong>
+						<strong>${buylist[0].buydate }</strong>
 					</li>
 					<li>
 						<span>주문번호&nbsp;&nbsp;:</span>
