@@ -77,6 +77,7 @@ public class MypageBuyListAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("dataMonth", c_month);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
