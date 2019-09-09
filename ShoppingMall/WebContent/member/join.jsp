@@ -41,6 +41,12 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 	}
 }
 
+<%
+
+String email = request.getParameter("email");
+String name = request.getParameter("name");
+
+%>  
 </script>
 <link rel="stylesheet" href="./asset/css/member.css"/> 
 
@@ -125,7 +131,7 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 				<h3 class="join_title">
 				<label for="birth">생년월일</label>
 				</h3>
-					<input type="date" name="birth_date" class="join" id="birth" onblur="join_check('birth')" required >
+					<input type="date" name="birth_date" class="join" id="birth" onblur="join_check('birth')" placeholder="05년생 이전 출생자만 가능(YYYY/MM/DD)" required>
 					<div class="check_font" id="birthMessage"></div>
 				</div>
 
@@ -243,10 +249,11 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 		var _birth = $("#birth").val();
 		
 		if(aa == 'check'){
+			var contextPath = "http://localhost:8090/ShoppingMall";
 			// ajax 아이디 중복 체크
 			$.ajax(
 					{
-						url:"${pageContext.request.contextPath}/Check",
+						url:"${pageContext.request.contextPath}/ShoppingMall/Check",
 						type:"post",
 						async:false,
 						data:{id:_id, phone:_phone},
@@ -281,7 +288,7 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 							}		
 						},
 						error:function(request,status,error){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
-							alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							alert("code = "+ request.status + "\n message = " + request.responseText + "\n error = " + error); // 실패 시 처리
 
              }
          }); // ajax 메소드 끝
