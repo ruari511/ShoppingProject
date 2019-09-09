@@ -44,7 +44,9 @@
 	</script>
 </head>
 <body>
-
+<%
+	String id = (String)session.getAttribute("id");
+%>
 <div id="Wrapper">
 	<div id="Container">
 		<div id="Contents">	
@@ -53,7 +55,7 @@
 			</div>
 			<ul class="comm1sTabs threeSet customer">
 				<li id="tabFaq" class="on"><a href="./faq.bd">FAQ</a></li>
-				<li id="tab1on1"><a href="javascript:common.link.moveQnaList();">1:1문의</a></li>
+				<li id="tab1on1"><a href="./qna.bd">1:1문의</a></li>
 				<li id="tabNotice"><a href="./notice.bd">공지사항</a></li>
 			</ul>
 			
@@ -138,14 +140,20 @@
 									${faqList.subject}<!-- qna 제목  --></p>
 									<ul class="conts">
 										<li class="question">
-											<p class="pdzero"></p>
-											<p>${faqList.content}<!-- qna 내용  --></p>
+											<p class="pdzero" ></p>
+											<p style="white-space:pre;">${faqList.content}<!-- qna 내용  --></p>
 											<p></p>
 											<!-- admin일때  -->
+											<% 
+											if(id != null){
+											if(id.equals("admin")){
+											%>
 											<div align="right">
 												<a href="./faqUpdate.bd?num=${faqList.num }"> 수정 </a>
 												<a href="./faqDelete.bd?num=${faqList.num }"> 삭제 </a>
 											</div>
+											<% }
+											} %>
 											<!-- admin일때//  -->
 										</li>
 									</ul>
@@ -184,8 +192,15 @@
 					<a href="./faq.bd?pageNum=${finalPage }"> [마지막페이지]</a>
 				</c:if>
 			</c:if>
-		</div>
 				<!-- 페이지번호  -->
+		<% 	if(id != null){
+			if(id.equals("admin")){
+		%>
+			<a href="./faqWrite.bd"> 글쓰기 </a>
+		<%} 
+			}
+		%>
+		</div>
 		</div>
 	</div>
 	

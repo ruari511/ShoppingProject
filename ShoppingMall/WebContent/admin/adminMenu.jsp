@@ -28,6 +28,17 @@
 							<h2>상품 목록 및 추가</h2>
 						</a>
 					</div>
+					<div class="menu_Inner">
+						<a href="./buylistCheck.ad"><img alt="상품등록" src="./asset/image/product.png">
+							<h2>회원별 주문 목록</h2>
+						</a>
+					</div>
+					<div class="menu_Inner">
+						<a href="./qnalistcheck.ad"><img alt="상품등록" src="./asset/image/product.png">
+							<h2>회원별 QnA 목록</h2>
+						</a>
+					</div>
+					
 				</div>			
 			</div>
 		</div>

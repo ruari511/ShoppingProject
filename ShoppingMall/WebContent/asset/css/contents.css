@@ -28,7 +28,7 @@
 .mypage-head.iconGrade3 .text span {color:#11b761}
 .mypage-head.iconGrade4 .text span {color:#89b000}
 
-/* 硫ㅻ쾭�떗 �벑湲�/�삙�깮 蹂�寃� */
+/* 筌롢끇苡�占쎈뼏 占쎈쾻疫뀐옙/占쎌굺占쎄문 癰귨옙野껓옙 */
 
 .mypage-head.iconGrade1 .infor li:first-child ul li:first-child{background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_rating_gold_on.png") no-repeat center 0;}
 .mypage-head.iconGrade2 .infor li:first-child ul li:first-child{background:url("https://image.oliveyoung.co.kr/pc-static-root/image/mypage/icon_rating_black_on.png") no-repeat center 0;}
@@ -62,7 +62,7 @@
 .mypage-conts .usage-guide li {color:#888} 
 
 
-/* 二쇰Ц諛곗넚 �떒怨� */
+/* 雅뚯눖揆獄쏄퀣�꽊 占쎈뼊�⑨옙 */
 .mypage-step {overflow:hidden;width:100%;border-bottom:1px solid #e6e6e6;}
 .mypage-step li {float:left;position:relative;width:20%;height:119px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow16x20.png") no-repeat 0 50%;font-size:0;line-height:0;}
 .mypage-step li:first-child {background:none;}
@@ -79,7 +79,7 @@
 .area-over .list-customer ul li .stit .data {margin:0;}
 .area-over .list-customer ul li.nodata {padding:80px 0 !important;background:none !important}
 
-/* 荑좏룿 */
+/* �뜎醫뤿？ */
 .coupon-go {overflow:hidden;width:100%;height:80px;padding:20px 0;background:#888;border-radius:5px}
 .coupon-go li {overflow:hidden;float:left;width:50%;padding:0 20px;border-left:1px solid #a0a0a0}
 .coupon-go li:first-child {border:0;}
@@ -98,7 +98,7 @@
 .comm1sTabConts {display:none}
 .comm1sTabConts.show {display:block}
 
-/* �룷�씤�듃 */
+/* 占쎈７占쎌뵥占쎈뱜 */
 .point-cjone {overflow:hidden;width:100%;border:1px solid #e6e6e6;border-radius:5px;}
 .point-cjone li {overflow:hidden;float:left;width:231px;height:27px;margin:26px 0 0;padding:4px 0 0;border-left:1px solid #e4e4e4;font-size:0;line-height:0;}
 .point-cjone li:first-child {width:554px;height:auto;margin:0;padding:22px 0 16px;border:0;}
@@ -110,7 +110,7 @@
 .point-cjone li span.btn {float:right;margin:0 30px 0 0;color:#666;font-size:16px;line-height:22px;}
 .point-cjone+.search-period {margin-top:20px}
 
-/* �삁移섍툑 */
+/* 占쎌굙燁살꼵�닊 */
 .deposit-area {overflow:hidden;width:100%;padding:16px 0 22px;border:1px solid #e6e6e6;border-radius:5px;text-align:center;}
 .deposit-area .tit {display:inline-block;height:34px;margin:0 0 0 30px;padding:8px 0 0 48px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_won34x34.png") no-repeat 0 50%;color:#222;font-size:18px;line-height:22px;vertical-align:middle;}
 .deposit-area .num {display:inline-block;margin:0 0 0 24px;color:#fe8840;font-size:34px;line-height:40px;vertical-align:middle;font-weight:700}
@@ -118,12 +118,12 @@
 
 .deposit-area+.search-period {margin-top:20px}
 
-/* CJ �긽�뭹沅� �쟾�솚 */
+/* CJ 占쎄맒占쎈�방쾮占� 占쎌읈占쎌넎 */
 .gift-area {overflow:hidden;width:100%;padding:26px 30px 30px;border:1px solid #e6e6e6;border-radius:5px;}
 .gift-area p {color:#333;font-size:14px;line-height:20px;}
 .gift-area .btn {display:inline-block;width:130px;height:38px;margin:16px 0 0;padding:8px 0 0;border:1px solid #ddd;border-radius:5px;background:#f6f6f6;color:#666;font-size:14px;text-align:center;line-height:20px;vertical-align:top;}
 
-/* �긽�뭹�룊 */
+/* 占쎄맒占쎈�뱄옙猷� */
 .review-area {overflow:hidden;width:100%;margin:10px 0 0;padding:30px 0;border-radius:5px;border:1px solid #e6e6e6;}
 .review-area li {overflow:hidden;float:left;width:302px;height:18px;padding:0 35px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x18.gif") no-repeat 0 0;}
 .review-area li:first-child {width:250px;background:none;}
@@ -156,7 +156,7 @@
 .reviews-point li span {display:block;color:#666;font-size:14px;line-height:23px;vertical-align:middle;}
 .reviews-point li span em {display:inline-block;margin:0 0 0 5px;color:#f47330;font-style:normal;vertical-align:middle;}
 
-/* �슦�렪踰덊샇 寃��깋 */
+/* 占쎌뒭占쎈젶甕곕뜇�깈 野껓옙占쎄퉳 */
 .TabsOpenArea .comm4sTabs {margin-top:14px}
 .TabsOpenArea .board-list-4s tbody td:first-child {color:#ee782f;}
 
@@ -182,11 +182,11 @@
 .schResultNum{margin-top:5px;font-size:12px;color:#888}
 .schResultNum i{font-style:normal;color:#979900}
 
-/* 二쇰Ц諛곗넚 議고쉶 */
+/* 雅뚯눖揆獄쏄퀣�꽊 鈺곌퀬�돳 */
 .area-over .ButtonBasic {position:absolute;bottom:10px;right:0;font-weight:700}
 .area-over .ButtonBasic.fob:focus{border:1px solid #888;outline:thin dotted;outline: -webkit-focus-ring-color auto 5px;}
 
-/* 痍⑥냼&諛섑뭹&援먰솚 �궡�뿭 */
+/* �뿆�뫁�꺖&獄쏆꼹萸�&�뤃癒곗넎 占쎄땀占쎈열 */
 .completed-area {padding:95px 0 100px;border-bottom:1px solid #e6e6e6;}
 .completed-guide {color:#333;font-size:26px;text-align:center;line-height:32px;}
 .completed-guide em {display:inline-block;color:#969937;font-style:normal;vertical-align:top;}
@@ -261,7 +261,7 @@
 .list-text.type li p span {display:inline-block;padding-top:0;font-size:14px;line-height:18px;}
 
 
-/* 諛곗넚吏� 蹂�寃�. */
+/* 獄쏄퀣�꽊筌욑옙 癰귨옙野껓옙. */
 .address-modify {overflow:hidden;width:100%;margin:20px 0 0;padding:13px 0;border-radius:5px;border:2px solid #e6e6e6;}
 .address-modify li {float:left;font-size:0;text-align:center;line-height:0;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_1x30.gif") no-repeat 0 50%;}
 .address-modify li:nth-child(1) {width:28%;background:none;}
@@ -270,7 +270,7 @@
 .address-modify li strong {display:block;color:#222;font-size:13px;line-height:20px;vertical-align:middle}
 .address-modify li span {display:inline-block;color:#969937;font-style:normal;font-size:13px;line-height:20px;vertical-align:middle;}
 
-/* 諛곗넚議고쉶 */
+/* 獄쏄퀣�꽊鈺곌퀬�돳 */
 .goods-lookup {overflow:hidden;width:100%;}
 .goods-lookup li {position:relative;width:100%;padding:13px 10px 13px 95px;border-bottom:1px solid #e6e6e6;font-size:0;line-height:0;}
 .goods-lookup li .image {position:absolute;left:10px;top:13px;width:85px;height:85px;}
@@ -282,7 +282,7 @@
 .goods-lookup li .area .qty em.tit {font-style:normal}
 .goods-lookup li .area .qty em.tit:after {content: '';display: inline-block;width: 1px;height: 10px;background: #cccccc;margin: 0 7px 1px;vertical-align: middle;}
 
-/* �쉶�썝�젙蹂� �닔�젙 */
+/* 占쎌돳占쎌뜚占쎌젟癰귨옙 占쎈땾占쎌젟 */
 .member-area {width:100%;margin:16px 0 0;padding:0 30px;border-radius:5px;border:1px solid #e6e6e6;}
 .member-area dl {overflow:hidden;width:100%;padding:30px 0;}
 .member-area dl dt, .member-area dl dd {float:left;font-size:14px;line-height:20px;vertical-align:middle;}
@@ -317,12 +317,12 @@
 .member-area .tbl_agree tr td {padding:15px 20px;border-top:1px solid #e4e4e4;border-left:1px solid #e4e4e4;font-size:12px;line-height:20px;color:#666;vertical-align:top;}
 
 
-/* �쉶�썝�깉�눜 */
+/* 占쎌돳占쎌뜚占쎄퉱占쎈닚 */
 .secess-area {width:100%;margin:10px 0 0;padding:15px 20px 27px;border-radius:5px;border:1px solid #e6e6e6;}
 .secess-area li {margin:10px 0 0;padding:0 0 0 8px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_black2x2.gif") no-repeat 0 9px;color:#666;font-size:13px;line-height:20px;}
 
-/* 목록 조회 */
-/* 고객센터 > 1:1문의 > 목록 */
+/* 紐⑸줉 議고쉶 */
+/* 怨좉컼�꽱�꽣 > 1:1臾몄쓽 > 紐⑸줉 */
 .search-period {overflow:hidden;position:relative;width:100%;margin:20px 0 0;padding:20px;background:#ececec;box-sizing:border-box;border-radius:5px}
 .search-period .select-month {overflow:hidden;}
 .search-period .select-month li {float:left;width:70px;height:28px;margin:0 0 0 -1px;font-size:0;line-height:0;}
@@ -338,3 +338,179 @@
 .search-period button.btnLookup,
 .search-period input[type="submit"] {display:inline-block;position:absolute;top:0;right:0;width:85px;height:100%;background:#969937;border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;color:#fff;font-size:16px;line-height:22px;}
 .search-period.mgT30 {margin-top:20px !important}
+
+
+.sub_title_area h1 {padding:38px 0 0;font-size:40px;color:#000;line-height:44px}
+.sub_title_area h1 > span {color:#333;font-size:18px;margin-left:5px;font-weight:400}
+
+.sub-title3 {width:1020px;margin:0 auto;padding:27px 0 10px;color:#4c4c4c;font-size:18px;line-height:22px;}
+.sub_title_area.customer h1 {float:left;padding:28px 0 0}
+.sub_title_area.customer {height:100px;background:#faeee1 url("http://image.oliveyoung.co.kr/pc-static-root/image/top/bg_customer_top.png") no-repeat 50% 0}
+.sub_title_area.customer:before {height:100px;background:#faeee1}
+.sub_title_area.customer:after {content:'';display:block;clear:both}
+.sub_title_area.customer h1 {float:left;padding:28px 0 0}
+.sub_title_area.customer button.btn_inquiry {float:right;width:190px;height:48px;margin-top:26px;padding-left:30px;color:#fff;font-size:16px;line-height:46px;background:#f39251 url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_inquiry2.png") no-repeat 37px 13px;border-radius:24px}
+.sub_title_area.customer button.btn_inquiry > em {font-style:normal;font-size:14px;font-family:'noto';font-weight:400}
+
+/* 怨좉컼�꽱�꽣 > �쉶�썝&硫ㅻ쾭�떗 �꺆 */
+.comm1sTabs.customer {overflow:hidden;height:55px;margin:30px 0 0;padding-bottom:5px}
+.comm1sTabs.customer > li {position:relative;float:left;width:340px;text-align:center;border:0}
+.comm1sTabs.customer > li+li {width:341px;margin-left:-1px}
+.comm1sTabs.customer > li > a {display:block;height:50px;padding:0;line-height:50px;background:#f6f6f6;font-size:18px;color:#666;font-weight:400;border-left:1px solid #e6e6e6}
+.comm1sTabs.customer > li:first-child > a {border:0}
+.comm1sTabs.customer > li.on > a {background:#555 !important;color:#fff;border:0}
+.comm1sTabs.customer > li.on:before {position:absolute;content:'';bottom:-5px;left:50%;width:12px;height:5px;margin-left:-6px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_tab_arrow.png") no-repeat 0 0}
+
+.comm1sTabs.customer+.search-period {margin-top:35px !important}
+.area-customer .comm2sTabs {margin-top:35px}
+
+.area-customer .comm2sTabs {overflow:visible;position:relative;height:40px;box-sizing:initial;}
+.area-customer .twoTabs {display:none;overflow:hidden;position:absolute;left:0;bottom:-42px}
+.area-customer .comm2sTabs > li.on .twoTabs {display:block;}
+.area-customer .twoTabs li {float:left;padding:0 12px 0 11px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar1x13_gray.gif") no-repeat 0 0;}
+.area-customer .twoTabs li:first-child {background:none;}
+.area-customer .twoTabs li button {background:#fff;color:#888;font-weight:400;font-size:16px}
+.area-customer .twoTabs li.on button {color:#333;font-weight:bold}
+.TabsConts-textus {display:none;}
+.TabsConts-textus.on {display:block;}
+
+/* 怨좉컼�꽱�꽣 > FAQ 寃��깋 */
+.search-faq {overflow:hidden;width:100%;height:110px;margin:35px 0 0;padding:30px 0 0;background:#f6f6f6;text-align:center}
+.search-faq label {display:inline-block;margin:0 20px 0 0;color:#222;font-size:20px;line-height:38px;vertical-align:middle}
+.search-faq .input {display:inline-block;overflow:hidden;width:420px;height:48px;border-radius:30px;border:1px solid #ccc;background:#fff;vertical-align:middle;}
+.search-faq .input input[type="text"] {float:left;width:75%;height:44px;padding:8px 10px 8px 18px;border:0;font-size:14px;line-height:22px;}
+.search-faq .input input[type="text"]:focus {outline:none;}
+.search-faq .input input[type="submit"] {float:right;width:25px;height:27px;margin:10px 19px 0 0;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search25x27.png") no-repeat 0 0;font-size:0;text-indent:-99999px;line-height:0;}
+
+
+/* 怨좉컼�꽱�꽣 �꺆 */
+.comm2sTabs.iconTab {height:40px;margin-bottom:60px}
+.comm2sTabs.iconTab > li {width:147px;height:40px }
+.comm2sTabs.iconTab > li:first-child {margin-left:0;width:144px}
+.comm2sTabs.iconTab > li > button.icon_tab06+.twoTabs,
+.comm2sTabs.iconTab > li > button.icon_tab07+.twoTabs {right:0}
+
+.comm2sTabs.iconTab > li.on {border:1px solid #ddd}
+.comm2sTabs.iconTab > li.on > button {color:#fff}
+
+
+/* 怨좉컼�꽱�꽣 > 怨듯넻 寃뚯떆�뙋 */
+.list-customer {width:1020px;margin:0 auto;}
+.list-customer ul {overflow:hidden;width:100%;border-top:2px solid #888}
+.list-customer ul li {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow21x12_off.png") no-repeat 98% 24px;border-bottom:1px solid #e6e6e6}
+.list-customer ul li.nodata {padding:200px 15px 80px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_nodata104x104.png") no-repeat center 80px;color:#888;font-size:16px;text-align:center;line-height:20px;}
+.list-customer ul li .tit, .list-customer ul li .stit {margin-left:20px;padding:20px 0 20px 42px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_faq14x15.png") no-repeat 0 23px;color:#222;font-size:14px;line-height:18px;cursor:pointer;}
+.list-customer ul li .stit {position:relative;margin:0;padding:20px 0 20px 30px;background:none}
+.list-customer ul li .tit strong {display:inline-block;width:140px;margin-right:11px;vertical-align:middle;}
+.list-customer ul li .stit strong {display:inline-block;width:70px;height:22px;margin:0 20px 0 0;padding:0 4px;border-radius:15px;box-sizing:border-box;text-align:center;background:#888;color:#fff;font-size:12px;line-height:22px}
+.list-customer ul li .stit .data {position:absolute;right:60px;color:#888;font-size:14px;line-height:18px;}
+.list-customer ul li .conts {display:none;background:#fafafa;border:0;color:#222;font-size:0;line-height:0;}
+.list-customer ul li .conts li {padding:28px 30px 25px;background:none;border-top:1px solid #e6e6e6;border-bottom:0}
+.list-customer ul li .conts li strong {display:block;font-size:16px;line-height:22px;}
+.list-customer ul li .conts li p,
+.list-customer ul li .conts li div {padding:0;color:#222;font-size:14px;line-height:22px;}
+.list-customer ul li .conts li > ul+p,
+.list-customer ul li .conts li > ul+div {padding:15px 0 0}
+.list-customer ul li .conts li .phr {position:relative;margin:25px 0 0;padding:28px 0 0;/*background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar_dott7x1.gif") repeat-x 0 0;*/border-top:1px dashed #e6e6e6;color:#888;font-size:14px;line-height:18px;}
+.list-customer ul li .conts li .btnGreenW {display:inline-block;position:absolute;top:17px;right:0;width:112px;height:38px;padding:4px 0 0;font-size:14px;text-align:center;letter-spacing:-1px;}
+.list-customer ul li .conts li.question {padding:28px 30px 25px 62px}
+.list-customer ul li .conts li.question strong {color:#666;}
+.list-customer ul li .conts li.answer {}
+.list-customer ul li .conts li.answer strong {display:block;position:relative;color:#969937}
+.list-customer ul li .conts li.answer strong > .answer_date {position:absolute;top:0;right:0;font-size:14px}
+.list-customer ul li .conts li.answer strong+p,
+.list-customer ul li .conts li.answer strong+div {padding:15px 0 0}
+
+.list-customer ul li .conts li ul {margin:18px 0 0;padding:0 0 0 8px;border:0;border-left:2px solid #ccc;}
+.list-customer ul li .conts li ul li {padding:0;border:0;color:#888;font-size:14px;line-height:22px;}
+.list-customer ul li .conts li ul li em {display:inline-block;margin:0 6px 0 0;font-style:normal}
+.list-customer ul li .conts li ul li.offline{color:#8f9100;font-weight:bold;}
+.list-customer ul li.open .conts {display:block;}
+.list-customer ul li.open {background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow21x12_on.png") no-repeat 98% 24px;}
+.list-customer ul li.open .tit, .list-customer ul li.open .stit {color:#9ea000;font-weight:700}
+/* .list-customer ul li.open .stit strong {background:#979900;} */
+.list-customer ul li.open .stit .data {}
+
+.list-customer ul li .tit > span.tx_same {color:#969937;font-weight:700}
+
+.list-customer.onenone {margin-top:20px}
+.list-customer.onenone ul li .stit.complete strong {background:#969937}
+.list-customer.onenone ul li .stit strong {background:#888}
+.list-customer.onenone ul li .conts li.question {padding-left:30px}
+
+
+/* 怨좉컼�꽱�꽣 > 1:1臾몄쓽 > 紐⑸줉 */
+.search-period {overflow:hidden;position:relative;width:100%;margin:20px 0 0;padding:20px;background:#ececec;box-sizing:border-box;border-radius:5px}
+.search-period .select-month {overflow:hidden;}
+.search-period .select-month li {float:left;width:70px;height:28px;margin:0 0 0 -1px;font-size:0;line-height:0;}
+.search-period .select-month li:first-child {margin:0;}
+.search-period .select-month button {width:100%;height:28px;border:1px solid #d0d0d0;background:#fff;color:#222;font-size:12px;font-weight:400}
+.search-period .select-month li:first-child button {border-top-left-radius:5px;border-bottom-left-radius:5px;}
+.search-period .select-month li:last-child button {border-top-right-radius:5px;border-bottom-right-radius:5px;}
+.search-period .select-month li.on button {border:1px solid #848484;background:#848484;color:#fff;}
+.search-period .select-range {padding:10px 0 0;line-height:38px}
+.search-period .select-range select {height:28px;padding-right:0;color:#222;font-size:12px;line-height:16px;vertical-align:middle}
+.search-period .select-range label {display:inline-block;margin:0 11px 0 1px;color:#222;font-size:12px;line-height:16px;}
+.search-period .select-range .des {margin:0 15px 0 10px;}
+.search-period button.btnLookup,
+.search-period input[type="submit"] {display:inline-block;position:absolute;top:0;right:0;width:85px;height:100%;background:#969937;border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;color:#fff;font-size:16px;line-height:22px;}
+.search-period.mgT30 {margin-top:20px !important}
+
+
+/* TAB */
+.TabsConts {display:none;}
+.TabsConts.on {display:block;}
+.comm1sTabs {overflow:hidden;width:100%;margin:15px 0 0;}
+.comm1sTabs.threeSet li {width:33.5%;}
+.comm1sTabs.threeSet li:first-child {width:33%;}
+.comm1sTabs > li {float:left;width:50%;border-left:1px solid #e3e3e3;border-bottom:2px solid #969937;text-align:center;background:#f6f6f6}
+.comm1sTabs > li:first-child {border-left:0}
+.comm1sTabs > li > a {display:block;height:50px;padding-top:15px;color:#333;font-size:18px}
+.comm1sTabs > li.on {border-left:2px solid #969937;border-top:2px solid #969937;border-right:2px solid #969937;border-bottom:0;background:#fff}
+.comm1sTabs > li.on+li {border-left:0}
+
+.comm2sTabs {overflow:hidden;width:100%;margin-top:30px;}
+.comm2sTabs > li {float:left;width:50%;height:20px;margin:0 0 0 -1px;background:#fff;box-sizing:border-box;border:1px solid #ddd;}
+.comm2sTabs > li:first-child {margin:0;}
+.comm2sTabs > li > button {width:100%;height:38px;color:#666;background:#fff;box-sizing:border-box;font-size:14px;line-height:18px;}
+.comm2sTabs > li.on {border:2px solid #8f9100;background:#8f9100;}
+.comm2sTabs > li.on > button {height:36px;background:#8f9100;color:#fff;}
+.comm2sTabs.fiveSet > li {width:205px}
+.comm2sTabs.fiveSet > li:first-child {width:204px}
+.comm2sTabs.sevenSet > li {width:14.5%;}
+.comm2sTabs.sevenSet > li:first-child {width:14%;margin:0;}
+.comm2sTabs.sevenSet > li:last-child {width:13.5%;}
+
+.comm3sTabs {}
+.comm3sTabs:after {content:'';display:block;clear:both}
+.comm3sTabs > li {float:left;margin-left:-1px;border:1px solid #ddd}
+.comm3sTabs > li:first-child {margin:0}
+.comm3sTabs > li > a {display:block;height:52px;line-height:52px;color:#888;font-size:16px;text-align:center;background:#fff}
+.comm3sTabs > li.on > a {position:relative;color:#979900;height:54px;line-height:52px;border:2px solid #babb3b;margin:-1px;z-index:0;font-weight:700}
+.comm3sTabs.sixSet > li {width:171px}
+.comm3sTabs.sixSet > li:first-child {width:170px}
+
+.comm4sTabs {overflow:hidden;width:100%;margin-top:35px;}
+.comm4sTabs > li {float:left;width:50%;height:40px;background:#e6e6e6;box-sizing:border-box;color:#fff;}
+.comm4sTabs > li:first-child {margin:0;}
+.comm4sTabs > li > button {width:100%;height:38px;color:#666;background:#e6e6e6;box-sizing:border-box;font-size:14px;line-height:18px;color:#666;}
+.comm4sTabs > li.on {border:2px solid #8f9100;background:#969937;}
+.comm4sTabs > li.on > button {height:36px;background:#969937;color:#fff;}
+
+.comm5sTabs {overflow:hidden;width:1020px;margin:30px auto 0;padding-bottom:5px}
+.comm5sTabs li {position:relative;float:left;width:50%;}
+.comm5sTabs li button {width:100%;height:50px;background:#f6f6f6;color:#666;font-size:18px;line-height:24px;font-weight:400}
+.comm5sTabs li.on button {color:#fff;background:#555 !important}
+.comm5sTabs li.on:before {position:absolute;content:'';bottom:-5px;left:50%;width:12px;height:5px;margin-left:-6px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bg_tab_arrow.png") no-repeat 0 0}
+.comm5sTabs.tab3 li{width:340px;}
+.comm5sTabs.tab3 li button{border-left:1px solid #e6e6e6}
+.comm5sTabs.tab3 li:first-of-type{border-left:0;}
+.comm5sTabs.tab3 li +li{width:341px;margin-left:-1px;}
+.comm6sTabs {overflow:hidden;width:100%;padding:10px 0 0;}
+.comm6sTabs li {float:left;width:50%;font-size:0;line-height:0;}
+.comm6sTabs li a {display:block;width:100%;height:40px;padding:10px 0 0;background:#d0d0d0;color:#fff;font-size:14px;text-align:center;line-height:20px;}
+.comm6sTabs li.on a {background:#969937;}
+
+.tabConts {display:none}
+.tabConts.show {display:block}
+

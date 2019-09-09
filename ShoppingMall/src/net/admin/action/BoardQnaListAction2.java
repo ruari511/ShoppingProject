@@ -1,4 +1,4 @@
-package net.board.action;
+package net.admin.action;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,35 +13,25 @@ import javax.servlet.http.HttpSession;
 
 import net.action.Action;
 import net.action.ActionForward;
-import net.board.db.FaqDAO;
+import net.board.db.QnaDAO;
+import net.product.db.ProductDAO;
+import net.product.db.ProductDTO;
 import net.board.db.BoardDTO;
 
-public class BoardFaqListAction implements Action {
+public class BoardQnaListAction2 implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		System.out.println("BoardFaqListction execute()");
+		System.out.println("BoardQnaListAction execute()");
 		request.setCharacterEncoding("utf-8");
 		
-		FaqDAO faqdao = new FaqDAO();
+		QnaDAO qnadao = new QnaDAO();
 		
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
-		String category = request.getParameter("category");
-		String search = request.getParameter("search");
-		int count = 0; //0���� �ʱ�ȭ
-		
-		if(category == null && search == null){ //��ü �Խñ� �� ��ȸ
-			count = faqdao.getFaqCount();
-		}else if(category == null && search != null){
-		    count = faqdao.getFaqSearchCount(search);
-		}else if(category != null && search != null){
-			count = faqdao.getFaqSearchCount(category, search);
-		}else{ //ī�װ��� �Խñ� �� ��ȸ
-			count = faqdao.getFaqCount(category);
-		}
-		//������ ũ�� ����
+		int count = 0; 
+			count = qnadao.getQnaCount(id);
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
@@ -51,16 +41,8 @@ public class BoardFaqListAction implements Action {
 		int startRow = (pageNo-1)*pageSize+1;
 		int endRow = pageNo*pageSize;
 		
-		List<BoardDTO> faqList = null;
-		if(category == null && count != 0 && search == null){
-			faqList = faqdao.getFaqList(startRow, pageSize);
-		}else if(category == null && count != 0 && search != null){
-			faqList = faqdao.getFaqSearchList(startRow, pageSize, search);
-		}else if(category != null && count != 0 && search != null){
-			faqList = faqdao.getFaqSearchList(category, search, startRow, pageSize);
-		}else if(category != null && count != 0 && search == null){
-			faqList = faqdao.getFaqList(category, startRow, pageSize);
-		}
+		List<BoardDTO> qnaList = null;
+		qnaList = qnadao.getQnaList(id, startRow, pageSize);
 		int finalPage =count/pageSize+(count%pageSize==0?0:1);
 		int firstPage = 1;
 		int pageBlock=5;
@@ -70,20 +52,18 @@ public class BoardFaqListAction implements Action {
 		if(endPage > finalPage){
 			endPage = finalPage;
 		}
-		request.setAttribute("faqList", faqList); 
+		
+		request.setAttribute("qnaList", qnaList); 
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("finalPage", finalPage);
 		request.setAttribute("firstPage", firstPage);
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		request.setAttribute("search", search);
-		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./Main.jsp?section=board/faq.jsp");
+		forward.setPath("./Main.jsp?section=board/qna.jsp");
 		return forward;
-
 	}
 }
 

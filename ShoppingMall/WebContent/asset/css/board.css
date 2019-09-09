@@ -23,13 +23,13 @@
 .board-list-1s tr td .ButtonTime {display:inline-block;width:70px;height:28px;margin:0 0 0;padding:3px 0 0;border-radius:5px;border:1px solid #ccc;color:#666;font-size:12px;text-align:center;line-height:18px;background:transparent;vertical-align:middle;}
 .board-list-1s tr td .FG01, .board-list-1s tr td .FG02, .board-list-1s tr td .FG03, .board-list-1s tr td .FG04 {position:relative;top:-1px;margin:0 15px 0 0;}
 
-/* 공지사항 게시글고정 2018-11-09 */
+/* 怨듭��궗�빆 寃뚯떆湲�怨좎젙 2018-11-09 */
 .board-list-1s tr.notice_fix td.subject a {font-weight:700}
 .board-list-1s tr.notice_fix td:first-child {font-weight:700}
 .board-list-1s tr.notice_fix + tr td{border-top:1px solid #e6e6e6}
 .board-list-1s tr.notice_fix + tr.notice_fix td{border-top:none !important}
 .board-list-1s tr td.subject strong {color:#333;font-size:14px;line-height:30px;}
-/* 매장안내 수정 2017-01-05 */
+/* 留ㅼ옣�븞�궡 �닔�젙 2017-01-05 */
 .list-burial {border-top:2px solid #888;}
 .list-burial li {overflow:hidden;display:table;width:100%;border-bottom:1px solid #e6e6e6;min-height:88px;}
 .list-burial li .jemm {display:table-cell;width:64px;text-align:center;vertical-align:middle}
@@ -119,7 +119,7 @@
 .board-list-2s tr.saleEnd td .textus a .tit, .board-list-2s tr.saleEnd td .textus a .txt {color:#ccc;}
 .board-list-2s tr td.nodata {padding:200px 15px 80px !important;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_nodata104x104.png") no-repeat center 80px;color:#888;font-size:16px;line-height:20px;}
 
-/* 상품 내역 */
+/* �긽�뭹 �궡�뿭 */
 .board-list-2s tr td textarea {padding:5px 10px;font-size:12px;line-height:16px;}
 .board-list-2s tr.lineBz td, .board-list-2s tr td.lineBz {border-bottom:0;}
 /*.board-list-2s tr td .color1s {display:block;padding:2px 0 0;color:#888;vertical-align:top;} */
@@ -164,7 +164,7 @@
 .board-list-2s tbody.history tr td.colorOrange > strong {}
 
 
-/* 상품 Q&A */
+/* �긽�뭹 Q&A */
 .board-list-2s tbody.qna tr td {padding:0;}
 .board-list-2s tbody tr td .question {display:table;table-layout:fixed;padding:30px 0;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow20x12_off.png") no-repeat 98% 50%;}
 .board-list-2s tbody tr td .question > div {display:table-cell;overflow:hidden;text-align:left;vertical-align:middle;}
@@ -202,7 +202,7 @@
 .board-list-2s tbody.qna tr td.open .stit strong {background:#9ea000;}
 .board-list-2s tbody.qna tr td.open .stit .data {}
 
-/* 거래명세서 */
+/* 嫄곕옒紐낆꽭�꽌 */
 .board-list-2s.statement {}
 .board-list-2s.statement tr td {padding:18px 5px 17px;border-left:1px solid #e6e6e6;}
 .board-list-2s.statement tr td:first-child {padding-left:12px;text-align:left;border-left:0;}
@@ -214,7 +214,7 @@
 .board-list-2s.statement tfoot td:last-child {color:#fe0000;}
 .board-list-2s.statement tfoot td:last-child strong {display:inline-block;font-size:18px;line-height:24px;vertical-align:-1px;}
 
-/*  추가 */
+/*  異붽� */
 .board-list-2s .history2 td{border-left:1px solid #e6e6e6}
 .board-list-2s .history2 tr td:last-of-type{border-right:0;}
 .board-list-2s .history2 td{border-left:1px solid #e6e6e6}
@@ -284,7 +284,7 @@
 .board-list-2s .add_gift_area  .tx_gift_list+.tx_no_gift {margin-top:10px}
 .board-list-2s .add_gift_area  .btnSmall {position:absolute;top:50%;right:40px;margin-top:-14px;width:70px}
 
-/* 올리브영 멤버십 */
+/* �삱由щ툕�쁺 硫ㅻ쾭�떗 */
 .board-list-3s {table-layout:fixed;width:100%;border-top:2px solid #888;}
 .board-list-3s tr th, .board-list-3s tr td {border-bottom:1px solid #e6e6e6;font-size:14px;line-height:20px;}
 .board-list-3s tr th a {padding:20px 0;color:#666;display:block;font-size:14px;line-height:20px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow20x11_down.png") no-repeat 750px center;}
@@ -296,7 +296,7 @@
 .board-list-3s tr td:first-child {border-left:0;}
 .board-list-3s tr td em {display:inline-block;width:28px;height:28px;margin:0 12px 0 0;border-radius:20px;background:#969937;font-style:normal;font-size:0;text-indent:-99999px;line-height:0;vertical-align:middle;}
 
-/* 우편번호 검색 */
+/* �슦�렪踰덊샇 寃��깋 */
 .board-list-4s {table-layout:fixed;width:100%;margin-top:20px;border-top:2px solid #d6d6d6;}
 .board-list-4s tr th, .board-list-4s tr td {border-bottom:1px solid #e4e4e4;color:#666;font-size:13px;line-height:20px;}
 .board-list-4s tr td:first-child {/* color:#ee782f ; */}
@@ -316,7 +316,7 @@
 
 
 /* BOARD VIEW */
-/* 공지사항 상세 */
+/* 怨듭��궗�빆 �긽�꽭 */
 .board-view-1s {table-layout:fixed;width:100%;border-top:2px solid #888;border-bottom:2px solid #888;}
 .board-view-1s>tbody>tr>th {z-index:-1;visibility:hidden;position:absolute;top:-99999px;width:0;height:0;font-size:0;text-indent:-99999px;line-height:0;}
 .board-view-1s>tbody>tr>td {padding:30px 20px;color:#333;font-size:16px;line-height:26px;}
@@ -431,6 +431,7 @@
 .board-write-3s tbody tr td.star {padding-left:36px !important;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_star6x5.png") no-repeat 20px 25px;}
 .board-write-3s tbody tr td input[type="text"]+button {margin-left:3px}
 
+
 /* PAGEING */
 .pageing {padding:30px 0 0;font-size:0;text-align:center;line-height:0;}
 .pageing a, .pageing strong {display:inline-block;width:30px;height:30px;margin:0 2px;border:1px solid #e5e5e5;color:#888;font-size:14px;line-height:28px;vertical-align:top;box-sizing:border-box;font-weight:700}
@@ -439,7 +440,6 @@
 .pageing .prev {margin-right:8px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_prev7x11.png") no-repeat center center;}
 .pageing .next {margin-left:8px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_next7x11.png") no-repeat center center;}
 .pageing strong, .pageing a:hover, .pageing a:active, .pageing a:focus, .pageing strong:hover, .pageing strong:focus, .pageing strong:active {border:1px solid #666;color:#333;font-weight:700}
-
 .pageing span {display:inline-block;width:30px;height:30px;border:1px solid #e5e5e5;text-indent:-9999px}
 
 /* BOARD LIST RESULT */
@@ -461,9 +461,9 @@
 .result-common .all-delete {position:absolute;bottom:14px;right:0;min-width:70px;width:auto;height:28px;padding:0 5px;border-radius:5px;border:1px solid #aaa;color:#666;background:#fff;font-size:12px} /*{position:absolute;bottom:14px;right:0;width:80px;height:38px;border-radius:5px;border:1px solid #aaa;background:#fff;color:#666;font-size:14px;line-height:18px;white-space:nowrap;}*/
 
 
-/* 검색시작 */
+/* 寃��깋�떆�옉 */
 
-/* 검색 결과 - 브랜드 바로가기 영역 */
+/* 寃��깋 寃곌낵 - 釉뚮옖�뱶 諛붾줈媛�湲� �쁺�뿭 */
 .brandBanner {position:relative;overflow:hidden;display:table;width:100%;height:110px;padding:20px 0 20px 271px;margin-top:40px;border:1px solid #e6e6e6}
 .brandBanner .brandLogo {overflow:hidden;position:absolute;top:1px;left:1px;width:270px;height:108px;background:#fff}
 .brandBanner .brandLogo img {position:absolute;width:186px;height:140px;margin:-16px 42px 0}
@@ -471,7 +471,7 @@
 .brandBanner .brandInfo > span {font-weight:700}
 .brandBanner button {position:absolute;top:50%;right:30px;width:126px;height:38px;margin-top:-19px;background:#9ea000;border-radius:5px}
 
-/* 검색 결과 - 이벤트/기획전 바로가기 영역 */
+/* 寃��깋 寃곌낵 - �씠踰ㅽ듃/湲고쉷�쟾 諛붾줈媛�湲� �쁺�뿭 */
 .promoBanner {position:relative;display:table;width:100%;height:130px;margin-top:40px}
 .promoBanner > a {display:block;border:1px solid #e6e6e6;}
 .promoBanner .promoImg {overflow:hidden;position:absolute;top:50%;left:1px;width:270px;height:130px;margin-top:-65px;text-align:center;background:#fff}
@@ -484,13 +484,13 @@
 .promoBanner .promoInfo .promo_tit {font-size:16px;color:#888;line-height:24px}
 
 
-/* 검색결과 텍스트 + 검색창*/
+/* 寃��깋寃곌낵 �뀓�뒪�듃 + 寃��깋李�*/
 .searchResultArea {overflow:hidden;position:relative;padding:34px 0 14px;border-bottom:2px solid #666;}
 .searchResultArea .resultTxt {padding-right:250px;font-size:20px;line-height:40px;color:#333;}
 .searchResultArea .resultTxt:after {display:block;content:"";clear:both;}
 .searchResultArea .resultTxt strong {overflow:hidden;position:relative;display:block;float:left;max-width:410px;margin-right:5px;padding:0 5px 0 7px;font-size:30px;line-height:40px;vertical-align:top;color:#969937;text-overflow:ellipsis;white-space:nowrap;font-weight:400}
-.searchResultArea .resultTxt strong:before {content:'‘';position:absolute;top:0;left:0}
-.searchResultArea .resultTxt strong:after {content:'’';position:absolute;top:0;right:0}
+.searchResultArea .resultTxt strong:before {content:'��';position:absolute;top:0;left:0}
+.searchResultArea .resultTxt strong:after {content:'��';position:absolute;top:0;right:0}
 .searchResultArea .resultTxt span {color:#f47330}
 
 .searchResultArea .resultTxt .resultKor {margin:2px 0 10px 10px;font-size:16px;color:#666;vertical-align:bottom}
@@ -502,11 +502,11 @@
 .searchResultArea .searchWrap input[type="text"] {width:200px;height:28px;padding:4px 40px 4px 10px;border:1px solid #ccc;border-radius:14px;font-size:12px;line-height:20px;font-family:'noto'}
 .searchResultArea .searchWrap input[type="text"]:focus {border-color:#969937;}
 .searchResultArea .searchWrap input[type="submit"] {position:absolute;top:0;right:10px;width:30px;height:28px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search19x19.png") no-repeat center center;background-size:14px 14px;text-indent:-9999px;}
-/* 오늘드림 검색개선 */
+/* �삤�뒛�뱶由� 寃��깋媛쒖꽑 */
 .searchResultArea .searchWrap .check_today{display:inline-block;padding:4px 17px 0 0;font-family:'noto'}
 .searchResultArea .searchWrap .check_today input[type=checkbox]{margin-right:3px;}
 
-/* 연관검색어*/
+/* �뿰愿�寃��깋�뼱*/
 .relatedSearch {position:relative;overflow:hidden;padding:13px 0;background-color:#fcfcfc;}
 .relatedSearch .tit {float:left;width:90px;color:#333;text-align:center;line-height:30px}
 .relatedSearch .tit > span {display:block;height:30px;border:1px solid #ccc;border-radius:15px;font-size:12px;color:#666;line-height:28px;font-weight:700}
@@ -516,18 +516,18 @@
 .relatedSearch .btn_more {position:absolute;top:18px;right:20px;width:20px;height:20px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow20x40.png") no-repeat 0 -20px;text-indent:-9999px;}
 .relatedSearch.more_view .btn_more {background-position:0 0}
 
-/* 상세검색 */
+/* �긽�꽭寃��깋 */
 .detailSearch {overflow:hidden;}
-.detailSearch .btnBox {overflow:hidden;margin-top:15px;}/* 초기화 버튼 */
+.detailSearch .btnBox {overflow:hidden;margin-top:15px;}/* 珥덇린�솕 踰꾪듉 */
 .detailSearch .btnReset {float:right;width:90px;height:28px;border:1px solid #ddd;border-radius:3px;background-color:#f6f6f6;font-size:12px;line-height:24px;color:#666;}
 
-/* 카테고리 */
+/* 移댄뀒怨좊━ */
 .finderArea {border-top:1px solid #888;}
 .finderArea>li {display:table;width:100%;position:relative}
 .finderArea>li:after,
 .finderArea>li .bigCate li:after,
 .finderArea>li .listBrand li:after {display:block;content:"";clear:both;float:none;}
-.finderArea>li .bigCate:after{display:block;content:"";clear:both;float:none;}/* 검색 시 카테고리 영역 두줄 */
+.finderArea>li .bigCate:after{display:block;content:"";clear:both;float:none;}/* 寃��깋 �떆 移댄뀒怨좊━ �쁺�뿭 �몢以� */
 
 .finderArea>li .filter {display:table-cell;width:90px;height:52px;padding:15px 20px 0 15px;background-color:#888;vertical-align:top;border-bottom:1px solid #888}
 .finderArea>li.on .filter {background-color:#666;}
@@ -551,7 +551,7 @@
 .finderArea>li .subCate ul li.on a {}
 .finderArea>li .subCate ul li.on a span{color:#f47330;}
 
-/* 브랜드 */
+/* 釉뚮옖�뱶 */
 .finderArea>li .box {overflow:hidden;width:930px;border-bottom:1px solid #e6e6e6;}
 .finderArea>li .listBrand {width:930px;height:55px;padding:10px 0 10px 20px;overflow:hidden}
 .finderArea>li .listBrand.more_view {height:auto;overflow-y:auto;max-height:215px;}
@@ -566,14 +566,14 @@
 .finderArea>li .btn_more {position:absolute;top:18px;right:20px;width:20px;height:20px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_arrow20x40.png") no-repeat 0 -20px;text-indent:-9999px;}
 .finderArea>li .listBrand.more_view+.btn_more{background-position:0 0}
 
-/* 헤택 */
+/* �뿤�깮 */
 .finderArea>li .listBenefit {overflow:hidden;padding:10px 0 10px 20px}
 .finderArea>li .listBenefit li {float:left;width:174px;line-height:35px;vertical-align:middle;font-size:12px}
 .finderArea>li .listBenefit li input[type="checkbox"] {width:12px;height:12px;margin-right:0;background:none;-webkit-appearance:checkbox;-webkit-appearance:checkbox;vertical-align:middle;}
 .finderArea>li .listBenefit li label {display:inline-block;color:#333;vertical-align:middle}
 .finderArea>li .listBenefit li span {color:#666;vertical-align:middle;margin-left:2px}
 
-/* 가격대 */
+/* 媛�寃⑸� */
 .finderArea>li .priceSearch {overflow:hidden;display:table-cell;width:930px;border-bottom:1px solid #e6e6e6;padding:14px 20px}
 .finderArea>li .priceSearch> * {float:left;}
 .finderArea>li .priceSearch input[type="text"]{width:100px;height:28px;font-size:12px;line-height:15px;color:#333;}
@@ -582,12 +582,12 @@
 .finderArea>li .priceSearch span {display:inline-block;width:20px;height:28px;font-size:16px;line-height:28px;color:#333;text-align:center;}
 
 
-/* 검색결과 없을 시 */
+/* 寃��깋寃곌낵 �뾾�쓣 �떆 */
 .search_no_data {border-bottom:1px solid #e6e6e6;width:100%;padding:190px 15px 74px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_nodata104x104.png") no-repeat center 60px;}
 .search_no_data p {color:#333;font-size:20px;text-align:center;line-height:24px;}
 .search_no_data p strong {position:relative;display:inline-block;max-width:550px;padding:0 5px;margin:0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:20px;color:#969937;vertical-align:top;font-weight:400}
-.search_no_data p strong:before {content:'‘';position:absolute;top:0;left:0}
-.search_no_data p strong:after {content:'’';position:absolute;top:0;right:0}
+.search_no_data p strong:before {content:'��';position:absolute;top:0;left:0}
+.search_no_data p strong:after {content:'��';position:absolute;top:0;right:0}
 
 .search_no_data .usage-guide {overflow:hidden;width:100%;margin-top:20px;padding:20px 0;background:#fafafa}
 .search_no_data .usage-guide > p {float:left;width:50%;padding-left:150px;line-height:64px;font-size:18px;color:#333;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search_grey.png") no-repeat 225px 22px}
@@ -596,16 +596,16 @@
 .search_no_data .usage-guide > ul > li:first-child {margin-top:0}
 
 
-/* 인기검색어 */
+/* �씤湲곌��깋�뼱 */
 .popularitySearch {margin-top:30px;}
-.popularitySearch h2 {padding:10px 0 20px;;font-size:20px;line-height:25px;color:#333;text-align:center;}/* 큐레이션 2차 */
+.popularitySearch h2 {padding:10px 0 20px;;font-size:20px;line-height:25px;color:#333;text-align:center;}/* �걧�젅�씠�뀡 2李� */
 .popularitySearch .BoxPopularity {overflow:hidden;border-top:2px solid #969937;}
 .popularitySearch .BoxPopularity ol {display:table-cell;width:510px;}
 .popularitySearch .BoxPopularity ol li {border-bottom:1px solid #efefef;padding:15px 0;font-size:14px;line-height:24px;color:#333}
 .popularitySearch .BoxPopularity ol li .num {display:inline-block;width:50px;font-size:16px;line-height:24px;color:#969937;vertical-align:top;text-align:center;font-weight:700}
 .popularitySearch .BoxPopularity ol:first-child {display:table-cell;}
 
-/* 에디터 등록 스타일 */
+/* �뿉�뵒�꽣 �벑濡� �뒪���씪 */
 .contEditor {color:#333;line-height:normal}
 .contEditor td{padding:2px 2px 0 2px;line-height:20px}
 .contEditor ol, .contEditor ul, .contEditor dl {margin:0 0 0 20px !important;padding:0 !important;}
@@ -618,7 +618,7 @@
 .contEditor em{font-style:italic !important}
 .contEditor em{}
 
-/* 당일 배송 추가 */
+/* �떦�씪 諛곗넚 異붽� */
 .table_type table{width:100%;border-top:1px solid #e5e5e5;}
 .table_type th{padding:13px 0 13px 0;color:#888;border-bottom:1px solid #e5e5e5;border-right:1px solid #e5e5e5;}
 .table_type th.vat{vertical-align:top;}
@@ -632,7 +632,7 @@
 .board-list-2s tr.dis td .FGBasic{background-color:#aaaaaa;}
 .board-list-2s tr.dis td.subject .data{color:#aaa;}
 
-/* 상품평 개편 */
+/* �긽�뭹�룊 媛쒗렪 */
 .board-list-2s.new tr td .area .textus .txt.oneline {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .board-list-2s.new tr td .area .textus .txt_option{font-size:12px;color:#888;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .board-list-2s.new tr td .area .textus .txt_option em{position:relative;margin-right:5px;padding-right:7px;font-style:normal;}
@@ -657,7 +657,7 @@
 .board-list-2s tr td:last-child strong+.color1sSize {margin-top:7px !important}
 .board-list-2s tr td:last-child .color1sSize+.BtnDelete {margin-top:7px !important}
 
-/* 속성검색 */
+/* �냽�꽦寃��깋 */
 .relatedSearch.new{background-color:#fff;border-bottom:1px solid #999;}
 .relatedSearch.new .tit{text-align:left;padding:0 0 0 20px;}
 .relatedSearch.new .tit > span{border:0;line-height:32px;color:#333;}
@@ -725,3 +725,43 @@
 #Wrapper .FG02 {background:#a68fcd;}
 #Wrapper .FG03 {background:#ed95b7;}
 #Wrapper .FG04 {background:#f5a031;}
+
+
+/* 버튼 영역 */
+.area1sButton {padding:10px 0 0;text-align:center;}
+.area2sButton {padding:20px 0 0;text-align:center;}
+.area3sButton {margin:20px 0 0;padding:30px 0 0;border-top:1px solid #e6e6e6;text-align:center;}
+.area1sButton a.btnGray, .area1sButton a.btnGreenW, .area1sButton a.btnGreen {display:inline-block;width:150px;margin:0 2px;box-sizing:border-box;}
+.area2sButton .btnGray, .area2sButton .btnGreenW, .area2sButton .btnGreen,
+.area2sButton a.btnGray, .area2sButton a.btnGreenW, .area2sButton a.btnGreen {display:inline-block;width:100px;margin:0 2px;box-sizing:border-box;height:38px;font-size:14px;}
+.area3sButton .btnGray, .area3sButton .btnGreenW, .area3sButton .btnGreen,
+.area3sButton a.btnGray, .area3sButton a.btnGreenW, .area3sButton a.btnGreen {display:inline-block;width:100px;margin:0 2px;box-sizing:border-box;height:38px;font-size:14px;}
+.area1sButton a.btnGreen, .area1sButton a.btnGray, .area2sButton a.btnGreen, .area1sButton a.btnGray, .area3sButton a.btnGreen, .area3sButton a.btnGray {color:#fff;font-weight:700;}
+.area1sButton a {padding:9px 0 0;}
+.area2sButton a, .area3sButton a {padding:3px 0 0 !important;}
+.area1sButton button, .area2sButton button, .area3sButton button {margin:0 2px;padding:2px 0 0 !important;}
+.ButtonBasic,
+.ButtonBasic:hover,
+.ButtonBasic:active{display:inline-block;min-width:50px;height:28px;padding:0 10px;border-radius:5px;border:1px solid #888;background:#fff;color:#666;font-size:12px;}
+.area1sButton .btnGreen.w160 {width:160px;height:40px;padding:5px 0 0;font-size:16px;}
+a.ButtonBasic {line-height:27px}
+a.w150, button.w150 {width:150px !important;}
+.ButtonBasic.w106 {width:106px !important;padding:0}
+.ButtonBasic.w140 {width:140px !important;}
+td.select-w200 select {width:200px !important;}
+.lay_delivery .board-list-2s tr td a.ButtonBasic:hover{border:1px solid #babc00 !important;color:#babc00;}
+.scroll-area.type .btn_area{padding-top:30px;text-align:center;border-top:1px solid #e6e6e6;}
+.scroll-area.type .btn_area.btn2 button{margin:0 2px;}
+.btngray{height:60px;line-height:60px;background-color:#bbb;font-size:18px;color:#fff;font-weight:bold;}
+.btngline{height:60px;line-height:60px;background-color:#fff;border:1px solid #999;font-size:18px;color:#999;font-weight:bold;}
+.btnMint{height:60px;line-height:60px;background-color:#00c4b5;font-size:18px;color:#fff;color:#fff;font-weight:bold;}
+.btnMint_s{height:30px;line-height:30px;background-color:#00c4b5;font-size:12px;color:#fff;color:#fff;font-weight:bold;border-radius:5px;padding:0 13px;}
+.btnMints{display:inline-block;min-width:50px;height:28px;padding:0 10px;border-radius:5px;border:1px solid #00c4b5;background:#fff;color:#00c4b5;font-size:12px;}
+.btn_img{height:40px;line-height:40px;padding:0 15px 0 40px;background:#00c4b5 url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/icon_img.png") no-repeat 14px 9px;font-size:12px;border-radius:5px;}
+
+
+
+/*버튼 리셋*/
+.btnGray, a.btnGray {width:100%;height:50px;background-color:#888;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
+.btnGreen, a.btnGreen {width:100%;height:50px;background-color:#969937;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
+.btnGreen2, a.btnGreen2 {width:100%;height:44px;background-color:#c0c200;padding:0;font-size:18px;line-height:44px;border-radius:5px}

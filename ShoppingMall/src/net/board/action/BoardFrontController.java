@@ -1,5 +1,4 @@
 package net.board.action;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.action.Action;
 import net.action.ActionForward;
+import net.mypage.action.MypageBuyListAction;
 
 public class BoardFrontController extends HttpServlet {
 
@@ -33,11 +33,11 @@ public class BoardFrontController extends HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-
+/*
 		System.out.println("RequestURI:	"+RequestURI);
 		System.out.println("contextPath:	"+contextPath);
 		System.out.println("command:	"+command);
-		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");*/
 		/* FAQ */
 		if (command.equals("/faq.bd")) {
 			action = new BoardFaqListAction();
@@ -46,7 +46,7 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/faqwrite.bd")) {
+		} else if (command.equals("/faqWrite.bd")) {
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./Main.jsp?section=board/faqWrite.jsp");
@@ -133,9 +133,35 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-		System.out.println("---------------------------------------");
-		System.out.println("---------------------------------------");
+		} else if(command.equals("/qna.bd")) {
+			action = new BoardQnaListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/qnaWrite.bd")) {
+			  action = new BoardBuyListAction();
+				try{
+					forward = action.execute(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+		} else if (command.equals("/BoardQnaWriteAction.bd")) {
+			action = new BoardQnaWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/BoardQnaReplyAction.bd")) {
+			action = new BoardQnaReplyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		if (forward != null) { 
 			if (forward.isRedirect()) {

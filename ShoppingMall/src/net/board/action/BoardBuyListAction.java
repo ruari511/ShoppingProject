@@ -1,4 +1,4 @@
-package net.mypage.action;
+package net.board.action;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,19 +15,21 @@ import net.action.ActionForward;
 import net.buyList.db.BuyListDAO;
 import net.buyList.db.BuyListDTO;
 
-public class MypageBuyListAction implements Action {
+public class BoardBuyListAction implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		System.out.println("MypageBuyListAction execute()");
-		
+
 		request.setCharacterEncoding("utf-8");
+		
 		BuyListDAO bdao = new BuyListDAO();
+		
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		//현재 년, 월, 일 구하기
+		//���� ��, ��, �� ���ϱ�
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -36,7 +38,7 @@ public class MypageBuyListAction implements Action {
 		String startdate = null;
 		String enddate = dateFormat.format(date);
 		
-		/* 첫 로딩시 */
+		/* ù �ε��� */
 		if(c_month == null && startdate == null){
 			startdate = getDate(-1);
 		}else{
@@ -52,12 +54,13 @@ public class MypageBuyListAction implements Action {
 		
 		//�ֹ� ���� �ޱ�
 		Vector<BuyListDTO> buylist = bdao.getBuyList(id, startdate, enddate);
+		
 		/*request.setAttribute("pageNum", pageNum);*/
 		request.setAttribute("buylist", buylist);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./Main.jsp?section=myPage/mypage_Main.jsp");
+		forward.setPath("./Main.jsp?section=board/qnaWrite.jsp");
 		return forward;
 
 	}

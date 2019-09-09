@@ -80,10 +80,10 @@
 					<fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-1'">1개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-3'">3개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-6'">6개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-12'">12개월</button></li>
 						</ul>
 						<!-- <div class="select-range">
 							<select id="cal-start-year" title="년도를 선택하세요"
@@ -175,7 +175,8 @@
 										<tr>
 											<td class="gubun">
 											    <span style="display: inline-block; font-weight: bold;">
-											    	<fmt:formatDate pattern="yyyy-MM-dd" value="${buylist.buydate }" />
+											    	<%-- <fmt:formatDate pattern="yyyy-MM-dd" value="${buylist.buydate }" /> --%>
+											    	${buylist.buydate }
 											    </span><!-- 주문일  -->
 												<span class="color1s">${buylist.buynum }</span><!-- 주문번호  -->
 											    <a class="btnDetail" href="mypage_BuyListDetail.mp?buynum=${buylist.buynum }">주문상세보기</a> 
@@ -183,7 +184,7 @@
 											<td class="subject">
 												<div class="area">
 													<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
-														<img src="./upload/${buylist.img_main }"> <!-- 제품이미지 정보 -->
+														<img src="./asset/image/${buylist.img_main }"> <!-- 제품이미지 정보 -->
 													</a>
 													<div class="textus">
 														<a class="" href="ProductDetailAction.do?product_num=${buylist.product_num }">
@@ -199,11 +200,9 @@
 												<strong>${buylist.delivery_result }</strong>
 												<!-- c:if test="{buylist.delivery_result == 1" 배송완료 -->
 												<!-- <button type="button" class="BtnDelete mgT5">...</button>
-												<button type="button" class="BtnDelete mgT5">상품평쓰기</button> -->
-												<c:if test="${buylist.delivery_result eq '배송완료' }">
-												<button type="button" class="BtnDelete mgT5" id="btnDelete" onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">교환신청</button>
-												<button type="button" class="BtnDelete mgT5" id="btnDelete" onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">반품신청</button> 
-												</c:if>
+												<button type="button" class="BtnDelete mgT5">상품평쓰기</button>
+												<button type="button" class="BtnDelete mgT5" id="btnDelete">교환신청</button>
+												<button type="button" class="BtnDelete mgT5" id="btnDelete">반품신청</button> -->
 											</td>
 									</tr>	
 								</c:forEach>

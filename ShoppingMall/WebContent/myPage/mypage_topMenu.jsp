@@ -76,8 +76,9 @@
 				</li>
 				<li><h2>마이 활동</h2>
 					<ul>
+						<li class="subMenu"><a href="qna.bd" myMenuId="0402">1:1 문의내역</a></li>
 						<li class="subMenu"><a href="mypage_Review.mp" myMenuId="0402">상품평</a></li>
-						<li class="subMenu"><a href="mypage_GoodsQnaList.mp" myMenuId="0403">상품Q&amp;A내역</a></li>
+						<!-- <li class="subMenu"><a href="mypage_GoodsQnaList.mp" myMenuId="0403">상품Q&amp;A내역</a></li> -->
 					</ul>
 				</li>
 				<li><h2>마이 정보</h2>

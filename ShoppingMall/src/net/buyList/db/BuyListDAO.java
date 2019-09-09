@@ -504,7 +504,6 @@ DataSource ds;
 				buylistDTO.setProduct_price(rs.getInt("product_price"));
 				buylistDTO.setProduct_sale_price(rs.getInt("product_sale_price"));
 				buylistDTO.setPoint(rs.getInt("buylist.point"));
-				buylistDTO.setBuynum(rs.getInt("buynum"));
 				buylistDTO.setOrder_name(rs.getString("order_name"));
 				buylistDTO.setOrder_mtel(rs.getString("order_mtel"));
 				buylistDTO.setOrder_email(rs.getString("order_email"));
@@ -532,6 +531,62 @@ DataSource ds;
 		}
 		return buyList;
 	}//getBuyList()
+	
+	/* Mypage_BuyList */
+	public Vector<BuyListDTO> getCancelList(String id, String startdate, String enddate){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		Vector<BuyListDTO> buyList = new Vector<BuyListDTO>();
+		try {
+			con = getConnection();
+			
+			sql  = "select * from buylist natural join product where id=? and delivery_result = '주문취소' and buydate between ? and ?  order by buynum asc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, startdate);
+			pstmt.setString(3, enddate);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				
+				BuyListDTO buylistDTO = new BuyListDTO();
+				buylistDTO.setId(rs.getString("id"));
+				buylistDTO.setProduct_num(rs.getInt("product_num"));
+				buylistDTO.setBuynum(rs.getInt("buynum"));
+				buylistDTO.setProduct_name(rs.getString("product_name"));
+				buylistDTO.setProduct_price(rs.getInt("product_price"));
+				buylistDTO.setProduct_sale_price(rs.getInt("product_sale_price"));
+				buylistDTO.setPoint(rs.getInt("buylist.point"));
+				buylistDTO.setOrder_name(rs.getString("order_name"));
+				buylistDTO.setOrder_mtel(rs.getString("order_mtel"));
+				buylistDTO.setOrder_email(rs.getString("order_email"));
+				buylistDTO.setBuydate(rs.getString("buydate"));
+				buylistDTO.setProduct_num(rs.getInt("product_num"));
+				buylistDTO.setBuy_count(rs.getInt("buy_count"));
+				buylistDTO.setAll_coupon_num(rs.getInt("all_coupon_num"));
+				buylistDTO.setDelivery_cost(rs.getInt("delivery_cost"));
+				buylistDTO.setDelivery_result(rs.getString("delivery_result"));
+				buylistDTO.setDelivery_name(rs.getString("delivery_name"));
+				buylistDTO.setDelivery_mtel(rs.getString("delivery_mtel"));
+				buylistDTO.setDelivery_address(rs.getString("delivery_address"));
+				buylistDTO.setDelivery_message(rs.getString("delivery_message"));
+				buylistDTO.setPayments(rs.getString("payments"));
+				buylistDTO.setImg_main(rs.getString("img_main"));
+				
+				buyList.add(buylistDTO);
+			}
+		} catch (Exception e) {
+			System.out.println("getBuyList() error :" + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+		}
+		return buyList;
+	}//getCancelList()
 		
 	
 	public int getBuyListCount(String id){
@@ -625,5 +680,118 @@ DataSource ds;
 			return buyList;
 		}//getBuyList()
 	
+	/* Mypage_BuyDetail */
+	public Vector<BuyListDTO> getBuyCancelProcess(String id, int buynum){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "";
+			Vector<BuyListDTO> buyList = new Vector<BuyListDTO>();
+			
+			try {
+				con = getConnection();
+				
+				sql  = "select * from buylist natural join product where id=? and buynum=? and delivery_result ='배송완료'";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, id);
+				pstmt.setInt(2, buynum);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					
+					BuyListDTO buylistDTO = new BuyListDTO();
+					
+					buylistDTO.setProduct_num(rs.getInt("product_num"));
+					buylistDTO.setBuynum(rs.getInt("buynum"));
+					buylistDTO.setProduct_name(rs.getString("product_name"));
+					buylistDTO.setProduct_price(rs.getInt("product_price"));
+					buylistDTO.setProduct_sale_price(rs.getInt("product_sale_price"));
+					buylistDTO.setPoint(rs.getInt("buylist.point"));
+					buylistDTO.setBuynum(rs.getInt("buynum"));
+					buylistDTO.setOrder_name(rs.getString("order_name"));
+					buylistDTO.setOrder_mtel(rs.getString("order_mtel"));
+					buylistDTO.setOrder_email(rs.getString("order_email"));
+					buylistDTO.setBuydate(rs.getString("buydate"));
+					buylistDTO.setProduct_num(rs.getInt("product_num"));
+					buylistDTO.setBuy_count(rs.getInt("buy_count"));
+					buylistDTO.setAll_coupon_num(rs.getInt("all_coupon_num"));
+					buylistDTO.setDelivery_cost(rs.getInt("delivery_cost"));
+					buylistDTO.setDelivery_result(rs.getString("delivery_result"));
+					buylistDTO.setDelivery_name(rs.getString("delivery_name"));
+					buylistDTO.setDelivery_mtel(rs.getString("delivery_mtel"));
+					buylistDTO.setDelivery_address(rs.getString("delivery_address"));
+					buylistDTO.setDelivery_message(rs.getString("delivery_message"));
+					buylistDTO.setPayments(rs.getString("payments"));
+					buylistDTO.setImg_main(rs.getString("img_main"));
+					
+					
+					buyList.add(buylistDTO);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("getBuyList() error :" + e);
+			} finally{
+				if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+				if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+				if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
+			}
+			return buyList;
+		}//getBuyCancelProcess()
+	
+	public void updateBuyCancel(int buynum, int product_num){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		BuyListDTO buyList = new BuyListDTO();
+		
+		
+		try {
+			con = getConnection();
+			
+			sql  = "update buylist set delivery_result = '주문취소' where buynum = ? and product_num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, buynum);
+			pstmt.setInt(2, product_num);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("updateBuylist() error :" + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
+	
+	public void updateBuylist(int buynum, int product_num, String delivery_result){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		BuyListDTO buyList = new BuyListDTO();
+		
+		
+		try {
+			con = getConnection();
+			
+			sql  = "update buylist set delivery_result = ? where buynum = ? and product_num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, delivery_result);
+			pstmt.setInt(2, buynum);
+			pstmt.setInt(3, product_num);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("updateBuylist() error :" + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+		}
+	}
 	
 }

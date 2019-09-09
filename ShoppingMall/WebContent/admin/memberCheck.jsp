@@ -64,7 +64,7 @@
 					<c:forEach items="${memberList}" var="member">
 					<tr align="center">
 						<td>${member.num}</td>
-						<td>${member.id}</td>
+						<td><a href="./buylistCheck.ad?search_id=${member.id }">${member.id}</a></td>
 						<td>${member.password}</td>
 						<td>${member.name}</td>
 						<td>${member.birth_date}</td>

@@ -28,13 +28,16 @@
 <body>
 <div id="Wrapper">
 	<div id="Container">
-		<div id="Contents">
+		<div id="Contents">	
 			<div class="sub_title_area customer">
 				<h1>고객센터 <span>무엇을 도와드릴까요?</span></h1>
 			</div>
-			<li id="tabFaq"><a href="./faq.bd">FAQ</a></li>
-				<li id="tab1on1"><a href="javascript:common.link.moveQnaList();">1:1문의</a></li>
+			<ul class="comm1sTabs threeSet customer">
+					<li id="tabFaq"><a href="./faq.bd">FAQ</a></li>
+				<li id="tab1on1"><a href="./qna.bd">1:1문의</a></li>
 				<li id="tabNotice" class="on"><a href="./notice.bd">공지사항</a></li>
+			</ul>
+			<br>
 			<table class="board-view-1s mgT40">
 				<caption>공지사항 상세보기</caption>
 				<colgroup>
@@ -61,13 +64,15 @@
 						<td class="data">${noticeDetail.reg_date }</td>
 					</tr>
 					<tr>
-						<td class="textus" colspan="2"><div class="contEditor">
-						${noticeDetail.content }
-					</div></td>
+						<td class="textus" colspan="2">
+							<div class="contEditor" style="white-space:pre;">
+								<p>${noticeDetail.content }</p>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
-			
+				
 			<ul class="prev-next">
 				<c:if test="${empty next }">
 				<li>
