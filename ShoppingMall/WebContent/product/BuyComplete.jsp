@@ -243,7 +243,7 @@
 				</div>
 				<div class="order_btn_area">
 					<button class="btnGreenW" onclick="location.href='Main.jsp'">쇼핑계속</button>
-					<button class="btnGreen" onclick="location.href='mypage.mp'">주문내역조회</button>
+					<button class="btnGreen" onclick="location.href='mypage.mp?data_month=-1'">주문내역조회</button>
 				</div>
 				
 				
