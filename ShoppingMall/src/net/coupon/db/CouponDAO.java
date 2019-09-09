@@ -45,6 +45,10 @@ public class CouponDAO {
 			
 		} catch (Exception e) {
 			System.out.println("rouletCheck()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
 		}
 		
 		return result;
@@ -69,6 +73,10 @@ public class CouponDAO {
 			
 		} catch (Exception e) {
 			System.out.println("rouletComplete()메소드 내부에서의 오류 : " + e);
+		} finally{
+			if(pstmt!=null){ try{pstmt.close();} catch(Exception e){e.printStackTrace();}}
+			if(con!=null){ try{con.close();} catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
 		}
 		
 	}
