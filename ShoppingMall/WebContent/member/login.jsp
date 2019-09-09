@@ -198,15 +198,9 @@
 						//응답메세지를 받아 구현할 곳
 						if(data == 'usable'){
 							//id속성값이 message인 <div>태그영역을 선택해  "사용할수 있는 ID입니다."메세지표시
-							console.log("DB에 email이 없음")
 							//사용할수 있는 ID이면  버튼을 비활성화 시킵니다.
-							//location.href="join.jsp"
-							console.log(data);
 							checkEmail = 0;
 						}else{
-							console.log("DB에 email이 있음")
-							//location.href="join.jsp"
-							console.log(data);
 							checkEmail = 1;
 						}
 					}
@@ -233,39 +227,17 @@
 		naverLogin.init();
 		naverLogin.getLoginStatus(function(status) {
 			if (status) {
-				var gender = naverLogin.user.getGender();
-				var email = naverLogin.user.getEmail();
-				var name = naverLogin.user.getName();
-				var profileImage = naverLogin.user.getProfileImage();
-				var birthday = naverLogin.user.getBirthday();
-				var uniqId = naverLogin.user.getId();
-				var age = naverLogin.user.getAge();
-				console.log("email : ", email);
-				console.log("gender : ", gender)
-				console.log("name : ", name);
-				console.log("profileImage : ", profileImage);
-				console.log("birthday : ", birthday);
-				console.log("uniqId : ", uniqId);
-				console.log("age : ", age);
-	
-				
 				var naverEmail = naverLogin.user.getEmail();
+				
 				var naverName = naverLogin.user.getName();
 				
 				var checkEmail = fn_process(naverEmail)
 				
-			    console.log(checkEmail);
-				
 			    if(checkEmail == 0) {
 			    	//데이터 베이스에 없을 경우(즉 회원가입하지 않은 이메일인 경우) join페이지로 get방식으로 이메일 전달
 			    	location.href = "./join.do?email=" + naverEmail + "&name=" + naverName;
-			    } else {
-			    	//위의 반대
-			    	alert("login하였음");
 			    }
 			    
-			} else {
-				console.log("AccessToken이 올바르지 않습니다.");
 			}
 		});
 
@@ -281,25 +253,12 @@
 				Kakao.API.request({
 					url : '/v2/user/me',
 					success : function(res) {
-						alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
-
-						alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-
-						console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
-
-						console.log(res.kakao_account.email);//<---- 콘솔 로그에 email 정보 출력
-
-						console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
-
-						console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
-						
 						
 						var kakaoEmail = res.kakao_account.email;
 						var kakaoName = res.properties['nickname'];
 						
 						var checkEmail = fn_process(kakaoEmail)
 						
-					    console.log(checkEmail);
 					    if(checkEmail == 0) {
 					    	//데이터 베이스에 없을 경우(즉 회원가입하지 않은 이메일인 경우) join페이지로 get방식으로 이메일 전달
 					    	location.href = "./join.do?email=" + kakaoEmail + "&name=" + kakaoName;
@@ -323,16 +282,7 @@
 		function onSignIn(googleUser) {
 			// Useful data for your client-side scripts:
 			var profile = googleUser.getBasicProfile();
-			console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-			console.log('Full Name: ' + profile.getName());
-			console.log('Given Name: ' + profile.getGivenName());
-			console.log('Family Name: ' + profile.getFamilyName());
-			console.log("Image URL: " + profile.getImageUrl());
-			console.log("Email: " + profile.getEmail());
-	
-			var id_token = googleUser.getAuthResponse().id_token;
-			console.log("ID Token: " + id_token);
-
+			
 			// 이름 저장
 			var fullname = profile.getName();
 			
@@ -340,10 +290,6 @@
 			var gmailEmail = profile.getEmail();
 			
 			var checkEmail = fn_process(gmailEmail);
-			
-			var name = fn_process(fullname);
-			
-			console.log(checkEmail);
 			
 			if (checkEmail == 0) {
 				//데이터 베이스에 없을 경우(즉 회원가입하지 않은 이메일인 경우) join페이지로 get방식으로 이메일 전달

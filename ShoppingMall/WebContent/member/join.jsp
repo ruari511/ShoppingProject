@@ -41,12 +41,6 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 	}
 }
 
-<%
-
-String email = request.getParameter("email");
-String name = request.getParameter("name");
-
-%>  
 </script>
 <link rel="stylesheet" href="./asset/css/member.css"/> 
 
@@ -94,7 +88,19 @@ String name = request.getParameter("name");
 				<h3 class="join_title">
 				<label for="name">이름</label>
 				</h3>
+				<%
+					if(request.getParameter("name") != null  && request.getParameter("name").length() != 0){
+						String name = request.getParameter("name");
+				%>
+				
 					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" value="<%=name %>" required>
+				<%
+					} else{
+				%>
+					<input type="text" name="name" class="join" id="name" onblur="join_check('name')" value="" required>
+				<%
+					}
+				%>
 					<%-- value="<%=name %>"--%>
 					<div class="check_font" id="nameMessage"></div>
 				</div>
@@ -131,6 +137,36 @@ String name = request.getParameter("name");
 					<label for="g" style="height: 50px; font-size: 14px;">여자</label><input type="radio" name="gender" id="g" value="여자" ><br>
 				</div>
 				
+				
+				<%
+					if(request.getParameter("email") != null && request.getParameter("email").length() != 0){
+						String email = request.getParameter("email");
+						
+						// 먼저 @ 의 인덱스를 찾는다 - 인덱스 값: 5
+						int idx = email.indexOf("@"); 
+
+						// @ 앞부분을 추출
+						// substring은 첫번째 지정한 인덱스는 포함하지 않는다.
+						// 아래의 경우는 첫번째 문자열인 a 부터 추출된다.
+						String email1 = email.substring(0, idx);
+
+						// 뒷부분을 추출
+						// 아래 substring은 @ 바로 뒷부분인 n부터 추출된다.
+						String email2 = email.substring(idx+1);
+				%>
+				<div>
+				<h3 class="join_title">
+				<label for="email">이메일</label>
+				</h3>
+				<input type="text" id="email_1" name="email_1" value="<%=email1 %>" class="join" style="width: 150px; font-size: 14px;" required>
+				@ <input type="text" id="email_2" name="email_2" value="<%=email2 %>" class="join" style="width: 150px; font-size: 14px;" required>
+					<div class="check_font" id="emailMessage"></div> 
+				</div>
+				
+				<%
+					}else{
+				%>
+
 				<div>
 				<h3 class="join_title">
 				<label for="email">이메일</label>
@@ -154,9 +190,13 @@ String name = request.getParameter("name");
 					<option value="korea.com">korea.com</option>
 					<option value="dreamwiz.com">dreamwiz.com</option>
 				</select>
-					<%-- <input type="email" name="email" class="join" id="email" onblur="join_check('email')" value="<%=email %>" required><br>--%>
 					<div class="check_font" id="emailMessage"></div> 
 				</div>
+				
+				<%
+					}
+				%>
+				
 				
 				<div>
 				<h3 class="join_title">
