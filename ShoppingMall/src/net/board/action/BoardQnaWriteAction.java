@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import net.action.Action;
 import net.action.ActionForward;
-import net.board.db.FaqDAO;
 import net.board.db.QnaDAO;
 import net.board.db.BoardDTO;
 
@@ -22,8 +21,6 @@ public class BoardQnaWriteAction implements Action {
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
 		int product_num = Integer.parseInt(request.getParameter("product_num"));
-		System.out.println(product_num);
-		
 		
 		BoardDTO boarddto = new BoardDTO();
 		boarddto.setCategory(request.getParameter("category"));
@@ -36,7 +33,7 @@ public class BoardQnaWriteAction implements Action {
 		qnadao.insertQna(boarddto);
 		
 		ActionForward forward = new ActionForward();
-		forward.setRedirect(false);
+		forward.setRedirect(true);
 		forward.setPath("./qna.bd");
 		return forward;
 	}

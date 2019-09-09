@@ -63,7 +63,7 @@
 					<div class="area-customer">
 						<ul class="comm2sTabs fiveSet pdB30">
 							<li>
-								<button type="button" onclick="location.href='notice.bd'">전체</button>
+								<button type="button" onclick="location.href='notice.bd'" style="border: 1px solid #dddddd;">전체</button>
 							</li>
 							<li>
 								<button type="button"

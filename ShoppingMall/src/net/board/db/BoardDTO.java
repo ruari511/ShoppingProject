@@ -17,68 +17,17 @@ public class BoardDTO {
 	private String reply_id;  //답변자 id
 	private String reply; //답변 내용
 	private Timestamp re_reg_date;  //답변 등록일
-	
-	
-	
-	public String getProduct_name() {
-		return product_name;
+	public int getNum() {
+		return num;
 	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
-	}
-	public String getReply_id() {
-		return reply_id;
-	}
-	public void setReply_id(String reply_id) {
-		this.reply_id = reply_id;
-	}
-	public int getProduct_num() {
-		return product_num;
-	}
-	public void setProduct_num(int product_num) {
-		this.product_num = product_num;
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getRe_result() {
-		return re_result;
-	}
-	public void setRe_result(String re_result) {
-		this.re_result = re_result;
-	}
-	public Timestamp getRe_reg_date() {
-		return re_reg_date;
-	}
-	public void setRe_reg_date(Timestamp re_reg_date) {
-		this.re_reg_date = re_reg_date;
-	}
-	public String getReply() {
-		return reply;
-	}
-	public void setReply(String reply) {
-		this.reply = reply;
-	}
-	public String getFile() {
-		return file;
-	}
-	public void setFile(String file) {
-		this.file = file;
-	}
-	public Timestamp getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(Timestamp reg_date) {
-		this.reg_date = reg_date;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
 	}
 	public String getCategory() {
 		return category;
@@ -92,6 +41,18 @@ public class BoardDTO {
 	public void setCategory_num(int category_num) {
 		this.category_num = category_num;
 	}
+	public int getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(int product_num) {
+		this.product_num = product_num;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
 	public String getSubject() {
 		return subject;
 	}
@@ -104,8 +65,43 @@ public class BoardDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
+	public String getRe_result() {
+		return re_result;
+	}
+	public void setRe_result(String re_result) {
+		this.re_result = re_result;
+	}
+	public Timestamp getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Timestamp reg_date) {
+		this.reg_date = reg_date;
+	}
+	public String getReply_id() {
+		return reply_id;
+	}
+	public void setReply_id(String reply_id) {
+		this.reply_id = reply_id;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+	public Timestamp getRe_reg_date() {
+		return re_reg_date;
+	}
+	public void setRe_reg_date(Timestamp re_reg_date) {
+		this.re_reg_date = re_reg_date;
+	}
 	
 	
-	 
 	
 }

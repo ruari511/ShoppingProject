@@ -64,20 +64,21 @@
 					<tr class="textarea">
 						<th scope="col"><label for="InputTextarea">제목</label></th>
 						<td>
-							<input type="text" id="subject" name="subject" placeholder="제목을 입력해주세요.(200자 이내)" style="width:98%;"></input>
+							<input required type="text" id="subject" name="subject" placeholder="제목을 입력해주세요.(200자 이내)" style="width:98%;" required></input>
 						</td>
 					</tr>
 					<tr>
 						<th scope="col"><label for="InputTextarea">내용</label></th>
 						<td>
-							<textarea id="content" name="content" cols="5" rows="1" placeholder="내용을 입력해주세요.(2000자 이내)" style="width:98%;height:280px;"></textarea>
+							<textarea required id="content" name="content" cols="5" rows="1" placeholder="내용을 입력해주세요.(2000자 이내)" style="width:98%;height:280px;" required></textarea>
 						</td>
 					</tr>
-					<button type="submit">전송</button>
 				</form>
 			</tbody>
 		</table>
-				<!-- 페이지번호  -->
+			<div align="center" style="padding-top: 20px">
+				<input type="submit" class="ButtonSubmit" value="전송" style="width:114px;height:38px; background:#969937;color:#fff;letter-spacing:-1px;">
+			</div>
 		</div>
 	</div>
 	

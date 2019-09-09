@@ -95,6 +95,7 @@
 									<ul class="conts">
 										<li class="question">
 											<strong>문의</strong>
+ 											<c:if test="${qnaList.product_num != '0'}">${qnaList.product_name }</c:if>
 											<p style="white-space:pre;">${qnaList.content }</p>
 										</li>
 									<c:if test="${qnaList.re_result eq '1' }">

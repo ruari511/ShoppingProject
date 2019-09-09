@@ -37,6 +37,7 @@ public class QnaDAO {
 			if(rs.next()){
 				num=rs.getInt(1)+1; // 글번호의 최대큰번호 + 1
 			}
+		
 			//카테코리별 카테고리 최대번호
 			sql="select max(category_num) from Qna where category=?";
 			pstmt=con.prepareStatement(sql);
@@ -105,11 +106,10 @@ public class QnaDAO {
 				sql="select count(*) from qna"; 
 				pstmt=con.prepareStatement(sql);
 			}else{
-				sql="select count(*) from qna where id=? and reg_date between ? and ?";
+				sql="select count(*) from qna where id=? and reg_date between ? and now()";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, id);
 				pstmt.setString(2, startdate);
-				pstmt.setString(3, enddate);
 			}
 			rs=pstmt.executeQuery();
 			if(rs.next()){
@@ -177,25 +177,26 @@ public class QnaDAO {
 		List<BoardDTO> qnaList=new ArrayList<>();
 		try{
 			con=getConnection();
-			if(id.equals("admin")){
-				sql="select a.*, b.product_name from qna a left join product b "
-						+ "on a.product_num = b.product_num order by re_result asc, reg_date desc asc limit ?,?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setInt(1, startRow-1);
-				pstmt.setInt(2, pageSize);
-			}else{
-				sql="select a.*, b.product_name from qna a left join product b "
-						+ "on a.product_num = b.product_num where id=? and reg_date between ? and ? order by reg_date desc limit ?,?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, id);
-				pstmt.setString(2, startdate);
-				pstmt.setString(3, enddate);
-				pstmt.setInt(4, startRow-1);
-				pstmt.setInt(5, pageSize);
-			}
+			if(id != null){
+				if(id.equals("admin")){
+					sql="select a.*, b.product_name from qna a left join product b "
+							+ "on a.product_num = b.product_num order by re_result asc, reg_date desc limit ?,?";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, startRow-1);
+					pstmt.setInt(2, pageSize);
+				}else{
+					sql="select a.*, b.product_name from qna a left join product b "
+							+ "on a.product_num = b.product_num where id=? and reg_date between ? and now() order by reg_date desc limit ?,?";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setString(1, id);
+					pstmt.setString(2, startdate);
+					pstmt.setInt(3, startRow-1);
+					pstmt.setInt(4, pageSize);
+				}
+			
 			rs=pstmt.executeQuery();
-
 			while(rs.next()){
+				
 				BoardDTO boarddto=new BoardDTO();
 
 				boarddto.setNum(rs.getInt("num"));
@@ -203,7 +204,6 @@ public class QnaDAO {
 				boarddto.setCategory(rs.getString("category"));
 				boarddto.setCategory_num(rs.getInt("category_num"));
 				boarddto.setProduct_num(rs.getInt("product_num"));
-				boarddto.setProduct_name(rs.getString("product_name"));
 				boarddto.setSubject(rs.getString("subject"));
 				boarddto.setContent(rs.getString("content"));
 				boarddto.setRe_result(rs.getString("re_result"));
@@ -211,9 +211,11 @@ public class QnaDAO {
 				boarddto.setReply(rs.getString("reply"));
 				boarddto.setReg_date(rs.getTimestamp("reg_date"));
 				boarddto.setRe_reg_date(rs.getTimestamp("re_reg_date"));
+				boarddto.setProduct_name(rs.getString("product_name"));
 				
 				qnaList.add(boarddto);
 			}
+		}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {

@@ -224,9 +224,9 @@
 
 					<div class="pageing">
 						<c:if test="${pageNo != 0}">
-							<c:if test="${pageNo > pageBlock }">
+							<%-- <c:if test="${pageNo > pageBlock }">
 								<a href="./mypage.mp?pageNum=${firstPage }"> [첫페이지] </a>
-							</c:if>
+							</c:if> --%>
 							<c:if test="${startPage != 1 }">
 								<a href="./mypage.mp?pageNum=${startPage-pageBlock }"> [이전]
 								</a>
@@ -244,13 +244,13 @@
 								</c:choose>
 							</c:forEach>
 
-							<c:if test="${pageNo != finalPage}">
+							<c:if test="${endPage < finalPage}">
 								<a href="./mypage.mp?pageNum=${startPage+pageBlock}"> [다음] </a>
 							</c:if>
-
+<%-- 
 							<c:if test="${pageNo < finalPage }">
 								<a href="./mypage.mp?pageNum=${finalPage }"> [마지막페이지]</a>
-							</c:if>
+							</c:if> --%>
 						</c:if>
 					</div>
 

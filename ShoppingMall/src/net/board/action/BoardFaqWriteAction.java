@@ -20,10 +20,12 @@ public class BoardFaqWriteAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		BoardDTO boarddto = new BoardDTO();
+		System.out.println(request.getParameter("category"));
+		System.out.println(request.getParameter("subject"));
+		System.out.println(request.getParameter("content"));
 		boarddto.setCategory(request.getParameter("category"));
 		boarddto.setSubject(request.getParameter("subject"));
 		boarddto.setContent(request.getParameter("content"));
-		
 		FaqDAO faqdao = new FaqDAO();
 		faqdao.insertFaq(boarddto);
 		
