@@ -42,6 +42,11 @@ public class MainAction implements Action {
 		Vector<ProductDTO> v3 = pdao.getProductLimitList("헤어케어", "스타일링/에센스", 8);
 		Vector<Vector> category3 = ProductListAction.Make2DArray(v3);	
 		category.add(category3);
+		
+		//메인카테고리, 서브카테고리, 상품 표시 갯수
+		Vector<ProductDTO> v4 = pdao.getProductLimitList("건강/위생용품", "덴탈케어", 8);
+		Vector<Vector> category4 = ProductListAction.Make2DArray(v4);	
+		category.add(category4);
 	
 		request.setAttribute("category", category);
 		
@@ -50,6 +55,7 @@ public class MainAction implements Action {
 		title.add("페이셜케어");
 		title.add("로션/크림");
 		title.add("스타일링/에센스");
+		title.add("덴탈케어");
 		
 		request.setAttribute("title", title);
 		

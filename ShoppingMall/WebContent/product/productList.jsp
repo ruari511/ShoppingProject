@@ -11,7 +11,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
+<link rel="stylesheet" href="./asset/js/common.js"/> 
 <script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
 <title>상품 리스트</title>
 <script type="text/javascript">
