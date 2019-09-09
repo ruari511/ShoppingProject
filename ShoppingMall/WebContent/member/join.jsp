@@ -40,13 +40,7 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 		document.getElementById("email_2").readOnly = true;
 	}
 }
-
-<%
-
-String email = request.getParameter("email");
-String name = request.getParameter("name");
-
-%>  
+ 
 </script>
 <link rel="stylesheet" href="./asset/css/member.css"/> 
 
