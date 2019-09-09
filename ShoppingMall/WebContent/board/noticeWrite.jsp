@@ -76,12 +76,12 @@ if(!id.equals("admin")){
 							<textarea required id="content" name="content" cols="5" rows="1" placeholder="내용을 입력해주세요.(2000자 이내)" style="width:98%;height:280px;"></textarea>
 						</td>
 					</tr>
-				</form>
 			</tbody>
 		</table>
 			<div align="center" style="padding-top: 20px">
 				<input type="submit" class="ButtonSubmit" value="전송" style="width:114px;height:38px; background:#969937;color:#fff;letter-spacing:-1px;">
 			</div>
+			</form>
 		</div>
 	</div>
 	
