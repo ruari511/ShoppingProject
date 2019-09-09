@@ -54,6 +54,7 @@ public class MypageBuyListAction implements Action {
 		Vector<BuyListDTO> buylist = bdao.getBuyList(id, startdate, enddate);
 		/*request.setAttribute("pageNum", pageNum);*/
 		request.setAttribute("buylist", buylist);
+		request.setAttribute("dataMonth", c_month);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

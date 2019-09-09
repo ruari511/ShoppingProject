@@ -28,7 +28,7 @@ public class MypageAllBuyListAction implements Action {
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
 		String search_id = request.getParameter("search_id");
-		//ÇöÀç ³â, ¿ù, ÀÏ ±¸ÇÏ±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
@@ -38,7 +38,7 @@ public class MypageAllBuyListAction implements Action {
 		String startdate = null;
 		String enddate = dateFormat.format(date);
 		
-		/* Ã¹ ·Îµù½Ã */
+		/* Ã¹ ï¿½Îµï¿½ï¿½ï¿½ */
 		if(c_month == null && startdate == null){
 			startdate = getDate(-1);
 		}else{
@@ -49,14 +49,14 @@ public class MypageAllBuyListAction implements Action {
 /*		System.out.println(startdate);
 		System.out.println(enddate);*/
 		
-		//ÆäÀÌÁö ¹øÈ£
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 		/*int num=Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		bdao.getBuyListCount(id);*/
 		
 		Vector<BuyListDTO> buylist = null;
 		if(id.equals("admin") && search_id == null){
-		//ÁÖ¹® Á¤º¸ ¹Þ±â
+		//ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 			buylist = bdao.getAllBuyList(startdate, enddate);
 		}else if( id.equals("admin") && search_id != null){
 			buylist = bdao.getBuyList(search_id, startdate, enddate);

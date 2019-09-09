@@ -62,7 +62,7 @@ function notReady(){
 					}else{
 					%>
 						<li class="cart"><a href="./CartListAction.buy">장바구니<span id="cartToCnt">(<%=cartCount%>)</span></a></li>
-						<li class="mypage"><a href="./mypage.mp">마이페이지</a></li>
+						<li class="mypage"><a href="./mypage.mp?data_month=-1">마이페이지</a></li>
 						<li class="order"><a href="#">주문배송</a></li>
 					<%
 					}
