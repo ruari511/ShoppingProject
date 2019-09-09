@@ -1,3 +1,4 @@
+<%@page import="net.coupon.db.CouponDAO"%>
 <%@page import="net.product.db.ProductDTO"%>
 <%@page import="net.cart.db.CartDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -93,6 +94,14 @@ function selectBuy(cartnum) {
 	
 </script>
 </head>
+<%
+	String id = (String)session.getAttribute("id");
+
+	CouponDAO cdao = new CouponDAO();
+	int cpNum = cdao.CouponNum(id);
+	
+	request.setAttribute("cpNum", cpNum);
+%>
 <body>
 <div id="Wrapper">
 	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
@@ -121,8 +130,7 @@ function selectBuy(cartnum) {
 					<li><a class="grade_benefit"><span>등급혜택</span></a></li>
 					<li><a><strong>포인트</strong> 
 					<span class="own_point"><span class="tx_num">${member.point}</span>P</span></a></li>
-					<li><a><strong>할인쿠폰</strong> <span class="own_point"><span class="tx_num">0</span>개</span></a></li>
-					<li><a><strong>예치금</strong> <span class="own_point"><span class="tx_num">0</span>원</span></a></li>
+					<li><a><strong>할인쿠폰</strong> <span class="own_point"><span class="tx_num"></span>${cpNum}개</span></a></li>
 				</ul>
 			</div>
 			<h2 class="sub-title2">

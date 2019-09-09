@@ -37,7 +37,6 @@ public class MypageAllBuyListAction implements Action {
 		c_month = (String) request.getParameter("data_month");
 		String startdate = null;
 		String enddate = dateFormat.format(date);
-		System.out.println("999");
 		/* 첫 占싸듸옙占쏙옙 */
 		if(c_month == null && startdate == null){
 			startdate = getDate(-1);

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <title>아이티영 온라인몰</title>
 	<link rel="stylesheet" href="./asset/css/coupon.css"/> 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>

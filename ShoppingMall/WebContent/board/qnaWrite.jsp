@@ -73,7 +73,7 @@
 				<col style="width:75%;">
 			</colgroup>
 			<tbody>
-				<form id="cnslRegForm" action="./BoardQnaWriteAction.bd" method="get">
+				<form id="cnslRegForm" action="./BoardQnaWriteAction.bd" method="post">
 					<tr>
 						<th scope="col"><label for="TypeInquiry">문의유형</label></th>
 						<td>
@@ -121,14 +121,14 @@
 							<textarea required id="content" name="content" cols="5" rows="1" placeholder="내용을 입력해주세요." style="width:98%;height:280px;"></textarea>
 						</td>
 					</tr>
-				</form>
 			</tbody>
 		</table>
 		<!-- //등록 게시판 -->
 			<div align="center" style="padding-top: 20px">
 				<input type="submit" class="ButtonSubmit" value="전송" style="width:114px;height:38px; background:#969937;color:#fff;letter-spacing:-1px;">
 			</div>
-		
+		</form>
+			
 	
 	</div>
 		<!-- //#Contents -->
