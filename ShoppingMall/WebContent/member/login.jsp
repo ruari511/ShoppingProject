@@ -86,6 +86,10 @@
     
    }
    
+   window.onload=function(){
+	   $(".g-signin2>div").css('width','500px');
+	   $("#naverIdLogin img").css('height', '49px');
+   }
    
 </script>
 </head>
@@ -189,7 +193,7 @@
 		
 		$.ajax(
 				{
-					url:"http://localhost:8090/ShoppingMall/emailcheck", //요청할 가상주소 
+					url:"${pageContext.request.contextPath}/emailcheck", //요청할 가상주소 
 					type:"post", //요청방식 지정
 					async:false,  //비동기 방식의 요청 지정 
 					data:{id:_email, name:_name}, // 아래의 입력한 아이디를 서블릿으로 전송함(요청값).
