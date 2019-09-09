@@ -205,7 +205,7 @@ String name = request.getParameter("name");
 			// ajax 아이디 중복 체크
 			$.ajax(
 					{
-						url:"${pageContext.request.contextPath}/ShoppingMall/Check",
+						url:"${pageContext.request.contextPath}/Check",
 						type:"post",
 						async:false,
 						data:{id:_id, phone:_phone},

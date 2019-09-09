@@ -119,7 +119,7 @@ public class BuyMemberUpdateAction implements Action{
 		//sendRedirect() <-이방식은 이동할 페이지 주소 경로 노출 함.
 		forward.setRedirect(false);
 		// ./member/login.jsp 이동할 페이지 주소 저장
-		forward.setPath("./BuyComplete.buy");
+		forward.setPath("/product/BuyComplete.jsp");
 		
 		//페이지 이동 방식 여부 값 true와...
 		// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..

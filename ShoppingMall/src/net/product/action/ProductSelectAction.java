@@ -147,7 +147,7 @@ public class ProductSelectAction implements Action{
 
 		forward.setRedirect(false);
 
-		forward.setPath("./ProductSelect.pro");
+		forward.setPath("./ProductSelect.jsp");
 		
 		return forward;
 		}
