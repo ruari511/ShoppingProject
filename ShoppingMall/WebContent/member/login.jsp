@@ -8,16 +8,16 @@
 
 <!-- 구글 -->
 <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="714799720673-kmhsf3rqmk083p148at0tui000p84ntu.apps.googleusercontent.com">
+<meta name="google-signin-client_id" content="714799720673-kmhsf3rqmk083p148at0tui000p84ntu.apps.googleusercontent.com">
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 
 <!-- 네이버 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 <!-- 카카오 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-<!-- 구글 -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
 <link rel="stylesheet" href="./asset/css/member.css"/> 
@@ -94,81 +94,82 @@
     
     <!-- 로그인 폼 -->
     <%--MemberFrontController서블릿에.. 로그인 처리 요청시! 입력한 id와 패스워드 전달 --%>
-    <div>
+<div>
     <form action="./MemberLoginAction.do" method="post" id="login">
+    
     <div class="jointo">
     
         <h1 align="center" class="tit">로그인</h1>
         <h3 align="center">아이티영의 다양한 서비스와 혜택을 누리세요.</h3>
 		
-		<div class="joinin">
+	<div class="joinin">
     
         <div>
-   		<h3 class="join_title">
-        <label>아이디</label>
-        </h3>
+   			<h3 class="join_title">
+        		<label>아이디</label>
+       	 	</h3>
+            
             <input type="text" id="id" name="id" class="form-control" onblur="login_check()" required autofocus/>
+            
             <div class="check_font" id="idMessage"></div>
+            
         </div>
         
         <div>
-    	<h3 class="join_title">
-        <label>비밀번호</label>
-        </h3>
+    		<h3 class="join_title">
+        		<label>비밀번호</label>
+        	</h3>
+            
             <input  type="password" id="password" name="password" class="form-control" onblur="login_check()" required autofocus/>
+            
             <div class="check_font" id="passMessage"></div>
         </div>
         
         
         
-        <div class="for">
+	<div class="for">
         <div class="login_SR">
-        <input type="submit" value="로그인" class="submit_l">
+        	<input type="submit" value="로그인" class="submit_l">
         </div>
         
         <div class="fond_btn">
+        
         <br>
-        <input type="button" class="btn btn-primary" value="아이디/비밀번호 찾기" onclick="showPopup();" style="float: left;"/>
-        <a href="./join.do"><input type="button" class="btn btn-primary2" value="회원가입" ></a>
+        
+        	<input type="button" class="btn btn-primary" value="아이디/비밀번호 찾기" onclick="showPopup();" style="float: left;"/>
+        	<a href="./join.do"><input type="button" class="btn btn-primary2" value="회원가입" ></a>
+        	
         </div>
-        </div>
-        <!--  <button type="submit" class="btn btn-primary" style="float: right;">로그인</button> -->
+    </div>
       
-      <div class="qqq">
+      
+      <br><br>
+      
+      <!-- 구글 로그인 추가 -->
+	<div>
+		<a class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" ></a>
+	</div>
+	
+	<br><br>
+      
+    <div>
+		<a id="kakao-login-btn" ></a>
+		<a href="http://developers.kakao.com/logout" ></a>
+	</div>
+      
+      
+    <br><br>
+      
 	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
 	<div id="naverIdLogin" style="width: 100px; display: inline-block;"></div>
 
-	<br>
-	<br>
-	
-	<div>
-	<a id="kakao-login-btn" ></a>
-	<a href="http://developers.kakao.com/logout" ></a>
-	</div>
-	<br>
-	<br>
 
-	<!-- 구글 로그인 추가 -->
-	<div>
-	<a class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" ></a>
-	</div>
-	
-	
 	</div>
       
-      </div>
-      </div>
-      
-      
-      
-    
-   </form>
    
-   <br><br><br><br><br>
-   <hr>
-	
-	
-	</div>
+    
+	</form>
+</div>
 	
 	
 	<script type="text/javascript">

@@ -190,7 +190,7 @@ public class review_DAO {
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
 				int review_star = rs.getInt("REVIEW_STAR"); // 별점
 				Date review_regdate = rs.getDate("REVIEW_REGDATE"); // 리뷰 작성일
-				System.out.println("img = " + rs.getString("review_img"));
+				
 				// 빈객체 생성
 				ReviewDTO dto = new ReviewDTO();
 
@@ -347,7 +347,6 @@ public class review_DAO {
 			if(rs.next()){
 				// 전체 글의 개수를 가져온다.
 				cnt = rs.getInt(1);
-				System.out.println("review_getPageCount: " + cnt);
 			}
 			
 		} catch (Exception e) {
@@ -409,14 +408,14 @@ public class review_DAO {
 	}
 	
 	// 별점 평균 구하는 메서드
-	public int review_getStarAvg(int product_num){
+	public double review_getStarAvg(double product_num){
 
 			con=null;
 		    sql="";
 		    pstmt=null;
 		    rs=null;
 		    
-		    int staravg = 0;
+		    double staravg = 0;
 		    
 		    try {
 		    	con=getConnection();
@@ -431,8 +430,7 @@ public class review_DAO {
 				
 				if(rs.next()){
 
-					staravg = rs.getInt(1);
-					System.out.println("review_getStarAvg: " + staravg);
+					staravg = rs.getDouble(1);
 				}
 				
 			} catch (Exception e) {

@@ -170,7 +170,7 @@ axe.run( function(err, results) {
 // 이미지 모달 띄우면서 src 변경
 function imgmodal(a){
 	
-	var img = './asset/image/review/' + a;
+	var img = './review_upload/' + a;
 	$("#modal_img").attr("src",img);
 	$("#modalIMG").modal();
 
@@ -184,7 +184,7 @@ function imgmodal_G(){
 
 function imgmodal_GI(a){
 	
-	var img = './asset/image/review/' + a;
+	var img = './review_upload/' + a;
 	$("#modal_img_GI").attr("src",img);
 	$("#modalIMG_GI").modal();
 
@@ -199,6 +199,7 @@ function imgmodal_GI(a){
 <!-- header// -->
 <div id="Container">
 	<c:set var="PATH" value="./upload/" />
+	<c:set var="REVIEW_PATH" value="./review_upload/" />
 	<div id="Contents">
 	<c:set var="product" value="${requestScope.pdto}" />
 	<input type="hidden" id="product_num" name="product_num" value="${product.product_num}">
@@ -252,7 +253,7 @@ function imgmodal_GI(a){
 					<img src="${PATH}${product.img_main}" alt="상품명 이미지">
 				</div>
 				<ul class="prd_thumb_list">
-					<li class="sel"><a href=""><img src="${PATH}${product.img_main}" alt="썸네일이미지""></a></li>
+					<li class="sel"><a href=""><img src="${PATH}${product.img_main}" alt="썸네일이미지"></a></li>
 					<li class=""><a href=""><img src="${PATH}${product.img_main}" alt="썸네일이미지"></a></li>
 				</ul>
 			</div>
@@ -473,11 +474,38 @@ function imgmodal_GI(a){
       <c:forEach var="ReviewDTO" items="${requestScope.reviewlist}" end="0">
       <c:if test="${requestScope.review_cnt != 0}">
          <div class="grade_img">
-            <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
+         <% int num = 1; %>
+         <!-- grade5 : 최고, grade4 : 좋음, grade3 : 보통, grade2 : 별로, grade1 : 나쁨  -->
+         
+         	<c:if test="${requestScope.staravg < 1}">
+				<p class="img_face"><span class="grade grade1"></span><em>나쁨</em></p>
+			</c:if>
+         	
+         	<c:if test="${requestScope.staravg >= 1 and requestScope.staravg < 2}">
+				<p class="img_face"><span class="grade grade1"></span><em>나쁨</em></p>
+			</c:if>
+			
+			<c:if test="${requestScope.staravg >= 2 && requestScope.staravg < 3}">
+				<p class="img_face"><span class="grade grade2"></span><em>별로</em></p>
+			</c:if>
+			
+			<c:if test="${requestScope.staravg >= 3 && requestScope.staravg < 4}">
+				<p class="img_face"><span class="grade grade3"></span><em>보통</em></p>
+			</c:if>
+         
+         	<c:if test="${requestScope.staravg >= 4 && requestScope.staravg < 5}">
+				<p class="img_face"><span class="grade grade4"></span><em>좋음</em></p>
+			</c:if>
+			
+			<c:if test="${requestScope.staravg == 5}">
+				<p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
+			</c:if>
+			
          </div>
+         
          <div class="star_area">
             <p class="total">총 <em>${requestScope.review_cnt}</em>건의 고객상품평</p>
-            <p class="num"><strong>${requestScope.staravg}</strong><span>점 / 5점</span></p>
+            <p class="num"><strong>${requestScope.staravg}</strong><span>점 / 5.0점</span></p>
             <ul class="star_list">
 				 <span id="star-prototype">${requestScope.staravg}</span>
           </ul>
@@ -504,7 +532,6 @@ function imgmodal_GI(a){
        <c:forEach var="ReviewDTO" items="${requestScope.reviewlist} > 0" end="0">
        <c:if test="${requestScope.review_cnt == 0}">
          <div class="grade_img">
-            <p class="img_face"><span class="grade grade5"></span><em>최고</em></p>
          </div>
          <div class="star_area">
             <p class="total">총 <em>0</em>건의 고객상품평</p>
@@ -541,7 +568,7 @@ function imgmodal_GI(a){
 		<li>
 			<a>               
 				<span>
-					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" alt="">
+					<img src="${REVIEW_PATH}${ReviewAll.review_img}" class="thum">
 				</span>
 			</a>
 		</li>
@@ -551,7 +578,7 @@ function imgmodal_GI(a){
 			<a onclick="imgmodal_G('${ReviewAll.review_img}');" class="more" style="cursor: pointer;">
 				<span>
 					<span><em>더보기</em></span>
-					<img src="./asset/image/review/${ReviewAll.review_img}" class="thum">
+						<img src="${REVIEW_PATH}${ReviewAll.review_img}" class="thum">
 				</span>
 			</a>
 		</li>
@@ -665,7 +692,7 @@ function imgmodal_GI(a){
 				<li>
 					<span>
 						<a onclick="imgmodal('${ReviewDTO.review_img}');">
-							<img src="./asset/image/review/${ReviewDTO.review_img}" class="thum" style="cursor: pointer;">
+							<img src="${REVIEW_PATH}${ReviewDTO.review_img}" class="thum" style="cursor: pointer;">
 						</a>
 					</span>
 				</li>
@@ -679,11 +706,19 @@ function imgmodal_GI(a){
 			
 			<div class="recom_area">    
 			<c:if test="<%=id != null %>">																																								
-				<button class="btn_recom" onclick="return confirm('추천하시겠습니까?')"><a type="button" class="recom" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}&product_num=${product}" style="cursor: pointer;">도움이 돼요<span class="num">${ReviewDTO.like_count}</span></a></button>
+				<button class="btn_recom" onclick="return confirm('추천하시겠습니까?')">
+					<a type="button" class="recom" href="./product/likeAction.jsp?review_num=${ReviewDTO.review_num}&product_num=${product}" style="cursor: pointer;">
+						도움이 돼요<span class="num">${ReviewDTO.like_count}</span>
+					</a>
+				</button>
 			</c:if>
 			
 			<c:if test="<%=id == null %>">
-				<button class="btn_recom"><a type="button" class="recom" onclick="location.href='./login.do'" style="cursor: pointer;">도움이 돼요 <span class="num">${ReviewDTO.like_count}</span></a></button>
+				<button class="btn_recom">
+					<a type="button" class="recom" onclick="location.href='./login.do'" style="cursor: pointer;">
+						도움이 돼요 <span class="num">${ReviewDTO.like_count}</span>
+					</a>
+				</button>
 			</c:if>
 			
 			</div>
@@ -718,7 +753,7 @@ function imgmodal_GI(a){
 				<c:forEach var="ReviewAll" items="${requestScope.reviewAlllist}" varStatus="idx">             
 					<span>
 						<a onclick="imgmodal_GI('${ReviewAll.review_img}');">
-							<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px; cursor: pointer;">
+							<img src="${REVIEW_PATH}${ReviewAll.review_img}" class="thum" style="width: 80px;height: 80px; cursor: pointer;">
 						</a>
 					</span>
 				</c:forEach>
@@ -736,22 +771,22 @@ function imgmodal_GI(a){
 <!-- Img Modal 더보기 -->
 
 
-<!-- Img Modal 더보기 이미지 클릭 시 -->		
+<!-- Img Modal 더보기 안 이미지 클릭 시 -->		
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG_GI" tabindex="-1">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-		
+  
 			<div class="modal-body mb-0 p-0">
-				<img src="./asset/image/review/${ReviewAll.review_img}" class="thum" id="modal_img_GI" style="width:100%">
+				<img src="${REVIEW_PATH}${ReviewDTO.review_img}" class="thum" id="modal_img_GI" style="width:100%">
 			</div>
-				
+
 			<div class="modal-footer">
 				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- Img Modal 더보기 이미지 클릭 시 -->
+<!-- Img Modal 더보기 안 이미지 클릭 시 -->
 
 </c:forEach>
 	</ul>
@@ -851,6 +886,8 @@ function imgmodal_GI(a){
     </div>
   </div>
 <!-- Modal끝 -->
+
+
 		</div> <!-- review 정보탭 끝부분 -->	
 	</div> <!-- div id=contonts -->
 </div> <!-- div id=container -->
