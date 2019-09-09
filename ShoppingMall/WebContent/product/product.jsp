@@ -892,13 +892,6 @@ function imgmodal_GI(a){
 	</div> <!-- div id=contonts -->
 </div> <!-- div id=container -->
 
-
-
-	<!-- 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
-	<div id="directTop" style="display: block;">
-		<button><span></span>TOP</button>
-	</div>
-	<!--// 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
 	
 	<!-- #Footer -->
 	<jsp:include page="../include/Footer.jsp"/>
