@@ -25,7 +25,19 @@
 
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
-	<script>
+	<script type="text/javascript">
+	$(window).ready(function(){
+		var dataMonth = $('#dataMonth').val();
+		if(dataMonth == null || dataMonth == '-1'){
+			$('.select-month > li ').eq(0).addClass('on');
+		}else if(dataMonth == '-3'){
+			$('.select-month > li ').eq(1).addClass('on');
+		}else if(dataMonth == '-6'){
+			$('.select-month > li ').eq(2).addClass('on');
+		}else if(dataMonth == '-12'){
+			$('.select-month > li ').eq(3).addClass('on');
+		}
+	});
 	
 	<%
 
@@ -70,6 +82,8 @@
 			</ul>
 			
 			<fieldset class="search-period">
+			<c:set var="dataMonth" value="${requestScope.dataMonth}" />
+					<input type="hidden" id="dataMonth" value="${requestScope.dataMonth}"> 
 						<legend></legend>
 						<ul class="select-month">
 							<li><button type="button"  onclick="location.href ='qna.bd?data_month=-1'">1개월</button></li>
