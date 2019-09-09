@@ -164,7 +164,7 @@ public class MemberDAO {
           pstmt.setString(8, dto.getAddress_main());
           pstmt.setString(9, dto.getAddress_detail());
           pstmt.setString(10, dto.getPhone());
-          pstmt.setString(11, "bronze");
+          pstmt.setString(11, "아이언");
           pstmt.setInt(12,0);
          pstmt.setInt(13,3000); // 회원가입 축하 포인트 3000
 
