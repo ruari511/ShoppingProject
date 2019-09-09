@@ -34,8 +34,23 @@ public class BoardQnaListAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		String c_month = null;
+		c_month = request.getParameter("data_month");
+		System.out.println(c_month);
+		String startdate = null;
+		String enddate = dateFormat.format(date);
+		if(c_month == null && startdate == null){
+			startdate = getDate(-1);
+		}else{
+			int data_month = Integer.parseInt(c_month);
+			startdate = getDate(data_month);
+		}
+		
 		int count = 0; 
-			count = qnadao.getQnaCount(id);
+			count = qnadao.getQnaCount(id, startdate, enddate);
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
@@ -46,7 +61,7 @@ public class BoardQnaListAction implements Action {
 		int endRow = pageNo*pageSize;
 		
 		List<BoardDTO> qnaList = null;
-		qnaList = qnadao.getQnaList(id, startRow, pageSize);
+		qnaList = qnadao.getQnaList(id, startRow, pageSize, startdate, enddate);
 		int finalPage =count/pageSize+(count%pageSize==0?0:1);
 		int firstPage = 1;
 		int pageBlock=5;
@@ -73,6 +88,29 @@ public class BoardQnaListAction implements Action {
 		}
 		return forward;
 	}
+	
+	public String getDate ( int MM )
+	{
+	Calendar temp=Calendar.getInstance ( );
+	StringBuffer sbDate=new StringBuffer ( );
+	 
+	temp.add ( Calendar.MONTH, MM );
+	 
+	int nYear = temp.get ( Calendar.YEAR );
+	int nMonth = temp.get ( Calendar.MONTH ) + 1;
+	int nDay = temp.get ( Calendar.DAY_OF_MONTH );
+	 
+	sbDate.append ( nYear + "-" );
+	if ( nMonth < 10 )
+	sbDate.append ( "0" );
+	sbDate.append ( nMonth + "-");
+	if ( nDay < 10 )
+	sbDate.append ( "0" );
+	sbDate.append ( nDay );
+	 
+	return sbDate.toString ( );
+	}
+	
 }
 
 

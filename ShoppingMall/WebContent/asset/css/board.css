@@ -437,10 +437,12 @@
 .pageing a, .pageing strong {display:inline-block;width:30px;height:30px;margin:0 2px;border:1px solid #e5e5e5;color:#888;font-size:14px;line-height:28px;vertical-align:top;box-sizing:border-box;font-weight:700}
 .pageing a {text-decoration:none;}
 .pageing .prev, .pageing .next {height:30px;padding:0;font-size:0;text-indent:-99999px;line-height:0;}
-.pageing .prev {margin-right:8px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_prev7x11.png") no-repeat center center;}
-.pageing .next {margin-left:8px;background:url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_next7x11.png") no-repeat center center;}
+.pageing .prev {margin-right:8px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_prev7x11.png") no-repeat center center;}
+.pageing .next {margin-left:8px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_pageing_next7x11.png") no-repeat center center;}
 .pageing strong, .pageing a:hover, .pageing a:active, .pageing a:focus, .pageing strong:hover, .pageing strong:focus, .pageing strong:active {border:1px solid #666;color:#333;font-weight:700}
+
 .pageing span {display:inline-block;width:30px;height:30px;border:1px solid #e5e5e5;text-indent:-9999px}
+
 
 /* BOARD LIST RESULT */
 .result-board {overflow:hidden;width:1020px;margin:0 auto;padding:40px 0 10px;line-height:24px}
@@ -725,6 +727,11 @@
 #Wrapper .FG02 {background:#a68fcd;}
 #Wrapper .FG03 {background:#ed95b7;}
 #Wrapper .FG04 {background:#f5a031;}
+
+.list-customer.onenone {margin-top:20px}
+.list-customer.onenone ul li .stit.complete strong {background:#969937}
+.list-customer.onenone ul li .stit strong {background:#888}
+.list-customer.onenone ul li .conts li.question {padding-left:30px}
 
 
 /* 버튼 영역 */

@@ -63,7 +63,7 @@ public class BoardFaqListAction implements Action {
 		}
 		int finalPage =count/pageSize+(count%pageSize==0?0:1);
 		int firstPage = 1;
-		int pageBlock=5;
+		int pageBlock=10;
 		
 		int startPage=((pageNo-1)/pageBlock)*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -77,6 +77,7 @@ public class BoardFaqListAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("search", search);
 		
 		ActionForward forward = new ActionForward();

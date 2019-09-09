@@ -75,7 +75,7 @@
 				<div class="area-customer">
 					<ul class="comm2sTabs iconTab">
 					<!-- 컨트롤러에서 data-cd 값을 받아와 해당하는 값에 맞는 리스트를 뿌려줌 -->
-						<li><button type="button" class="icon_tab01" onclick="location.href ='faq.bd<c:if test="${search != null}">?search=${search} </c:if>'">전체</button>
+						<li><button type="button" class="icon_tab01" onclick="location.href ='faq.bd'">전체</button>
 						</li>
 						<!-- <li data-cd="40"><button type="button" class="icon_tab02">회원/멤버십</button> 카테고리2 
 							<ul class="twoTabs">
@@ -163,44 +163,46 @@
 					</div>
 				</div>
 				
-				<!-- 페이지번호 -->
-		<div id="pageing">
-			<c:if test="${pageNo != 0}">
-				<c:if test="${pageNo > pageBlock }">
-					<a href="./faq.bd?pageNum=${firstPage }"> [첫페이지] </a>
-				</c:if>
-				<c:if test="${startPage != 1 }">
-					<a href="./faq.bd?pageNum=${startPage-pageBlock }"> [이전] </a>
-				</c:if>
-			
-				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-					<c:choose>
-						<c:when test="${i eq pageNo }">
-							<a href="./faq.bd?pageNum=${i }"><Strong>${i }</Strong></a>
-						</c:when>
-						<c:otherwise>
-							<a href="./faq.bd?pageNum=${i }">${i }</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			
-				<c:if test="${pageNo != finalPage}">
-					<a href="./faq.bd?pageNum=${startPage+pageBlock}"> [다음] </a>
-				</c:if>
+			<!-- 페이지번호 -->
+			<div class="pageing">
+				<c:if test="${pageNo != 0}">
+					<%-- <c:if test="${pageNo > pageBlock }">
+						<a href="./faq.bd?pageNum=${firstPage }"> [첫페이지] </a>
+					</c:if> --%>
+					<c:if test="${startPage != 1 }">
+						<a class="prev"  href="./faq.bd?pageNum=${startPage-pageBlock }"> 이전 페이지 </a>
+					</c:if>
 				
-				<c:if test="${pageNo < finalPage }">
-					<a href="./faq.bd?pageNum=${finalPage }"> [마지막페이지]</a>
+					<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+						<c:choose>
+							<c:when test="${i eq pageNo }">
+								<Strong>${i }</Strong>
+							</c:when>
+							<c:otherwise>
+								<a href="./faq.bd?pageNum=${i }">${i }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${endPage < finalPage}">
+						<a class="next" href="./faq.bd?pageNum=${startPage+pageBlock}"> 다음 페이지 </a>
+					</c:if>
+					
+					<%-- <c:if test="${pageNo < finalPage }">
+						<a href="./faq.bd?pageNum=${finalPage }"> [마지막페이지]</a>
+					</c:if> --%>
 				</c:if>
-			</c:if>
-				<!-- 페이지번호  -->
-		<% 	if(id != null){
-			if(id.equals("admin")){
-		%>
-			<a href="./faqWrite.bd"> 글쓰기 </a>
-		<%} 
-			}
-		%>
-		</div>
+			</div>
+			<!-- 페이지번호  -->
+				<div align="center" style="padding-top: 10px;">
+				<%
+				if(id != null){
+					if(id.equals("admin")){
+				%>
+					<a href="./faqWrite.bd">관리자 글쓰기 </a>
+				<%	} 
+				}
+				%>
+				</div>
 		</div>
 	</div>
 	

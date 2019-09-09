@@ -1,6 +1,7 @@
 package net.board.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class QnaDAO {
 	}
 	
 	/* id별 게시글 수 조회*/
-	public int getQnaCount(String id){
+	public int getQnaCount(String id, String startdate, String enddate){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -104,9 +105,11 @@ public class QnaDAO {
 				sql="select count(*) from qna"; 
 				pstmt=con.prepareStatement(sql);
 			}else{
-				sql="select count(*) from qna where id=?";
+				sql="select count(*) from qna where id=? and reg_date between ? and ?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, id);
+				pstmt.setString(2, startdate);
+				pstmt.setString(3, enddate);
 			}
 			rs=pstmt.executeQuery();
 			if(rs.next()){
@@ -166,7 +169,7 @@ public class QnaDAO {
 	
 	
 	/* id별 페이지 번호*/
-	public List<BoardDTO> getQnaList(String id, int startRow,int pageSize){
+	public List<BoardDTO> getQnaList(String id, int startRow,int pageSize, String startdate, String enddate){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -176,17 +179,19 @@ public class QnaDAO {
 			con=getConnection();
 			if(id.equals("admin")){
 				sql="select a.*, b.product_name from qna a left join product b "
-						+ "on a.product_num = b.product_num order by re_result asc, num asc limit ?,?";
+						+ "on a.product_num = b.product_num order by re_result asc, reg_date desc asc limit ?,?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, startRow-1);
 				pstmt.setInt(2, pageSize);
 			}else{
 				sql="select a.*, b.product_name from qna a left join product b "
-						+ "on a.product_num = b.product_num where id=? order by reg_date asc limit ?,?";
+						+ "on a.product_num = b.product_num where id=? and reg_date between ? and ? order by reg_date desc limit ?,?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, id);
-				pstmt.setInt(2, startRow-1);
-				pstmt.setInt(3, pageSize);
+				pstmt.setString(2, startdate);
+				pstmt.setString(3, enddate);
+				pstmt.setInt(4, startRow-1);
+				pstmt.setInt(5, pageSize);
 			}
 			rs=pstmt.executeQuery();
 

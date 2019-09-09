@@ -7,24 +7,24 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<meta name="format-detection" content="telephone=no">
-	<meta property="og:title" content="공식 온라인몰">
-	<meta property="og:url" content="main.html">
-	<meta property="og:image" content="">
-	<meta property="og:description" content="">
-	<title> # </title>
-	
-	<link rel="stylesheet" href="../asset/css/board.css"/>
-	<link rel="stylesheet" href="../asset/css/global.css"/>
-	<link rel="stylesheet" href="../asset/css/contents.css"/>
-	<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="../asset/js/slick.min.js"></script>
-	<script type="text/javascript" src="../asset/js/common.js"></script>
-	<script type="text/javascript">
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:title" content="공식 온라인몰">
+<meta property="og:url" content="main.html">
+<meta property="og:image" content="">
+<meta property="og:description" content="">
+<title>#</title>
+
+<link rel="stylesheet" href="../asset/css/board.css" />
+<link rel="stylesheet" href="../asset/css/global.css" />
+<link rel="stylesheet" href="../asset/css/contents.css" />
+<script type="text/javascript" src="../asset/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../asset/js/slick.min.js"></script>
+<script type="text/javascript" src="../asset/js/common.js"></script>
+<script type="text/javascript">
 	$(window).ready(function(){
 			$('.select-month > li ').eq(0).addClass('on');
 			
@@ -38,18 +38,19 @@
 	</script>
 </head>
 <body>
-<div id="Wrapper">
-	
-	<div id="Container">
-		<div id="Contents">	
-			<jsp:include page="mypage_topMenu.jsp"/>	
+	<div id="Wrapper">
+
+		<div id="Container">
+			<div id="Contents">
+				<jsp:include page="mypage_topMenu.jsp" />
 				<div class="mypage-conts">
-					<script src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
+					<script
+						src="https://www.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=2019080133412"></script>
 					<script>
 						$(window).ready(function(){
 						    mypage.header.init();
 					</script>
-					
+
 					<!-- 마이페이지 Inner -->
 					<div class="title-area">
 						<h2 class="tit">주문/배송 조회</h2>
@@ -80,10 +81,14 @@
 					<fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
+							<li><button type="button"
+									onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
+							<li><button type="button"
+									onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
+							<li><button type="button"
+									onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
+							<li><button type="button"
+									onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
 						</ul>
 						<!-- <div class="select-range">
 							<select id="cal-start-year" title="년도를 선택하세요"
@@ -142,10 +147,10 @@
 								title="날일을 선택하세요" style="width: 60px;">
 							</select> <label for="cal-end-day">일</label>
 						</div> -->
-					<!--<button type="button" class="btnLookup" id="do-search-period">조회</button> -->
+						<!--<button type="button" class="btnLookup" id="do-search-period">조회</button> -->
 					</fieldset>
 					<br>
-					
+
 					<table class="board-list-2s mgT20">
 						<caption>주문&amp;배송&amp;내역 목록</caption>
 						<colgroup>
@@ -156,7 +161,7 @@
 							<col style="width: 110px;">
 						</colgroup>
 						<thead>
-							<tr>	
+							<tr>
 								<th scope="col">주문일자</th>
 								<th scope="col">상품</th>
 								<th scope="col">수량</th>
@@ -200,43 +205,72 @@
 												<!-- c:if test="{buylist.delivery_result == 1" 배송완료 -->
 												<!-- <button type="button" class="BtnDelete mgT5">...</button>
 												<button type="button" class="BtnDelete mgT5">상품평쓰기</button> -->
-												<c:if test="${buylist.delivery_result eq '배송완료' }">
-												<button type="button" class="BtnDelete mgT5" id="btnDelete" onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">교환신청</button>
-												<button type="button" class="BtnDelete mgT5" id="btnDelete" onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">반품신청</button> 
-												</c:if>
-											</td>
-									</tr>	
+											<c:if test="${buylist.delivery_result eq '배송완료' }">
+												<button type="button" class="BtnDelete mgT5" id="btnDelete"
+													onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">교환신청</button>
+												<button type="button" class="BtnDelete mgT5" id="btnDelete"
+													onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">반품신청</button>
+											</c:if></td>
+									</tr>
 								</c:forEach>
 							</c:if>
 						</tbody>
 					</table>
 
-		
-		
-			<script>
-			$(window).load(function () {
-				/* 주문번호 병합 */
-				$(".gubun").each(function () {
-				    var rows = $(".gubun:contains('" + $(this).text() + "')");
-				    if (rows.length > 1) {
-				        rows.eq(0).attr("rowspan", rows.length);
-				        rows.not(":eq(0)").remove(); 
-				    } 
-				});
-	        });
-			</script>
+					<div class="pageing">
+						<c:if test="${pageNo != 0}">
+							<c:if test="${pageNo > pageBlock }">
+								<a href="./mypage.mp?pageNum=${firstPage }"> [첫페이지] </a>
+							</c:if>
+							<c:if test="${startPage != 1 }">
+								<a href="./mypage.mp?pageNum=${startPage-pageBlock }"> [이전]
+								</a>
+							</c:if>
+
+							<c:forEach var="i" begin="${startPage }" end="${endPage }"
+								step="1">
+								<c:choose>
+									<c:when test="${i eq pageNo }">
+										<%-- <a heef="./mypage.mp?pageNum=${i }"> --%><Strong title="현재 페이지">${i }</Strong><!-- </a> -->
+									</c:when>
+									<c:otherwise>
+										<a href="./mypage.mp?pageNum=${i }">${i }</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<c:if test="${pageNo != finalPage}">
+								<a href="./mypage.mp?pageNum=${startPage+pageBlock}"> [다음] </a>
+							</c:if>
+
+							<c:if test="${pageNo < finalPage }">
+								<a href="./mypage.mp?pageNum=${finalPage }"> [마지막페이지]</a>
+							</c:if>
+						</c:if>
+					</div>
+
+					<script>
+						$(window).load(function () {
+							/* 주문번호 병합 */
+							$(".gubun").each(function () {
+							    var rows = $(".gubun:contains('" + $(this).text() + "')");
+							    if (rows.length > 1) {
+							        rows.eq(0).attr("rowspan", rows.length);
+							        rows.not(":eq(0)").remove(); 
+							    } 
+							});
+				        });
+						</script>
 
 				</div>
+
 			</div>
-				
-			</div>
-		
+
 			<script>
 				$(document).ready(function(){
 				    common.gnb.initMypageMenu(); 
 				};
-			</script>	
-			</div>
-	
+			</script>
+		</div>
 </body>
 </html>
