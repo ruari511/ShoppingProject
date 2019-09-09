@@ -317,7 +317,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 		}else if (aa == 'check') {
 			//휴대폰 중복체크
 			$.ajax({
-					url:"http://localhost:8090/ShoppingMall/Check",
+					url:"${pageContext.request.contextPath}/Check",
 					type:"post",
 					async:false,
 					data:{phone:_phone},

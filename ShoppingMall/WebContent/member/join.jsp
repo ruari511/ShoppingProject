@@ -243,11 +243,10 @@ function email_change() { //이메일 자동으러 뒤에받아오는것 ex)nave
 		var _birth = $("#birth").val();
 		
 		if(aa == 'check'){
-			var contextPath = "http://localhost:8090/ShoppingMall";
 			// ajax 아이디 중복 체크
 			$.ajax(
 					{
-						url:"${pageContext.request.contextPath}/ShoppingMall/Check",
+						url:"${pageContext.request.contextPath}/Check",
 						type:"post",
 						async:false,
 						data:{id:_id, phone:_phone},
