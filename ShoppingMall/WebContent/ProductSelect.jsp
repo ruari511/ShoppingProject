@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
 <link rel="stylesheet" href="./asset/css/ProductSelect.css"/> 
-<title>Insert title here</title>
+<title>아이티영 온라인몰</title>
 <script type="text/javascript">
 	
 	function brandOnOff(){

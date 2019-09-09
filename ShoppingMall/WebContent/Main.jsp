@@ -5,7 +5,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="utf-8">
-	<title> # </title>
+	<title>아이티영 온라인몰</title>
 
 	<link rel="stylesheet" href="./asset/css/board.css"/>
 	<link rel="stylesheet" href="./asset/css/global.css"/>

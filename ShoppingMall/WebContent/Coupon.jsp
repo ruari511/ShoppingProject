@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이티영 온라인몰</title>
 	<link rel="stylesheet" href="./asset/css/coupon.css"/> 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="./asset/js/jQueryRotate.2.2.js"></script>

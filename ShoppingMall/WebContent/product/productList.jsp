@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="./asset/js/common.js"/> 
 <script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
-<title>상품 리스트</title>
+<title>아이티영 온라인몰</title>
 <script type="text/javascript">
 	
 	var brand = new Array();

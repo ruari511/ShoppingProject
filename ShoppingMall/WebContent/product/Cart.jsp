@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>아이티영 온라인몰</title>
 <link rel="stylesheet" href="./asset/css/global.css"/> 
 <link rel="stylesheet" href="./asset/css/cart.css"/> 
 	<script type="text/javascript" src="./asset/js/jquery-1.9.1.min.js"></script>
