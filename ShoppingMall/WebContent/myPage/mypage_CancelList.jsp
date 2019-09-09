@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -80,10 +80,10 @@
 					<fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-1'">1개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-3'">3개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-6'">6개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage_CancelList.mp?data_month=-12'">12개월</button></li>
 						</ul>
 						<!-- <div class="select-range">
 							<select id="cal-start-year" title="년도를 선택하세요"
@@ -183,7 +183,7 @@
 											</td>
 											<td class="subject">
 												<div class="area">
-													<a class="thum" href="ProductDetailAction.pro?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
+													<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
 														<img src="./asset/image/${buylist.img_main }"> <!-- 제품이미지 정보 -->
 													</a>
 													<div class="textus">
@@ -229,7 +229,6 @@
 			</div>
 				
 			</div>
-			
 		
 			<script>
 				$(document).ready(function(){

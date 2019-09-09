@@ -52,31 +52,36 @@ public class MypageFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
       // 留덉씠�럹�씠吏� 二쇰Ц�긽�꽭由ъ뒪�듃
-      }if(command.equals("/mypage_BuyListDetail.mp")){
+      }else if(command.equals("/mypage_BuyListDetail.mp")){
     	  action = new MypageBuyListDetailAction();
 			try{
 				forward = action.execute(request, response);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-      }else if(command.equals("/mypage_OrderCancelList.mp")){
+      }else if(command.equals("/mypage_BuyCancelA.mp")){
+    	  action = new MypageBuyCancelListAction();
+			try{
+				forward = action.execute(request, response);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+      }else if(command.equals("/mypage_BuyCancelB.mp")){
+    	  action = new MypageBuyCancelUpdateAction();
+			try{
+				forward = action.execute(request, response);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+      }else if(command.equals("/mypage_CancelList.mp")){
       
-         action = new MypageBuyListAction();
+         action = new MypageCancelListAction();
 			try{
 				forward = action.execute(request, response);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
       // 留덉씠�럹�씠吏� 二쇰Ц痍⑥냼由ъ뒪�듃
-      }else if(command.equals("/mypage_OrderCancelList.mp")){
-		
-	//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛�,�씠�룞�럹�씠吏� 寃쎈줈 媛� ���옣 �븯�뿬 由ы꽩 �빐二쇰뒗 媛앹껜 �깮�꽦 
-	forward=new ActionForward();
-	//�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛� false濡� ���옣-> RequestDispatcher  forward() 諛⑹떇
-	forward.setRedirect(false);
-	//�씠�룞�븷 �럹�씠吏� 寃쎈줈(�쉶�썝媛��엯 �럹�씠吏�) 二쇱냼媛� ���옣
-	forward.setPath("./Main.jsp?section=./myPage/mypage_OrderCancelList.jsp");
-      // 留덉씠�럹�씠吏� �옣諛붽뎄�땲
       }else if(command.equals("/Cart.jsp")){
       
          //�럹�씠吏� �씠�룞 諛⑹떇 �뿬遺� 媛�,�씠�룞�럹�씠吏� 寃쎈줈 媛� ���옣 �븯�뿬 由ы꽩 �빐二쇰뒗 媛앹껜 �깮�꽦 

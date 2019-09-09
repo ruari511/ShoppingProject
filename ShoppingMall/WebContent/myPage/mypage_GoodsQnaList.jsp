@@ -52,18 +52,16 @@
 					<fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
-							<li class="on"><button type="button" data-month="-1">1개월</button></li>
-							<li><button type="button" data-month="-3">3개월</button></li>
-							<li><button type="button" data-month="-6">6개월</button></li>
-							<li><button type="button" data-month="-12">12개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
 						</ul>
-						<div class="select-range">
+						<!-- <div class="select-range">
 							<select id="cal-start-year" title="년도를 선택하세요"
 								style="width: 76px;">
-
 								<option value="2012">2012</option>
 								<option value="2013">2013</option>
-
 								<option value="2014">2014</option>
 								<option value="2015">2015</option>
 								<option value="2016">2016</option>
@@ -89,10 +87,8 @@
 								id="cal-start-day" title="날일을 선택하세요" style="width: 60px;">
 							</select> <label for="cal-start-day">일</label> <span class="des">~</span>
 							<select id="cal-end-year" title="년도를 선택하세요" style="width: 76px;">
-
 								<option value="2012">2012</option>
 								<option value="2013">2013</option>
-
 								<option value="2014">2014</option>
 								<option value="2015">2015</option>
 								<option value="2016">2016</option>
@@ -117,19 +113,10 @@
 							</select> <label for="cal-end-month">월</label> <select id="cal-end-day"
 								title="날일을 선택하세요" style="width: 60px;">
 							</select> <label for="cal-end-day">일</label>
-						</div>
-						<button type="button" class="btnLookup" id="do-search-period">조회</button>
+						</div> -->
+					<!--<button type="button" class="btnLookup" id="do-search-period">조회</button> -->
 					</fieldset>
-					<script type="text/javascript"
-						src="https://www.oliveyoung.co.kr/pc-static-root/js/common/searchPeriod.js?dumm=2019080133412"></script>
-					<script>
-						START_DATE = '';
-						END_DATE = '';
-
-						$(document).ready(function() {
-							SearchPeriod.init();
-						});
-					</script>
+					<br>
 
 					<table class="board-list-2s mgT20">
 						<caption>상품 Q&amp;A 내역 목록</caption>

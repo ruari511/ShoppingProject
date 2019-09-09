@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -183,7 +183,7 @@
 											</td>
 											<td class="subject">
 												<div class="area">
-													<a class="thum" href="ProductDetailAction.pro?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
+													<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
 														<img src="./asset/image/${buylist.img_main }"> <!-- 제품이미지 정보 -->
 													</a>
 													<div class="textus">
@@ -200,9 +200,11 @@
 												<strong>${buylist.delivery_result }</strong>
 												<!-- c:if test="{buylist.delivery_result == 1" 배송완료 -->
 												<!-- <button type="button" class="BtnDelete mgT5">...</button>
-												<button type="button" class="BtnDelete mgT5">상품평쓰기</button>
-												<button type="button" class="BtnDelete mgT5" id="btnDelete">교환신청</button>
-												<button type="button" class="BtnDelete mgT5" id="btnDelete">반품신청</button> -->
+												<button type="button" class="BtnDelete mgT5">상품평쓰기</button> -->
+												<c:if test="${buylist.delivery_result eq '배송완료' }">
+												<button type="button" class="BtnDelete mgT5" id="btnDelete" onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">교환신청</button>
+												<button type="button" class="BtnDelete mgT5" id="btnDelete" onclick="location.href='./mypage_BuyCancelA.mp?buynum=${buylist.buynum}'">반품신청</button> 
+												</c:if>
 											</td>
 									</tr>	
 								</c:forEach>
@@ -229,7 +231,6 @@
 			</div>
 				
 			</div>
-			
 		
 			<script>
 				$(document).ready(function(){

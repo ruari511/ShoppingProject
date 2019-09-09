@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -83,7 +83,7 @@
 						<tr>
 							<td class="subject">
 								<div class="area">
-									<a class="thum" href="ProductDetailAction.pro?product_num=${buylist.product_num }">
+									<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }">
 										<img src="./asset/image/${buylist.img_main }">
 									</a>
 									<div class="textus" style="width: 68%;">
@@ -98,8 +98,7 @@
 							<td>${buylist.buy_count}</td>
 							<td class="colorOrange"><strong>${(buylist.product_price - buylist.product_sale_price - buylist.point)* buylist.buy_count }</strong> 원</td>
 							<!-- 총 주문 금액 -->
-							
-
+							<c:set var="total_price" value="${total_price + (buylist.product_price - buylist.product_sale_price) * buylist.buy_count }"/>
 							<td class="bgnone">
 							${buylist.delivery_result }
 							<!-- 총 배송료 -->

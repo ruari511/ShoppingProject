@@ -43,7 +43,7 @@
 	        });
 		    jQuery('#category').change(function() {
 		    	var select = $('#category option:selected').val();
-		    	if ( select == '20' ) {
+		    	if ( select == '20' || select == '40') {
 		    		$('#product_select').show();
 		    	} else {
 		    		$('#product_select').hide();
