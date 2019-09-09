@@ -67,19 +67,19 @@
 							</li>
 							<li>
 								<button type="button"
-									onclick="location.href='notice.bd?category=10'">일반</button>
+									onclick="location.href='notice.bd?category=10'" style="border: 1px solid #dddddd;">일반</button>
 							</li>
 							<li>
 								<button type="button"
-									onclick="location.href='notice.bd?category=20'">매장</button>
+									onclick="location.href='notice.bd?category=20'" style="border: 1px solid #dddddd;">매장</button>
 							</li>
 							<li>
 								<button type="button"
-									onclick="location.href='notice.bd?category=30'">이벤트</button>
+									onclick="location.href='notice.bd?category=30'" style="border: 1px solid #dddddd;">이벤트</button>
 							</li>
 							<li>
 								<button type="button"
-									onclick="location.href='notice.bd?category=40'">뷰티테스터</button>
+									onclick="location.href='notice.bd?category=40'" style="border: 1px solid #dddddd;">뷰티테스터</button>
 							</li>
 						</ul>
 					</div>
