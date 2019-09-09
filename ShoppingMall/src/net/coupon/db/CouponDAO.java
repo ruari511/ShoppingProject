@@ -378,7 +378,7 @@ public class CouponDAO {
 			con = getConnection();
 
 			sql = "select count(*)"
-				+ " from shoppingmall.coupon c join shoppingmall.user_coupon u"
+				+ " from coupon c join user_coupon u"
 				+ " on c.coupon_num = u.coupon_num"
 				+ " where u.id=? && u.usecheck=0 && c.coupon_type='전체금액'";
 			
@@ -416,7 +416,7 @@ public class CouponDAO {
 			con = getConnection();
 
 			sql = "select count(*)"
-				+ " from shoppingmall.coupon c join shoppingmall.user_coupon u"
+				+ " from coupon c join user_coupon u"
 				+ " on c.coupon_num = u.coupon_num"
 				+ " where u.id=? && u.usecheck=0 && c.coupon_type='배송비'";
 			
