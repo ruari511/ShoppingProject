@@ -102,7 +102,7 @@
 							<td class="bgnone">
 							${buylist.delivery_result }
 							<!-- 총 배송료 -->
-							<c:set var="total_delivery" value="${total_delivery + delivery_cost}"/>
+							<c:set var="total_delivery" value="${buylist.delivery_cost}"/>
 							<!--  -->
 							<c:set var="total_coupon" value="${total_coupon + (buylist.all_coupon_num * 100) }" />
 							<!-- 총 포인트 할인금액  -->
@@ -157,6 +157,7 @@
 				<h3 class="sub-title3">결제 정보</h3>
 
 				<div class="price-conts">
+				<c:set var="totalsaleprice" value="${requestScope.totalsaleprice}" />
 					<ul class="list ">
 						<li>
 							<dl>
@@ -185,7 +186,7 @@
 							<dl>
 								<dt>쿠폰할인금액</dt>
 								<dd>
-									<c:out value="${total_coupon}" /><em>원</em>
+									${totalsaleprice}<em>원</em>
 								</dd>
 							</dl>
 							<ul>
@@ -205,7 +206,7 @@
 					<div class="price-sum">
 						<div>
 							<strong>총 결제금액</strong>
-							<span><c:out value="${total - total_coupon - total_point }"/><em>원</em></span>
+							<span><c:out value="${total - totalsaleprice - total_point }"/><em>원</em></span>
 						</div>
 						<!-- <span class="txt">미입금취소</span> -->
 					</div>

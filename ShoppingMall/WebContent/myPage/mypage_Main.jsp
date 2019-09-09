@@ -175,18 +175,18 @@
 										<tr>
 											<td class="gubun">
 											    <span style="display: inline-block; font-weight: bold;">
-											    	<fmt:formatDate pattern="yyyy-MM-dd" value="${buylist.buydate }" />
+											    	${buylist.buydate }
 											    </span><!-- 주문일  -->
 												<span class="color1s">${buylist.buynum }</span><!-- 주문번호  -->
 											    <a class="btnDetail" href="mypage_BuyListDetail.mp?buynum=${buylist.buynum }">주문상세보기</a> 
 											</td>
 											<td class="subject">
 												<div class="area">
-													<a class="thum" href="ProductDetailAction.do?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
+													<a class="thum" href="ProductDetailAction.pro?product_num=${buylist.product_num }"> <!-- 제품상세페이지 이동  -->
 														<img src="./upload/${buylist.img_main }"> <!-- 제품이미지 정보 -->
 													</a>
 													<div class="textus">
-														<a class="" href="ProductDetailAction.do?product_num=${buylist.product_num }">
+														<a class="" href="ProductDetailAction.pro?product_num=${buylist.product_num }">
 															<span class="tit">${buylist.product_name }</span> <!-- 제품 제목  -->
 															<%-- <span class="txt">${product.product_sub_name }</span> --%> <!-- 제품 부제목  -->
 														</a>

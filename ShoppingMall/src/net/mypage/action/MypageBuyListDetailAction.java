@@ -26,8 +26,12 @@ public class MypageBuyListDetailAction implements Action {
 		
 		int buynum = Integer.parseInt(request.getParameter("buynum"));
 		
+		int limit = bdao.coupon_limitmax(buynum);
+		int totalsaleprice = bdao.buytotalsaleprice(buynum, limit);
+		
 		Vector<BuyListDTO> buylist = bdao.getBuyDetail(id, buynum);
 		request.setAttribute("buylist", buylist);
+		request.setAttribute("totalsaleprice", totalsaleprice);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

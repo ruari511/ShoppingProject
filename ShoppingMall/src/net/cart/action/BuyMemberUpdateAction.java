@@ -52,11 +52,8 @@ public class BuyMemberUpdateAction implements Action{
 		mdao.UpdatePoint(update_point, id);
 				
 		int totalprice = bdao.buytotalprice(maxbuynum);
-		System.out.println("totalprice = " + totalprice);
 		int limit = bdao.coupon_limitmax(maxbuynum);
-		System.out.println("limit = " + limit);
 		int totalsaleprice = bdao.buytotalsaleprice(maxbuynum, limit);
-		System.out.println("totalsaleprice = " + totalsaleprice);
 		int point = bdao.inpoint(maxbuynum);
 		totalsaleprice = totalsaleprice + point;
 		int delivery_cost1 = bdao.delivery_cost(maxbuynum);
