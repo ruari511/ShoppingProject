@@ -236,7 +236,7 @@ DataSource ds;
 			
 			con = getConnection();
 			
-			sql  = "select sum((p.product_price-p.product_sale_price)*b.product_count) "
+			sql  = "select sum((p.product_price-p.product_sale_price)*b.buy_count) "
 				 + "from product p join buylist b "
 				 + "on p.product_num=b.product_num "
 				 + "where b.buynum=?";
@@ -276,7 +276,7 @@ DataSource ds;
 			
 			con = getConnection();
 			
-			sql  = "select distinct (select sum((p.product_price-p.product_sale_price)*b.product_count) "
+			sql  = "select distinct (select sum((p.product_price-p.product_sale_price)*b.buy_count) "
 				 + "from product p join buylist b "
 				 + "on p.product_num=b.product_num "
 				 + "where b.buynum=?)/100*("
@@ -486,7 +486,7 @@ public Vector<BuyListDTO> getBuyList(String id, String startdate, String enddate
 		try {
 			con = getConnection();
 			
-			sql  = "select * from buylist natural join product where id=? and buydate between ? and now() order by buydate desc";
+			sql  = "select * from buylist natural join product where id=? and buydate between ? and now() order by buynum desc, buydate desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, startdate);
