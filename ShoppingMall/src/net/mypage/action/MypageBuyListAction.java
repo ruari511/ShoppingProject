@@ -54,7 +54,7 @@ public class MypageBuyListAction implements Action {
 			count = bdao.getBuyListCount(id, startdate, enddate);
 		
 		int pageNo = Integer.parseInt(pageNum);
-		int startRow = (pageNo-1)*pageSize+1;
+		int startRow = (pageNo-1)*pageSize;
 		int endRow = pageNo*pageSize;
 		int finalPage =count/pageSize+(count%pageSize==0?0:1);
 		int firstPage = 1;
