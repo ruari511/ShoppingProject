@@ -28,6 +28,7 @@ public class MypageAllBuyListAction implements Action {
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
 		String search_id = request.getParameter("search_id");
+		//현재 년, 월, 일 구하기
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 

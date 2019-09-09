@@ -62,7 +62,7 @@ function notReady(){
 					}else{
 					%>
 						<li class="cart"><a href="./CartListAction.buy">장바구니<span id="cartToCnt">(<%=cartCount%>)</span></a></li>
-						<li class="mypage"><a href="./mypage.mp">마이페이지</a></li>
+						<li class="mypage"><a href="./mypage.mp?data_month=-1">마이페이지</a></li>
 						<li class="order"><a href="./mypage.mp">주문배송</a></li>
 					<%
 					}
@@ -87,14 +87,7 @@ function notReady(){
 		</form>
 			<!--// 검색영역 -->
 			<ul class="mymenu_area">
-				<li class="store ">
-					<a href="#" class="mymenu_layer" title="관심 매장소식 자세히보기 열기/닫기">관심 매장소식</a>
-		
-				</li>
-				<li class="recent">
-					<a href="javascript:;" class="mymenu_layer" title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
-			
-				</li>
+				
 			</ul>
 		</div>
 		</div>

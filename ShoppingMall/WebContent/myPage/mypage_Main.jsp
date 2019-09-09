@@ -26,15 +26,17 @@
 <script type="text/javascript" src="../asset/js/common.js"></script>
 <script type="text/javascript">
 	$(window).ready(function(){
+		var dataMonth = $('#dataMonth').val();
+		if(dataMonth == null || dataMonth == '-1'){
 			$('.select-month > li ').eq(0).addClass('on');
-			
-			
-			$('.search-period').find('.select-month > li ').on('click', function(){
-				check_idx = $(this).index();
-  				$('.serarch-period').find('.select-month > li').removeClass('on').eq(idx).addClass('on');
-    		});
-		});
-	
+		}else if(dataMonth == '-3'){
+			$('.select-month > li ').eq(1).addClass('on');
+		}else if(dataMonth == '-6'){
+			$('.select-month > li ').eq(2).addClass('on');
+		}else if(dataMonth == '-12'){
+			$('.select-month > li ').eq(3).addClass('on');
+		}
+	});
 	</script>
 </head>
 <body>
@@ -79,16 +81,14 @@
 					</ul> -->
 
 					<fieldset class="search-period">
+					<c:set var="dataMonth" value="${requestScope.dataMonth}" />
+					<input type="hidden" id="dataMonth" value="${requestScope.dataMonth}"> 
 						<legend></legend>
 						<ul class="select-month">
-							<li><button type="button"
-									onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
-							<li><button type="button"
-									onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
-							<li><button type="button"
-									onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
-							<li><button type="button"
-									onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
+							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
 						</ul>
 						<!-- <div class="select-range">
 							<select id="cal-start-year" title="년도를 선택하세요"
@@ -180,7 +180,7 @@
 										<tr>
 											<td class="gubun">
 											    <span style="display: inline-block; font-weight: bold;">
-											    	${buylist.buydate }
+											    	${buylist.buydate}
 											    </span><!-- 주문일  -->
 												<span class="color1s">${buylist.buynum }</span><!-- 주문번호  -->
 											    <a class="btnDetail" href="mypage_BuyListDetail.mp?buynum=${buylist.buynum }">주문상세보기</a> 
