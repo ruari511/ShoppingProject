@@ -179,7 +179,7 @@ public class FaqDAO {
 		try{
 			con=getConnection();
 			
-			sql="select * from faq order by category_num asc limit ?,?";
+			sql="select * from faq order by num asc limit ?,?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, startRow-1);
 			pstmt.setInt(2, pageSize);
@@ -217,7 +217,7 @@ public class FaqDAO {
 		try{
 			con=getConnection();
 			
-			sql="select * from faq where category=? order by category_num asc limit ?,?";
+			sql="select * from faq where category=? order by num asc limit ?,?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, category);
 			pstmt.setInt(2, startRow-1);
@@ -255,7 +255,7 @@ public class FaqDAO {
 		try{
 			con=getConnection();
 			
-			sql="select * from faq where subject like ? or content like ? order by category_num asc limit ?,?";
+			sql="select * from faq where subject like ? or content like ? order by num asc limit ?,?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
 			pstmt.setString(2, "%"+search+"%");
@@ -295,7 +295,7 @@ public class FaqDAO {
 		try{
 			con=getConnection();
 			
-			sql="select * from faq where category=? and (subject like ? or content like ?) order by category_num asc limit ?,?";
+			sql="select * from faq where category=? and (subject like ? or content like ?) order by num asc limit ?,?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, category);
 			pstmt.setString(2, "%"+search+"%");

@@ -477,9 +477,7 @@ DataSource ds;
 	}//getAllBuyList()
 	
 	
-	
-	/* Mypage_BuyList */
-	public Vector<BuyListDTO> getBuyList(String id, String startdate, String enddate){
+public Vector<BuyListDTO> getBuyList(String id, String startdate, String enddate){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -489,7 +487,7 @@ DataSource ds;
 		try {
 			con = getConnection();
 			
-			sql  = "select * from buylist natural join product where id=? and buydate between ? and ? order by buynum asc";
+			sql  = "select * from buylist natural join product where id=? and buydate between ? and ? order by buydate desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, startdate);
@@ -532,7 +530,9 @@ DataSource ds;
 			if(rs!=null){ try{rs.close();} catch(Exception e){e.printStackTrace();}}
 		}
 		return buyList;
-	}//getBuyList()
+	}
+
+
 	
 	/* Mypage_BuyList */
 	public Vector<BuyListDTO> getCancelList(String id, String startdate, String enddate){
@@ -591,7 +591,7 @@ DataSource ds;
 	}//getCancelList()
 		
 	
-	public int getBuyListCount(String id){
+	public int getBuyListCount(String id, String startdate, String enddate){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -599,9 +599,11 @@ DataSource ds;
 		int count=0;
 		try {
 			con=getConnection();
-			sql="select count(*)  from buylist natural join product where id=?";
+			sql="select count(*)  from buylist natural join product where id=? and buydate between ? and ?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setString(2, startdate);
+			pstmt.setString(3, enddate);
 			
 			rs=pstmt.executeQuery();
 			

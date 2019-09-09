@@ -47,9 +47,26 @@ public class MypageBuyListAction implements Action {
 			startdate = getDate(data_month);
 		}
 		
-		/*int num=Integer.parseInt(request.getParameter("num"));
+		int count = 0;
+		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
-		bdao.getBuyListCount(id);*/
+		if(pageNum == null){
+			pageNum = "1";
+		}
+			count = bdao.getBuyListCount(id, startdate, enddate);
+		
+		int pageNo = Integer.parseInt(pageNum);
+		int startRow = (pageNo-1)*pageSize+1;
+		int endRow = pageNo*pageSize;
+		int finalPage =count/pageSize+(count%pageSize==0?0:1);
+		int firstPage = 1;
+		int pageBlock=5;
+		
+		int startPage=((pageNo-1)/pageBlock)*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		if(endPage > finalPage){
+			endPage = finalPage;
+		}
 		
 		
 		//�ֹ� ���� �ޱ�
@@ -57,6 +74,12 @@ public class MypageBuyListAction implements Action {
 		
 		/*request.setAttribute("pageNum", pageNum);*/
 		request.setAttribute("buylist", buylist);
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("finalPage", finalPage);
+		request.setAttribute("firstPage", firstPage);
+		request.setAttribute("pageBlock", pageBlock);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

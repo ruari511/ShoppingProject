@@ -60,30 +60,35 @@
 				<li id="tabNotice"><a href="./notice.bd">공지사항</a></li>
 			</ul>
 			
-			<!-- <fieldset class="search-period">
+			<fieldset class="search-period">
 						<legend></legend>
 						<ul class="select-month">
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-1'">1개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-3'">3개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-6'">6개월</button></li>
-							<li><button type="button"  onclick="location.href ='mypage.mp?data_month=-12'">12개월</button></li>
+							<li><button type="button"  onclick="location.href ='qna.bd?data_month=-1'">1개월</button></li>
+							<li><button type="button"  onclick="location.href ='qna.bd?data_month=-3'">3개월</button></li>
+							<li><button type="button"  onclick="location.href ='qna.bd?data_month=-6'">6개월</button></li>
+							<li><button type="button"  onclick="location.href ='qna.bd?data_month=-12'">12개월</button></li>
 						</ul>
-			</fieldset> -->
+			</fieldset>
 			
 				<div class="TabsConts on">
-					<div class="list-customer">
-							<c:if test="${qnaList == null}">
+					<div class="list-customer onenone">
+							<c:if test="${empty qnaList}">
 							<ul>
 								<li class="nodata">등록하신 1:1 문의가 없습니다.</li>
 							</ul>
 							</c:if>
-							<c:if test="${qnaList != null}">
+							<c:if test="${!empty qnaList}">
 							<c:forEach  var="qnaList" items="${qnaList }">
 						<ul>
 							<li>
-								<p class="stit">
-									<c:if test="${qnaList.re_result eq '0' }">	<strong>답변대기</strong> </c:if>
-									<c:if test="${qnaList.re_result eq '1' }">	<strong>답변완료</strong> </c:if>
+								<c:if test="${qnaList.re_result eq '0' }">	
+									<p class="stit">
+										<strong>답변대기</strong> 
+								</c:if>
+								<c:if test="${qnaList.re_result eq '1' }">
+										<p class="stit complete">
+											<strong>답변완료</strong>
+								</c:if>
 									${qnaList.subject } 
 									<span class="data"><fmt:formatDate pattern="yyyy-MM-dd" value="${qnaList.reg_date }" /></span>
 								</p>
@@ -126,19 +131,19 @@
 				</div>
 
 
-	<div id="pageing">
+	<div class="pageing">
 			<c:if test="${pageNo != 0}">
-				<c:if test="${pageNo > pageBlock }">
+				<%-- <c:if test="${pageNo > pageBlock }">
 					<a href="./qna.bd?pageNum=${firstPage }"> [첫페이지] </a>
-				</c:if>
+				</c:if> --%>
 				<c:if test="${startPage != 1 }">
-					<a href="./qna.bd?pageNum=${startPage-pageBlock }"> [이전] </a>
+					<a class="prev"href="./qna.bd?pageNum=${startPage-pageBlock }"> [이전] </a>
 				</c:if>
 			
 				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
 					<c:choose>
 						<c:when test="${i eq pageNo }">
-							<a href="./qna.bd?pageNum=${i }"><Strong>${i }</Strong></a>
+								<Strong>${i }</Strong>
 						</c:when>
 						<c:otherwise>
 							<a href="./qna.bd?pageNum=${i }">${i }</a>
@@ -146,16 +151,18 @@
 					</c:choose>
 				</c:forEach>
 			
-				<c:if test="${pageNo != finalPage}">
-					<a href="./qna.bd?pageNum=${startPage+pageBlock}"> [다음] </a>
+				<c:if test="${endPage < finalPage}">
+					<a class="next" href="./qna.bd?pageNum=${startPage+pageBlock}"> [다음] </a>
 				</c:if>
 				
-				<c:if test="${pageNo < finalPage }">
+				<%-- <c:if test="${pageNo < finalPage }">
 					<a href="./qna.bd?pageNum=${finalPage }"> [마지막페이지]</a>
-				</c:if>
+				</c:if> --%>
 			</c:if>
 		</div>
-		<a href="./qnaWrite.bd"> 글쓰기 </a>
+			<div align="center" style="padding-top: 10px;">
+				<a href="./qnaWrite.bd"> 1:1 문의하기 </a>
+			</div>
 		</div>
 	</div>
 	
