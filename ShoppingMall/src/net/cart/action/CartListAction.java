@@ -42,7 +42,7 @@ public class CartListAction implements Action{
 
 		forward.setRedirect(false);
 
-		forward.setPath("./Cart.buy");
+		forward.setPath("./product/Cart.jsp");
 		
 		return forward;
 	}

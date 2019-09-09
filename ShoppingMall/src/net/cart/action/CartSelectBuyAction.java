@@ -62,7 +62,7 @@ public class CartSelectBuyAction implements Action{
 
 		forward.setRedirect(false);
 
-		forward.setPath("./Buy.buy");
+		forward.setPath("./product/Buy.jsp");
 		
 		return forward;
 	}

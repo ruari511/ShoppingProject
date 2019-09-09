@@ -38,7 +38,7 @@ public class BuyFailIn implements Action{
 		
 		forward.setRedirect(false);
 		
-		forward.setPath("./BuyFail.buy");
+		forward.setPath("./product/BuyFail.jsp");
 		
 		return forward;
 	}

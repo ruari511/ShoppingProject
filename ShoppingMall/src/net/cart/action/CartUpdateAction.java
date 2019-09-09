@@ -47,7 +47,7 @@ public class CartUpdateAction implements Action{
 
 		forward.setRedirect(false);
 
-		forward.setPath("./Cart.buy?num="+num);
+		forward.setPath("./product/Cart.jsp?num="+num);
 		
 		return forward;
 	}
