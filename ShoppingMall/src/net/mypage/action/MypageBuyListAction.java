@@ -68,7 +68,7 @@ public class MypageBuyListAction implements Action {
 		
 		
 		//�ֹ� ���� �ޱ�
-		Vector<BuyListDTO> buylist = bdao.getBuyList(id, startdate, enddate);
+		Vector<BuyListDTO> buylist = bdao.getBuyList(id, startdate, enddate, startRow, endRow);
 		/*request.setAttribute("pageNum", pageNum);*/
 		request.setAttribute("buylist", buylist);
 		request.setAttribute("pageNo", pageNo);

@@ -234,7 +234,7 @@
 										<%-- <a heef="./mypage.mp?pageNum=${i }"> --%><Strong title="현재 페이지">${i }</Strong><!-- </a> -->
 									</c:when>
 									<c:otherwise>
-										<a href="./mypage.mp?pageNum=${i }">${i }</a>
+										<a href="./mypage.mp?pageNum=${i }&data_month=${requestScope.dataMonth}">${i }</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
