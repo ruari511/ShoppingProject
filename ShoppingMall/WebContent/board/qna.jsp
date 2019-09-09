@@ -26,6 +26,16 @@
 	<script type="text/javascript" src="./asset/js/slick.min.js"></script>
 	<script type="text/javascript" src="./asset/js/common.js"></script>
 	<script>
+	
+	<%
+
+	String id = (String)session.getAttribute("id");
+	if(id == null){
+%>
+	location.href="./login.do";
+<%		
+	}
+%>
 		$(window).ready(function(){
 			/* $('#TabsOpenArea').find('.comm2sTabs > li ').on('click', function(){
 	            var idx = $(this).index();
@@ -42,11 +52,11 @@
 	        });
 		}); 
 	</script>
+	
+
 </head>
 <body>
-<%
-	String id = (String)session.getAttribute("id");
-%>
+
 <div id="Wrapper">
 	<div id="Container">
 		<div id="Contents">	
@@ -160,9 +170,11 @@
 				</c:if> --%>
 			</c:if>
 		</div>
+			<%if(id != null){ %>
 			<div align="center" style="padding-top: 10px;">
 				<a href="./qnaWrite.bd"> 1:1 문의하기 </a>
 			</div>
+			<%} %>
 		</div>
 	</div>
 	

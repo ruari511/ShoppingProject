@@ -81,7 +81,7 @@
 							<tbody class="history3">
 								<c:forEach var="buylist" items="${buylist}" varStatus="status">
 									<tr>
-										<td><input type="checkbox" name="cancel_CheckBox""></td>
+										<td><input type="checkbox" name="cancel_CheckBox" checked></td>
 										<td class="subject">
 											<div class="area">
 												<a class="thum"
@@ -248,7 +248,7 @@
 
 							<div class="area1sButton mgT20">
 								<a href="./mypage.mp" class="btnGray">이전</a>
-								<a href="./mypage_BuyCancel.mp" class="btnGreen">신청</a>
+								<a href="./mypage_BuyCancelB" class="btnGreen">신청</a>
 							</div>
 					</div>
 				</div>

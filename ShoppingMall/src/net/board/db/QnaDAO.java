@@ -20,7 +20,7 @@ public class QnaDAO {
 		ds = (DataSource)ctx.lookup("java:comp/env/jdbc/shoppingmall");
 		return ds.getConnection();
 	}
-	/* Qna 글쓰기 (전체번호, 카테고리별 번호 부여)*/	
+	/* Qna 湲��벐湲� (�쟾泥대쾲�샇, 移댄뀒怨좊━蹂� 踰덊샇 遺��뿬)*/	
 	public void insertQna(BoardDTO boarddto){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -30,21 +30,21 @@ public class QnaDAO {
 		int category_num = 0;
 		try {
 			con=getConnection();
-			// Qna 최대번호
+			// Qna 理쒕�踰덊샇
 			sql="select max(num) from qna";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				num=rs.getInt(1)+1; // 글번호의 최대큰번호 + 1
+				num=rs.getInt(1)+1; // 湲�踰덊샇�쓽 理쒕��겙踰덊샇 + 1
 			}
 		
-			//카테코리별 카테고리 최대번호
+			//移댄뀒肄붾━蹂� 移댄뀒怨좊━ 理쒕�踰덊샇
 			sql="select max(category_num) from Qna where category=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, boarddto.getCategory());
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				category_num=rs.getInt(1)+1; //카테고리번호의 최대큰번호 +1
+				category_num=rs.getInt(1)+1; //移댄뀒怨좊━踰덊샇�쓽 理쒕��겙踰덊샇 +1
 			}
 			
 			sql="insert into qna(num, id, category, category_num, product_num, subject, content, re_result, reg_date)"
@@ -68,7 +68,7 @@ public class QnaDAO {
 		}
 	}// insertQna()
 	
-	/* 전체 게시글 수 조회 */
+	/* �쟾泥� 寃뚯떆湲� �닔 議고쉶 */
 	public int getQnaCount(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -93,7 +93,7 @@ public class QnaDAO {
 		return count;
 	}
 	
-	/* id별 게시글 수 조회*/
+	/* id蹂� 寃뚯떆湲� �닔 議고쉶*/
 	public int getQnaCount(String id, String startdate, String enddate){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -101,19 +101,21 @@ public class QnaDAO {
 		ResultSet rs=null;
 		int count=0;
 		try {
-			con=getConnection();
-			if(id.equals("admin")){
-				sql="select count(*) from qna"; 
-				pstmt=con.prepareStatement(sql);
-			}else{
-				sql="select count(*) from qna where id=? and reg_date between ? and now()";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, id);
-				pstmt.setString(2, startdate);
-			}
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				count=rs.getInt(1);
+			if(id != null){
+				con=getConnection();
+				if(id.equals("admin")){
+					sql="select count(*) from qna"; 
+					pstmt=con.prepareStatement(sql);
+				}else{
+					sql="select count(*) from qna where id=? and reg_date between ? and now()";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setString(1, id);
+					pstmt.setString(2, startdate);
+				}
+				rs=pstmt.executeQuery();
+				if(rs.next()){
+					count=rs.getInt(1);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,7 +129,7 @@ public class QnaDAO {
 	
 	
 	
-	/* Qna 전체 페이지 번호 */
+	/* Qna �쟾泥� �럹�씠吏� 踰덊샇 */
 	public List<BoardDTO> getQnaList(int startRow,int pageSize){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -168,7 +170,7 @@ public class QnaDAO {
 	}
 	
 	
-	/* id별 페이지 번호*/
+	/* id蹂� �럹�씠吏� 踰덊샇*/
 	public List<BoardDTO> getQnaList(String id, int startRow,int pageSize, String startdate, String enddate){
 		Connection con=null;
 		PreparedStatement pstmt=null;
