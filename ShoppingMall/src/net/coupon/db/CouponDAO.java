@@ -174,7 +174,7 @@ public class CouponDAO {
 			pstmt.setString(2, dto.getId());
 			pstmt.setTimestamp(3, dto.getStart_date());
 			pstmt.setTimestamp(4, dto.getLast_date());
-			pstmt.setInt(5, 1);
+			pstmt.setInt(5, 0);
 			
 			//result = pstmt.executeUpdate();
 			pstmt.executeUpdate();
