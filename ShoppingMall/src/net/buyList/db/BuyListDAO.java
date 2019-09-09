@@ -486,11 +486,11 @@ public Vector<BuyListDTO> getBuyList(String id, String startdate, String enddate
 		try {
 			con = getConnection();
 			
-			sql  = "select * from buylist natural join product where id=? and buydate between ? and ? order by buydate desc";
+			sql  = "select * from buylist natural join product where id=? and buydate between ? and now() order by buydate desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, startdate);
-			pstmt.setString(3, enddate);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				BuyListDTO buylistDTO = new BuyListDTO();

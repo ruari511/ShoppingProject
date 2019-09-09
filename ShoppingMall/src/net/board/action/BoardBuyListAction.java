@@ -55,7 +55,6 @@ public class BoardBuyListAction implements Action {
 		//�ֹ� ���� �ޱ�
 		Vector<BuyListDTO> buylist = bdao.getBuyList(id, startdate, enddate);
 		
-		/*request.setAttribute("pageNum", pageNum);*/
 		request.setAttribute("buylist", buylist);
 		
 		ActionForward forward = new ActionForward();

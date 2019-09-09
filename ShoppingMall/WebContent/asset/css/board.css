@@ -767,8 +767,48 @@ td.select-w200 select {width:200px !important;}
 .btn_img{height:40px;line-height:40px;padding:0 15px 0 40px;background:#00c4b5 url("https://image.oliveyoung.co.kr/pc-static-root/image/comm/icon_img.png") no-repeat 14px 9px;font-size:12px;border-radius:5px;}
 
 
-
+.board-write-1s tbody tr td .ButtonSubmit {float:right;width:114px;height:38px;line-height:38px;background:#969937;color:#fff;letter-spacing:-1px;}
 /*버튼 리셋*/
 .btnGray, a.btnGray {width:100%;height:50px;background-color:#888;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
 .btnGreen, a.btnGreen {width:100%;height:50px;background-color:#969937;padding:11px 0 9px;font-size:18px;line-height:30px;border-radius:5px}
 .btnGreen2, a.btnGreen2 {width:100%;height:44px;background-color:#c0c200;padding:0;font-size:18px;line-height:44px;border-radius:5px}
+
+.sub_title_area:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -50%;
+    width: 100%;
+    height: 120px;
+    z-index: -1;
+}
+
+.area-customer .comm2sTabs {margin-top:35px}
+
+.area-customer .comm2sTabs {overflow:visible;position:relative;height:40px;box-sizing:initial;}
+.area-customer .twoTabs {display:none;overflow:hidden;position:absolute;left:0;bottom:-42px}
+.area-customer .comm2sTabs > li.on .twoTabs {display:block;}
+.area-customer .twoTabs li {float:left;padding:0 12px 0 11px;background:url("http://image.oliveyoung.co.kr/pc-static-root/image/comm/bar1x13_gray.gif") no-repeat 0 0;}
+.area-customer .twoTabs li:first-child {background:none;}
+.area-customer .twoTabs li button {background:#fff;color:#888;font-weight:400;font-size:16px}
+.area-customer .twoTabs li.on button {color:#333;font-weight:bold}
+
+/* 고객센터 탭 */
+.comm2sTabs.iconTab {height:120px;margin-bottom:60px}
+.comm2sTabs.iconTab > li {width:147px;height:120px}
+.comm2sTabs.iconTab > li:first-child {margin-left:0;width:144px}
+.comm2sTabs.iconTab > li > button.icon_tab01 {background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.icon_tab02 {background-position:-95px 24px}
+.comm2sTabs.iconTab > li > button.icon_tab03 {background-position:-239px 24px}
+.comm2sTabs.iconTab > li > button.icon_tab04 {background-position:-385px 24px}
+.comm2sTabs.iconTab > li > button.icon_tab05 {background-position:-532px 24px}
+.comm2sTabs.iconTab > li > button.icon_tab06 {background-position:-675px 24px}
+.comm2sTabs.iconTab > li > button.icon_tab07 {background-position:-823px 24px}
+
+.comm2sTabs.iconTab > li > button.icon_tab06+.twoTabs,
+.comm2sTabs.iconTab > li > button.icon_tab07+.twoTabs {right:0}
+
+.comm2sTabs.iconTab > li.on {border:1px solid #ddd}
+.comm2sTabs.iconTab > li.on > button {color:#fff}
+

@@ -34,14 +34,15 @@ public class BoardQnaListAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
+		
 		Date date = new Date();
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 		String c_month = null;
 		c_month = request.getParameter("data_month");
-		System.out.println(c_month);
 		String startdate = null;
 		String enddate = dateFormat.format(date);
+		
 		if(c_month == null && startdate == null){
 			startdate = getDate(-1);
 		}else{
@@ -50,6 +51,7 @@ public class BoardQnaListAction implements Action {
 		}
 		
 		int count = 0; 
+		
 			count = qnadao.getQnaCount(id, startdate, enddate);
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
@@ -59,9 +61,7 @@ public class BoardQnaListAction implements Action {
 		int pageNo = Integer.parseInt(pageNum);
 		int startRow = (pageNo-1)*pageSize+1;
 		int endRow = pageNo*pageSize;
-		
 		List<BoardDTO> qnaList = null;
-		qnaList = qnadao.getQnaList(id, startRow, pageSize, startdate, enddate);
 		int finalPage =count/pageSize+(count%pageSize==0?0:1);
 		int firstPage = 1;
 		int pageBlock=5;
@@ -71,7 +71,8 @@ public class BoardQnaListAction implements Action {
 		if(endPage > finalPage){
 			endPage = finalPage;
 		}
-		
+		qnaList = qnadao.getQnaList(id, startRow, pageSize, startdate, enddate);
+
 		request.setAttribute("qnaList", qnaList); 
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("finalPage", finalPage);
@@ -88,7 +89,6 @@ public class BoardQnaListAction implements Action {
 		}
 		return forward;
 	}
-	
 	public String getDate ( int MM )
 	{
 	Calendar temp=Calendar.getInstance ( );
@@ -112,9 +112,3 @@ public class BoardQnaListAction implements Action {
 	}
 	
 }
-
-
-
-
-
-

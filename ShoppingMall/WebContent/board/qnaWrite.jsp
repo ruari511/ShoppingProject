@@ -73,7 +73,7 @@
 				<col style="width:75%;">
 			</colgroup>
 			<tbody>
-				<form id="cnslRegForm" action="./BoardQnaWriteAction.bd" method="POST">
+				<form id="cnslRegForm" action="./BoardQnaWriteAction.bd" method="get">
 					<tr>
 						<th scope="col"><label for="TypeInquiry">문의유형</label></th>
 						<td>
@@ -95,6 +95,7 @@
 							<div class="over" style="width:98%;">
 							 	<c:if test="${empty buylist }">
 									<p>주문내역이 없습니다</p>
+									<input type="hidden" name="product_num" value="0">
 								</c:if>
 								<c:if test="${!empty buylist}">
 									<select id="product_num" name="product_num" style="width:192px;">
@@ -111,20 +112,22 @@
 					<tr class="textarea">
 						<th scope="col"><label for="InputTextarea">제목</label></th>
 						<td>
-							<input type="text" id="subject" name="subject" placeholder="제목을 입력해주세요." style="width:98%;"></input>
+							<input required type="text" id="subject" name="subject" placeholder="제목을 입력해주세요." style="width:98%;"></input>
 						</td>
 					</tr>
 					<tr>
 						<th scope="col"><label for="InputTextarea">내용</label></th>
 						<td>
-							<textarea id="content" name="content" cols="5" rows="1" placeholder="내용을 입력해주세요." style="width:98%;height:280px;"></textarea>
+							<textarea required id="content" name="content" cols="5" rows="1" placeholder="내용을 입력해주세요." style="width:98%;height:280px;"></textarea>
 						</td>
 					</tr>
-					<input type="submit" value="전송">
 				</form>
 			</tbody>
 		</table>
 		<!-- //등록 게시판 -->
+			<div align="center" style="padding-top: 20px">
+				<input type="submit" class="ButtonSubmit" value="전송" style="width:114px;height:38px; background:#969937;color:#fff;letter-spacing:-1px;">
+			</div>
 		
 	
 	</div>
