@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.member.db.MemberDAO;
 
 @WebServlet("/Check")
+//@RequestMapping(value="/login/regiEmailChk.do", method = RequestMethod.POST)
 public class joinServlet extends HttpServlet {
 
 	@Override
@@ -53,50 +54,16 @@ public class joinServlet extends HttpServlet {
 		//아이디 중복이냐 중복이 아니냐에 따라 메세지를 클라이언트의 웹브라우저로 출력(응답)
 		if(overlappedID == 1){ // 아이디가 중복되었다면
 			writer.print("1"); // 중복되어서 사용 X
-			System.out.println(id + " : 중복");
 		}else if(overlappedID == 0){
 			writer.print("2"); // 사용 가능
-			System.out.println(id + " : 사용가능");
 		}
 		
 		//핸드폰번호 중복이냐 중복이 아니냐에 따라 메세지를 클라이언트의 웹브라우저로 출력(응답)	
 		if(overlappedPhone == 1){ 
 			writer.print("3"); // 중복되어서 사용 X
-			System.out.println(phone + " : 중복");
 		}else if(overlappedPhone == 0){
 			writer.print("4"); // 중복안되서 사용 가능
-			System.out.println(phone + " : 사용 가능");
 		}
-		
-//		if(flag){
-//			if(overlappedPhone == 1){ 
-//				writer.print("3"); // 중복되어서 사용 X
-//				System.out.println(phone + " : 중복");
-//			}else if(overlappedPhone == 0){
-//				writer.print("4"); // 중복안되서 사용 가능
-//				System.out.println(phone + " : 사용 가능");
-//			}
-//		}		
-//		switch(overlappedID){
-//			case 1:
-//				writer.print("1"); // 중복되어서 사용 X
-//				System.out.println(id + " : 중복");
-//				break;
-//			case 0:
-//				writer.print("2"); // 중복 안되서 사용 가능
-//				System.out.println(id + " : 사용 가능");
-//				break;
-//		}
-		
-		
-//		if(overlappedPhone == 1){
-//			writer.print("overlappedPhone"); // 중복되어서 사용 X
-//			System.out.println(phone + " : 중복");
-//		}else if(overlappedPhone == 0){
-//			writer.print("not_overlappedPhone"); // 중복안되서 사용 가능
-//			System.out.println(phone + " : 사용 가능");
-//		}
-		
 		
 	}	
 	

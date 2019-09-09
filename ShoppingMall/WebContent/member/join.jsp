@@ -69,7 +69,7 @@ String name = request.getParameter("name");
 				<h3 class="join_title">
 				<label for="id">아이디</label>
 				</h3>
-					<input type="text" name="id" class="join" id="id" onblur="join_check('check')" placeholder="아이디"/>
+					<input type="text" name="id" class="join" id="id" onblur="join_check('check')"/>
 					<div class="check_font" id="idMessage"></div>
 				</div>
 
@@ -118,7 +118,7 @@ String name = request.getParameter("name");
 				<h3 class="join_title">
 				<label for="birth">생년월일</label>
 				</h3>
-					<input type="date" name="birth_date" class="join" id="birth" onblur="join_check('birth')" required >
+					<input type="date" name="birth_date" class="join" id="birth" onblur="join_check('birth')" placeholder="05년생 이전 출생자만 가능(YYYY/MM/DD)" required>
 					<div class="check_font" id="birthMessage"></div>
 				</div>
 
@@ -202,10 +202,11 @@ String name = request.getParameter("name");
 		var _birth = $("#birth").val();
 		
 		if(aa == 'check'){
+			var contextPath = "http://localhost:8090/ShoppingMall";
 			// ajax 아이디 중복 체크
 			$.ajax(
-					{
-						url:"${pageContext.request.contextPath}/ShoppingMall/Check",
+					{// 
+						url: "${pageContext.request.contextPath}/Check",
 						type:"post",
 						async:false,
 						data:{id:_id, phone:_phone},
@@ -240,13 +241,12 @@ String name = request.getParameter("name");
 							}		
 						},
 						error:function(request,status,error){ //작업중 오류가 발생했을 경우에 수행할 작업을 설정 합니다.
-							alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							alert("code = "+ request.status + "\n message = " + request.responseText + "\n error = " + error); // 실패 시 처리
 
              }
          }); // ajax 메소드 끝
    }else if(aa == 'pass2'){
       // 비밀번호 체크
-      alert(_pass + "///" + _pass2);
       if(_pass != _pass2 ){
          $("#passMessage").text("비밀번호가 일치하지 않습니다.");
          $("#passMessage").css("color","red");
