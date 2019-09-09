@@ -82,19 +82,7 @@ textarea {
 	box-shadow:none;
 	box-sizing:border-box;
 	-webkit-appearance:none;
-	/*outline:none;*/
-}
-input{ /* 체크박스 기본 */
-	border:1px solid #ccc;
-	padding:10px 8px;
-	border-radius:5px;
-	resize:none;
-	font-family:'AppleGothic', 'Roboto', 'montserrat', 'noto', sans-serif;
-	font-size:14px;
-	line-height:20px;
-	box-shadow:none;
-	box-sizing:border-box;
-	-webkit-appearance:none;
+	outline:none;
 }
 
 /* Base */
