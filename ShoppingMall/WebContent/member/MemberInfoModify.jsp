@@ -182,7 +182,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 				<h3 class="join_title">
 				<label for="birth">생년월일</label>
 				</h3>
-					<input type="text" name="birth_date" class="update" id="birth" value="${memberInfo.birth_date}" onblur="join_check('birth')" required readonly>
+					<input type="text" name="birth_date" class="update" id="birth" value="${birth_date}" onblur="join_check('birth')" required readonly>
 					<div class="check_font" id="birthMessage"></div>
 				</div>
 				
@@ -222,9 +222,9 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 				<label onClick="goPopup();">주소 * </label>
 				</h3>
             	<div id="callBackDiv">
-            		<input type="text" class="update_a" id="roadAddrPart1" name="address_main" value="${memberInfo.address_main}" class="form-control" placeholder="Enter Addr" required="true" readonly="true" />
+            		<input type="text" class="update_a" id="roadAddrPart1" name="address_main" value="${address_main}" class="form-control" placeholder="Enter Addr" required="true" readonly="true" />
             		<div class="ad">
-            		<input type="text" class="update" id="addrDetail" name="address_detail" value="${memberInfo.address_detail}" />
+            		<input type="text" class="update" id="addrDetail" name="address_detail" value="${address_detail}" />
             		<input type="button" onClick="goPopup();" value="주소 찾기" class="adbtn_up"/>
             		</div><br>
             	</div>

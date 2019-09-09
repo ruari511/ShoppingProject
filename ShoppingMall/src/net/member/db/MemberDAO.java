@@ -787,8 +787,8 @@ public class MemberDAO {
 	   sql="";
 	   pstmt=null;
 	   rs=null;
+	   MemberDTO dto = null;
 	   
-	   MemberDTO dto = new MemberDTO();
 	   
 	   try {
 	         //1단계 드라이버로더
@@ -804,6 +804,7 @@ public class MemberDAO {
 	         rs=pstmt.executeQuery();
 	        
 	         if(rs.next()){
+	        	 dto = new MemberDTO();
 	        	 dto.setEmail(rs.getString("email"));
 	        	 dto.setPassword(rs.getString("password"));
 	        	 dto.setAddress_detail(rs.getString("address_detail"));

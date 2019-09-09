@@ -18,7 +18,7 @@ public class MemberModifyFormAction implements Action
 	@Override
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+		System.out.println("MemberModifyFormAction");
 		ActionForward forward = new ActionForward();
 		
 		// 세션이 가지고있는 로그인한 ID 정보를 가져온다
@@ -28,6 +28,9 @@ public class MemberModifyFormAction implements Action
 		// 수정할 회원정보를 가져온다.
 		MemberDAO dao = new MemberDAO();
 		MemberDTO member = dao.getUser(id);
+		
+		System.out.println("Ac " + member.getEmail());
+		
 		
 		// ModifyFrom.jsp에 회원정보를 전달하기 위해 request에 MemberBean을 세팅한다.
 		request.setAttribute("memberInfo", member);
